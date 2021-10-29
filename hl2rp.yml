@@ -1,0 +1,37 @@
+depends:
+  - 3dtexts
+  - admin
+  - areadisplay
+  - attributes
+  - characters
+  - chatbox
+  - containers
+  - currencies
+  - doors
+  - factions
+  - items
+  - inventory
+  - mapscenes
+  - observer
+  - ragdoll
+  - stamina
+  - staticents
+  - thirdperson
+  - adminesp
+  - colormod
+  - crosshair
+  - hints
+  - toolgun_fix
+  - visiblelegs
+  - autowalk
+  - prefixes
+  - raisegun
+  - weaponselect
+  - shared_flashlight
+  - pickup_objects
+  - displaytyping
+depends_development:
+  - devhud
+  - profiler
+#  - linter
+#  - fdoc

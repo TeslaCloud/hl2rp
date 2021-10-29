@@ -1,0 +1,187 @@
+en:
+  attribute:
+    level:
+      superb: Superb
+      great: Great
+      good: Good
+      fair: Fair
+      mediocre: Mediocre
+      poor: Poor
+      terrible: Terrible
+    strength:
+      title: Strength
+      short: STR
+      description:
+        Physical fitness of your character. Affects the chance of a
+        successful bruteforce action, such as knocking down a door.
+      superb:
+        Your strength is akin to that of an Olympian. You are able
+        to deadlift much weight with minimal effort, and your melee
+        has the potential of being fatal.
+      great:
+        Your muscles are in fine shape. Able to lift heavy objects
+        with some effort, your melee is indeed a strong counter to foes.
+      good:
+        Your strength is above average. You are able to lift heavy objects
+        with strenuous efforts that may fatigue, your melee has good defensive potential.
+      fair:
+        Your strength is average. You have difficulty lifting heavy
+        objects, and you may injure yourself if great caution is not used.
+        In melee, it may be easy to be overpowered.
+      mediocre:
+        Your strength is somewhat poor. Objects with even a small amount of
+        weight to them can feel unwieldy and clumsy. In melee, your efforts
+        largely go wasted without the assistance of a weapon.
+      poor:
+        You hold little to no strength whatsoever. Applying any physical
+        effort to anything, even walking in some cases, can be of extreme
+        difficulty. In melee, you are easily overpowered by mostly everything.
+      terrible:
+        No strength. Applying any strength to any activity may in fact be
+        of some detriment to you. Your melee is unheard of, you are so
+        delicate that a strong breeze could knock you over.
+    reflexes:
+      title: Reflexes
+      short: REF
+      description:
+        Dexterity and reaction timings of your character. Takes effect in
+        lockpicking, dodging, etc.
+      superb: 
+        Your reflexes are as sharp as a Ninja. Performing great feats
+        of agility is of no effort to you, and your hands are naturally
+        nimble and clever. Your melee is extremely easy to land, you also
+        avoid strikes with ease.
+      great:
+        Your reflexes are really great. Applying reflexes to anything comes
+        with relative ease, and some acrobatics come naturally to you. Your
+        melee is easy to land, and foes have difficulty landing strikes on you.
+      good:
+        Your agility is above that of the average person. You can make strides
+        up stairs with ease and are unlikely to lose your balance in your average
+        daily affairs. Though you are not a parkour master or an excellent fighter,
+        your skills are notable.
+      fair:
+        Your agility is that of the average human. You have a fair time 
+        getting around normally, but begin to struggle when encountered with 
+        climbing large obstacles or quickly vaulting over objects. Nothing about 
+        your speed or dexterity is notable.
+      mediocre:
+        You have mediocre agility. You may appear clumsy or slow to a 
+        mild degree, and have difficulty climbing or hiking your way around rough 
+        terrain. Your punches land slower than average.
+      poor:
+        Your agility is far below average, you are quite the slow runner 
+        and find yourself having a difficult time when it comes to races 
+        between others.
+      terrible: 
+        You are quite slow, going at speeds that most if not 
+        all can keep up with. This could almost be deemed as a handicap. 
+    perception:
+      title: Perception
+      short: PER
+      description:
+        General awareness of your character. Affects the chance of
+        noticing something quick enough, or something that your opponent cannot see.
+      superb:
+        Your visual and audible senses are extraordinary. Spotting a needle in a 
+        haystack is one of the easiest tasks you can perform, next to being able 
+        to differentiate twins (or even CPs). A sneaking person will have a hard 
+        time getting past you.
+      great:
+        Your attentiveness is very remarkable. Noticing small details even from 
+        a distance is possible while close-up objects are almost viewed in slow 
+        motion. Decrypting noises is also much easier and more effective.
+      good:
+        Your skill to observe from a distance and perceive quiet noises is more 
+        than average. Hard to beat in thimbles, you are likely to spot an enemy 
+        before they spot you and can keep creeping around while paying attention 
+        to distant footsteps.
+      fair:
+        Your senses are in working condition and unremarkable. Sudden changes 
+        are easy to spot while distant figures can be identified over time. 
+        Hearing approaching footsteps is a challenging, but manageable task.
+      mediocre:
+        You have a common issue with your sighting and listening. It is possible 
+        for you to notice objects from far away, but not differentiate or identify 
+        them. Most noises are unclear and very dull compared to each other.
+      poor:
+        Your defect organs of perception work quite poorly. Small animals or objects 
+        are a rare sight, if ever perceived by you in whatever way. Listening to 
+        suppressed noises is not an option since they might confuse you more than 
+        provide information.
+      terrible:
+        Your illnesses associated with hearing or vision have devastating effects. 
+        You are almost deaf or have very bad eyesight. Even processing the most 
+        simple signals by others appears very hard for you.
+    endurance:
+      title: Endurance
+      short: END
+      description:
+        General fitness and toughness of your character. Determines how
+        much beating they can take.
+      superb:
+        Your body is the true meaning of durability and discipline. There are 
+        many different forms of pain and potential challenges you can put yourself 
+        through and you will most likely come out unscathed.
+      great:
+        You are extremely hardy. You almost do not get sick and easily master 
+        the mountain hike.
+      good:
+        Although strong, your body has only started its journey. You can take 
+        a beating and can outlast most people in physical activities where others falter.
+      fair:
+        Just like nearly everyone else, your physical form is plainly standard. 
+        You tolerate pain and can steadily take on difficulties for a period of time.
+      mediocre:
+        You’re not that fit or tolerant, but can still hold your own. While 
+        you suffer physically like when climbing upstairs and becoming tired, 
+        it doesn’t usually get worse from there.
+      poor:
+        Your body is fragile, more so than most. You attract sickness like a 
+        moth to a flame and your character suffers from walking various distances.
+      terrible:
+        You are constantly exhausted and always want to sleep. You do not even 
+        remember the last time you were properly healthy.
+    intelligence:
+      title: Intelligence
+      short: INT
+      description:
+        Strength of mind. Determines how smart your character is. Can
+        come in handy when mentally assaulting other characters.
+      superb:
+        You are a genius. Your IQ is far above average, your knowledge covers 
+        a lot of very different areas. Not many can match you when it comes to 
+        a battle of wits.
+      great:
+        You are extremely smart. Complex sciences are given to you quite easily. 
+        You are mentally fast, able to calculate workarounds much faster than most. 
+      good:
+        Your IQ is above average. You are very erudite and can solve most of 
+        the tasks. You are not bad at making almost perfect decisions.
+      fair:
+        You have a normal level of intelligence. You had a decent education 
+        given to you. You know your way around most problems/situations when they arise.
+      mediocre:
+        You are not too smart. Exact sciences are given to you with difficulty. 
+        You can work your way around a problem if you think hard enough.
+      poor:
+        Your mental abilities are insignificant. It is hard for you to express 
+        your thoughts. You may find it quite hard to exit out of situations 
+        requiring strategical thinking. 
+      terrible:
+        You are weak-minded. It is difficult for you to pronounce words. 
+        Difficult situations are almost impossible for you.
+  error:
+    attribute:
+      sum: Attribute sum is not equal to the maximum amount of the attributes.
+  ui:
+    effect:
+      hearing_radius: Hearing Radius
+    char_create:
+      invalid_points: Invalid amount of points
+      excess_points: You must assign all points
+      stats_points: "Points left: "
+      stats_random: Randomize
+      stats: Stats
+      cur_level: Current level
+      effects: Effects

@@ -1,0 +1,3090 @@
+voice_commands:
+  citizens:
+    figures:
+      sound: 
+        male: "sound/vo/npc/male01/answer03.wav"
+        female: "sound/vo/npc/female01/answer03.wav"
+      text: "Figures."
+    dwell:
+      sound: 
+        male: "sound/vo/npc/male01/answer04.wav"
+        female: "sound/vo/npc/female01/answer04.wav"
+      text: "Try not to dwell on it."
+      aliases:
+        - "try not to dwell on it"
+        - "dwell on it"
+    later:
+      sound: 
+        male: "sound/vo/npc/male01/answer05.wav"
+        female: "sound/vo/npc/female01/answer05.wav"
+      text: "Can we talk about this later?"
+      aliases:
+        - "can we talk about this later"
+        - "talk later"
+    same:
+      sound: 
+        male: "sound/vo/npc/male01/answer07.wav"
+        female: "sound/vo/npc/female01/answer07.wav"
+      text: "Same here."
+      aliases:
+        - "same here"
+    know:
+      sound: 
+        male: "sound/vo/npc/male01/answer08.wav"
+        female: "sound/vo/npc/female01/answer08.wav"
+      text: "Know what you mean."
+      aliases:
+        - "know what you mean"
+        - "i know"
+    yourself:
+      sound: 
+        male: "sound/vo/npc/male01/answer09.wav"
+        female: "sound/vo/npc/female01/answer09.wav"
+      text: "You're talking to yourself again."
+      aliases:
+        - "you are talking to yourself"
+        - "talking to yourself"
+    loud:
+      sound: 
+        male: "sound/vo/npc/male01/answer10.wav"
+        female: "sound/vo/npc/female01/answer10.wav"
+      text: "I wouldn't say that too loud."
+      aliases:
+        - "i would not say that too loud"
+        - "too loud"
+        - "do not say that"
+    join:
+      sound: 
+        male: "sound/vo/npc/male01/answer13.wav"
+        female: "sound/vo/npc/female01/answer13.wav"
+      text: "I'm with you."
+      aliases:
+        - "with you"
+        - "join you"
+        - "i am with you"
+    both:
+      sound: 
+        male: "sound/vo/npc/male01/answer14.wav"
+        female: "sound/vo/npc/female01/answer14.wav"
+      text: 
+        male: "Huh, you and me both."
+        female: "Yeah, you and me both."
+      aliases:
+        - "you and me both"
+        - "both of us"
+    shut:
+      sound: 
+        male: "sound/vo/npc/male01/answer17.wav"
+        female: "sound/vo/npc/female01/answer17.wav"
+      text: "I'm not even gonna tell you to shut up!"
+      aliases:
+        - "shut up"
+        - "angry"
+    work:
+      sound: 
+        male: "sound/vo/npc/male01/answer19.wav"
+        female: "sound/vo/npc/female01/answer19.wav"
+      text: "Keep your mind on your work."
+      aliases:
+        - "keep your mind on your work"
+        - "keep working"
+        - "stay focused"
+    know:
+      sound: 
+        male: "sound/vo/npc/male01/answer22.wav"
+        female: "sound/vo/npc/female01/answer22.wav"
+      text: "You never know."
+      aliases:
+        - "never know"
+        - "unsure"
+        - "you never know"
+    telling:
+      sound: 
+        male: "sound/vo/npc/male01/answer24.wav"
+        female: "sound/vo/npc/female01/answer24.wav"
+      text: "Why are you telling me?"
+      aliases:
+        - "why me"
+        - "why are you telling me"
+        - "telling me"
+    bet:
+      sound: 
+        male: "sound/vo/npc/male01/answer27.wav"
+        female: "sound/vo/npc/female01/answer27.wav"
+      text: 
+        male: "Heh.. Wanna bet?."
+        female: "Wanna bet?"
+      aliases:
+        - "wanna bet"
+    supposed:
+      sound: 
+        male: "sound/vo/npc/male01/answer29.wav"
+        female: "sound/vo/npc/female01/answer29.wav"
+      text: "What am I supposed to do about it!?"
+      aliases:
+        - "why me"
+        - "what am i supposed to do"
+    talking:
+      sound: 
+        male: "sound/vo/npc/male01/answer30.wav"
+        female: "sound/vo/npc/female01/answer30.wav"
+      text: "You talking to me?"
+      aliases:
+        - "talking to me"
+        - "me?"
+    righton:
+      sound: 
+        male: "sound/vo/npc/male01/answer32.wav"
+        female: "sound/vo/npc/female01/answer32.wav"
+      text: "Right on!"
+      aliases:
+        - "right on"
+    yousure:
+      sound: 
+        male: "sound/vo/npc/male01/answer37.wav"
+        female: "sound/vo/npc/female01/answer38.wav"
+      text: "You sure about that?"
+      aliases:
+        - "you sure"
+        - "are you sure"
+    behind:
+      sound: 
+        male: "sound/vo/npc/male01/behindyou01.wav"
+        female: "sound/vo/npc/female01/behindyou01.wav"
+      text: "Behind you!"
+      aliases:
+        - "behind you"
+        - "alert"
+    busy:
+      sound: 
+        male: "sound/vo/npc/male01/busy02.wav"
+        female: "sound/vo/npc/female01/busy02.wav"
+      text: "Can't you see I am busy?"
+      aliases:
+        - "i am busy"
+        - "go away"
+    civilprotection:
+      sound: 
+        male: "sound/vo/npc/male01/civilprotection01.wav"
+        female: "sound/vo/npc/female01/civilprotection01.wav"
+      text: "Civil Protection!"
+      aliases:
+        - "civil protection"
+    combine:
+      sound: 
+        male: "sound/vo/npc/male01/combine01.wav"
+        female: "sound/vo/npc/female01/combine01.wav"
+      text: "Combine!"
+    reload:
+      sound: 
+        male: "sound/vo/npc/male01/coverwhilereload01.wav"
+        female: "sound/vo/npc/female01/coverwhilereload01.wav"
+      text: "Cover me while I reload!"
+      aliases:
+        - "cover me"
+        - "need to reload"
+    cps:
+      sound: 
+        male: "sound/vo/npc/male01/cps01.wav"
+        female: "sound/vo/npc/female01/cps02.wav"
+      text: "CPS!"
+    doing_something:
+      sound: 
+        male: "sound/vo/npc/male01/doingsomething.wav"
+        female: "sound/vo/npc/female01/doingsomething.wav"
+      text: "Shouldn't we be... Err-Doing something?"
+      aliases:
+        - "do something"
+        - "doing something"
+    excuseme:
+      sound: 
+        male: "sound/vo/npc/male01/excuseme01.wav"
+        female: "sound/vo/npc/female01/excuseme01.wav"
+      text: "Excuse me."
+      aliases:
+        - "excuse me"
+        - "excuse"
+    fantastic:
+      sound: 
+        male: "sound/vo/npc/male01/fantastic01.wav"
+        female: "sound/vo/npc/female01/fantastic02.wav"
+      text: "Fantastic!"
+    goodgod:
+      sound: 
+        male: "sound/vo/npc/male01/goodgod.wav"
+        female: "sound/vo/npc/female01/goodgod.wav"
+      text: "Good god..!?"
+      aliases:
+        - "shocked"
+        - "good god"
+        - "surprised"
+    dead:
+      sound: 
+        male: "sound/vo/npc/male01/gordead_ques01.wav"
+        female: "sound/vo/npc/female01/gordead_ques01.wav"
+      text: "He's dead."
+      aliases:
+        - "he is dead"
+    gunship:
+      sound: 
+        male: "sound/vo/npc/male01/gunship02.wav"
+        female: "sound/vo/npc/female01/gunship02.wav"
+      text: "Gunship!"
+    hacks:
+      sound: 
+        male: "sound/vo/npc/male01/hacks01.wav"
+        female: "sound/vo/npc/female01/hacks02.wav"
+      text: "HAAAACKS!"
+    headcrabs:
+      sound: 
+        male: "sound/vo/npc/male01/headcrabs01.wav"
+        female: "sound/vo/npc/female01/headcrabs01.wav"
+      text: "Headcraaabs!"
+    medkit:
+      sound: 
+        male: "sound/vo/npc/male01/health01.wav"
+        female: "sound/vo/npc/female01/health01.wav"
+      text: "Take this medkit."
+    help:
+      sound: 
+        male: "sound/vo/npc/male01/help01.wav"
+        female: "sound/vo/npc/female01/help01.wav"
+      text: "Help!"
+    hi:
+      sound: 
+        male: "sound/vo/npc/male01/hi01.wav"
+        female: "sound/vo/npc/female01/hi01.wav"
+      text: "Hi."
+    incoming:
+      sound: 
+        male: "sound/vo/npc/male01/incoming02.wav"
+        female: "sound/vo/npc/female01/incoming02.wav"
+      text: "Incoming!"
+    ohno:
+      sound: 
+        male: "sound/vo/npc/male01/ohno.wav"
+        female: "sound/vo/npc/female01/ohno.wav"
+      text: "Oh no!"
+      aliases:
+        - "oh no"
+    okay:
+      sound: 
+        male: "sound/vo/npc/male01/ok01.wav"
+        female: "sound/vo/npc/female01/ok01.wav"
+      text: "Okay!"
+      aliases:
+        - "ok"
+    cheese:
+      sound: 
+        male: "sound/vo/npc/male01/question06.wav"
+        female: "sound/vo/npc/female01/question06.wav"
+      text: "Sometimes.. I dream about cheese."
+      aliases:
+        - "dream"
+    plan:
+      sound: 
+        male: "sound/vo/npc/male01/question11.wav"
+        female: "sound/vo/npc/female01/question11.wav"
+      text: "I'm.. Pretty sure this isn't a part of the plan?"
+    bullshit:
+      sound: 
+        male: "sound/vo/npc/male01/question26.wav"
+        female: "sound/vo/npc/female01/question26.wav"
+      text: "This is bullshit!"
+    run2:
+      sound: 
+        male: "sound/vo/npc/male01/runforyourlife01.wav"
+        female: "sound/vo/npc/female01/runforyourlife01.wav"
+      text: "RUN FOR YOUR LIFE!"
+      aliases:
+        - "run2"
+        - "panic2"
+        - "run for your life"
+    scanners:
+      sound: 
+        male: "sound/vo/npc/male01/scanners02.wav"
+        female: "sound/vo/npc/female01/scanners02.wav"
+      text: "Scanners!"
+    sorry:
+      sound: 
+        male: "sound/vo/npc/male01/sorry01.wav"
+        female: "sound/vo/npc/female01/sorry01.wav"
+      text: "Sorry."
+    run:
+      sound: 
+        male: "sound/vo/npc/male01/strider_run.wav"
+        female: "sound/vo/npc/female01/strider_run.wav"
+      text: "RUUUUN!"
+      aliases:
+        - "run"
+        - "panic"
+    strider:
+      sound: 
+        male: "sound/vo/npc/male01/strider.wav"
+        female: "sound/vo/npc/female01/strider.wav"
+      text: "STRIDER!"
+      aliases:
+        - "strider"
+    vorty:
+      sound: 
+        male: "sound/vo/npc/male01/vquestion05.wav"
+        female: "sound/vo/npc/female01/vquestion05.wav"
+      text: "You're alright, vorty."
+    zombies:
+      sound: 
+        male: "sound/vo/npc/male01/zombies01.wav"
+        female: "sound/vo/npc/female01/zombies01.wav"
+      text: "Zombies!"
+    whoops:
+      sound: 
+        male: "sound/vo/npc/male01/whoops01.wav"
+        female: "sound/vo/npc/female01/whoops01.wav"
+      text: "Whoops!"
+      aliases:
+        - "oops"
+  civil_protection:
+    sweep:
+      sound: "sound/npc/metropolice/hiding02.wav"
+      text: "Sweeping for suspect."
+      aliases:
+        - "position to contain"
+        - "take him down"
+    positioncontain:
+      sound: "sound/npc/metropolice/hiding03.wav"
+      text: "Position to contain."
+      aliases:
+        - "position contain"
+        - "position to contain"
+    lock:
+      sound: "sound/npc/metropolice/hiding04.wav"
+      text: "Lock."
+    isolate:
+      sound: "sound/npc/metropolice/hiding05.wav"
+      text: "Isolate."
+    takehimdown:
+      sound: "sound/npc/metropolice/takedown.wav"
+      text: "Take him down!"
+      aliases:
+        - "takedown"
+        - "take him down"
+    takehimdown2:
+      sound: "sound/npc/metropolice/vo/11-99officerneedsassistance.wav"
+      text: "Lock."
+      aliases:
+        - "takedown"
+        - "take him down"
+    fourzerofour:
+      sound: "sound/npc/metropolice/vo/404zone.wav"
+      text: "404 Zone."
+      aliases:
+        - "404"
+        - "404 zone"
+    acquiringonvisual:
+      sound: "sound/npc/metropolice/vo/acquiringonvisual.wav"
+      text: "Acquiring on visual!"
+      aliases:
+        - "acquiring"
+        - "acquiring visual"
+    administer:
+      sound: "sound/npc/metropolice/vo/administer.wav"
+      text: "Administer."
+    affirmative:
+      sound: "sound/npc/metropolice/vo/affirmative.wav"
+      text: "Affirmative."
+    airwatchsubjectis505:
+      sound: "sound/npc/metropolice/vo/airwatchsubjectis505.wav"
+      text: "Dispatch, we need airwatch, subject is 505."
+      aliases:
+        - "505"
+        - "need airwatch"
+        - "subject 505"
+    allrightyoucango:
+      sound: "sound/npc/metropolice/vo/allrightyoucango.wav"
+      text: "All right. You can go."
+      aliases:
+        - "you can go"
+    bolthreefour:
+      sound: "sound/npc/metropolice/vo/allrightyoucango.wav"
+      text: "All units BOL we have 34 s at"
+      aliases:
+        - "bol 34s"
+    allunitscloseonsuspect:
+      sound: "sound/npc/metropolice/vo/allunitscloseonsuspect.wav"
+      text: "All units close on suspect."
+      aliases:
+        - "close on suspect"
+    allunitscode2:
+      sound: "sound/npc/metropolice/vo/allunitscode2.wav"
+      text: "All units code 2."
+      aliases:
+        - "code 2"
+    allunitsmaintainthiscp:
+      sound: "sound/npc/metropolice/vo/allunitsmaintainthiscp.wav"
+      text: "All units maintain this CP."
+      aliases:
+        - "mantain cp"
+    allunitsmovein:
+      sound: "sound/npc/metropolice/vo/allunitsmovein.wav"
+      text: "All units move in."
+      aliases:
+        - "all units move in"
+        - "move in"
+    allunitsreportlocationsuspect:
+      sound: "sound/npc/metropolice/vo/allunitsreportlocationsuspect.wav"
+      text: "All units report location of suspect."
+      aliases:
+        - "location suspect"
+        - "suspect location"
+        - "report suspect location"
+    units_code_three:
+      sound: "sound/npc/metropolice/vo/allunitsrespondcode3.wav"
+      text: "All units at location, respond code 3"
+      aliases:
+        - "code 3"
+    amputate:
+      sound: "sound/npc/metropolice/vo/amputate.wav"
+      text: "Amputate."
+    anticitizen:
+      sound: "sound/npc/metropolice/vo/anticitizen.wav"
+      text: "Anticitizen."
+    anyonepickup:
+      sound: "sound/npc/metropolice/vo/anyonepickup647e.wav"
+      text: "Anyone else pickup a 647-E reading?"
+      aliases:
+        - "647-e"
+    apply:
+      sound: "sound/npc/metropolice/vo/apply.wav"
+      text: "Apply."
+    assaultpointsecureadvance:
+      sound: "sound/npc/metropolice/vo/assaultpointsecureadvance.wav"
+      text: "Assault point secure. Advance."
+      aliases:
+        - "assault secure"
+        - "point secure"
+        - "point secure advance"
+    atcheckpoint:
+      sound: "sound/npc/metropolice/vo/atcheckpoint.wav"
+      text: "At checkpoint."
+      aliases:
+        - "at checkpoint"
+    backmeupimout:
+      sound: "sound/npc/metropolice/vo/backmeupimout.wav"
+      text: "Back me up! I'm out!"
+      aliases:
+        - "back me up"
+        - "i'm out"
+    backup:
+      sound: "sound/npc/metropolice/vo/backup.wav"
+      text: "Backup."
+    block:
+      sound: "sound/npc/metropolice/vo/block.wav"
+      text: "Block."
+    blockisholdingcohesive:
+      sound: "sound/npc/metropolice/vo/blockisholdingcohesive.wav"
+      text: "Block is holding, cohesive."
+      aliases:
+        - "block is holding"
+    breakhiscover:
+      sound: "sound/npc/metropolice/vo/breakhiscover.wav"
+      text: "Break his cover."
+      aliases:
+        - "break cover"
+        - "break his cover"
+    bugs:
+      sound: "sound/npc/metropolice/vo/bugs.wav"
+      text: "Bugs."
+    bugsontheloose:
+      sound: "sound/npc/metropolice/vo/bugsontheloose.wav"
+      text: "We have bugs on the loose."
+      aliases:
+        - "bugs loose"
+    canal:
+      sound: "sound/npc/metropolice/vo/canal.wav"
+      text: "Canal."
+    canalblock:
+      sound: "sound/npc/metropolice/vo/canalblock.wav"
+      text: "Canal block."
+      aliases:
+        - "canal block"
+    catchthatbliponstabilization:
+      sound: "sound/npc/metropolice/vo/catchthatbliponstabilization.wav"
+      text: "Catch that blip on the stabilization readout."
+      aliases:
+        - "catch clip"
+    cauterize:
+      sound: "sound/npc/metropolice/vo/cauterize.wav"
+      text: "Cauterize."
+    miscount:
+      sound: "sound/npc/metropolice/vo/checkformiscount.wav"
+      text: "Check for miscount."
+    haha:
+      sound: "sound/npc/metropolice/vo/chuckle.wav"
+      aliases:
+        - "lol"
+    citizen:
+      sound: "sound/npc/metropolice/vo/citizen.wav"
+      text: "Citizen."
+    citizensummoned:
+      sound: "sound/npc/metropolice/vo/citizensummoned.wav"
+      text: "Reporting citizen summoned to voluntary conscription for general service public detail T94-322."
+      aliases:
+        - "citizen conscription"
+        - "voluntary conscription"
+    classifyasdbthisblockready:
+      sound: "sound/npc/metropolice/vo/classifyasdbthisblockready.wav"
+      text: "Classify subject name as DB this block ready for cleanout."
+      aliases:
+        - "classify db"
+    clearandcode:
+      sound: "sound/npc/metropolice/vo/clearandcode100.wav"
+      text: "Clear and Code 100."
+      aliases:
+        - "code 100"
+    sixfourseven:
+      sound: "sound/npc/metropolice/vo/clearno647no10-107.wav"
+      text: "Clear, no 647, no ten 107."
+      aliases:
+        - "no 647"
+    codeseven:
+      sound: "sound/npc/metropolice/vo/code7.wav"
+      text: "Code 7."
+      aliases:
+        - "code 7"
+    codehundred:
+      sound: "sound/npc/metropolice/vo/code100.wav"
+      text: "Code 7."
+      aliases:
+        - "code 100"
+    condemnedzone:
+      sound: "sound/npc/metropolice/vo/condemnedzone.wav"
+      text: "Condemned zone."
+      aliases:
+        - "condemned zone"
+    confirmadw:
+      sound: "sound/npc/metropolice/vo/confirmadw.wav"
+      text: "Confirmed ADW on that suspect. 10-Zero."
+      aliases:
+        - "confirm adw"
+    priorityone:
+      sound: "sound/npc/metropolice/vo/confirmpriority1sighted.wav"
+      text: "Confirm priority 1 sighted."
+      aliases:
+        - "priority 1"
+    twofourthree:
+      sound: "sound/npc/metropolice/vo/contactwith243suspect.wav"
+      text: "Contact with 243 suspect."
+      aliases:
+        - "243 suspect"
+    prioritytwo:
+      sound: "sound/npc/metropolice/vo/contactwithpriority2.wav"
+      text: "Contact with a priority 2."
+      aliases:
+        - "priority 2"
+    hundredpercent:
+      sound: "sound/npc/metropolice/vo/control100percent.wav"
+      text: "Control is 100 percent this location. No sign of that 647-E."
+      aliases:
+        - "control 100"
+        - "location under control"
+    controlsection:
+      sound: "sound/npc/metropolice/vo/controlsection.wav"
+      text: "Control section."
+      aliases:
+        - "control section"
+    converging:
+      sound: "sound/npc/metropolice/vo/converging.wav"
+      text: "Converging."
+    copy:
+      sound: "sound/npc/metropolice/vo/copy.wav"
+      text: "Copy."
+    coverme:
+      sound: "sound/npc/metropolice/vo/covermegoingin.wav"
+      text: "Cover me, I'm going in!"
+      aliases:
+        - "going in"
+        - "cover me"
+    airwatchbol:
+      sound: "sound/npc/metropolice/vo/cpbolforthat243.wav"
+      text: "CP we need airwatch to BOL for that 243."
+      aliases:
+        - "airwatch bol 243"
+    compromised:
+      sound: "sound/npc/metropolice/vo/cpiscompromised.wav"
+      text: "CP is compromised. Re-establish."
+      aliases:
+        - "cp compromised"
+    overrun:
+      sound: "sound/npc/metropolice/vo/cpisoverrunwehavenocontainment.wav"
+      text: "CP is overrun, we have no containment!"
+      aliases:
+        - "cp overrun"
+    reportin:
+      sound: "sound/npc/metropolice/vo/cprequestsallunitsreportin.wav"
+      text: "CP requests all units location report in."
+      aliases:
+        - "report in"
+    perimeter:
+      sound: "sound/npc/metropolice/vo/cpweneedtoestablishaperimeterat.wav"
+      text: "CP we need to establish a perimeter at"
+      aliases:
+        - "perimeter"
+        - "establish perimeter"
+    trespass:
+      sound: "sound/npc/metropolice/vo/criminaltrespass63.wav"
+      text: "Six three, criminal trespass."
+    dbcount:
+      sound: "sound/npc/metropolice/vo/dbcountis.wav"
+      text: "DB count is"
+      aliases:
+        - "db count"
+    defender:
+      sound: "sound/npc/metropolice/vo/defender.wav"
+      text: "Defender."
+    deservicedarea:
+      sound: "sound/npc/metropolice/vo/deservicedarea.wav"
+      text: "Deserviced area."
+      aliases:
+        - "deserviced area"
+    designatesuspect:
+      sound: "sound/npc/metropolice/vo/designatesuspectas.wav"
+      text: "Designate suspect as"
+      aliases:
+        - "designate suspect"
+    destroycover:
+      sound: "sound/npc/metropolice/vo/destroythatcover.wav"
+      text: "Destroy that cover!"
+      aliases:
+        - "destroy cover"
+    dismounthardpoint:
+      sound: "sound/npc/metropolice/vo/dismountinghardpoint.wav"
+      text: "Dismounting hardpoint."
+      aliases:
+        - "dismount hardpoint"
+    trouble:
+      sound: "sound/npc/metropolice/vo/dispatchIneed10-78.wav"
+      text: "Dispatch I need 10-78 officer in trouble!"
+      aliases:
+        - "10-78"
+    incursion:
+      sound: "sound/npc/metropolice/vo/dispreportssuspectincursion.wav"
+      text: "Disp reports suspect incursion at location."
+    apb:
+      sound: "sound/npc/metropolice/vo/dispupdatingapb.wav"
+      text: "Disp updating APB likeness."
+    db:
+      sound: "sound/npc/metropolice/vo/distributionblock.wav"
+      text: "Distribution block."
+    document:
+      sound: "sound/npc/metropolice/vo/document.wav"
+      text: "Document."
+    dontmove:
+      sound: "sound/npc/metropolice/vo/dontmove.wav"
+      text: "Don't move."
+      aliases:
+        - "don't move"
+    eight:
+      sound: "sound/npc/metropolice/vo/eight.wav"
+      text: "Eight."
+      aliases:
+        - "8"
+    eighteen:
+      sound: "sound/npc/metropolice/vo/eighteen.wav"
+      text: "Eighteen."
+      aliases:
+        - "18"
+    eighty:
+      sound: "sound/npc/metropolice/vo/eighty.wav"
+      text: "Eighty."
+      aliases:
+        - "80"
+    eleven:
+      sound: "sound/npc/metropolice/vo/eleven.wav"
+      text: "Eleven."
+      aliases:
+        - "11"
+    fallout:
+      sound: "sound/npc/metropolice/vo/establishnewcp.wav"
+      text: "Fall out, establish a new CP."
+      aliases:
+        - "fall out"
+    examine:
+      sound: "sound/npc/metropolice/vo/examine.wav"
+      text: "Examine."
+    expired:
+      sound: "sound/npc/metropolice/vo/expired.wav"
+      text: "Expired."
+    external:
+      sound: "sound/npc/metropolice/vo/externaljurisdiction.wav"
+      text: "External jurisdiction."
+      aliases:
+        - "external jurisdiction"
+    fifteen:
+      sound: "sound/npc/metropolice/vo/fifteen.wav"
+      text: "Fifteen."
+      aliases:
+        - "15"
+    fifty:
+      sound: "sound/npc/metropolice/vo/fifty.wav"
+      text: "Fifty."
+      aliases:
+        - "50"
+    finalverdict:
+      sound: "sound/npc/metropolice/vo/finalverdictadministered.wav"
+      text: "Final verdict administered."
+      aliases:
+        - "final verdict"
+    finalwarning:
+      sound: "sound/npc/metropolice/vo/finalwarning.wav"
+      text: "Final warning."
+      aliases:
+        - "final warning"
+    dislocateinterpose:
+      sound: "sound/npc/metropolice/vo/firetodislocateinterpose.wav"
+      text: "Fire to dislocate that interpose!"
+      aliases:
+        - "dislocate interpose"
+    exposetarget:
+      sound: "sound/npc/metropolice/vo/firingtoexposetarget.wav"
+      text: "Firing to expose target!"
+      aliases:
+        - "expose target"
+    firstwarning:
+      sound: "sound/npc/metropolice/vo/firstwarningmove.wav"
+      text: "First warning; move away."
+      aliases:
+        - "first warning"
+    five:
+      sound: "sound/npc/metropolice/vo/five.wav"
+      text: "Five."
+      aliases:
+        - "5"
+    four:
+      sound: "sound/npc/metropolice/vo/four.wav"
+      text: "Four."
+      aliases:
+        - "4"
+    fourteen:
+      sound: "sound/npc/metropolice/vo/fourteen.wav"
+      text: "Fourteen."
+      aliases:
+        - "14"
+    fourty:
+      sound: "sound/npc/metropolice/vo/fourty.wav"
+      text: "Fourty."
+      aliases:
+        - "40"
+    freenecrotics:
+      sound: "sound/npc/metropolice/vo/freenecrotics.wav"
+      text: "I have free necrotics."
+      aliases:
+        - "free necrotics"
+    oneonefourfour:
+      sound: "sound/npc/metropolice/vo/get11-44inboundcleaningup.wav"
+      text: "	Get that 11-44 inbound, we're cleaning up now."
+      aliases:
+        - "11-44 inbound"
+    getdown:
+      sound: "sound/npc/metropolice/vo/getdown.wav"
+      text: "Get down!"
+      aliases:
+        - "get down"
+    getout:
+      sound: "sound/npc/metropolice/vo/getoutofhere.wav"
+      text: "Get out of here."
+      aliases:
+        - "get out"
+    alook:
+      sound: "sound/npc/metropolice/vo/goingtotakealook.wav"
+      text: "Going to take a look."
+      aliases:
+        - "going to take a look"
+    tenhundredseven:
+      sound: "sound/npc/metropolice/vo/gota10-107sendairwatch.wav"
+      text: "Got a 10-107 here, send airwatch for tag."
+      aliases:
+        - "10-107"
+    tentwenty:
+      sound: "sound/npc/metropolice/vo/gothimagainsuspect10-20at.wav"
+      text: "Got him again, suspect is 10-20 at"
+      aliases:
+        - "suspect 10-20 at"
+    oneaccomplish:
+      sound: "sound/npc/metropolice/vo/gotoneaccomplicehere.wav"
+      text: "I got one accomplice here."
+      aliases:
+        - "one accomplice"
+    suspectone:
+      sound: "sound/npc/metropolice/vo/gotsuspect1here.wav"
+      text: "Got suspect 1 here."
+      aliases:
+        - "suspect one"
+    grenade:
+      sound: "sound/npc/metropolice/vo/grenade.wav"
+      text: "Grenade!"
+    hardpointscanning:
+      sound: "sound/npc/metropolice/vo/hardpointscanning.wav"
+      text: "Hardpoint scanning."
+      aliases:
+        - "hardpoint scanning"
+    help:
+      sound: "sound/npc/metropolice/vo/help.wav"
+      text: "Help!"
+    hero:
+      sound: "sound/npc/metropolice/vo/hero.wav"
+      text: "Hero."
+    hesgone:
+      sound: "sound/npc/metropolice/vo/hesgone148.wav"
+      text: "He's gone 148."
+      aliases:
+        - "gone 148"
+    hesrunning:
+      sound: "sound/npc/metropolice/vo/hesrunning.wav"
+      text: "He's running."
+      aliases:
+        - "running"
+    hesupthere:
+      sound: "sound/npc/metropolice/vo/hesupthere.wav"
+      text: "He's up there."
+      aliases:
+        - "he's up there"
+    hidinglastseen:
+      sound: "sound/npc/metropolice/vo/hidinglastseenatrange.wav"
+      text: "Hiding, last seen at range."
+      aliases:
+        - "last seen at"
+    highpriorityregion:
+      sound: "sound/npc/metropolice/vo/highpriorityregion.wav"
+      text: "High priority region."
+      aliases:
+        - "high priority region"
+    tenfourteen:
+      sound: "sound/npc/metropolice/vo/holdingon10-14duty.wav"
+      text: "Holding on 10-14 duty at code 4."
+      aliases:
+        - "10-14 duty"
+    holdit:
+      sound: "sound/npc/metropolice/vo/holdit.wav"
+      text: "Hold it."
+      aliases:
+        - "hold it"
+    holditrightthere:
+      sound: "sound/npc/metropolice/vo/holditrightthere.wav"
+      text: "Hold it right there."
+      aliases:
+        - "hold it right there"
+    holdposition:
+      sound: "sound/npc/metropolice/vo/holdthisposition.wav"
+      text: "Protection Team hold this position."
+      aliases:
+        - "hold position"
+    tenthirty:
+      sound: "sound/npc/metropolice/vo/ihave10-30my10-20responding.wav"
+      text: "I have my 10-30 my 10-20 responding code 2."
+      aliases:
+        - "a 10-30"
+    industrialzone:
+      sound: "sound/npc/metropolice/vo/industrialzone.wav"
+      text: "Industrial zone."
+      aliases:
+        - "industrial zone"
+    infection:
+      sound: "sound/npc/metropolice/vo/infection.wav"
+      text: "Infection."
+      aliases:
+        - "infection"
+    infestedzone:
+      sound: "sound/npc/metropolice/vo/infestedzone.wav"
+      text: "Infested zone."
+      aliases:
+        - "infection zone"
+    inject:
+      sound: "sound/npc/metropolice/vo/inject.wav"
+      text: "Inject."
+    innoculate:
+      sound: "sound/npc/metropolice/vo/innoculate.wav"
+      text: "Inoculate."
+    inposition:
+      sound: "sound/npc/metropolice/vo/inposition.wav"
+      text: "In position."
+      aliases:
+        - "in position"
+    inpositionat:
+      sound: "sound/npc/metropolice/vo/inpositionathardpoint.wav"
+      text: "In position at hard point."
+      aliases:
+        - "in position at"
+    positionone:
+      sound: "sound/npc/metropolice/vo/inpositiononeready.wav"
+      text: "In position, one ready."
+      aliases:
+        - "position one"
+    intercede:
+      sound: "sound/npc/metropolice/vo/intercede.wav"
+      text: "Intercede."
+    interlock:
+      sound: "sound/npc/metropolice/vo/interlock.wav"
+      text: "Interlock."
+    investigate:
+      sound: "sound/npc/metropolice/vo/interlock.wav"
+      text: "Interlock."
+    investigate2:
+      sound: "sound/npc/metropolice/vo/investigating10-103.wav"
+      text: "Investigating 10-103."
+      aliases:
+        - "investigating 10-103"
+    tenhundredeight:
+      sound: "sound/npc/metropolice/vo/is10-108.wav"
+      text: "Is 10-108!"
+      aliases:
+        - "is 10-108"
+    fourhundredfifteen:
+      sound: "sound/npc/metropolice/vo/is415b.wav"
+      text: "Is 415-B."
+      aliases:
+        - "is 415-b"
+    fourhundredfifteen:
+      sound: "sound/npc/metropolice/vo/is415b.wav"
+      text: "Is 415-B."
+      aliases:
+        - "is 415-b"
+    isaidmovealong:
+      sound: "sound/npc/metropolice/vo/isaidmovealong.wav"
+      text: "I said, move along."
+      aliases:
+        - "i said move along"
+    hardpointprosecute:
+      sound: "sound/npc/metropolice/vo/isathardpointreadytoprosecute.wav"
+      text: "Is at hard point, ready to prosecute."
+      aliases:
+        - "hardpoint prosecute"
+    isclosingonsuspect:
+      sound: "sound/npc/metropolice/vo/isclosingonsuspect.wav"
+      text: "Is closing on suspect."
+      aliases:
+        - "closing on suspect"
+    isdown:
+      sound: "sound/npc/metropolice/vo/isdown.wav"
+      text: "Is down!"
+      aliases:
+        - "is down"
+    isgo:
+      sound: "sound/npc/metropolice/vo/isgo.wav"
+      text: "Is go."
+      aliases:
+        - "is go"
+    ismovingin:
+      sound: "sound/npc/metropolice/vo/ismovingin.wav"
+      text: "Is moving in."
+      aliases:
+        - "is moving in"
+    isolate:
+      sound: "sound/npc/metropolice/vo/isolate.wav"
+      text: "Isolate!"
+    ispassive:
+      sound: "sound/npc/metropolice/vo/ispassive.wav"
+      text: "Is passive."
+      aliases:
+        - "is passive"
+    readytogo:
+      sound: "sound/npc/metropolice/vo/isreadytogo.wav"
+      text: "Is ready to go."
+      aliases:
+        - "is ready to go"
+    citation:
+      sound: "sound/npc/metropolice/vo/issuingmalcompliantcitation.wav"
+      text: "Issuing malcompliant citation."
+    fourhundredeight:
+      sound: "sound/npc/metropolice/vo/ivegot408hereatlocation.wav"
+      text: "I've got a 408 here at location."
+      aliases:
+        - "408 here"
+    jury:
+      sound: "sound/npc/metropolice/vo/jury.wav"
+      text: "Jury."
+    keepmoving:
+      sound: "sound/npc/metropolice/vo/keepmoving.wav"
+      text: "Keep moving."
+      aliases:
+        - "keep moving"
+    king:
+      sound: "sound/npc/metropolice/vo/king.wav"
+      text: "King."
+    levelthreeprivacy:
+      sound: "sound/npc/metropolice/vo/level3civilprivacyviolator.wav"
+      text: "I have a level 3 civil privacy violator here."
+      aliases:
+        - "privacy violator"
+    line:
+      sound: "sound/npc/metropolice/vo/line.wav"
+      text: "Line."
+    localcptreportstatus:
+      sound: "sound/npc/metropolice/vo/localcptreportstatus.wav"
+      text: "Local CPT report status."
+      aliases:
+        - "local cpt report"
+    location:
+      sound: "sound/npc/metropolice/vo/location.wav"
+      text: "Location."
+    lock:
+      sound: "sound/npc/metropolice/vo/lock.wav"
+      text: "Lock."
+    lockyourposition:
+      sound: "sound/npc/metropolice/vo/lockyourposition.wav"
+      text: "All units, lock your position."
+      aliases:
+        - "lock position"
+    lookingfortrouble:
+      sound: "sound/npc/metropolice/vo/lookingfortrouble.wav"
+      text: "Looking for trouble?"
+      aliases:
+        - "looking for trouble"
+    lookout:
+      sound: "sound/npc/metropolice/vo/lookout.wav"
+      text: "Look out!"
+      aliases:
+        - "look out"
+    rogueviscerator:
+      sound: "sound/npc/metropolice/vo/lookoutrogueviscerator.wav"
+      text: "Look out, rogue viscerator!"
+      aliases:
+        - "rogue viscerator"
+    looseparasitics:
+      sound: "sound/npc/metropolice/vo/looseparasitics.wav"
+      text: "Loose parasitics!"
+      aliases:
+        - "loose parasitics"
+    loyaltycheckfailure:
+      sound: "sound/npc/metropolice/vo/loyaltycheckfailure.wav"
+      text: "I have a failure to comply with loyalty check, possible 10-103M."
+      aliases:
+        - "possible 10-103m"
+    malcompliantprosecute:
+      sound: "sound/npc/metropolice/vo/malcompliant10107my1020.wav"
+      text: "Malcompliant 10-107 of my 10-20 preparing to prosecute."
+      aliases:
+        - "malcompliant 10-107"
+    malignant:
+      sound: "sound/npc/metropolice/vo/malignant.wav"
+      text: "Malignant."
+    matchapb:
+      sound: "sound/npc/metropolice/vo/matchonapblikeness.wav"
+      text: "I have a match on APB likeness."
+      aliases:
+        - "match apb"
+    meters:
+      sound: "sound/npc/metropolice/vo/meters.wav"
+      text: "Meters."
+    minorhits:
+      sound: "sound/npc/metropolice/vo/minorhitscontinuing.wav"
+      text: "Minor hits, continuing prosecution."
+      aliases:
+        - "minor hits"
+    move:
+      sound: "sound/npc/metropolice/vo/move.wav"
+      text: "Move."
+    movealong:
+      sound: "sound/npc/metropolice/vo/movealong.wav"
+      text: "Move along."
+      aliases:
+        - "move along"
+    movealong2:
+      sound: "sound/npc/metropolice/vo/movealong3.wav"
+      text: "Move along."
+      aliases:
+        - "move along2"
+    moveback:
+      sound: "sound/npc/metropolice/vo/movebackrightnow.wav"
+      text: "Move back right now."
+      aliases:
+        - "move back"
+    moveit:
+      sound: "sound/npc/metropolice/vo/moveit.wav"
+      text: "Move it!"
+      aliases:
+        - "move it"
+    moveit2:
+      sound: "sound/npc/metropolice/vo/moveit2.wav"
+      text: "Move it."
+      aliases:
+        - "move it2"
+    arrestpositions:
+      sound: "sound/npc/metropolice/vo/movetoarrestpositions.wav"
+      text: "All units move to arrest positions."
+      aliases:
+        - "arrest positions"
+    movingtocover:
+      sound: "sound/npc/metropolice/vo/movingtocover.wav"
+      text: "Moving to cover!"
+      aliases:
+        - "moving to cover"
+    movingtohardpoint:
+      sound: "sound/npc/metropolice/vo/movingtohardpoint.wav"
+      text: "Moving to hardpoint."
+      aliases:
+        - "moving to hardpoint"
+    necrotics:
+      sound: "sound/npc/metropolice/vo/necrotics.wav"
+      text: "Necrotics."
+    needhelp:
+      sound: "sound/npc/metropolice/vo/needanyhelpwiththisone.wav"
+      text: "Need any help with this one?"
+      aliases:
+        - "need any help"
+    nine:
+      sound: "sound/npc/metropolice/vo/nine.wav"
+      text: "Nine."
+    nineteen:
+      sound: "sound/npc/metropolice/vo/nineteen.wav"
+      text: "Nineteen."
+    ninety:
+      sound: "sound/npc/metropolice/vo/ninety.wav"
+      text: "Ninety."
+    nocontact:
+      sound: "sound/npc/metropolice/vo/nocontact.wav"
+      text: "No contact."
+      aliases:
+        - "no contact"
+    noncitizen:
+      sound: "sound/npc/metropolice/vo/noncitizen.wav"
+      text: "Non-citizen."
+      aliases:
+        - "non-citizen"
+    nonpatrolregion:
+      sound: "sound/npc/metropolice/vo/nonpatrolregion.wav"
+      text: "Non-patrol region."
+      aliases:
+        - "non-patrol"
+    taggedviromeshere:
+      sound: "sound/npc/metropolice/vo/non-taggedviromeshere.wav"
+      text: "Non-tagged viromes here."
+      aliases:
+        - "viromes"
+    novisualonupi:
+      sound: "sound/npc/metropolice/vo/novisualonupi.wav"
+      text: "No visual on UPI at this time."
+      aliases:
+        - "no visual upi"
+    nowgetoutofhere:
+      sound: "sound/npc/metropolice/vo/nowgetoutofhere.wav"
+      text: "Now get out of here."
+      aliases:
+        - "now get out of here"
+    officerdown:
+      sound: "sound/npc/metropolice/vo/officerdowniam10-99.wav"
+      text: "Officer down, I am 10-99 repeat I am 10-99!"
+      aliases:
+        - "officer down"
+    assistance:
+      sound: "sound/npc/metropolice/vo/officerneedsassistance.wav"
+      text: "Officer needs assistance, I'm 11-99!"
+      aliases:
+        - "need assistance"
+        - "i am 11-99"
+    officerneedhelp:
+      sound: "sound/npc/metropolice/vo/officerneedshelp.wav"
+      text: "Officer needs help!"
+      aliases:
+        - "officer needs help"
+        - "need help"
+    underfire:
+      sound: "sound/npc/metropolice/vo/officerunderfiretakingcover.wav"
+      text: "Officer under fire, taking cover!"
+      aliases:
+        - "under fire"
+    officerdowntentwenty:
+      sound: "sound/npc/metropolice/vo/officerdowncode3tomy10-20.wav"
+      text: "Officer down, request all units code 3 to my 10-20!"
+      aliases:
+        - "officer down2"
+    one:
+      sound: "sound/npc/metropolice/vo/one.wav"
+      text: "One."
+    onehundred:
+      sound: "sound/npc/metropolice/vo/onehundred.wav"
+      text: "One hundred."
+    outbreak:
+      sound: "sound/npc/metropolice/vo/outbreak.wav"
+      text: "Outbreak."
+    outlandbiotic:
+      sound: "sound/npc/metropolice/vo/outlandbioticinhere.wav"
+      text: "We've got an outland biotic in here!"
+      aliases:
+        - "outland biotic"
+    outlandzone:
+      sound: "sound/npc/metropolice/vo/outlandzone.wav"
+      text: "Outland zone."
+      aliases:
+        - "outland zone"
+    pacifying:
+      sound: "sound/npc/metropolice/vo/pacifying.wav"
+      text: "Pacifying."
+    patrol:
+      sound: "sound/npc/metropolice/vo/patrol.wav"
+      text: "Patrol."
+    pickingupnoncorplexindy:
+      sound: "sound/npc/metropolice/vo/pickingupnoncorplexindy.wav"
+      text: "Picking up a non corplex indy over here."
+      aliases:
+        - "picking up"
+    pickupthecan1:
+      sound: "sound/npc/metropolice/vo/pickupthecan1.wav"
+      text: "Pick up that can."
+      aliases:
+        - "can1"
+    pickupthecan2:
+      sound: "sound/npc/metropolice/vo/pickupthecan2.wav"
+      text: "Pick up the can."
+      aliases:
+        - "can2"
+    pickupthecan3:
+      sound: "sound/npc/metropolice/vo/pickupthecan3.wav"
+      text: "I said pick up the can."
+      aliases:
+        - "can3"
+    tenhundredthree:
+      sound: "sound/npc/metropolice/vo/possible10-103alerttagunits.wav"
+      text: "Possible 10-103 my location, alert tag units."
+      aliases:
+        - "possible 10-103"
+    fourofour:
+      sound: "sound/npc/metropolice/vo/possible404here.wav"
+      text: "Possible 404 here."
+      aliases:
+        - "possible 404"
+    sixfourseven:
+      sound: "sound/npc/metropolice/vo/possible647erequestairwatch.wav"
+      text: "Possible 647-E here, request airwatch tag."
+      aliases:
+        - "possible 647-e"
+    sixfourseven:
+      sound: "sound/npc/metropolice/vo/possiblelevel3civilprivacyviolator.wav"
+      text: "Possible level 3 civil privacy violator here."
+      aliases:
+        - "possible privacy violator"
+    tenfifteen:
+      sound: "sound/npc/metropolice/vo/preparefor1015.wav"
+      text: "Prepare for 1015."
+      aliases:
+        - "prepare for 1015"
+    prepareforjudgement:
+      sound: "sound/npc/metropolice/vo/prepareforjudgement.wav"
+      text: "Suspect, prepare to receive civil judgment."
+      aliases:
+        - "civil judgement"
+    judgetenhundredseven:
+      sound: "sound/npc/metropolice/vo/preparingtojudge10-107.wav"
+      text: "Preparing to judge the 10-107, please be advised."
+      aliases:
+        - "judge 10-107"
+    preserve:
+      sound: "sound/npc/metropolice/vo/preserve.wav"
+      text: "Preserve."
+    pressure:
+      sound: "sound/npc/metropolice/vo/pressure.wav"
+      text: "Pressure."
+    prioritytwoac:
+      sound: "sound/npc/metropolice/vo/priority2anticitizenhere.wav"
+      text: "I have a priority 2 anticitizen here."
+    aliases:
+        - "priority 2 anticitzen"
+        - "priority two anticitzen"
+    proceedtocheckpoints:
+      sound: "sound/npc/metropolice/vo/proceedtocheckpoints.wav"
+      text: "Proceed to designated checkpoints."
+    aliases:
+        - "designated checkpoints"
+    productionblock:
+      sound: "sound/npc/metropolice/vo/productionblock.wav"
+      text: "Production block."
+    aliases:
+        - "production block"
+    prosecute:
+      sound: "sound/npc/metropolice/vo/prosecute.wav"
+      text: "Prosecute."
+    protectioncomplete:
+      sound: "sound/npc/metropolice/vo/protectioncomplete.wav"
+      text: "Protection complete."
+      aliases:
+        - "protection complete"
+    ptatlocationreport:
+      sound: "sound/npc/metropolice/vo/ptatlocationreport.wav"
+      text: "Protection Team is at location, reporting."
+      aliases:
+        - "at location"
+    ptgoagain:
+      sound: "sound/npc/metropolice/vo/ptgoagain.wav"
+      text: "PT go again."
+      aliases:
+        - "pt go again"
+    putitinthetrash1:
+      sound: "sound/npc/metropolice/vo/putitinthetrash1.wav"
+      text: "Now, put it in the trash can."
+      aliases:
+        - "trash1"
+    putitinthetrash2:
+      sound: "sound/npc/metropolice/vo/putitinthetrash2.wav"
+      text: "I said, put it in the trash can."
+      aliases:
+        - "trash2"
+    quick:
+      sound: "sound/npc/metropolice/vo/quick.wav"
+      text: "Quick."
+    readytoamputate:
+      sound: "sound/npc/metropolice/vo/readytoamputate.wav"
+      text: "Ready to amputate."
+      aliases:
+        - "ready to amputate"
+    readytojudge:
+      sound: "sound/npc/metropolice/vo/readytojudge.wav"
+      text: "Ready to judge."
+      aliases:
+        - "ready to judge"
+    readytoprosecute:
+      sound: "sound/npc/metropolice/vo/readytoprosecute.wav"
+      text: "Ready to prosecute."
+      aliases:
+        - "ready to prosecute"
+    readytoprosecutefinalwarning:
+      sound: "sound/npc/metropolice/vo/readytoprosecutefinalwarning.wav"
+      text: "Ready to prosecute malcompliant citizen, final warning issued."
+      aliases:
+        - "prosecute final warning"
+    reinforcementcodethree:
+      sound: "sound/npc/metropolice/vo/reinforcementteamscode3.wav"
+      text: "Reinforcement teams, code 3."
+      aliases:
+        - "reinforcement code 3"
+    reportsightingsaccomplices:
+      sound: "sound/npc/metropolice/vo/reportsightingsaccomplices.wav"
+      text: "Report sightings of possible accomplices."
+      aliases:
+        - "possible accomplices"
+    repurposedarea:
+      sound: "sound/npc/metropolice/vo/repurposedarea.wav"
+      text: "Repurposed area."
+      aliases:
+        - "repurposed area"
+    secondaryviscerator:
+      sound: "sound/npc/metropolice/vo/requestsecondaryviscerator.wav"
+      text: "Request secondary viscerator, primary is in cap."
+      aliases:
+        - "request secondary"
+    residentialblock:
+      sound: "sound/npc/metropolice/vo/residentialblock.wav"
+      text: "Residential block."
+      aliases:
+        - "residential block"
+    responding2:
+      sound: "sound/npc/metropolice/vo/responding2.wav"
+      text: "Responding."
+    restrict:
+      sound: "sound/npc/metropolice/vo/restrict.wav"
+      text: "Restrict."
+    restrictedblock:
+      sound: "sound/npc/metropolice/vo/restrictedblock.wav"
+      text: "Restricter block."
+      aliases:
+        - "restricter block"
+    rogerthat:
+      sound: "sound/npc/metropolice/vo/rodgerthat.wav"
+      text: "Roger that."
+      aliases:
+        - "roger that"
+        - "roger"
+    roller:
+      sound: "sound/npc/metropolice/vo/roller.wav"
+      text: "Roller."
+    runninglowonverdicts:
+      sound: "sound/npc/metropolice/vo/runninglowonverdicts.wav"
+      text: "Running low on verdicts, taking cover."
+      aliases:
+        - "running low"
+    sacrificecp:
+      sound: "sound/npc/metropolice/vo/sacrificecode1maintaincps.wav"
+      text: "All units, sacrifice code 1, maintain this CP."
+      aliases:
+        - "mantain cp"
+    search:
+      sound: "sound/npc/metropolice/vo/search.wav"
+      text: "Search."
+    searchingforsuspect:
+      sound: "sound/npc/metropolice/vo/searchingforsuspect.wav"
+      text: "Searching for suspect - no status."
+      aliases:
+        - "searching suspect"
+    secondwarning:
+      sound: "sound/npc/metropolice/vo/secondwarning.wav"
+      text: "Second warning given."
+      aliases:
+        - "second warning given"
+    sector:
+      sound: "sound/npc/metropolice/vo/sector.wav"
+      text: "Sector."
+    sentencedelivered:
+      sound: "sound/npc/metropolice/vo/sentencedelivered.wav"
+      text: "	Sentence name delivered."
+      aliases:
+        - "sentence name delivered"
+    serve:
+      sound: "sound/npc/metropolice/vo/serve.wav"
+      text: "Serve."
+    seven:
+      sound: "sound/npc/metropolice/vo/seven.wav"
+      text: "Seven."
+      aliases:
+        - "7"
+    seventeen:
+      sound: "sound/npc/metropolice/vo/seventeen.wav"
+      text: "Seventeen."
+      aliases:
+        - "17"
+    seventy:
+      sound: "sound/npc/metropolice/vo/seventy.wav"
+      text: "Seventeen."
+      aliases:
+        - "70"
+    shit:
+      sound: "sound/npc/metropolice/vo/shit.wav"
+      text: "Shit!"
+    shotsfired:
+      sound: "sound/npc/metropolice/vo/shotsfiredhostilemalignants.wav"
+      text: "Shots fired, hostile malignants here."
+      aliases:
+        - "shots fired"
+    six:
+      sound: "sound/npc/metropolice/vo/six.wav"
+      text: "Six."
+      aliases:
+        - "6"
+    sixteen:
+      sound: "sound/npc/metropolice/vo/sixteen.wav"
+      text: "Sixteen."
+      aliases:
+        - "16"
+    sixty:
+      sound: "sound/npc/metropolice/vo/sixty.wav"
+      text: "Sixty."
+      aliases:
+        - "60"
+    sociocide:
+      sound: "sound/npc/metropolice/vo/sociocide.wav"
+      text: "Sociocide."
+    stabilizationjurisdiction:
+      sound: "sound/npc/metropolice/vo/stabilizationjurisdiction.wav"
+      text: "Stabilization jurisdiction."
+      aliases:
+        - "stabilization"
+    loyaltycheck:
+      sound: "sound/npc/metropolice/vo/standardloyaltycheck.wav"
+      text: "Uh, roger that, we'll run standard loyalty check procedure 243, my 10-22 intake station, over."
+      aliases:
+        - "loyalty check"
+    stationblock:
+      sound: "sound/npc/metropolice/vo/stationblock.wav"
+      text: "Station block."
+      aliases:
+        - "station block"
+    sterilize:
+      sound: "sound/npc/metropolice/vo/sterilize.wav"
+      text: "Sterilize."
+    stick:
+      sound: "sound/npc/metropolice/vo/stick.wav"
+      text: "Stick."
+    stillgetting:
+      sound: "sound/npc/metropolice/vo/stillgetting647e.wav"
+      text: "Still getting that 647-E from local surveillance."
+      aliases:
+        - "still getting"
+    stormsystem:
+      sound: "sound/npc/metropolice/vo/stormsystem.wav"
+      text: "Storm system."
+      aliases:
+        - "storm system"
+    subject:
+      sound: "sound/npc/metropolice/vo/subject.wav"
+      text: "Subject."
+    subjectfiveofive:
+      sound: "sound/npc/metropolice/vo/subjectis505.wav"
+      text: "Subject is 505."
+      aliases:
+        - "subject 505"
+    highspeed:
+      sound: "sound/npc/metropolice/vo/subjectisnowhighspeed.wav"
+      text: "All units be advised, subject is now high speed."
+      aliases:
+        - "high speed"
+    supsecthasmovednowto:
+      sound: "sound/npc/metropolice/vo/supsecthasmovednowto.wav"
+      text: "Suspect has moved now to"
+      aliases:
+        - "moved to"
+    elevensix:
+      sound: "sound/npc/metropolice/vo/suspect11-6my1020is.wav"
+      text: "Suspect 11-6 my 10-20 is."
+      aliases:
+        - "suspect 11-6"
+    elevensix:
+      sound: "sound/npc/metropolice/vo/suspectinstormrunoff.wav"
+      text: "All units, suspect is in storm runoff system at"
+      aliases:
+        - "runoff"
+    suspectbleeding:
+      sound: "sound/npc/metropolice/vo/suspectisbleeding.wav"
+      text: "Suspect is bleeding from multiple wounds."
+      aliases:
+        - "suspect bleeding"
+    suspectlocationunknown:
+      sound: "sound/npc/metropolice/vo/suspectlocationunknown.wav"
+      text: "Suspect location unknown."
+      aliases:
+        - "location unknown"
+    restrictedcanals:
+      sound: "sound/npc/metropolice/vo/suspectusingrestrictedcanals.wav"
+      text: "Suspect is using restricted canals at"
+      aliases:
+        - "restricted canals"
+    suspend:
+      sound: "sound/npc/metropolice/vo/suspend.wav"
+      text: "Suspend."
+    sweeping:
+      sound: "sound/npc/metropolice/vo/sweepingforsuspect.wav"
+      text: "Sweeping for suspect."
+    tagtennine:
+      sound: "sound/npc/metropolice/vo/tag10-91d.wav"
+      text: "Tag 10-91D."
+      aliases:
+        - "tag 10-91d"
+    takecover:
+      sound: "sound/npc/metropolice/vo/takecover.wav"
+      text: "Take cover."
+      aliases:
+        - "take cover"
+    tap:
+      sound: "sound/npc/metropolice/vo/tap.wav"
+      text: "Tap."
+    teaminposition:
+      sound: "sound/npc/metropolice/vo/teaminpositionadvance.wav"
+      text: "Team in position, advance."
+      aliases:
+        - "team advance"
+    ten:
+      sound: "sound/npc/metropolice/vo/ten.wav"
+      text: "Ten."
+      aliases:
+        - "10"
+    tentwo:
+      sound: "sound/npc/metropolice/vo/ten2.wav"
+      text: "Ten-2."
+      aliases:
+        - "10-2"
+    tenfour:
+      sound: "sound/npc/metropolice/vo/ten4.wav"
+      text: "Ten-4."
+      aliases:
+        - "10-4"
+    teneight:
+      sound: "sound/npc/metropolice/vo/ten8standingby.wav"
+      text: "10-8, standing by."
+      aliases:
+        - "10-8"
+    tennineseven:
+      sound: "sound/npc/metropolice/vo/ten97.wav"
+      text: "10-97."
+      aliases:
+        - "10-97"
+    goa:
+      sound: "sound/npc/metropolice/vo/ten97suspectisgoa.wav"
+      text: "10-97, suspect is GOA."
+      aliases:
+        - "suspect goa"
+    visceratorhunt:
+      sound: "sound/npc/metropolice/vo/tenzerovisceratorishunting.wav"
+      text: "10-0, viscerator is hunting."
+      aliases:
+        - "viscerator hunting"
+    terminalrestrictionzone:
+      sound: "sound/npc/metropolice/vo/terminalrestrictionzone.wav"
+      text: "Terminal restriction zone."
+      aliases:
+        - "terminal restriction"
+    thatsagrenade:
+      sound: "sound/npc/metropolice/vo/thatsagrenade.wav"
+      text: "That's a grenade!"
+      aliases:
+        - "grenade!"
+    hegoes:
+      sound: "sound/npc/metropolice/vo/therehegoeshesat.wav"
+      text: "There he goes, he's at."
+      aliases:
+        - "he's at"
+    thereheis:
+      sound: "sound/npc/metropolice/vo/thereheis.wav"
+      text: "There he is!"
+      aliases:
+        - "there he is"
+    thirteen:
+      sound: "sound/npc/metropolice/vo/thirteen.wav"
+      text: "Thirteen."
+      aliases:
+        - "13"
+    thirty:
+      sound: "sound/npc/metropolice/vo/thirty.wav"
+      text: "Thirty."
+      aliases:
+        - "30"
+    secondwarning:
+      sound: "sound/npc/metropolice/vo/thisisyoursecondwarning.wav"
+      text: "This is your second warning."
+      aliases:
+        - "second warning"
+    three:
+      sound: "sound/npc/metropolice/vo/three.wav"
+      text: "Three."
+      aliases:
+        - "3"
+    threehundred:
+      sound: "sound/npc/metropolice/vo/threehundred.wav"
+      text: "Three hundred."
+      aliases:
+        - "300"
+    transitblock:
+      sound: "sound/npc/metropolice/vo/transitblock.wav"
+      text: "Transit block."
+      aliases:
+        - "transit"
+    twelve:
+      sound: "sound/npc/metropolice/vo/twelve.wav"
+      text: "Twelve."
+      aliases:
+        - "12"
+    twenty:
+      sound: "sound/npc/metropolice/vo/twenty.wav"
+      text: "Twenty."
+      aliases:
+        - "20"
+    two:
+      sound: "sound/npc/metropolice/vo/two.wav"
+      text: "Two."
+      aliases:
+        - "2"
+    twohundred:
+      sound: "sound/npc/metropolice/vo/twohundred.wav"
+      text: "Two hundred."
+      aliases:
+        - "200"
+    union:
+      sound: "sound/npc/metropolice/vo/union.wav"
+      text: "Union."
+    standingby:
+      sound: "sound/npc/metropolice/vo/unitis10-8standingby.wav"
+      text: "Unit is 10-8 standing by."
+      aliases:
+        - "standing by"
+    tensixtyfive:
+      sound: "sound/npc/metropolice/vo/unitis10-65.wav"
+      text: "Unit is 10-65."
+      aliases:
+        - "is 10-65"
+    onduty:
+      sound: "sound/npc/metropolice/vo/unitisonduty10-8.wav"
+      text: "Unit is on duty 10-8."
+      aliases:
+        - "is on duty"
+        - "10-8"
+    reporttentwentyfive:
+      sound: "sound/npc/metropolice/vo/unitreportinwith10-25suspect.wav"
+      text: "Any unit, report in with 10-25 suspect."
+      aliases:
+        - "report 10-25"
+    unlawfulentry:
+      sound: "sound/npc/metropolice/vo/unlawfulentry603.wav"
+      text: "Six oh three, unlawful entry."
+      aliases:
+        - "603"
+    upi:
+      sound: "sound/npc/metropolice/vo/upi.wav"
+      text: "UPI."
+    utlsuspect:
+      sound: "sound/npc/metropolice/vo/utlsuspect.wav"
+      text: "UTL suspect."
+      aliases:
+        - "utl suspect"
+    utlthatsuspect:
+      sound: "sound/npc/metropolice/vo/utlthatsuspect.wav"
+      text: "UTL that suspect."
+      aliases:
+        - "utl that suspect"
+    vacatecitizen:
+      sound: "sound/npc/metropolice/vo/vacatecitizen.wav"
+      text: "Vacate citizen."
+      aliases:
+        - "vacate"
+    vice:
+      sound: "sound/npc/metropolice/vo/vice.wav"
+      text: "Vice."
+    victor:
+      sound: "sound/npc/metropolice/vo/victor.wav"
+      text: "Victor."
+    deployed:
+      sound: "sound/npc/metropolice/vo/visceratordeployed.wav"
+      text: "Viscerator deployed."
+    visceratorisoc:
+      sound: "sound/npc/metropolice/vo/visceratorisoc.wav"
+      text: "Viscerator is OC!"
+      aliases:
+        - "is oc"
+    visceratorisoffgrid:
+      sound: "sound/npc/metropolice/vo/visceratorisoffgrid.wav"
+      text: "Viscerator is off grid."
+      aliases:
+        - "is off grid"
+    wasteriver:
+      sound: "sound/npc/metropolice/vo/wasteriver.wav"
+      text: "Waste river."
+      aliases:
+        - "waste river"
+    watchit:
+      sound: "sound/npc/metropolice/vo/watchit.wav"
+      text: "Watch it!"
+      aliases:
+        - "watch it"
+    sociostable:
+      sound: "sound/npc/metropolice/vo/wearesociostablethislocation.wav"
+      text: "We are sociostable at this location."
+      aliases:
+        - "sociostable"
+    dbhere:
+      sound: "sound/npc/metropolice/vo/wegotadbherecancel10-102.wav"
+      text: "We got a DB here, cancel that 11-42."
+      aliases:
+        - "cancel 11-42"
+    hundreeight:
+      sound: "sound/npc/metropolice/vo/wehavea10-108.wav"
+      text: "We have a ten 108!"
+      aliases:
+        - "10-108"
+    workforceintake:
+      sound: "sound/npc/metropolice/vo/workforceintake.wav"
+      text: "Workforce intake."
+      aliases:
+        - "workforce intake"
+    xray:
+      sound: "sound/npc/metropolice/vo/xray.wav"
+      text: "X-Ray."
+      aliases:
+        - "x-ray"
+    yellow:
+      sound: "sound/npc/metropolice/vo/yellow.wav"
+      text: "Yellow."
+    youknockeditover:
+      sound: "sound/npc/metropolice/vo/youknockeditover.wav"
+      text: "You knocked it over, pick it up."
+      aliases:
+        - "pick it up"
+    malcomplianceverdict:
+      sound: "sound/npc/metropolice/vo/youwantamalcomplianceverdict.wav"
+      text: "You want a malcompliance verdict?"
+      aliases:
+        - "malcompliance verdict"
+    zero:
+      sound: "sound/npc/metropolice/vo/zero.wav"
+      text: "Zero."
+    zone:
+      sound: "sound/npc/metropolice/vo/zone.wav"
+      text: "Zone."
+  vortigaunt:
+    nodistance:
+      sound: "sound/vo/npc/vortigaunt/vmono_04.wav"
+      text: "There is no distance between us. No false veils of time or space may intervene."
+      aliases:
+        - "no distance"
+    betweenworlds:
+      sound: "sound/vo/npc/vortigaunt/vmono_07.wav"
+      text: "For a brief time you joined us. You are one. Between the worlds."
+      aliases:
+        - "between worlds"
+    communionvortessence:
+      sound: "sound/vo/npc/vortigaunt/vmono_08.wav"
+      text: "Communion of the vortessence. And that other: a deeper mystery. No deeper than the void itself."
+      aliases:
+        - "communion of the vortessence"
+    cutcords:
+      sound: "sound/vo/npc/vortigaunt/vmono_09.wav"
+      text: "We cannot forget those whose cords you cut. Forgiveness is not ours to bestow."
+      aliases:
+        - "cut cords"
+    unityofpurpose:
+      sound: "sound/vo/npc/vortigaunt/vmono_10.wav"
+      text: "Unity of purpose, the shattering of common shackles, a single road we tread."
+      aliases:
+        - "unity of purpose"
+    singforeternity:
+      sound: "sound/vo/npc/vortigaunt/vmono_11.wav"
+      text: "Your song we sing and shall sing for eternity. No matter the consequences of this struggle."
+      aliases:
+        - "sing for eternity"
+    griefjubilation:
+      sound: "sound/vo/npc/vortigaunt/vmono_12.wav"
+      text: "You have brought us grief and jubilation beyond measure."
+      aliases:
+        - "grief and jubilation"
+    finalstroke:
+      sound: "sound/vo/npc/vortigaunt/vmono_13.wav"
+      text: "We are there still, in observance of your final stroke."
+      aliases:
+        - "final stroke"
+    talismanofvictory:
+      sound: "sound/vo/npc/vortigaunt/vmono_16.wav"
+      text: "With you besides us, a talisman of victory, the day of freedom draws nigh."
+      aliases:
+        - "talisman of victory"
+    darkmask:
+      sound: "sound/vo/npc/vortigaunt/vmono_17.wav"
+      text: "Your bright face obscures your darker mask."
+      aliases:
+        - "dark mask"
+    sib:
+      sound: "sound/vo/npc/vortigaunt/vmono_18.wav"
+      text: "	We call you sib, although your mind and meaning are a mystery to us."
+    distanteyes:
+      sound: "sound/vo/npc/vortigaunt/vmono_19.wav"
+      text: "Far distant eyes look out through yours."
+      aliases:
+        - "distant eyes"
+    secretsteers:
+      sound: "sound/vo/npc/vortigaunt/vmono_20.wav"
+      text: "Something secret steers us both. We shall not name it."
+      aliases:
+        - "secret steers"
+    chafingbonds:
+      sound: "sound/vo/npc/vortigaunt/vmono_21.wav"
+      text: "We have endured these chafing bonds for eons, yet a single moment of further servitude seems intolerable!"
+      aliases:
+        - "chafing bonds"
+    ouryoke:
+      sound: "sound/vo/npc/vortigaunt/vmono_22.wav"
+      text: "How often have we slipped our yoke, only to find it choking us again."
+      aliases:
+        - "our yoke"
+    totalvictory:
+      sound: "sound/vo/npc/vortigaunt/vmono_23.wav"
+      text: "Let this war end in either total victory or our extinction. No further compromise shall we allow."
+      aliases:
+        - "total victory"
+    miserablerock:
+      sound: "sound/vo/npc/vortigaunt/vmono_24.wav"
+      text: "We take our stand beside you, here, upon this miserable rock."
+      aliases:
+        - "miserable rock"
+    darkahead:
+      sound: "sound/vo/npc/vortigaunt/vmono_25.wav"
+      text: "The way ahead is dark for the moment."
+      aliases:
+        - "the way ahead is dark"
+    sacrificetous:
+      sound: "sound/vo/npc/vortigaunt/vmono_26.wav"
+      text: "What seems to you a sacrifice is merely, to us, an oscillation. We do not fear the interval of darkness."
+      aliases:
+        - "sacrifice is merely"
+    tapestry:
+      sound: "sound/vo/npc/vortigaunt/vmono_27.wav"
+      text: "We are a tapestry woven of vortessence. It is the same for you if only you would see it."
+    hopesanddreams:
+      sound: "sound/vo/npc/vortigaunt/vmono_28.wav"
+      text: "How many are there in you? Whose hopes and dreams do you encompass?"
+      aliases:
+        - "hopes and dreams"
+    eyesinside:
+      sound: "sound/vo/npc/vortigaunt/vmono_29.wav"
+      text: "Could you but see the eyes inside your own, the minds in your mind, you would see how much we share."
+      aliases:
+        - "eyes inside"
+    languagecourtesy:
+      sound: "sound/vo/coast/vgossip_02.wav"
+      text: "Yes, we will vocalize in your auditory language as a matter of courtesy."
+      aliases:
+        - "language courtesy"
+    unflatteringthings:
+      sound: "sound/vo/coast/vgossip_03.wav"
+      text: "Unless we wish to say unflattering things about you."
+      aliases:
+        - "unflattering things"
+    justso:
+      sound: "sound/vo/coast/vgossip_04.wav"
+      text: "Just so."
+      aliases:
+        - "just so"
+    affirmed:
+      sound: "sound/vo/npc/vortigaunt/affirmed.wav"
+      text: "Affirmed."
+    alldear:
+      sound: "sound/vo/npc/vortigaunt/alldear.wav"
+      text: "We have lost all dear to us."
+      aliases:
+        - "all dear"
+    allfornow:
+      sound: "sound/vo/npc/vortigaunt/allfornow.wav"
+      text: "That is all for now."
+      aliases:
+        - "all for now"
+    allinoneinall:
+      sound: "sound/vo/npc/vortigaunt/allinoneinall.wav"
+      text: "All in one and one in all."
+      aliases:
+        - "all in one"
+    allowme:
+      sound: "sound/vo/npc/vortigaunt/allowme.wav"
+      text: "Allow me."
+      aliases:
+        - "allow me"
+    allwecanspare:
+      sound: "sound/vo/npc/vortigaunt/allwecanspare.wav"
+      text: "That is all we can spare."
+      aliases:
+        - "all we can spare"
+    asyouwish:
+      sound: "sound/vo/npc/vortigaunt/asyouwish.wav"
+      text: "As you wish."
+      aliases:
+        - "as you wish"
+    beofservice:
+      sound: "sound/vo/npc/vortigaunt/beofservice.wav"
+      text: "Can we be of service?"
+      aliases:
+        - "of service"
+    bodyyours:
+      sound: "sound/vo/npc/vortigaunt/bodyyours.wav"
+      text: "This body is yours to command."
+      aliases:
+        - "yours to command"
+    calmyourself:
+      sound: "sound/vo/npc/vortigaunt/calm.wav"
+      text: "Calm yourself."
+      aliases:
+        - "calm yourself"
+    canconvince:
+      sound: "sound/vo/npc/vortigaunt/canconvince.wav"
+      text: "Can we not convince you otherwise?"
+      aliases:
+        - "convince you"
+    caution:
+      sound: "sound/vo/npc/vortigaunt/caution.wav"
+      text: "Caution!"
+    certainly:
+      sound: "sound/vo/npc/vortigaunt/certainly.wav"
+      text: "Certainly."
+    corporeal:
+      sound: "sound/vo/npc/vortigaunt/corporeal.wav"
+      text: "We never dreamed to meet you in corporeal form."
+    dedicateourselves:
+      sound: "sound/vo/npc/vortigaunt/dedicate.wav"
+      text: "We dedicate ourselves to your purpose."
+      aliases:
+        - "dedicate ourselves"
+    done:
+      sound: "sound/vo/npc/vortigaunt/done.wav"
+      text: "Done."
+    dreamed:
+      sound: "sound/vo/npc/vortigaunt/dreamed.wav"
+      text: "We have dreamed of this moment."
+    gladly:
+      sound: "sound/vo/npc/vortigaunt/gladly.wav"
+      text: "Gladly."
+    halt:
+      sound: "sound/vo/npc/vortigaunt/halt.wav"
+      text: "Halt."
+    gloriousend:
+      sound: "sound/vo/npc/vortigaunt/gloriousend.wav"
+      text: "To our glorious end."
+      aliases:
+        - "glorious end"
+    here:
+      sound: "sound/vo/npc/vortigaunt/here.wav"
+      text: "Here."
+    herewestay:
+      sound: "sound/vo/npc/vortigaunt/herewestay.wav"
+      text: "Here we stay."
+      aliases:
+        - "Here we stay."
+    honorours:
+      sound: "sound/vo/npc/vortigaunt/honorours.wav"
+      text: "	The honor is ours."
+      aliases:
+        - "honor is ours"
+        - "honour is ours"
+    leadon:
+      sound: "sound/vo/npc/vortigaunt/leadon.wav"
+      text: "Lead on."
+      aliases:
+        - "lead on"
+    mutual:
+      sound: "sound/vo/npc/vortigaunt/mutual.wav"
+      text: "Our purpose is mutual."
+      aliases:
+        - "mutual purpose"
+    onward:
+      sound: "sound/vo/npc/vortigaunt/onward.wav"
+      text: "Onward!"
+    opaque:
+      sound: "sound/vo/npc/vortigaunt/opaque.wav"
+      text: "Your mind is opaque."
+      aliases:
+        - "opaque mind"
+    wewillpersevere:
+      sound: "sound/vo/npc/vortigaunt/persevere.wav"
+      text: "This is more than anyone can bear, but we will persevere."
+      aliases:
+        - "we will persevere"
+    withpleasure:
+      sound: "sound/vo/npc/vortigaunt/pleasure.wav"
+      text: "With pleasure."
+      aliases:
+        - "with pleasure"
+    finestpoet:
+      sound: "sound/vo/npc/vortigaunt/poet.wav"
+      text: "Our finest poet describes it thus: Gallum galla gilla ma."
+      aliases:
+        - "finest poet"
+    prevail:
+      sound: "sound/vo/npc/vortigaunt/prevail.wav"
+      text: "We shall prevail."
+    propitious:
+      sound: "sound/vo/npc/vortigaunt/propitious.wav"
+      text: "Propitious alliance."
+    reasondelay:
+      sound: "sound/vo/npc/vortigaunt/reasondelay.wav"
+      text: "Is there reason for delay?"
+      aliases:
+        - "reason for delay"
+    regrettable:
+      sound: "sound/vo/npc/vortigaunt/regrettable.wav"
+      text: "This is regrettable."
+    unconvinced:
+      sound: "sound/vo/npc/vortigaunt/vanswer01.wav"
+      text: "We remain unconvinced."
+    illusions:
+      sound: "sound/vo/npc/vortigaunt/vanswer02.wav"
+      text: "You're not the first to harbor such illusions."
+    concernis:
+      sound: "sound/vo/npc/vortigaunt/vanswer07.wav"
+      text: "Your concern is touching."
+      aliases:
+        - "your concern is"
+    dontrely:
+      sound: "sound/vo/npc/vortigaunt/vanswer08.wav"
+      text: "Don't rely on it.."
+      aliases:
+        - "don't rely"
+    deluded:
+      sound: "sound/vo/npc/vortigaunt/vanswer11.wav"
+      text: "	You are deluded."
+    gauche:
+      sound: "sound/vo/npc/vortigaunt/vanswer13.wav"
+      text: "Excuse our gauche vicissitudes."
+    likewise:
+      sound: "sound/vo/npc/vortigaunt/vanswer15.wav"
+      text: "Likewise, we are sure."
+    vortigeseone:
+      sound: "sound/vo/npc/vortigaunt/vortigese02.wav"
+      text: "Ah ghurrrr..."
+      aliases:
+        - "vortigese1"
+    vortigesetwo:
+      sound: "sound/vo/npc/vortigaunt/vortigese03.wav"
+      text: "Taaar..."
+      aliases:
+        - "vortigese2"
+    vortigesethree:
+      sound: "sound/vo/npc/vortigaunt/vortigese04.wav"
+      text: "Riiit..."
+      aliases:
+        - "vortigese3"
+    vortigesefour:
+      sound: "sound/vo/npc/vortigaunt/vortigese05.wav"
+      text: "Lung gah..."
+      aliases:
+        - "vortigese4"
+    vortigesefive:
+      sound: "sound/vo/npc/vortigaunt/vortigese07.wav"
+      text: "Gong..."
+      aliases:
+        - "vortigese5"
+    vortigesesix:
+      sound: "sound/vo/npc/vortigaunt/vortigese08.wav"
+      text: "Galanga..."
+      aliases:
+        - "vortigese6"
+    vortigeseseven:
+      sound: "sound/vo/npc/vortigaunt/vortigese09.wav"
+      text: "Ga la lung."
+      aliases:
+        - "vortigese7"
+    vortigeseeight:
+      sound: "sound/vo/npc/vortigaunt/vortigese11.wav"
+      text: "Churr galing chur alla gung..."
+      aliases:
+        - "vortigese8"
+    vortigesenine:
+      sound: "sound/vo/npc/vortigaunt/vortigese12.wav"
+      text: "Chur lung gong chella gurr..."
+      aliases:
+        - "vortigese9"
+    combinedepravity:
+      sound: "sound/vo/npc/vortigaunt/vques02.wav"
+      text: "The Combine will pay in kind for their depravity."
+      aliases:
+        - "combine depravity"
+    'yes':
+      sound: "sound/vo/npc/vortigaunt/yes.wav"
+      text: "Yes!"
+    vortcallone:
+      sound: "sound/vo/outland_01/intro/ol01_vortcall01.wav"
+      aliases:
+        - "vortcall1"
+    vortcalltwo:
+      sound: "sound/vo/outland_01/intro/ol01_vortcall02c.wav"
+      aliases:
+        - "vortcall2"
+    vortcallthree:
+      sound: "sound/vo/outland_01/intro/ol01_vortresp01.wav"
+      aliases:
+        - "vortcall3"
+    vortcallfour:
+      sound: "sound/vo/outland_01/intro/ol01_vortresp04.wav"
+      aliases:
+        - "vortcall4"
+  dispatch:
+    acreported:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_anticitizenreport_spkr"
+      aliases:
+        - "anti-citizen reported"
+        - "ac reported"
+    acreported:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_anticitizenreport_spkr.wav"
+      text: "Attention, ground units - anti-citizen reported in this community. Code: lock, cauterize, stabilize."
+      aliases:
+        - "anti-citizen reported"
+        - "ac reported"
+    aclvlone:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_anticivil1_5_spkr.wav"
+      text: "You are charged with anti-civil activity level 1. Protection Units: prosecution code: duty, sword, operate."
+      aliases:
+        - "anti-civil level 1"
+        - "anti-civil activity level 1"
+    acalert:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_anticivilevidence_3_spkr.wav"
+      text: "Protection team alert: evidence of anti-civil activity in this community: code assemble, clamp, contain."
+      aliases:
+        - "anti-civil evidence"
+        - "anti-civil alert"
+    capitalmalcompliance:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_capitalmalcompliance_spkr.wav"
+      text: "Individual, you are charged with capital malcompliance. Anti-citizen status approved."
+      aliases:
+        - "capital malcompliance"
+    socioendangerment:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_ceaseevasionlevelfive_spkr.wav"
+      text: "Individual, you are now charged with Socio-Endangerment, level 5. Cease evasion immediately, receive your verdict."
+      aliases:
+        - "charge level 5"
+        - "socio-endangerment level 5"
+    citizenshiprevoked:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_citizenshiprevoked_6_spkr.wav"
+      text: "Individual, you are convicted of multi-anti-civil violations. Implicit citizenship revoked, status: malignant."
+      aliases:
+        - "citizenship revoked"
+        - "convinced violations"
+    unidentified:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_confirmcivilstatus_1_spkr.wav"
+      text: "Attention please: unidentified person of interest - confirm your civil status with local protection team immediately."
+      aliases:
+        - "unidentified person"
+    evasionbehavior:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_evasionbehavior_2_spkr.wav"
+      text: "Attention please: Evasion behavior consistent with mal-compliant defendant. Ground Protection Team: alert, code: isolate, expose, administer."
+      aliases:
+        - "evasion behavior"
+    citizenreminder:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_innactionisconspiracy_spkr.wav"
+      text: "Citizen reminder: inaction is conspiracy. Report counter-behavior to a Civil Protection team immediately."
+      aliases:
+        - "reminder1"
+        - "inaction"
+    localunrest:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_localunrest_spkr.wav"
+      text: "Alert: Community Ground Protection units: Local unrest structure detected. Assemble, administer, pacify."
+      aliases:
+        - "local unrest"
+    statusevasion:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_protectionresponse_1_spkr.wav"
+      text: "Attention Protection Team: status evasion in progress in this community. Respond, isolate, inquire."
+      aliases:
+        - "status evasion"
+    aj:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_protectionresponse_4_spkr.wav"
+      text: "Attention all Ground Protection Teams: Autonomous judgment is now in effect. Sentencing is now discretionary. Code: amputate, zero, confirm."
+      aliases:
+        - "autonomous judgment"
+    jw:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_protectionresponse_5_spkr.wav"
+      text: "Attention all Ground Protection teams: Judgement waiver now in effect. Capital prosecution is discretionary."
+      aliases:
+        - "judgement waiver"
+    rationdeducted:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_rationunitsdeduct_3_spkr.wav"
+      text: "Attention occupants: your block is now charged with permissive inactive coercion. 5 ration units deducted."
+      aliases:
+        - "rations deducted"
+        - "permissive inaction"
+    chargelvlone:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_sociolevel1_4_spkr.wav"
+      text: "Individual: you are charged with Socio-endangerment, level 1. Protection Units: prosecution code: duty, sword, midnight."
+      aliases:
+        - "charge level 1"
+        - "socio-endangerment level 1"
+    inspectionone:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_trainstation_assemble_spkr.wav"
+      text: "Citizen notice: priority identification check in progress. Please assemble in your designated inspection positions."
+      aliases:
+        - "priority inspection"
+        - "inspection1"
+    inspectiontwo:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_trainstation_assumepositions_spkr.wav"
+      text: "Attention please: All citizens in local residential block, assume your inspection positions."
+      aliases:
+        - "residential inspection"
+        - "inspection2"
+    miscount:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_trainstation_cooperation_spkr.wav"
+      text: "Attention residents: miscount detected in your block. Cooperation with your Civil Protection team permits full ration reward."
+    infection:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_trainstation_inform_spkr.wav"
+      text: "Attention residents: This block contains potential civil infection. Inform, cooperate, assemble."
+      aliases:
+        - "civil infection"
+    relocation:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_trainstation_offworldrelocation_spkr.wav"
+      text: "Citizen notice: Failure to cooperate will result in permanent off-world relocation."
+      aliases:
+        - "reminder2"
+        - "off-world"
+    unrestprocedure:
+      sound: "sound/vo/npc/overwatch/cityvoice/f_unrestprocedure1_spkr.wav"
+      text: "Attention community: unrest procedure code is now in effect. Inoculate, shield, pacify. Code: pressure, sword, sterilize."
+      aliases:
+        - "unrest procedure"
+    exogenbreach:
+      sound: "sound/vo/npc/overwatch/cityvoice/fprison_airwatchdispatched.wav"
+      text: "Overwatch acknowleges critical exogen breach. Airwatch augmentation force dispatched and inbound. Hold for reinforcement."
+      aliases:
+        - "exogen breach"
+    exogenbreach:
+      sound: "sound/vo/npc/overwatch/cityvoice/fprison_airwatchdispatched.wav"
+      text: "Overwatch acknowleges critical exogen breach. Airwatch augmentation force dispatched and inbound. Hold for reinforcement."
+      aliases:
+        - "exogen breach"
+    systemsinactive:
+      sound: "sound/vo/npc/overwatch/cityvoice/fprison_detectionsystemsout.wav"
+      text: "Warning. Surveillance and detection systems inactive. Remaining stabilization team members report containment status please."
+      aliases:
+        - "systems inactive"
+    interfacebypass:
+      sound: "sound/vo/npc/overwatch/cityvoice/fprison_interfacebypass.wav"
+      text: "Warning. Malignant Viral Interface bypass detected. Polyphasic core reprogramming detected. Sterilizers and containment fields may be compromised."
+      aliases:
+        - "interface bypass"
+        - "reprogramming detected"
+    missionfailure:
+      sound: "sound/vo/npc/overwatch/cityvoice/fprison_missionfailurereminder.wav"
+      text: "Attention ground units. Mission failure will result in permanent offworld assignment. Code reminder: sacrifice, coagulate, clamp."
+      aliases:
+        - "mission failure"
+    nonstandard:
+      sound: "sound/vo/npc/overwatch/cityvoice/fprison_nonstandardexogen.wav"
+      text: "Alert. Nonstandard Exogen activity detected. Execute containment procedure and report."
+      aliases:
+        - "nonstandard exogen"
+    restrictorsoffline:
+      sound: "sound/vo/npc/overwatch/cityvoice/fprison_restrictorsdisengaged.wav"
+      text: "Priority warning: perimeter restrictors disengaged. All stabilization delegates move to incursion hard points immediately."
+      aliases:
+        - "restrictors disengaged"
+        - "restrictors offline"
+    singularitythree:
+      sound: "sound/vo/npc/overwatch/cityvoice/fcitadel_3minutestosingularity.wav"
+      text: "Warning: Three minutes to singularity."
+      aliases:
+        - "singularity 3min"
+    singularitytwo:
+      sound: "sound/vo/npc/overwatch/cityvoice/fcitadel_2minutestosingularity.wav"
+      text: "Warning: Two minutes to singularity."
+      aliases:
+        - "singularity 2min"
+    singularityone:
+      sound: "sound/vo/npc/overwatch/cityvoice/fcitadel_1minutetosingularity.wav"
+      text: "Warning: One minute to singularity."
+      aliases:
+        - "singularity 1min"
+    singularityfourtyfive:
+      sound: "sound/vo/npc/overwatch/cityvoice/fcitadel_45sectosingularity.wav"
+      text: "Priority Warning: Forty-five seconds to singularity."
+      aliases:
+        - "singularity 45"
+    singularitythirty:
+      sound: "sound/vo/npc/overwatch/cityvoice/fcitadel_30sectosingularity.wav"
+      text: "Priority Warning: Thirty seconds to singularity."
+      aliases:
+        - "singularity 30"
+    singularityfifteen:
+      sound: "sound/vo/npc/overwatch/cityvoice/fcitadel_15sectosingularity.wav"
+      text: "Priority Warning: Fifteen seconds to singularity."
+      aliases:
+        - "singularity 15"
+    singularityten:
+      sound: "sound/vo/npc/overwatch/cityvoice/fcitadel_10sectosingularity.wav"
+      text: "Priority Warning: Ten seconds to singularity."
+      aliases:
+        - "singularity 10"
+    Unregisteredweapons:
+      sound: "sound/vo/npc/overwatch/cityvoice/fcitadel_confiscating.wav"
+      text: "Security Alert: Unregistered weapons detected. Confiscation field engaged."
+      aliases:
+        - "Unregistered weapons"
+    counterresonant:
+      sound: "sound/vo/npc/overwatch/cityvoice/fcitadel_confiscationfailure.wav"
+      text: "Warning: Counter-resonant singularity device detected. Confiscation field failure."
+      aliases:
+        - "singularity device detected1"
+        - "counter-resonant1"
+    counterresonanttwo:
+      sound: "sound/vo/npc/overwatch/cityvoice/fcitadel_deploy.wav"
+      text: "Security Alert: Illegal counter-resonant singularity device detected. Deploy, Diagnose, Dissect."
+      aliases:
+        - "singularity device detected2"
+        - "counter-resonant2"
+    interlock:
+      sound: "sound/vo/npc/overwatch/cityvoice/fcitadel_transportsequence.wav"
+      text: "Attention: Transport singularity interlock sequence engaged."
+      aliases:
+        - "singularity interlock"
+    bioticsconfirmed:
+      sound: "sound/vo/outland_01/intro/over_camp.wav"
+      text: "Ongoing sector sweep. Biotics confirmed. Continue surface sector sweep. Remote compliance. Exterminate. Seek passive signature imprint. Mandate sublevel restrictions."
+      aliases:
+        - "biotics confirmed"
+    sectorassimilation:
+      sound: "sound/vo/outland_05/canyon/over_vista.wav"
+      text: "All autonomous units: Accept mandatory sector assimilation. Coordinated constriction underway. Debride and cauterize. Entering phase nine, enhanced compliance. Deploy advisory control and oversight. Submit and be subsumed."
+      aliases:
+        - "sector assimilation"
+    unitssubsumed:
+      sound: "sound/vo/outland_07/barn/over_vista.wav"
+      text: "Vital alert. Autonomous units subsumed. Mandatory compliance with all tenets of advisorial assistance act. Threat level adjustment. Probe. Expunge."
+      aliases:
+        - "units subsumed"
+    acone:
+      sound: "sound/vo/outland_10/olde-inne/over_inne.wav"
+      text: "Alert. Anticitizen One engaged. Vance subprime engaged. Expunge. Mandate removal of active signature imprint. Cauterize and expunge."
+      aliases:
+        - "anticitizen one engaged"
+    fourofour:
+      sound: "sound/npc/overwatch/radiovoice/404zone.wav"
+      text: "Four hundred and four zone."
+      aliases:
+        - "404"
+    accomplicesoperating:
+      sound: "sound/npc/overwatch/radiovoice/accomplicesoperating.wav"
+      text: "Protection teams, be advised accomplices operating in area."
+      aliases:
+        - "accomplices operating in area"
+    administer:
+      sound: "sound/npc/overwatch/radiovoice/administer.wav"
+      text: "Administer."
+    airwatchcopiesnoactivity:
+      sound: "sound/npc/overwatch/radiovoice/airwatchcopiesnoactivity.wav"
+      text: "Airwatch copies no activity in location."
+      aliases:
+        - "airwatch no activity"
+        - "no activity in location"
+    possiblemiscount:
+      sound: "sound/npc/overwatch/radiovoice/airwatchreportspossiblemiscount.wav"
+      text: "Airwatch reports possible miscount."
+      aliases:
+        - "possible miscount"
+    sixtytwoalarms:
+      sound: "sound/npc/overwatch/radiovoice/alarms62.wav"
+      text: "62 alarms."
+      aliases:
+        - "62 alarms"
+    codethree:
+      sound: "sound/npc/overwatch/radiovoice/allteamsrespondcode3.wav"
+      text: "All teams respond, code 3."
+      aliases:
+        - "respond code 3"
+    forwardpressure:
+      sound: "sound/npc/overwatch/radiovoice/allunitsapplyforwardpressure.wav"
+      text: "All units apply forward pressure."
+      aliases:
+        - "forward pressure"
+    unitsat:
+      sound: "sound/npc/overwatch/radiovoice/allunitsat.wav"
+      text: "All units at"
+      aliases:
+        - "all units at"
+    witnesssterlization:
+      sound: "sound/npc/overwatch/radiovoice/allunitsbeginwhitnesssterilization.wav"
+      text: "All units begin witness sterilization."
+      aliases:
+        - "witness sterilization"
+    boltwofourthree:
+      sound: "sound/npc/overwatch/radiovoice/allunitsbolfor243suspect.wav"
+      text: "All units B.O.L. for 243 suspect."
+      aliases:
+        - "243"
+    terminalverdict:
+      sound: "sound/npc/overwatch/radiovoice/allunitsdeliverterminalverdict.wav"
+      text: "All units deliver terminal verdict immediately."
+      aliases:
+        - "terminal verdict"
+    codetwelve:
+      sound: "sound/npc/overwatch/radiovoice/allunitsreturntocode12.wav"
+      text: "All units return to code 12."
+      aliases:
+        - "code 12"
+    verdictcode:
+      sound: "sound/npc/overwatch/radiovoice/allunitsverdictcodeis.wav"
+      text: "All units verdict code is"
+      aliases:
+        - "verdict code is"
+    verdictcodesuspect:
+      sound: "sound/npc/overwatch/radiovoice/allunitsverdictcodeonsuspect.wav"
+      text: "All units verdict code on suspect"
+      aliases:
+        - "verdict code on suspect"
+    amputate:
+      sound: "sound/npc/overwatch/radiovoice/amputate.wav"
+      text: "Amputate."
+    anticitizen:
+      sound: "sound/npc/overwatch/radiovoice/anticitizen.wav"
+      text: "Anti-citizen"
+      aliases:
+        - "anti-citizen"
+    antifatigue:
+      sound: "sound/npc/overwatch/radiovoice/antifatigueration3mg.wav"
+      text: "Anti-fatigue ration is now 3 milligrams"
+      aliases:
+        - "anti-fatigue"
+    apply:
+      sound: "sound/npc/overwatch/radiovoice/apply.wav"
+      text: "Apply"
+    assaultcps:
+      sound: "sound/npc/overwatch/radiovoice/assault243.wav"
+      text: "243 assault on Protection Team."
+      aliases:
+        - "243"
+    attemptedcrime:
+      sound: "sound/npc/overwatch/radiovoice/attemptedcrime27.wav"
+      text: "27 attempted crime"
+      aliases:
+        - "27"
+    attention:
+      sound: "sound/npc/overwatch/radiovoice/attention.wav"
+      text: "Attention"
+    chargedwidth:
+      sound: "sound/npc/overwatch/radiovoice/attentionyouhavebeenchargedwith.wav"
+      text: "Attention, you have been charged with"
+      aliases:
+        - "charged with"
+    beginscanning:
+      sound: "sound/npc/overwatch/radiovoice/beginscanning10-0.wav"
+      text: "Ten-zero, begin scanning"
+      aliases:
+        - "begin scanning"
+    block:
+      sound: "sound/npc/overwatch/radiovoice/block.wav"
+      text: "Block"
+    canalblock:
+      sound: "sound/npc/overwatch/radiovoice/canalblock.wav"
+      text: "Block"
+      aliases:
+        - "Canal block"
+    capitalmalcompliance:
+      sound: "sound/npc/overwatch/radiovoice/capitalmalcompliance.wav"
+      text: "Capital malcompliance"
+      aliases:
+        - "capital malcompliance"
+    cauterize:
+      sound: "sound/npc/overwatch/radiovoice/cauterize.wav"
+      text: "Cauterize"
+    citizen:
+      sound: "sound/npc/overwatch/radiovoice/citizen.wav"
+      text: "Citizen"
+    sentenceatwill:
+      sound: "sound/npc/overwatch/radiovoice/completesentencingatwill.wav"
+      text: "All Protection Team units: complete sentencing at will."
+      aliases:
+        - "sentence at will"
+    condemnedzone:
+      sound: "sound/npc/overwatch/radiovoice/condemnedzone.wav"
+      text: "Condemned zone"
+      aliases:
+        - "condemned zone"
+    upialert:
+      sound: "sound/npc/overwatch/radiovoice/confirmupialert.wav"
+      text: "Team: confirm UPI alert"
+      aliases:
+        - "upi alert"
+    controlsection:
+      sound: "sound/npc/overwatch/radiovoice/controlsection.wav"
+      text: "Polity: control section"
+      aliases:
+        - "control section"
+    criminaltrespass:
+      sound: "sound/npc/overwatch/radiovoice/criminaltrespass63.wav"
+      text: "63 criminal trespass"
+      aliases:
+        - "63"
+    defender:
+      sound: "sound/npc/overwatch/radiovoice/defender.wav"
+      text: "defender"
+    deservicedarea:
+      sound: "sound/npc/overwatch/radiovoice/deservicedarea.wav"
+      text: "Restricted block"
+      aliases:
+        - "restricted block"
+    destrutionofcpt:
+      sound: "sound/npc/overwatch/radiovoice/destrutionofcpt.wav"
+      text: "Destruction of corporal Social Protection units"
+      aliases:
+        - "destruction of corporal"
+    divisivesociocidal:
+      sound: "sound/npc/overwatch/radiovoice/devisivesociocidal.wav"
+      text: "Divisive sociocidal counter-obeyance"
+      aliases:
+        - "divisive sociocidal"
+    disassociation:
+      sound: "sound/npc/overwatch/radiovoice/disassociationfromcivic.wav"
+      text: "Disassociation from the civic populace"
+    disengagedworkforce:
+      sound: "sound/npc/overwatch/radiovoice/disengaged647e.wav"
+      text: "647-e disengaged from work force"
+      aliases:
+        - "647-e"
+    distributionblock:
+      sound: "sound/npc/overwatch/radiovoice/distributionblock.wav"
+      text: "distribution block"
+      aliases:
+        - "distribution block"
+    mentallyunfit:
+      sound: "sound/npc/overwatch/radiovoice/disturbancemental10-103m.wav"
+      text: "10-103 disturbance by mentally unfit"
+      aliases:
+        - "10-103"
+    civicdisunity:
+      sound: "sound/npc/overwatch/radiovoice/disturbingunity415.wav"
+      text: "415 civic disunity"
+      aliases:
+        - "civic disunity"
+    document:
+      sound: "sound/npc/overwatch/radiovoice/document.wav"
+      text: "Document"
+    eight:
+      sound: "sound/npc/overwatch/radiovoice/eight.wav"
+      text: "Eight"
+    noncohesive:
+      sound: "sound/npc/overwatch/radiovoice/engagingteamisnoncohesive.wav"
+      text: "Engaging Protection Team is non-cohesive"
+      aliases:
+        - "non-cohesive"
+    examine:
+      sound: "sound/npc/overwatch/radiovoice/examine.wav"
+      text: "Examine"
+    externaljurisdiction:
+      sound: "sound/npc/overwatch/radiovoice/externaljurisdiction.wav"
+      text: "External jurisdiction."
+      aliases:
+        - "external jurisdiction"
+    failuretocomply:
+      sound: "sound/npc/overwatch/radiovoice/failuretocomply.wav"
+      text: "Failure to comply with the civil will"
+      aliases:
+        - "civil will"
+    recycle:
+      sound: "sound/npc/overwatch/radiovoice/failuretotreatoutbreak.wav"
+      text: "Stabilization Team: failure to treat identified local outbreak will force team recall and recycle."
+    finalverdict:
+      sound: "sound/npc/overwatch/radiovoice/finalverdictadministered.wav"
+      text: "Final verdict administered"
+      aliases:
+        - "final verdict"
+    five:
+      sound: "sound/npc/overwatch/radiovoice/five.wav"
+      text: "Five"
+    skyshield:
+      sound: "sound/npc/overwatch/radiovoice/fmil_region_073.wav"
+      text: "Sky shield"
+      aliases:
+        - "sky shield"
+    four:
+      sound: "sound/npc/overwatch/radiovoice/four.wav"
+      text: "Four"
+    detachment:
+      sound: "sound/npc/overwatch/radiovoice/fugitive17f.wav"
+      text: "17-F fugitive detachment"
+    rankpoints:
+      sound: "sound/npc/overwatch/radiovoice/halfrankpoints.wav"
+      text: "50 percent rank points"
+      aliases:
+        - "rank points"
+    reproductioncredits:
+      sound: "sound/npc/overwatch/radiovoice/halfreproductioncredits.wav"
+      text: "50 percent reproduction credits"
+      aliases:
+        - "reproduction credits"
+    hero:
+      sound: "sound/npc/overwatch/radiovoice/hero.wav"
+      text: "Hero"
+    priorityregion:
+      sound: "sound/npc/overwatch/radiovoice/highpriorityregion.wav"
+      text: "High priority region"
+      aliases:
+        - "priority region"
+    carrying:
+      sound: "sound/npc/overwatch/radiovoice/illegalcarrying95.wav"
+      text: "95 illegal carrying"
+    sixtythree:
+      sound: "sound/npc/overwatch/radiovoice/illegalinoperation63s.wav"
+      text: "63s illegal in operation."
+      aliases:
+        - "63s"
+    immediateamputation:
+      sound: "sound/npc/overwatch/radiovoice/immediateamputation.wav"
+      text: "Immediate amputation"
+      aliases:
+        - "immediate amputation"
+    industrialzone:
+      sound: "sound/npc/overwatch/radiovoice/industrialzone.wav"
+      text: "industrial zone"
+      aliases:
+        - "industrial zone"
+    infection:
+      sound: "sound/npc/overwatch/radiovoice/infection.wav"
+      text: "Infection"
+    infestedzone:
+      sound: "sound/npc/overwatch/radiovoice/infestedzone.wav"
+      text: "Infested zone"
+      aliases:
+        - "infested zone"
+    inject:
+      sound: "sound/npc/overwatch/radiovoice/inject.wav"
+      text: "Inject."
+    innoculate:
+      sound: "sound/npc/overwatch/radiovoice/innoculate.wav"
+      text: "Innoculate."
+    inprogress:
+      sound: "sound/npc/overwatch/radiovoice/inprogress.wav"
+      text: "In progress."
+      aliases:
+        - "	in progress"
+    intercede:
+      sound: "sound/npc/overwatch/radiovoice/intercede.wav"
+      text: "Intercede."
+    interlock:
+      sound: "sound/npc/overwatch/radiovoice/interlock.wav"
+      text: "Interlock."
+    investigate:
+      sound: "sound/npc/overwatch/radiovoice/investigate.wav"
+      text: "Investigate."
+    investigateandreport:
+      sound: "sound/npc/overwatch/radiovoice/investigateandreport.wav"
+      text: "Investigate and report."
+      aliases:
+        - "investigate and report"
+    isnow:
+      sound: "sound/npc/overwatch/radiovoice/isnow.wav"
+      text: "is now"
+      aliases:
+        - "is now"
+    isolate:
+      sound: "sound/npc/overwatch/radiovoice/isolate.wav"
+      text: "Isolate."
+    jury:
+      sound: "sound/npc/overwatch/radiovoice/jury.wav"
+      text: "Jury."
+    king:
+      sound: "sound/npc/overwatch/radiovoice/king.wav"
+      text: "King."
+    leadersreportratios:
+      sound: "sound/npc/overwatch/radiovoice/leadersreportratios.wav"
+      text: "Attention Stabilization Team leader. Report de-serviced unit to sterilized body count ratio for reinforcement, reward, or removal processing."
+      aliases:
+        - "report de-serviced"
+    levelfiveac:
+      sound: "sound/npc/overwatch/radiovoice/level5anticivilactivity.wav"
+      text: "level 5 anti-civil activity"
+      aliases:
+        - "level 5"
+    line:
+      sound: "sound/npc/overwatch/radiovoice/line.wav"
+      text: "Line."
+    lock:
+      sound: "sound/npc/overwatch/radiovoice/lock.wav"
+      text: "Lock."
+    sacrificecode:
+      sound: "sound/npc/overwatch/radiovoice/lockdownlocationsacrificecode.wav"
+      text: "Protection Team: lock down your location: sacrifice code."
+      aliases:
+        - "sacrifice"
+    lostbiosignalforunit:
+      sound: "sound/npc/overwatch/radiovoice/lostbiosignalforunit.wav"
+      text: "Lost bio signal for Protection Team unit."
+      aliases:
+        - "lost biosignal"
+    nine:
+      sound: "sound/npc/overwatch/radiovoice/nine.wav"
+      text: "Nine."
+    noncitizen:
+      sound: "sound/npc/overwatch/radiovoice/noncitizen.wav"
+      text: "Non-citizen"
+      aliases:
+        - "non-citizen"
+    nonpatrolregion:
+      sound: "sound/npc/overwatch/radiovoice/nonpatrolregion.wav"
+      text: "Non patrol region."
+      aliases:
+        - "patrol region"
+    arson:
+      sound: "sound/npc/overwatch/radiovoice/nonsanctionedarson51.wav"
+      text: "51 non-sanctioned arson."
+      aliases:
+        - "51"
+    onsuspect:
+      sound: "sound/npc/overwatch/radiovoice/officerclosingonsuspect.wav"
+      text: "Officer closing on suspect."
+      aliases:
+        - "on suspect"
+    one:
+      sound: "sound/npc/overwatch/radiovoice/one.wav"
+      text: "One."
+    outland:
+      sound: "sound/npc/overwatch/radiovoice/outlandzone.wav"
+      text: "Outland zone."
+    patrol:
+      sound: "sound/npc/overwatch/radiovoice/patrol.wav"
+      text: "Patrol"
+    permanentoffworld:
+      sound: "sound/npc/overwatch/radiovoice/permanentoffworld.wav"
+      text: "Permanent off-world service assignment."
+    marginal:
+      sound: "sound/npc/overwatch/radiovoice/politistablizationmarginal.wav"
+      text: "Notice: Protection Teams: civic politistabilization index is marginal."
+    sixtynine:
+      sound: "sound/npc/overwatch/radiovoice/posession69.wav"
+      text: "69 possession of resources."
+      aliases:
+        - "69"
+    premature:
+      sound: "sound/npc/overwatch/radiovoice/prematuremissiontermination.wav"
+      text: "Premature mission termination will result in"
+    finalsentence:
+      sound: "sound/npc/overwatch/radiovoice/prepareforfinalsentencing.wav"
+      text: "Prepare for final sentencing."
+      aliases:
+        - "final sentencing"
+    inoculate:
+      sound: "sound/npc/overwatch/radiovoice/preparetoinnoculate.wav"
+      text: "All local Protection Team units: prepare to inoculate."
+    receiveverdict:
+      sound: "sound/npc/overwatch/radiovoice/preparetoreceiveverdict.wav"
+      text: "Prepare to receive verdict."
+      aliases:
+        - "receive verdict"
+    preparevisual:
+      sound: "sound/npc/overwatch/radiovoice/preparevisualdownload.wav"
+      text: "Attention: prepare visual download of anti-citizen 1."
+      aliases:
+        - "prepare visual"
+    preserve:
+      sound: "sound/npc/overwatch/radiovoice/preserve.wav"
+      text: "Preserve."
+    pressure:
+      sound: "sound/npc/overwatch/radiovoice/pressure.wav"
+      text: "Pressure."
+    productionblock:
+      sound: "sound/npc/overwatch/radiovoice/productionblock.wav"
+      text: "Production block."
+      aliases:
+        - "production block"
+    communalarrest:
+      sound: "sound/npc/overwatch/radiovoice/promotingcommunalunrest.wav"
+      text: "promoting communal unrest."
+      aliases:
+        - "communal unrest"
+    prosecute:
+      sound: "sound/npc/overwatch/radiovoice/prosecute.wav"
+      text: "Prosecute."
+    fiveoseven:
+      sound: "sound/npc/overwatch/radiovoice/publicnoncompliance507.wav"
+      text: "507 public non-compliance."
+      aliases:
+        - "507"
+    quick	:
+      sound: "sound/npc/overwatch/radiovoice/quick.wav"
+      text: "Quick."
+    socioscan:
+      sound: "sound/npc/overwatch/radiovoice/recalibratesocioscan.wav"
+      text: "	team: recalibrate socioscan."
+    conflictingdata:
+      sound: "sound/npc/overwatch/radiovoice/recievingconflictingdata.wav"
+      text: "We are receiving conflicting data."
+      aliases:
+        - "conflicting data"
+    ninenine:
+      sound: "sound/npc/overwatch/radiovoice/recklessoperation99.wav"
+      text: "99 reckless operation."
+      aliases:
+        - "99"
+    codethree:
+      sound: "sound/npc/overwatch/radiovoice/reinforcementteamscode3.wav"
+      text: "Reinforcement teams: code 3."
+      aliases:
+        - "code 3"
+    remainingunitscontain:
+      sound: "sound/npc/overwatch/radiovoice/remainingunitscontain.wav"
+      text: "Remaining units contain."
+      aliases:
+        - "contain"
+    reproduction:
+      sound: "sound/npc/overwatch/radiovoice/reminder100credits.wav"
+      text: "Rank leader: reminder: 100 sterilized credits qualifies non-mechanical reproduction simulation."
+    memory:
+      sound: "sound/npc/overwatch/radiovoice/remindermemoryreplacement.wav"
+      text: "Reminder: Memory replacement is the first step toward rank privileges."
+    reporton:
+      sound: "sound/npc/overwatch/radiovoice/reporton.wav"
+      text: "Local Protection Team units report on"
+      aliases:
+        - "report on"
+    reportplease:
+      sound: "sound/npc/overwatch/radiovoice/reportplease.wav"
+      text: "Report, please."
+      aliases:
+        - "report please"
+    repurposedarea:
+      sound: "sound/npc/overwatch/radiovoice/repurposedarea.wav"
+      text: "Repurposed area."
+      aliases:
+        - "repurposed area"
+    residentialblock:
+      sound: "sound/npc/overwatch/radiovoice/repurposedarea.wav"
+      text: "Residential block."
+      aliases:
+        - "residential block"
+    onefoureight:
+      sound: "sound/npc/overwatch/radiovoice/resistingpacification148.wav"
+      text: "148 resisting arrest."
+      aliases:
+        - "148"
+    respond:
+      sound: "sound/npc/overwatch/radiovoice/respond.wav"
+      text: "Respond."
+    restrict:
+      sound: "sound/npc/overwatch/radiovoice/restrict.wav"
+      text: "Restrict."
+    restrictedblock:
+      sound: "sound/npc/overwatch/radiovoice/restrictedblock.wav"
+      text: "Restricted block."
+      aliases:
+        - "restricted block"
+    incursion:
+      sound: "sound/npc/overwatch/radiovoice/restrictedincursioninprogress.wav"
+      text: "Restricted incursion in progress."
+    fourofour:
+      sound: "sound/npc/overwatch/radiovoice/riot404.wav"
+      text: "404 riot."
+      aliases:
+        - "404"
+    reward:
+      sound: "sound/npc/overwatch/radiovoice/rewardnotice.wav"
+      text: "Reward notice: Protection Team member: your family cohesion is preserved."
+    roller:
+      sound: "sound/npc/overwatch/radiovoice/roller.wav"
+      text: "roller"
+    search:
+      sound: "sound/npc/overwatch/radiovoice/search.wav"
+      text: "search"
+    sector:
+      sound: "sound/npc/overwatch/radiovoice/sector.wav"
+      text: "sector"
+    serve:
+      sound: "sound/npc/overwatch/radiovoice/serve.wav"
+      text: "serve"
+    seven:
+      sound: "sound/npc/overwatch/radiovoice/seven.wav"
+      text: "seven"
+      aliases:
+        - "7"
+    six:
+      sound: "sound/npc/overwatch/radiovoice/six.wav"
+      text: "six"
+      aliases:
+        - "6"
+    fracture:
+      sound: "sound/npc/overwatch/radiovoice/socialfractureinprogress.wav"
+      text: "Social fracture in progress. Respond."
+    sociocide:
+      sound: "sound/npc/overwatch/radiovoice/sociocide.wav"
+      text: "sociocide"
+    restored:
+      sound: "sound/npc/overwatch/radiovoice/sociostabilizationrestored.wav"
+      text: "Sociostabilization restored."
+    jurisdiction:
+      sound: "sound/npc/overwatch/radiovoice/stabilizationjurisdiction.wav"
+      text: "stabilization jurisdiction"
+    stationblock:
+      sound: "sound/npc/overwatch/radiovoice/stationblock.wav"
+      text: "station block"
+    twofourthree:
+      sound: "sound/npc/overwatch/radiovoice/statuson243suspect.wav"
+      text: "All units report status on 243 suspect."
+      aliases:
+        - "243"
+    sterilize:
+      sound: "sound/npc/overwatch/radiovoice/sterilize.wav"
+      text: "Sterilize."
+    stick:
+      sound: "sound/npc/overwatch/radiovoice/stick.wav"
+      text: "Stick."
+    storm:
+      sound: "sound/npc/overwatch/radiovoice/stormsystem.wav"
+      text: "Storm system."
+    subject:
+      sound: "sound/npc/overwatch/radiovoice/subject.wav"
+      text: "subject"
+    oneeightseven:
+      sound: "sound/npc/overwatch/radiovoice/suspectisnow187.wav"
+      text: "Suspect is now 1-8-7."
+      aliases:
+        - "187"
+    codeis:
+      sound: "sound/npc/overwatch/radiovoice/suspectmalignantverdictcodeis.wav"
+      text: "Suspect is judged malignant. Verdict code is"
+      aliases:
+        - "code is"
+    suspend:
+      sound: "sound/npc/overwatch/radiovoice/suspend.wav"
+      text: "suspend"
+    negotiations:
+      sound: "sound/npc/overwatch/radiovoice/suspendnegotiations.wav"
+      text: "Suspend negotiations."
+    tacthree:
+      sound: "sound/npc/overwatch/radiovoice/switchcomtotac3.wav"
+      text: "All units switch com to tac 3."
+      aliases:
+        - "tac 3"
+    tacfive:
+      sound: "sound/npc/overwatch/radiovoice/switchtotac5reporttocp.wav"
+      text: "All units switch com to tac 5 and report in to command point."
+      aliases:
+        - "tac 5"
+    tap:
+      sound: "sound/npc/overwatch/radiovoice/tap.wav"
+      text: "Tap."
+    status:
+      sound: "sound/npc/overwatch/radiovoice/teamsreportstatus.wav"
+      text: "Local Civil Protection Teams report status."
+    terminalprosecution:
+      sound: "sound/npc/overwatch/radiovoice/terminalprosecution.wav"
+      text: "Terminal prosecution."
+      aliases:
+        - "terminal prosecution"
+    terminalrestriction:
+      sound: "sound/npc/overwatch/radiovoice/terminalrestrictionzone.wav"
+      text: "Terminal restriction zone."
+      aliases:
+        - "terminal restriction"
+    fiveoneb:
+      sound: "sound/npc/overwatch/radiovoice/threattoproperty51b.wav"
+      text: "51-B threat to property."
+      aliases:
+        - "51-b"
+    three:
+      sound: "sound/npc/overwatch/radiovoice/three.wav"
+      text: "Three."
+      aliases:
+        - "3"
+    transitblock:
+      sound: "sound/npc/overwatch/radiovoice/transitblock.wav"
+      text: "Transit block."
+      aliases:
+        - "transit block"
+    two:
+      sound: "sound/npc/overwatch/radiovoice/two.wav"
+      text: "Two."
+      aliases:
+        - "2"
+    union:
+      sound: "sound/npc/overwatch/radiovoice/union.wav"
+      text: "Union."
+    deserviced:
+      sound: "sound/npc/overwatch/radiovoice/unitdeserviced.wav"
+      text: "Unit deserviced."
+    downat:
+      sound: "sound/npc/overwatch/radiovoice/unitdownat.wav"
+      text: "Unit down at"
+      aliases:
+        - "down at"
+    sixothree:
+      sound: "sound/npc/overwatch/radiovoice/unlawfulentry603.wav"
+      text: "603 unlawful entry."
+      aliases:
+        - "603"
+    upi:
+      sound: "sound/npc/overwatch/radiovoice/upi.wav"
+      text: "UPI."
+    vice:
+      sound: "sound/npc/overwatch/radiovoice/vice.wav"
+      text: "Vice."
+    victor:
+      sound: "sound/npc/overwatch/radiovoice/victor.wav"
+      text: "Victor."
+    civictrust:
+      sound: "sound/npc/overwatch/radiovoice/violationofcivictrust.wav"
+      text: "Violation of civic trust."
+      aliases:
+        - "civic trust"
+    wasteriver:
+      sound: "sound/npc/overwatch/radiovoice/wasteriver.wav"
+      text: "Waste river."
+      aliases:
+        - "waste river"
+    ninefour:
+      sound: "sound/npc/overwatch/radiovoice/weapon94.wav"
+      text: "94 weapon."
+      aliases:
+        - "94"
+    hub:
+      sound: "sound/npc/overwatch/radiovoice/workforceintake.wav"
+      text: "Workforce intake hub."
+    xray:
+      sound: "sound/npc/overwatch/radiovoice/xray.wav"
+      text: "X-ray."
+      aliases:
+        - "x-ray"
+    yellow:
+      sound: "sound/npc/overwatch/radiovoice/yellow.wav"
+      text: "Yellow."
+    chargedwidth:
+      sound: "sound/npc/overwatch/radiovoice/youarechargedwithterminal.wav"
+      text: "You are charged with terminal violations 148, 243, 245."
+      aliases:
+        - "are charged with"
+    guilty:
+      sound: "sound/npc/overwatch/radiovoice/youarejudgedguilty.wav"
+      text: "You are judged guilty by Civil Protection Team."
+    zero:
+      sound: "sound/npc/overwatch/radiovoice/zero.wav"
+      text: "Zero."
+    zone:
+      sound: "sound/npc/overwatch/radiovoice/zone.wav"
+      text: "Zone."

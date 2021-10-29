@@ -1,0 +1,227 @@
+en:
+  currency:
+    tokens: Tokens
+  faction:
+    admin:
+      title: City Administrator
+      desc: A person who controls the city.
+      phys_desc: Wearing a strict, fancy looking suit.
+    citizen:
+      title: Citizen
+      desc: A regular citizen living under combine authority.
+      phys_desc: Wearing some dirty citizen clothes.
+    xen:
+      vort_title: Vortigaunt
+      vort_slave_title: Enslaved Vortigaunt
+    combine:
+      overwatch:
+        title: Combine Overwatch
+        desc: Combine military soldiers.
+        phys_desc: Wearing heavy overwatch armor.
+      cca:
+        title: Combine Civil Authority
+        desc: Combine police forces.
+        phys_desc: Wearing shiny metropolice unit uniform with brand new stunstick on his belt.
+  item:
+    action:
+      eat: Eat
+      drink: Drink
+      apply: Apply
+    category:
+      cards: Access cards
+      medical: Medical
+    card_cp:
+      print_name: Civil Protection Access Card
+      description:
+        A high-tech combine access card used by regular Civil Protection units.
+        It works by using the body’s own electrical field.
+        Transmits data using salt in the body as the transmission medium.
+    card_cp_officer:
+      print_name: Civil Protection Officer Access Card
+      description:
+        A high-tech combine access card used by Civil Protection officers.
+        It works by using the body’s own electrical field.
+        Transmits data using salt in the body as the transmission medium.
+    cca_uniform:
+      print_name: Civil Protection Uniform
+      description: Civil Protection unit uniform with a pair of black boots and a gas mask.
+    breens_water:
+      print_name: Breen's Water
+      description:
+        A blue can filled with water. It has 'Breen's Private Reserve'
+        printed on it.
+    breens_water_gas:
+      print_name: Sparkling Breen's Water
+      description: A red can filled with sparkling water.
+    breens_water_limited:
+      print_name: Flavored Breen's Water
+      description: A yellow can filled with limited-tier flavored water.
+    food_waterbottle:
+      print_name: Bottle Of Water
+      description: A plastic bottle of water. Refreshing.
+    food_whiskey:
+      print_name: Whiskey Bottle
+      description: A 375 ml glass bottle of strong alcohol. It smells of fermented wheat.
+    food_vodka:
+      print_name: Vodka Bottle
+      description: A 375 ml glass bottle of strong alcohol. It smells of ethanol.
+    food_rum:
+      print_name: A Bottle Of Rum
+      description: A 375 ml glass bottle of strong alcohol. It smells of fermented sugar.
+    food_gin:
+      print_name: A Bottle Of Gin
+      description: A 375 ml glass bottle of strong alcohol. It smells of fermented berries.
+    food_headcrab:
+      print_name: Headcrab Meat
+      description: A piece of cooked headcrab. It tastes like chicken, but more bland and tougher.
+    food_pheadcrab:
+      print_name: Treated Poison Headcrab Meat
+      description: A piece of cooked and treated poison headcrab. Your lips go a little numb when you eat it...
+    food_melon:
+      print_name: Melon
+      description: A green, warped orb. It has a pinkish inside.
+    food_milk:
+      print_name: Milk Bottle
+      description: A gallon of milk in a plastic container.
+    canned_food:
+      print_name: Combine Branded Canned Food
+      description: A plastic container filled with, ugh... food.
+    medical_bandage:
+      print_name: Sterilized Bandage
+      description: A thin waiver of sterile bandages.
+    medical_fak:
+      print_name: First Aid Kit
+      description: A professional set of first-aid equipment.
+    pistol:
+      print_name: 9mm Pistol
+      description: A compact weapon that fires 9x19mm bullets.
+      ammo:
+        print_name: 9mm Ammo
+        description: A metal container filled with 9x19mm bullets.
+    smg:
+      print_name: SMG
+      description: A compact PDW that fires 4.6x30mm bullets.
+      ammo:
+        print_name: 4.6x30mm Ammo
+        description: A metal container filled with 4.6x30mm bullets.
+        grenade:
+          print_name: SMG Grenade
+          description: An explosive that can be used as SMG grenade launcher ammo.
+    shotgun:
+      print_name: SPAS-12
+      description:
+        A shotgun most commonly used by overwatch prison guard teams, fires
+        12 Gauge ammo.
+      ammo:
+        print_name: 12 Gauge
+        description: A cardboard box filled with 12 Gauge ammunition.
+    revolver:
+      print_name: '.357 Magnum'
+      description: A shiny pre-war revolver that fires .357 Magnum bullets.
+      ammo:
+        print_name: '.357 Magnum Bullets'
+        description: A cardboard box filled with .357 Magnum bullets.
+    ar2:
+      print_name: Pulse Rifle (AR2)
+      description: Overwatch Standard Issue Pulse Rifle (OSIPR). Fires energy beams.
+      ammo:
+        print_name: Pulse Rifle Energy
+        description: A small metal cartridge that contains pulse-rifle energy ammo.
+      core:
+        print_name: Pulse-Rifle Energy Core
+        description: An energy pellet contained within a metal chamber.
+    crossbow:
+      print_name: Crossbow
+      description: Crudely constructed weapon that fires red-hot bolts.
+      ammo:
+        print_name: Crossbow Bolts
+        description: Small pieces of metal that can be used as crossbow ammo.
+    crowbar:
+      print_name: Crowbar
+      description: A piece of metal with bent edges, most commonly known as the crowbar.
+    rpg:
+      print_name: RPG
+      description:
+        A weapon that looks like a green tube. Might occasionally fire
+        from the wrong end.
+      ammo:
+        print_name: RPG Missile
+        description: An orange missile, most commonly used with an RPG.
+    stunstick:
+      print_name: Stun Baton
+      description: A stun baton with electric shock function.
+    grenade:
+      print_name: Grenade
+      description: A small round tube filled with explosive substances.
+  npc:
+    hl2:
+      crow: Crow
+      monk: Father Grigori
+      pigeon: Pigeon
+      seagull: Seagull
+      combine_camera: Combine Camera
+      turret_ceiling: Ceiling Turret
+      cscanner: City Scanner
+      combine_dropship: Combine Dropship
+      combine_elite: Combine Elite
+      combine_gunship: Combine Gunship
+      combine_soldier: Combine Soldier
+      hunter: Hunter
+      helicopter: Hunter-Chopper
+      manhack: Manhack
+      metropolice: Metro Police
+      prison_guard: Prison Guard
+      prison_shotgunner: Prison Shotgun Guard
+      rollermine: Rollermine
+      clawscanner: Shield Scanner
+      shotgun_soldier: Shotgun Soldier
+      stalker: Stalker
+      strider: Strider
+      turret_floor: Turret
+      alyx: Alyx Vance
+      barney: Barney Calhoun
+      citizen: Citizen
+      dog: Dog
+      magnusson: Dr. Arne Magnusson
+      kleiner: Dr. Isaac Kleiner
+      mossman: Dr. Judith Mossman
+      eli: Eli Vance
+      gman: G-Man
+      medic: Medic
+      odessa: Odessa Cubbage
+      rebel: Rebel
+      refugee: Refugee
+      vortigaunturiah: Uriah
+      vortigaunt: Vortigaunt
+      vortigauntslave: Vortigaunt Slave
+      breen: Wallace Breen
+      antlion: Antlion
+      antlion_grub: Antlion Grub
+      antlionguard: Antlion Guard
+      antlionguardian: Antlion Guardian
+      antlion_worker: Antlion Worker
+      barnacle: Barnacle
+      headcrab_fast: Fast Headcrab
+      fastzombie: Fast Zombie
+      fastzombie_torso: Fast Zombie Torso
+      headcrab: Headcrab
+      headcrab_black: Poison Headcrab
+      poisonzombie: Poison Zombie
+      zombie: Zombie
+      zombie_torso: Zombie Torso
+      zombine: Zombine
+  ui:
+    hud:
+      alpha:
+        flux_alpha: FLUX ALPHA
+        subtext: Everything is a subject to a change!
+    limb:
+      body: Body
+      head: Head
+      chest: Chest
+      stomach: Stomach
+      right_arm: Right Arm
+      left_arm: Left Arm
+      right_leg: Right Leg
+      left_leg: Left Leg
+      groin: Groin

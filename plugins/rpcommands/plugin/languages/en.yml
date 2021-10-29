@@ -1,0 +1,61 @@
+en:
+  command:
+    it:
+      description: Describe an impersonal action.
+      syntax: <text>
+    me:
+      description: Describe your character's action. You can use "*text*" instead of this command. (whisper) and yell!! also works here.
+      syntax: <text>
+    whisper:
+      description: Whisper something. You can use "(text)" instead of this command. The number of parentheses affects the volume of the whisper (3 max.).
+      syntax: <text>
+    yell:
+      description: Yell something. You can use "text!!" instead of this command. The number of exclamation marks affects the volume of the yell (4 max.).
+      syntax: <text>
+    event:
+      description: Send a describing message to everyone on the server.
+      syntax: <text>
+    gag:
+      description: Mute player's OOC chats.
+      syntax: <name> <duration> [reason]
+      message: "{admin} has muted {target} from the OOC chat {time} ({reason})."
+    ungag:
+      description: Unmute player's OOC chats.
+      syntax: <player>
+      message: "{admin} has unmuted {target}."
+    its:
+      description: Place a static text, describing some details of surroundings.
+      syntax: <text>
+    itsremove:
+      description: Remove static text you looking at.
+    roll:
+      description: Roll a random number between 1 and 100 or specific number.
+      syntax: "[range]"
+    togglemask:
+      description: Toggles on/off your mask as part of the CCA.
+      syntax: <none>
+  error:
+    its_too_close: Too close to other static texts!
+  notification:
+    mute: You cannot use Out-Of-Character chat for another {time}.
+    muted: You have been muted for {time}.
+    unmuted: You have been unmuted.
+    static_text:
+      added: Static text added.
+      removed: Static text removed.
+      not_found: Static text available for removal not found on this position.
+  permission:
+    categories:
+      roleplay: Roleplay
+  ui:
+    hud:
+      display_typing:
+        talking: TALKING...
+        whispering: WHISPERING...
+        yelling: YELLING...
+        performing: PERFORMING...
+    chat:
+      say: "says"
+      yell: "yells"
+      whisper: "whispers"
+      roll: "has rolled {roll} out of {max}."

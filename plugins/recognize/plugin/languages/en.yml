@@ -1,0 +1,24 @@
+en:
+  notification:
+    recognize:
+      new_name: "You have remembered a new name: {name}"
+      change_name: You now know {name} as {new_name}
+      true_name: You introduced yourself as {name} (real name)
+      false_name: You introduced yourself as {name} (fake name)
+  ui:
+    hud:
+      stranger_male: Stranger
+      stranger_female: Stranger
+    recognize:
+      title: Recognition
+      message: What would you like others to know you as?
+      character_name: Real Name
+      fake_name: Fake Name
+      enter_fake_name: Enter Fake Name...
+      range: Range
+      previous_names: You are also known as
+      types:
+        whisper: All characters within whisper range
+        talk: All characters within talk range
+        yell: All characters within yell range
+        target: Character you looking at

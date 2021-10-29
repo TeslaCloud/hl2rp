@@ -1,0 +1,95 @@
+es:
+  faction:
+    administrator:
+      title: City Administrator
+      desc: A person who controls the city.
+      phys_desc: Wearing a strict, fancy looking suit.
+    citizen:
+      title: Citizen
+      desc: A regular citizen living under combine authority.
+      phys_desc: Wearing some dirty citizen clothes.
+    xen:
+      vort_title: Vortigaunt
+      vort_slave_title: Enslaved Vortigaunt
+    combine:
+      overwatch:
+        title: Combine Overwatch
+        desc: Combine military soldiers.
+        phys_desc: Wearing heavy overwatch armor.
+      cca:
+        title: Combine Civil Authority
+        desc: Combine police forces.
+        phys_desc: Wearing shiny metropolice unit uniform with brand new stunstick on his belt.
+  item:
+    action:
+      eat: Comer
+      drink: Beber
+    breens_water:
+      print_name: Agua de Breen
+      description: Una lata de color azul llena de agua. Hay una etiqueta donde pone 'Reserva privada de Breen'.
+    breens_water_gas:
+      print_name: Agua gaseosa de Breen
+      description: Una lata de color rojo llena de agua con gas. 'Un sabor diferente.' - Breen
+    breens_water_limited:
+      print_name: Agua saborizada de Breen
+      description: Una lata de color amarillo llena de una clase de agua limita. 'Solo para leales.' - Breen
+    canned_food:
+      print_name: Comida enlatada marca Combine
+      description: Envase de plástico repleto de, huh... comida sintética.
+    pistol:
+      print_name: Pistola 9x19mm
+      description: Pistola sotisficada que utiliza balas del calibre 9x19mm.
+      ammo:
+        print_name: Munición 9x19mm
+        description: Cartucho de metal lleno de balas de 9x19mm.
+    smg:
+      print_name: Subfusil
+      description: Un arma automática. Usa el calibre 4.6x30mm.
+      ammo:
+        print_name: Munición 4.6x30mm
+        description: Un cartucho de metal lleno de balas de 4.6x30mm.
+        grenade:
+          print_name: Granada(s) para SMG
+          description: Objecto explosivo utilizado en el lanza-granadas del Subfusil.
+    shotgun:
+      print_name: SPAS-12
+      description: Escopeta semi-automática muy usada por guardas Combine. Usa cartuchos del 12.
+      ammo:
+        print_name: Cartuchos del 12
+        description: Una caja de cartón llena de cartuchos del 12.
+    revolver:
+      print_name: "Magnum .357"
+      description: Un revolver reluciente de antes de la guerra. Utiliza balas .357.
+      ammo:
+        print_name: "Balas .357"
+        description: Una pequeña caja llena de balas .357.
+    ar2:
+      print_name: Rifle de Pulsos (AR2)
+      description: Rifle de Pulso Edición Estándar Overwatch. Dispara energía oscura concentrada a sí como orbes.
+      ammo:
+        print_name: Energía de Rifle de Pulsos
+        description: Un pequeño cargador de metal que contiene cargas de energía oscura.
+        core:
+          print_name: Núcleo de energía AR2
+          description: Energía oscura concentrada en el interior de una esfera de metal.
+    crossbow:
+      print_name: Ballesta
+      description: Ballesta casera que dispara
+      ammo:
+        print_name: Pernos de ballesta
+        description: Piezas ardientes de metal utilizadas para la ballesta.
+    crowbar:
+      print_name: Palanca
+      description: Palanca de color rojo. Qué más puedo decir sobre ella.
+    rpg:
+      print_name: RPG
+      description: Un arma de grado militar. Ten cuidado, puede no disparar por el lado deseado.
+      ammo:
+        print_name: Misil RPG
+        description: Misil de color naranja. Utilizado en el RPG.
+    stunstick:
+      print_name: Porra eléctrica
+      description: Porra reglamentaria de la CPC con una funcionalidad especial para neutralizar enemigos.
+    grenade:
+      print_name: Granada
+      description: Objecto cilíndrico que contiene materiales explosivos.

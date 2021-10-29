@@ -1,0 +1,23 @@
+en:
+  command:
+    sethealth:
+      description: 'Set the health of a character to a custom value.'
+      syntax: <target> <value>
+      notification: 'Your health has been set to {health}.'
+      message: '{player} has set {target} health to {health}.'
+    setarmor:
+      description: 'Set the armor of a character to a custom value.'
+      syntax: <target> <value>
+      notification: 'Your armor has been set to {armor}.'
+      message: '{player} has set {target} armor to {armor}.'
+    report:
+      description: 'Report to the staff members on those pesky issues.'
+      syntax: <message>
+    message:
+      description: 'Send a private message to another player.'
+      syntax: <target> <message>
+  error:
+    sethealth:
+      invalid_value: '[ERROR] {health} is not a valid health value.'
+    setarmor:
+      invalid_value: '[ERROR] {armor} is not a valid armor value.'

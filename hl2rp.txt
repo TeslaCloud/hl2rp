@@ -1,0 +1,8 @@
+"hl2rp"
+{
+  "title"         "HL2 RP"
+  "author"        "TeslaCloud Studios"
+  "description"   "A roleplay gamemode based on Half-Life 2."
+  "version"       "1.0"
+  "menusystem"    "1"
+}

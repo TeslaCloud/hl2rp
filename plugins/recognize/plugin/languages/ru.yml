@@ -1,0 +1,24 @@
+ru:
+  notification:
+    recognize:
+      new_name: "Вы запомнили новое имя: {name}"
+      change_name: Теперь вы знаете {name} как {new_name}
+      true_name: Вы представились реальным именем {name}
+      false_name: Вы представились ложным именем {name}
+  ui:
+    hud:
+      stranger_male: Незнакомец
+      stranger_female: Незнакомка
+    recognize:
+      title: Идентификация
+      message: Как Вы хотите представиться?
+      character_name: Реальное имя
+      fake_name: Ложное имя
+      enter_fake_name: Указать ложное имя...
+      range: Дальность
+      previous_names: Вы также известны как
+      types:
+        whisper: Все персонажи в радиусе слышимости шепота
+        talk: Все персонажи в радиусе слышимости разговора
+        yell: Все персонажи в радиусе слышимости крика
+        target: Персонаж, на которого Вы смотрите

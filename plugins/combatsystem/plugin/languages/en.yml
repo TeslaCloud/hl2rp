@@ -1,0 +1,18 @@
+en:
+  notification:
+    combat:
+      finish: "The combat is over"
+      turn: "{entity}'s turn"
+      initiator: "Initiator"
+      your_turn: "Your turn"
+      turn_order: "The combat begins. Turn order:"
+      enter: "{player} enters the combat."
+      leave: "{player} leaves the combat."
+      skip: "You are skipping your turn."
+      leave_try: "You are trying to leave the combat."
+      leave_interrupt: "You have been interrupted from leaving the combat!"
+      success: "{attacker} succesfully attacks {target} in the {limb}."
+      fail: "{attacker} attacks {target} in the {limb}, but misses."
+  ui:
+    hud:
+      skip: Press F1 to skip or end your turn.

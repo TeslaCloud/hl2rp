@@ -1,0 +1,190 @@
+ru:
+  currency:
+    tokens: Токены
+  faction:
+    administrator:
+      title: Городской Администратор
+      desc: Человек, который управляет городом.
+      phys_desc: Носит строгий костюм.
+    citizen:
+      title: Гражданский
+      desc: Обыкновенный гражданин, живущий под властью Альянса.
+      phys_desc: Носит грязную гражданскую униформу.
+    xen:
+      vort_title: Вортигонт
+      vort_slave_title: Вортигонт-раб
+    combine:
+      overwatch:
+        title: Надзор Альянса
+        desc: Боевое подразделение Альянса.
+        phys_desc: Носит тяжелый бронежилет.
+      cca:
+        title: Гражданская Оборона
+        desc: Полицейское подразделение Альянса.
+        phys_desc: Носит слегка поблёскивающую на свету униформу, на его поясе закреплена дубинка.
+  item:
+    action:
+      eat: Съесть
+      drink: Выпить
+    category:
+      cards: Карты доступа
+    card_cp:
+      print_name: Карта доступа Гражданской Обороны
+      description:
+        Высокотехнологичная карта доступа, используемая сотрудниками Гражданской Обороны.
+        Работает посредством использования собственного электрического поля тела.
+        Передает данные, используя соли в организме в качестве проводника.
+    card_cp_officer:
+      print_name: Офицерская карта доступа Гражданской Обороны
+      description:
+        Высокотехнологичная карта доступа, используемая офицерами Гражданской Обороны.
+        Работает посредством использования собственного электрического поля тела.
+        Передает данные, используя соли в организме в качестве проводника.
+    cca_uniform:
+      print_name: Униформа Гражданской Обороны
+      description: Комплект экипировки Гражданской Обороны с противогазом и парой чёрных сапог.
+    breens_water:
+      print_name: Вода Брина
+      description:
+        'Голубая баночка, наполненная водой. На ней напечатано: "Личные
+        резервы Доктора Брина".'
+    breens_water_gas:
+      print_name: Газированная вода Брина
+      description: Красная баночка, наполненная газированной водой.
+    breens_water_limited:
+      print_name: Ароматизированная вода Брина
+      description: Желтая баночка с приятно пахнущей водой в ней.
+    canned_food:
+      print_name: Питательная паста
+      description: Пластиковая банка с безвкусной серой пастой.
+    pistol:
+      print_name: 9мм Пистолет
+      description: Компактное оружие, использующее 9x19мм патроны.
+      ammo:
+        print_name: Патроны 9мм
+        description: Металлический короб, наполненный патронами калибра 9x19мм.
+    smg:
+      print_name: SMG
+      description: Пистолет-пулемет калибра 4.6x30мм.
+      ammo:
+        print_name: Патроны 4.6x30мм
+        description: Металлический короб, наполненный патронами калибра 4.6x30мм.
+        grenade:
+          print_name: Подствольная граната
+          description: Граната для подствольного гранатомета.
+    shotgun:
+      print_name: SPAS-12
+      description: Полуавтоматический дробовик 12-го калибра.
+      ammo:
+        print_name: Патроны 12-го калибра
+        description: Коробка ружейных патрон 12-го калибра.
+    revolver:
+      print_name: ".357 Магнум"
+      description: Блестящий довоенный револьвер калибра .357.
+      ammo:
+        print_name: Патроны .357 Магнум
+        description: Коробка, наполненная патронами калибра .357 Магнум.
+    ar2:
+      print_name: Импульсная винтовка
+      description: Импульсная штурмовая винтовка, производимая Альянсом.
+      ammo:
+        print_name: Импульсный заряд
+        description: 30-зарядный магазин с автоматической системой перезарядки.
+      core:
+        print_name: Энергетическое ядро AR2
+        description: Светящаяся оранжевая сфера в металлическом корпусе.
+    crossbow:
+      print_name: Арбалет
+      description:
+        Самодельный арбалет, использующий куски раскаленной арматуры как
+        болты.
+      ammo:
+        print_name: Арбалетные болты
+        description: Куски арматуры, используемые при стрельбе из арбалета.
+    crowbar:
+      print_name: Монтировка
+      description: Немного потертая монтировка.
+    rpg:
+      print_name: RPG
+      description: Мощный противотанковый гранатомет с лазерным наведением.
+      ammo:
+        print_name: Ракета для RPG
+        description: Большая самонаводящаяся ракета для RPG.
+    stunstick:
+      print_name: Оглушающая дубинка
+      description: Электрическая дубинка, используемая сотрудниками Гражданской Обороны.
+    grenade:
+      print_name: Граната
+      description: Осколочная граната MK3A2.
+  npc:
+    hl2:
+      crow: Ворона
+      monk: Отец Григорий
+      pigeon: Голубь
+      seagull: Чайка
+      combine_camera: Камера Альянса
+      turret_ceiling: Подвесная Турель Альянса
+      cscanner: Городской Сканер
+      combine_dropship: Транспортёр Альянса
+      combine_elite: Элитный Солдат Альянса
+      combine_gunship: Штурмовик Альянса
+      combine_soldier: Солдат Альянса
+      hunter: Охотник
+      helicopter: Вертолёт-охотник
+      manhack: Мэнхэк
+      metropolice: Юнит ГО
+      prison_guard: Солдат Нова Проспект
+      prison_shotgunner: Солдат Нова Проспект с дробовиком
+      rollermine: Шаровая мина
+      clawscanner: Боевой сканер
+      shotgun_soldier: Солдат Альянса с дробовиком
+      stalker: Сталкер
+      strider: Страйдер
+      turret_floor: Турель
+      alyx: Аликс Вэнс
+      barney: Барни Калхаун
+      citizen: Гражданин
+      dog: Пёс
+      magnusson: Доктор Арне Магнуссон
+      kleiner: Доктор Айзек Кляйнер
+      mossman: Доктор Джудит Моссман
+      eli: Элай Вэнс
+      gman: G-Man
+      medic: Медик Сопротивления
+      odessa: Одесса Кэббедж
+      rebel: Боец Сопротивления
+      refugee: Беженец
+      vortigaunturiah: Урия
+      vortigaunt: Вортигонт
+      vortigauntslave: Вортигонт-раб
+      breen: Уоллес Брин
+      antlion: Муравьиный лев
+      antlion_grub: Личинка муравьиного льва
+      antlionguard: Муравьиный лев-страж
+      antlionguardian: Муравьиный лев-страж гнезда
+      antlion_worker: Муравьиный лев-рабочий
+      barnacle: Барнакл
+      headcrab_fast: Быстрый хедкраб
+      fastzombie: Быстрый зомби
+      fastzombie_torso: Торс быстрого зомби
+      headcrab: Хедкраб
+      headcrab_black: Ядовитый хедкраб
+      poisonzombie: Ядовитый зомби
+      zombie: Зомби
+      zombie_torso: Торс зомби
+      zombine: Зомбайн
+  ui:
+    hud:
+      alpha:
+        flux_alpha: АЛЬФА ТЕСТ
+        subtext: В будущем может измениться что угодно!
+    limb:
+      body: Тело
+      head: Голова
+      chest: Грудь
+      stomach: Живот
+      right_arm: Правая рука
+      left_arm: Левая рука
+      right_leg: Правая нога
+      left_leg: Левая нога
+      groin: Пах
