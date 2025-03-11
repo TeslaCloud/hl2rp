@@ -3,6 +3,6 @@
 For installation instructions and other documentation please refer [to the main Flux repository](https://github.com/TeslaCloud/flux-ce).
 
 # Credits
-- Luna (Lead Developer)
+- Meow (Lead Developer)
 - AleXXX_007 (Co-lead developer)
 - Other former members of TeslaCloud Studios (Zig, NightAngel, and others)

@@ -27,7 +27,7 @@ end
 
 function CombatSystem:PlayerSwitchWeapon(player)
   if player:in_combat() then
-    if player:is_frozen() or !player:has_turn(TURN_ATTACK) then
+    if player:IsFrozen() or !player:has_turn(TURN_ATTACK) then
       return true
     else
       player:take_turn(TURN_ATTACK, player:get_turns(TURN_ATTACK))
@@ -35,49 +35,49 @@ function CombatSystem:PlayerSwitchWeapon(player)
   end
 end
 function CombatSystem:DoAnimationEvent(player, event)
-  if event == PLAYERANIMEVENT_RELOAD and player:in_combat() and !player:is_frozen() then
+  if event == PLAYERANIMEVENT_RELOAD and player:in_combat() and !player:IsFrozen() then
     player:take_turn(TURN_ATTACK, player:get_turns(TURN_ATTACK))
   end
 end
 
 function CombatSystem:CanPlayerRaiseWeapon(player)
-  if player:in_combat() and (player:is_frozen() or !player:has_turn(TURN_ATTACK)) then
+  if player:in_combat() and (player:IsFrozen() or !player:has_turn(TURN_ATTACK)) then
     return false
   end
 end
 
 function CombatSystem:ShouldWeaponBeRaised(player, weapon)
-  if player:in_combat() and (player:is_frozen() or !player:has_turn(TURN_ATTACK)) then
+  if player:in_combat() and (player:IsFrozen() or !player:has_turn(TURN_ATTACK)) then
     return false
   end
 end
 
 function CombatSystem:PlayerCanUseItem(player, item_obj, action, ...)
-  if player:in_combat() and (player:is_frozen() or !player:has_turn(TURN_MOVE)) then
+  if player:in_combat() and (player:IsFrozen() or !player:has_turn(TURN_MOVE)) then
     return false
   end
 end
 
 function CombatSystem:PlayerCanMoveItem(player, item_obj, instance_ids, inventory_id, x, y)
-  if player:in_combat() and (player:is_frozen() or !player:has_turn(TURN_MOVE)) then
+  if player:in_combat() and (player:IsFrozen() or !player:has_turn(TURN_MOVE)) then
     return false
   end
 end
 
 function CombatSystem:PlayerUsedItem(player, item_obj, act, ...)
-  if player:in_combat() and !player:is_frozen() then
+  if player:in_combat() and !player:IsFrozen() then
     player:take_turn(TURN_MOVE)
   end
 end
 
 function CombatSystem:OnItemMoved(player, item_obj, instance_ids, inventory_id, x, y)
-  if player:in_combat() and !player:is_frozen() then
+  if player:in_combat() and !player:IsFrozen() then
     player:take_turn(TURN_MOVE)
   end
 end
 
 function CombatSystem:ShowHelp(player)
-  if player:in_combat() and !player:is_frozen() then
+  if player:in_combat() and !player:IsFrozen() then
     if !player.turn_done then
       player:notify('notification.combat.leave_try')
       player.combat_leaving = true
@@ -120,7 +120,7 @@ function CombatSystem:EntityTakeDamage(entity, damage_info)
 end
 
 function CombatSystem:CanPlayerAutoWalk(player)
-  if player:is_frozen() then
+  if player:IsFrozen() then
     return false
   end
 end
