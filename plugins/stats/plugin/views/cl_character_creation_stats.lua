@@ -54,7 +54,7 @@ function PANEL:on_open(parent)
     if !selected_attribute then return end
 
     chat.PlaySound()
-    
+
     pnl:Clear()
 
     local panel = vgui.Create('DPanel', pnl)
@@ -70,7 +70,7 @@ function PANEL:on_open(parent)
       icon:SetImage(selected_attribute.icon)
       icon:SetKeepAspect(true)
       icon:SetSize(size, size)
-    end 
+    end
 
     local title = vgui.Create('DLabel', panel)
     title:SetText(t(selected_attribute.name))

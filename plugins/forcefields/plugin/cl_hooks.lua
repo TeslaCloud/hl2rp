@@ -8,7 +8,7 @@ function Forcefields:update_forcefields()
         { pos = v:WorldToLocal(start_pos) + Vector(0, 0, 150) },
         { pos = v:WorldToLocal(start_pos) + Vector(0, 0, 150) },
         { pos = v:WorldToLocal(start_pos) - Vector(0, 0, 35) },
-        { pos = Vector(0, 0, -35) },
+        { pos = Vector(0, 0, -35) }
       }
 
       v:PhysicsFromMesh(verts)

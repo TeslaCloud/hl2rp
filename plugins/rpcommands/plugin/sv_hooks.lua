@@ -47,7 +47,7 @@ function RPCommands:PlayerCanHear(listener, message_data)
 end
 
 function RPCommands:PlayerCanUseOOC(actor)
-  if (actor:get_player_data('ooc_mute', 0) > CurTime()) then
+  if actor:get_player_data('ooc_mute', 0) > CurTime() then
     return false
   end
 end
@@ -159,7 +159,10 @@ function RPCommands:format_message(speaker, text)
   }
 
   if !is_emote then
-    table.Add(msg_table, { volume == 0 and t'ui.chat.say' or (volume < 0 and t'ui.chat.whisper' or t'ui.chat.yell'), ': ' })
+    table.Add(msg_table, {
+      volume == 0 and t'ui.chat.say' or (volume < 0 and t'ui.chat.whisper' or t'ui.chat.yell'),
+      ': '
+    })
 
     if volume == 3 then
       text = text:utf8upper()
@@ -175,7 +178,8 @@ function RPCommands:format_message(speaker, text)
   table.insert(msg_table, {
     sender = speaker,
     position = speaker:EyePos(),
-    radius = Config.get('talk_radius') * (volume == 0 and 1 or (volume < 0 and (0.8 + volume * 0.2) or (1.2 + volume * 0.4))),
+    radius =
+      Config.get('talk_radius') * (volume == 0 and 1 or (volume < 0 and (0.8 + volume * 0.2) or (1.2 + volume * 0.4))),
     ic = true
   })
 

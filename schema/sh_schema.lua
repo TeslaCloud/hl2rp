@@ -147,8 +147,9 @@ end
 local entity_meta = FindMetaTable('Entity')
 
 function entity_meta:is_combine_door()
-  if IsValid(self) and self:is_door() and !self:HasSpawnFlags(256) and !self:HasSpawnFlags(8192) and !self:HasSpawnFlags(32768) then
-      return true
+  if IsValid(self) and self:is_door() and !self:HasSpawnFlags(256) and !self:HasSpawnFlags(8192) and
+     !self:HasSpawnFlags(32768) then
+    return true
   end
 
   return false

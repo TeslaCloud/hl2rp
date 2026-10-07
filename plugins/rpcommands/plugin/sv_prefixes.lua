@@ -1,7 +1,7 @@
 Prefixes:add('ooc', {
   prefix = { '//', '/ooc' },
   callback = function(actor, text, team_chat)
-    if (hook.Run('PlayerCanUseOOC', actor) == false) then
+    if hook.Run('PlayerCanUseOOC', actor) == false then
       actor:notify('notification.mute', { time = math.round(actor:get_player_data('ooc_mute') - CurTime()) })
 
       return
@@ -26,7 +26,7 @@ Prefixes:add('ooc', {
 Prefixes:add('looc', {
   prefix = { './/', '[[', '/looc' },
   callback = function(actor, text, team_chat)
-    if (hook.Run('PlayerCanUseOOC', actor) == false) then
+    if hook.Run('PlayerCanUseOOC', actor) == false then
       actor:notify('notification.mute', { time = math.round(actor:get_player_data('ooc_mute') - CurTime()) })
 
       return
@@ -48,7 +48,7 @@ Prefixes:add('looc', {
       }
     }
 
-    if (team.GetName(actor:Team()) == 'faction.combine.overwatch.title') then
+    if team.GetName(actor:Team()) == 'faction.combine.overwatch.title' then
       msg_table[5] = 'Overwatch Soldier'
     end
 

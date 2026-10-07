@@ -38,5 +38,8 @@ function CMD:on_run(actor, ...)
   actor.next_its = cur_time + 5
   actor:notify('notification.static_text.added')
 
-  Log:print(actor:Name(true)..' ('..actor:SteamID()..') added static text: '..text..'; pos: '..tostring(pos), 'player_action')
+  Log:print(
+    actor:Name(true)..' ('..actor:SteamID()..') added static text: '..text..'; pos: '..tostring(pos),
+    'player_action'
+  )
 end

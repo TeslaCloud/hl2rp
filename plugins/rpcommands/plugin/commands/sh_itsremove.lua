@@ -2,7 +2,15 @@ CMD.name = 'Itsremove'
 CMD.description = 'command.itsremove.description'
 CMD.permission = 'assistant'
 CMD.category = 'permission.categories.roleplay'
-CMD.aliases = { 'removedescribe', 'describeremove', 'actionremove', 'removeaction', 'itstaticremove', 'removeits', 'removeitstatic' }
+CMD.aliases = {
+  'removedescribe',
+  'describeremove',
+  'actionremove',
+  'removeaction',
+  'itstaticremove',
+  'removeits',
+  'removeitstatic'
+}
 
 function CMD:on_run(actor)
   local trace = actor:GetEyeTraceNoCursor()
@@ -12,7 +20,10 @@ function CMD:on_run(actor)
       RPCommands.remove_static_text(k)
       actor:notify('notification.static_text.removed')
 
-      Log:print(actor:Name(true)..' ('..actor:SteamID()..') removed static text: '..text..'; pos: '..tostring(pos), 'player_action')
+      Log:print(
+        actor:Name(true)..' ('..actor:SteamID()..') removed static text: '..text..'; pos: '..tostring(pos),
+        'player_action'
+      )
 
       return
     end

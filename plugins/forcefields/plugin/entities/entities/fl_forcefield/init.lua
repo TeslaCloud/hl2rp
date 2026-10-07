@@ -83,7 +83,7 @@ function ENT:Initialize()
     { pos = self:WorldToLocal(self.post:GetPos()) + Vector(0, 0, 150) },
     { pos = self:WorldToLocal(self.post:GetPos()) + Vector(0, 0, 150) },
     { pos = self:WorldToLocal(self.post:GetPos()) - Vector(0, 0, 35) },
-    { pos = Vector(0, 0, -35) },
+    { pos = Vector(0, 0, -35) }
   }
 
   self:PhysicsFromMesh(verts)

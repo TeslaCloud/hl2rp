@@ -4,7 +4,6 @@ function SCHEMA:ShouldOpenWepselect(client, bind, pressed)
   end
 end
 
-
 do
   local default_npcs = {
     ['npc_crow'] = 'npc.hl2.crow',

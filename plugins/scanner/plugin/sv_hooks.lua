@@ -79,7 +79,8 @@ function Scanners:StartCommand(actor, cmd)
       local forward = scanner:GetForward() * cmd:GetForwardMove() * speed
       local right = scanner:GetRight() * cmd:GetSideMove() * speed
       local up = scanner:GetUp() * cmd:GetUpMove() * speed
-      local aim = util.AimVector(scanner:GetAimVector():Angle(), actor:GetFOV(), cmd:GetMouseX(), cmd:GetMouseY(), 0, 0) * 32
+      local aim =
+        util.AimVector(scanner:GetAimVector():Angle(), actor:GetFOV(), cmd:GetMouseX(), cmd:GetMouseY(), 0, 0) * 32
 
       aim = aim + forward + right + up
 

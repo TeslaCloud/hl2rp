@@ -45,16 +45,16 @@ function CombatSystem:start_combat(attacker, target)
 end
 
 local hitgroup_adjust = {
-    [HITGROUP_GENERIC]    = 0,
-    [HITGROUP_HEAD]       = -1,
-    [HITGROUP_CHEST]      = 0,
-    [HITGROUP_STOMACH]    = 0,
-    [HITGROUP_LEFTARM]    = 1,
-    [HITGROUP_RIGHTARM]   = 1,
-    [HITGROUP_LEFTLEG]    = 1,
-    [HITGROUP_RIGHTLEG]   = 1,
-    [HITGROUP_GEAR]       = 0
-  }
+  [HITGROUP_GENERIC]    = 0,
+  [HITGROUP_HEAD]       = -1,
+  [HITGROUP_CHEST]      = 0,
+  [HITGROUP_STOMACH]    = 0,
+  [HITGROUP_LEFTARM]    = 1,
+  [HITGROUP_RIGHTARM]   = 1,
+  [HITGROUP_LEFTLEG]    = 1,
+  [HITGROUP_RIGHTLEG]   = 1,
+  [HITGROUP_GEAR]       = 0
+}
 
 function CombatSystem:calculate_hit(attacker, target, damage_info)
   local random = Dice.fudge()

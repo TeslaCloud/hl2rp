@@ -17,8 +17,22 @@ function SCHEMA:HUDPaint()
   surface.SetMaterial(util.get_material('materials/flux/hl2rp/vignette.png'))
   surface.DrawTexturedRect(0, 0, w, h)
 
-  local tw, th = draw.SimpleText(t'ui.hud.alpha.flux_alpha', Theme.get_font('text_large'), w - 16, h - text_offset, alpha_text_color, TEXT_ALIGN_RIGHT)
-  draw.SimpleText(t'ui.hud.alpha.subtext', Theme.get_font('text_normal'), w - 16, h - text_offset + th, alpha_text_color, TEXT_ALIGN_RIGHT)
+  local tw, th = draw.SimpleText(
+    t'ui.hud.alpha.flux_alpha',
+    Theme.get_font('text_large'),
+    w - 16,
+    h - text_offset,
+    alpha_text_color,
+    TEXT_ALIGN_RIGHT
+  )
+  draw.SimpleText(
+    t'ui.hud.alpha.subtext',
+    Theme.get_font('text_normal'),
+    w - 16,
+    h - text_offset + th,
+    alpha_text_color,
+    TEXT_ALIGN_RIGHT
+  )
 end
 
 function SCHEMA:FirstCharacterCreated(char)

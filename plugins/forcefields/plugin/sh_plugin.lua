@@ -51,7 +51,8 @@ function Forcefields:ShouldCollide(a, b)
 
   local a_class, b_class = a:GetClass(), b:GetClass()
 
-  if (allowed_ents[a_class] or allowed_ents[b_class]) and (a_class == 'fl_forcefield' or b_class == 'fl_forcefield') then
+  if (allowed_ents[a_class] or allowed_ents[b_class]) and
+     (a_class == 'fl_forcefield' or b_class == 'fl_forcefield') then
     return false
   end
 

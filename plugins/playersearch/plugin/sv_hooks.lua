@@ -79,7 +79,7 @@ function PlayerSearch:CanSearch(actor, target)
   if actor:GetPos():Distance(target:GetPos()) > 100 then
     return false, 'error.too_far'
   end
-  
+
   if !IsValid(target) then
     return false, 'error.invalid_entity'
   end

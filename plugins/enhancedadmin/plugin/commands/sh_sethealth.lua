@@ -9,6 +9,7 @@ CMD.aliases = { 'plysethealth', 'hp' }
 
 function CMD:on_run(actor, targets, ...)
   local value = tonumber(table.concat({ ... }, ' '))
+
   if value <= 0 then
     actor:notify('error.sethealth.invalid_value', { health = value })
     return

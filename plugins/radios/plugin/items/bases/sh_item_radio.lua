@@ -12,7 +12,8 @@ ItemRadio:set_action_sound('set_frequency', 'buttons/button18.wav')
 
 ItemRadio:add_button('toggle', {
   get_name = function(item_obj) return item_obj:is_enabled() and 'item.option.disable' or 'item.option.enable' end,
-  get_icon = function(item_obj) return item_obj:is_enabled() and 'icon16/lightning_delete.png' or 'icon16/lightning_add.png' end,
+  get_icon =
+    function(item_obj) return item_obj:is_enabled() and 'icon16/lightning_delete.png' or 'icon16/lightning_add.png' end,
   callback = 'on_toggle'
 })
 

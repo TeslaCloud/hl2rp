@@ -9,6 +9,7 @@ CMD.aliases = { 'plysetarmor', 'armor' }
 
 function CMD:on_run(actor, targets, ...)
   local value = tonumber(table.concat({ ... }, ' '))
+
   if value <= 0 then
     actor:notify('error.setarmor.invalid_value', { armor = value })
     return

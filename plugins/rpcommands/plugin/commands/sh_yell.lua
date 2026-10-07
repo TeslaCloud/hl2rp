@@ -6,7 +6,7 @@ CMD.aliases = { 'y', 'shout', 's' }
 CMD.arguments = 1
 
 function CMD:on_run(actor, ...)
-  local text = table.concat({...}, ' ')
+  local text = table.concat({ ... }, ' ')
 
   Chatbox.player_say(actor, text..'!!')
 end

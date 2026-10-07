@@ -119,14 +119,14 @@ end
 function SCHEMA:InitialDoorsLoad()
   for k, v in ipairs(ents.GetAll()) do
     if v:is_combine_door() then
-      v.conditions = {{
+      v.conditions = { {
         id = 'has_item',
         childs = {},
         data = {
           item_id  = 'card_cp_officer',
           operator = 'equal'
         }
-      }}
+      } }
     end
   end
 

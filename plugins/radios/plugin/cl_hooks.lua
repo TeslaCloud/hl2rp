@@ -1,5 +1,5 @@
 Cable.receive('fl_get_radio_frequency', function(instance_id, frequency)
-  Derma_StringRequest(t'ui.radio.frequency', t'ui.radio.frequency_message', frequency, 
+  Derma_StringRequest(t'ui.radio.frequency', t'ui.radio.frequency_message', frequency,
   function(text)
     local number = tonumber(text)
 

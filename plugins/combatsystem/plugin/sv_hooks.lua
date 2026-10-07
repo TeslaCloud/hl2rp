@@ -34,6 +34,7 @@ function CombatSystem:PlayerSwitchWeapon(actor)
     end
   end
 end
+
 function CombatSystem:DoAnimationEvent(actor, event)
   if event == PLAYERANIMEVENT_RELOAD and actor:in_combat() and !actor:is_frozen() then
     actor:take_turn(TURN_ATTACK, actor:get_turns(TURN_ATTACK))
@@ -94,7 +95,7 @@ function CombatSystem:EntityTakeDamage(entity, damage_info)
 
   if IsValid(attacker) and IsValid(entity)
   and ((attacker:IsPlayer() or attacker:IsNPC()) and (entity:IsPlayer() or entity:IsNPC()))
-  and !(attacker:IsNPC() and entity:IsNPC()) then 
+  and !(attacker:IsNPC() and entity:IsNPC()) then
     local attacker_combat = attacker:get_combat()
     local entity_combat = entity:get_combat()
     local combat = attacker_combat

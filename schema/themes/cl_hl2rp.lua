@@ -36,7 +36,10 @@ function THEME:ChatboxPaintBackground(panel, width, height)
 end
 
 function THEME:PaintMainMenu(panel, width, height)
-  local title, desc, author = SCHEMA:get_name()..' '..(SCHEMA.version or 'UNKNOWN'), SCHEMA:get_description(), t('ui.main_menu.developed_by', { author = SCHEMA:get_author() })
+  local title, desc, author = SCHEMA:get_name()..' '..(SCHEMA.version or 'UNKNOWN'), SCHEMA:get_description(), t(
+    'ui.main_menu.developed_by',
+    { author = SCHEMA:get_author() }
+  )
   local version = 'Flux '..(GAMEMODE.version or 'UNKNOWN')
   local logo = self:get_material('schema_logo')
   local title_w, title_h = util.text_size(title, self:get_font('main_menu_titles'))
@@ -51,13 +54,44 @@ function THEME:PaintMainMenu(panel, width, height)
   surface.DrawRect(0, logo_offset, width, height / 8)
 
   if logo then
-    draw.textured_rect(logo, width * 0.5 - math.scale(200), logo_offset + 16, math.scale(400), math.scale(96), Color(255, 255, 255))
+    draw.textured_rect(
+      logo,
+      width * 0.5 - math.scale(200),
+      logo_offset + 16,
+      math.scale(400),
+      math.scale(96),
+      Color(255, 255, 255)
+    )
   end
 
-  draw.SimpleText(desc, self:get_font('main_menu_titles'), 16, logo_offset + 128 - desc_h - 8, self:get_color('schema_text'))
-  draw.SimpleText(author, self:get_font('main_menu_titles'), width - author_w - 16, logo_offset + 128 - author_h - 8, self:get_color('schema_text'))
-  draw.SimpleText(title, self:get_font('main_menu_titles'), width - title_w - 8, logo_offset + height - title_h - 8, self:get_color('schema_text'))
-  draw.SimpleText(version, self:get_font('main_menu_titles'), 8, logo_offset + height - version_h - 8, self:get_color('schema_text'))
+  draw.SimpleText(
+    desc,
+    self:get_font('main_menu_titles'),
+    16,
+    logo_offset + 128 - desc_h - 8,
+    self:get_color('schema_text')
+  )
+  draw.SimpleText(
+    author,
+    self:get_font('main_menu_titles'),
+    width - author_w - 16,
+    logo_offset + 128 - author_h - 8,
+    self:get_color('schema_text')
+  )
+  draw.SimpleText(
+    title,
+    self:get_font('main_menu_titles'),
+    width - title_w - 8,
+    logo_offset + height - title_h - 8,
+    self:get_color('schema_text')
+  )
+  draw.SimpleText(
+    version,
+    self:get_font('main_menu_titles'),
+    8,
+    logo_offset + height - version_h - 8,
+    self:get_color('schema_text')
+  )
 end
 
 function THEME:PaintCharPanel(panel, w, h)
@@ -65,7 +99,13 @@ function THEME:PaintCharPanel(panel, w, h)
     local char_data = panel.char_data
     local name_w, name_h = util.text_size(char_data.name, self:get_font('main_menu_titles'))
 
-    draw.SimpleText(char_data.name, self:get_font('main_menu_titles'), w * 0.5 - name_w * 0.5, 4, self:get_color('schema_text'))
+    draw.SimpleText(
+      char_data.name,
+      self:get_font('main_menu_titles'),
+      w * 0.5 - name_w * 0.5,
+      4,
+      self:get_color('schema_text')
+    )
 
     if PLAYER:get_character_id() == char_data.id then
       surface.SetDrawColor(self:get_color('accent'))
@@ -89,14 +129,29 @@ end
 function THEME:PaintCharCreationBasePanel(panel, w, h)
   if isstring(panel.text) then
     local text_w, text_h = util.text_size(t(panel.text), Theme.get_font('main_menu_large'))
-    draw.SimpleText(t(panel.text), Theme.get_font('main_menu_large'), w * 0.5 - text_w * 0.5, 0, Theme.get_color('text'))
+    draw.SimpleText(
+      t(panel.text),
+      Theme.get_font('main_menu_large'),
+      w * 0.5 - text_w * 0.5,
+      0,
+      Theme.get_color('text')
+    )
   end
 end
 
 function THEME:DrawBarBackground(bar_info)
   local height = self:get_option('bar_height')
 
-  draw.box_outlined(4, bar_info.x, bar_info.y + bar_info.height - height, bar_info.width, height, 1, self:get_color('accent'), 2)
+  draw.box_outlined(
+    4,
+    bar_info.x,
+    bar_info.y + bar_info.height - height,
+    bar_info.width,
+    height,
+    1,
+    self:get_color('accent'),
+    2
+  )
 end
 
 function THEME:DrawBarHindrance(bar_info)
@@ -115,10 +170,10 @@ function THEME:DrawBarFill(bar_info)
   local bar_y = bar_info.y + bar_info.height - (bar_height - 2)
   local height = bar_height - 4
 
-  if (bar_info.real_fill_width < bar_info.fill_width) then
+  if bar_info.real_fill_width < bar_info.fill_width then
     draw.RoundedBox(2, barX, bar_y, (bar_info.fill_width or bar_info.width) - 4, height, bar_info.color)
     draw.RoundedBox(2, barX, bar_y, bar_info.real_fill_width - 4, height, self:get_color('accent'))
-  elseif (bar_info.real_fill_width > bar_info.fill_width) then
+  elseif bar_info.real_fill_width > bar_info.fill_width then
     draw.RoundedBox(2, barX, bar_y, bar_info.real_fill_width - 4, height, bar_info.color)
     draw.RoundedBox(2, barX, bar_y, (bar_info.fill_width or bar_info.width) - 4, height, self:get_color('accent'))
   else
@@ -132,11 +187,17 @@ function THEME:DrawBarTexts(bar_info)
 
   draw.SimpleText(bar_info.text, font, bar_info.x, bar_info.y + bar_info.text_offset - 3, accent_color)
 
-  if (bar_info.hinder_display and bar_info.hinder_display <= bar_info.hinder_value) then
+  if bar_info.hinder_display and bar_info.hinder_display <= bar_info.hinder_value then
     local width = bar_info.width
     local text_wide = util.text_size(bar_info.hinder_text, font)
     local length = width * (bar_info.hinder_value / bar_info.max_value)
 
-    draw.SimpleText(bar_info.hinder_text, font, bar_info.x + width - text_wide, bar_info.y + bar_info.text_offset - 3, accent_color)
+    draw.SimpleText(
+      bar_info.hinder_text,
+      font,
+      bar_info.x + width - text_wide,
+      bar_info.y + bar_info.text_offset - 3,
+      accent_color
+    )
   end
 end

@@ -30,12 +30,12 @@ function ItemMedical:on_use(actor)
   }
 
   -- Sanity Check [ Limit to max_health ]
-  if (self.health_regen > missing_health) then
+  if self.health_regen > missing_health then
     health_regen = missing_health
   end
 
   -- Sanity Check [ Disallow if at max_health ]
-  if (player_health >= max_health) then
+  if player_health >= max_health then
     Chatbox.add_text(actor, unpack(max_msg_table))
     return false
   end

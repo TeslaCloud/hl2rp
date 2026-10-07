@@ -145,7 +145,7 @@ function Combat:remove_member(id, all)
 
     if entity:IsPlayer() then
       timer.Remove('combat_turn_'..entity:SteamID())
-      
+
       Cable.send(entity, 'fl_combat_end_turn')
     end
   end
@@ -285,7 +285,7 @@ function Combat:next_turn()
 
     if member:IsPlayer() then
       timer.Remove('combat_turn_'..member:SteamID())
-      
+
       Cable.send(member, 'fl_combat_end_turn')
     end
   else

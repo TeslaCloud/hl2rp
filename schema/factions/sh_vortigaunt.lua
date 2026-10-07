@@ -1,7 +1,7 @@
 FACTION.name = 'faction.vortigaunt.title'
 FACTION.description = 'faction.vortigaunt.description'
 FACTION.phys_desc = 'faction.vortigaunt.phys_desc'
-FACTION.color = Color(7,135,32)
+FACTION.color = Color(7, 135, 32)
 FACTION.material = 'flux/hl2rp/factions/citizen.jpg'
 FACTION.name_template = '{name}'
 FACTION.default_class = 'vortigaunt'

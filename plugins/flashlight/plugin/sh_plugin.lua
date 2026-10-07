@@ -1,6 +1,6 @@
 if SERVER then
   function PLUGIN:PlayerSwitchFlashlight(actor, on)
-    if (on and !actor:has_item_equipped('flashlight')) then
+    if on and !actor:has_item_equipped('flashlight') then
       return false
     end
 

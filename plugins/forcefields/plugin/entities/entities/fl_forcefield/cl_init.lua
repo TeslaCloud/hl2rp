@@ -15,7 +15,7 @@ function ENT:Initialize()
     { pos = self:WorldToLocal(trace.HitPos - Vector(0, 0, 50)) + Vector(0, 0, 150) },
     { pos = self:WorldToLocal(trace.HitPos - Vector(0, 0, 50)) + Vector(0, 0, 150) },
     { pos = self:WorldToLocal(trace.HitPos - Vector(0, 0, 50)) - Vector(0, 0, 35) },
-    { pos = Vector(0, 0, -35) },
+    { pos = Vector(0, 0, -35) }
   }
 
   self:PhysicsFromMesh(verts)
@@ -36,7 +36,7 @@ function ENT:Draw()
 
   render.SetMaterial(material)
 
-  if (IsValid(post)) then
+  if IsValid(post) then
     local vertex = self:WorldToLocal(post:GetPos())
     self:SetRenderBounds(vector_origin - Vector(0, 0, 40), vertex + self:GetUp() * 150)
 
@@ -55,7 +55,7 @@ end
 
 -- I took a peek at how Chessnut drew his forcefields.
 function ENT:draw_shield(vertex)
-  if (self:GetDTInt(0) != 4) then
+  if self:GetDTInt(0) != 4 then
     local dist = self:GetDTEntity(0):GetPos():Distance(self:GetPos())
     local mat_fac = 45
     local height = 5

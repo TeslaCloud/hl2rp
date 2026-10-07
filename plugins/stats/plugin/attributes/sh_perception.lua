@@ -20,6 +20,7 @@ ATTRIBUTE.effects = {
   {
     text = 'ui.effect.hearing_radius',
     get_value = function(value) return (value > 0 and '+' or value < 0 and '-' or '')..Unit:format((value:abs() * 1.5):m():round(), 'metric') end,
-    get_color = function(value) return (value > 0 and Color('lightgreen')) or value < 0 and Color('pink') or color_white end
+    get_color =
+      function(value) return (value > 0 and Color('lightgreen')) or value < 0 and Color('pink') or color_white end
   }
 }

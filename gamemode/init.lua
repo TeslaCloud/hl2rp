@@ -1,1 +1,1 @@
-DeriveGamemode("flux")
+DeriveGamemode('flux')

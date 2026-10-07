@@ -63,25 +63,65 @@ function CombatSystem:HUDPaint()
     local font = Theme.get_font('menu_large')
     local text_w, text_h = util.text_size(text, font)
 
-    draw.SimpleTextOutlined(text, font, icon_x + text_w * 0.5, icon_y + text_h + math.scale(4), color, nil, nil, 1, color_outline)
+    draw.SimpleTextOutlined(
+      text,
+      font,
+      icon_x + text_w * 0.5,
+      icon_y + text_h + math.scale(4),
+      color,
+      nil,
+      nil,
+      1,
+      color_outline
+    )
 
     text = turns[TURN_MOVE]
     text_w, text_h = util.text_size(text, font)
 
-    draw.SimpleTextOutlined(text, font, icon_x_right + text_w * 0.5, icon_y + text_h + math.scale(4), color, nil, nil, 1, color_outline)
+    draw.SimpleTextOutlined(
+      text,
+      font,
+      icon_x_right + text_w * 0.5,
+      icon_y + text_h + math.scale(4),
+      color,
+      nil,
+      nil,
+      1,
+      color_outline
+    )
 
     local cur_time = CurTime()
 
     if PLAYER.turn_end and PLAYER.turn_end > cur_time then
       text = math.round(PLAYER.turn_end - cur_time, 1)
       text_w, text_h = util.text_size(text, font)
-      draw.SimpleTextOutlined(text, font, gx + scrw - text_w * 0.5, icon_y + text_h + math.scale(4), color, nil, nil, 1, color_outline)
+      draw.SimpleTextOutlined(
+        text,
+        font,
+        gx + scrw - text_w * 0.5,
+        icon_y + text_h + math.scale(4),
+        color,
+        nil,
+        nil,
+        1,
+        color_outline
+      )
     end
 
     font = Theme.get_font('menu_small')
     text = t'ui.hud.skip'
     text_w, text_h = util.text_size(text, font)
-    draw.SimpleTextOutlined(text, font, gx + scrw - text_w * 0.5, icon_y + text_h * 3, color, nil, nil, 1, color_outline)
+    draw.SimpleTextOutlined(
+      text,
+      font,
+      gx + scrw - text_w * 0.5,
+      icon_y + text_h * 3,
+      color,
+      nil,
+      nil,
+      1,
+      color_outline
+    )
   end
 end
 

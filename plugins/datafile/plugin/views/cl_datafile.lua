@@ -14,7 +14,6 @@ function PANEL:Init()
   self.sidebar:SetSize(width / 5 - 8, height)
   self.sidebar:SetPos(0, 0)
   self.sidebar.Paint = function(pnl, w, h) end
-
 end
 
 function PANEL:Paint(w, h)
@@ -26,7 +25,6 @@ function PANEL:Paint(w, h)
 
   draw.RoundedBox(0, 0, 0, w, h, Theme.get_color('background'):alpha(150))
 end
-
 
 function PANEL:get_menu_size()
   return math.scale(1280), math.scale(900)
