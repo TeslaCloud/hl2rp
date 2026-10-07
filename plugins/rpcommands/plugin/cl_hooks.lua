@@ -1,3 +1,5 @@
+--- Draws nearby visible static texts, fading with distance and screen position. Staff holding Alt also see
+-- who placed each text and when.
 function RPCommands:HUDPaint()
   if IsValid(PLAYER) then
     for k, v in pairs(RPCommands.texts) do
@@ -37,6 +39,10 @@ function RPCommands:HUDPaint()
   end
 end
 
+--- Returns the typing indicator text for emotes, whispers, yells and regular talking.
+-- @param target [Player player that is typing]
+-- @param text [String text being typed]
+-- @return [String indicator text, nil for other commands]
 function RPCommands:DisplayTypingTextType(target, text)
   if text:start_with('/me') or text:start_with('*') then
     return t'ui.hud.display_typing.performing'
@@ -49,6 +55,10 @@ function RPCommands:DisplayTypingTextType(target, text)
   end
 end
 
+--- Shrinks the typing indicator range for whispers and extends it for yells.
+-- @param target [Player player that is typing]
+-- @param text [String text being typed]
+-- @return [Number range multiplier, nil for regular talking]
 function RPCommands:DisplayTypingAdjustFadeoffMultiplier(target, text)
   if text:start_with('/w') or text:start_with('(') then
     return 0.025

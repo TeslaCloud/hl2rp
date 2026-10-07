@@ -1,14 +1,21 @@
 local player_meta = FindMetaTable('Player')
 
+--- Checks whether the player is controlling a scanner.
+-- @return [Boolean whether the player controls a scanner]
 function player_meta:controls_scanner()
   return self.scanner != nil
 end
 
+--- Returns the scanner the player is controlling.
+-- @return [Entity scanner, nil if the player does not control one]
 function player_meta:get_scanner()
   return self.scanner
 end
 
 if SERVER then
+  --- Puts the player in control of a scanner, viewing through it while it follows a marker the player steers.
+  -- The player's weapons are stored and stripped until they exit the scanner.
+  -- @param entity [NPC scanner to control]
   function player_meta:control_scanner(entity)
     entity:AddEntityRelationship(self, D_NU, 99)
 
@@ -45,6 +52,7 @@ if SERVER then
     end)
   end
 
+  --- Releases the player's scanner and restores their view and weapons.
   function player_meta:exit_scanner()
     local scanner = self.scanner
     scanner.pilot = nil

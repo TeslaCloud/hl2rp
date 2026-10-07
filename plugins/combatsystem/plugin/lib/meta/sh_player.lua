@@ -1,9 +1,14 @@
 local player_meta = FindMetaTable('Player')
 
+--- Checks whether the player has asked to leave their combat.
+-- @return [Boolean whether the player is leaving combat]
 function player_meta:leaving_combat()
   return self.combat_leaving
 end
 
+--- Uses up turns of a type, freezing the matching ability once none are left and ending the turn when all are spent.
+-- @param turn_type [Number TURN_ATTACK or TURN_MOVE]
+-- @param amount=1 [Number turns to use up]
 function player_meta:take_turn(turn_type, amount)
   amount = amount or 1
 
@@ -29,16 +34,23 @@ function player_meta:take_turn(turn_type, amount)
   self:get_combat():next_turn()
 end
 
+--- Returns how many turns of a type the player has left.
+-- @param turn_type [Number TURN_ATTACK or TURN_MOVE]
+-- @return [Number turns left]
 function player_meta:get_turns(turn_type)
   local turns = self:get_nv('fl_combat_turns', {})
 
   return turns and turns[turn_type] or 0
 end
 
+--- Checks whether the player has any turns of a type left.
+-- @param turn_type [Number TURN_ATTACK or TURN_MOVE]
+-- @return [Boolean whether the player has turns left]
 function player_meta:has_turn(turn_type)
   return self:get_turns(turn_type) > 0
 end
 
+--- Resets the player's attack and move turns at the start of their turn, using the weapon's turns if it has any.
 function player_meta:restore_turns()
   local turns = {
     [TURN_ATTACK] = 1,
@@ -59,6 +71,9 @@ function player_meta:restore_turns()
   self.turn_done = false
 end
 
+--- Rolls a fudge die against one of the player's attributes.
+-- @param attribute [String ID of the attribute]
+-- @return [Number attribute value plus the roll, after the AdjustDiceThrow hook]
 function player_meta:dice(attribute)
   local value = self:get_attribute(attribute)
   local roll = Dice.fudge(value)

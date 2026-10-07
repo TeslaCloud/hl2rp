@@ -3,6 +3,7 @@ PANEL.id = 'stats'
 PANEL.text = 'ui.char_create.stats'
 PANEL.stats = {}
 
+--- Sets up the available attribute points.
 function PANEL:Init()
   self.start_points = Stats:default_attribute_points()
   self.points = self.points or self.start_points
@@ -10,6 +11,9 @@ function PANEL:Init()
   self:DockPadding(0, math.scale(48), 0, 0)
 end
 
+--- Draws the remaining attribute points in the bottom right corner.
+-- @param w [Number width of the panel]
+-- @param h [Number height of the panel]
 function PANEL:PaintOver(w, h)
   local text = t'ui.char_create.stats_points'..self.points
   local text_w, text_h = util.text_size(text, Theme.get_font('text_normal_large'))
@@ -18,6 +22,9 @@ function PANEL:PaintOver(w, h)
   surface.DisableClipping(false)
 end
 
+--- Builds the list of stat attributes with point counters, the attribute details panel and the randomize button,
+-- restoring previously entered values.
+-- @param parent [Panel character creation menu]
 function PANEL:on_open(parent)
   local scrw, scrh = ScrW(), ScrH()
   local fa_icon_size = math.scale(16)
@@ -269,6 +276,8 @@ function PANEL:on_open(parent)
   end
 end
 
+--- Stores the chosen attribute values and remaining points in the character data.
+-- @param parent [Panel character creation menu]
 function PANEL:on_close(parent)
   local stats_table = {}
 
@@ -282,6 +291,8 @@ function PANEL:on_close(parent)
   })
 end
 
+--- Checks that all attribute points have been spent and none were overspent.
+-- @return [Boolean false and String error text if the points are invalid, nil otherwise]
 function PANEL:on_validate()
   local sum = 0
 

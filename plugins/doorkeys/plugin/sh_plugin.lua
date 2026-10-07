@@ -19,6 +19,7 @@ end
 
 Item.set_category_icon('item.category.keys', 'icon16/key.png')
 
+--- Registers the keys door property, which saves the door's keys and adds a menu to list, create and add keys.
 function PLUGIN:RegisterDoorProperties()
   Doors:register_property('keys', {
     get_save_data = function(entity)
@@ -63,6 +64,7 @@ if CLIENT then
     local list = vgui.Create('DScrollPanel', frame)
     list:Dock(FILL)
 
+    --- Refills the list with the door's keys, each with a delete button, followed by a button to add a key.
     function frame:rebuild()
       list:Clear()
 

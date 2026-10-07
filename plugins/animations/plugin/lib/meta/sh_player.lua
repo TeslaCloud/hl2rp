@@ -1,5 +1,8 @@
 local player_meta = FindMetaTable('Player')
 
+--- Plays the enter and loop sequences of a registered animation, freezing the player in third person.
+-- Clientside it asks the server to start the animation. Animations with a duration end on their own.
+-- @param animation [String ID of the registered animation]
 function player_meta:play_animation(animation)
   if CLIENT then
     Cable.send('fl_animation_start', animation)
@@ -56,6 +59,7 @@ function player_meta:play_animation(animation)
   end
 end
 
+--- Plays the exit sequence of the current animation, then restores the player's movement and view.
 function player_meta:leave_animation()
   if self.leaving_animation then return end
 

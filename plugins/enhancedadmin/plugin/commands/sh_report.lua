@@ -5,6 +5,8 @@ CMD.category = 'permission.categories.general'
 CMD.arguments = 1
 CMD.alias = 'help'
 
+--- Sends a report message to all online staff and to the reporting player.
+-- @param actor [Player player making the report]
 function CMD:on_run(actor, ...)
   local text = table.concat({ ... }, ' ')
 

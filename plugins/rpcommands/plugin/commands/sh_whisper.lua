@@ -5,6 +5,8 @@ CMD.category = 'permission.categories.roleplay'
 CMD.alias = 'w'
 CMD.arguments = 1
 
+--- Says the text as a whisper.
+-- @param actor [Player player running the command]
 function CMD:on_run(actor, ...)
   local text = table.concat({ ... }, ' ')
 

@@ -5,22 +5,36 @@ end
 local stored = CombatSystem.stored or {}
 CombatSystem.stored = stored
 
+--- Stores a combat.
+-- @param combat [Combat combat to store]
+-- @return [Number ID of the stored combat]
 function CombatSystem:add(combat)
   return table.insert(stored, combat)
 end
 
+--- Removes a stored combat.
+-- @param id [Number ID of the combat]
 function CombatSystem:remove(id)
   stored[id] = nil
 end
 
+--- Returns a stored combat.
+-- @param id [Number ID of the combat]
+-- @return [Combat combat, nil if it does not exist]
 function CombatSystem:find(id)
   return stored[id]
 end
 
+--- Adds an entity to a combat.
+-- @param combat [Combat combat to add the entity to]
+-- @param member [Entity player or NPC to add]
 function CombatSystem:add_member(combat, member)
   combat:add_member(member)
 end
 
+--- Adds every entity within 500 units that the member can see to a combat.
+-- @param combat [Combat combat to add the entities to]
+-- @param member [Entity entity to search around]
 function CombatSystem:add_entities_around(combat, member)
   local entities = ents.FindInSphere(member:GetPos(), 500)
   local pos = member:EyePos()
@@ -32,6 +46,10 @@ function CombatSystem:add_entities_around(combat, member)
   end
 end
 
+--- Starts a combat between an attacker and a target, pulling in everyone around them.
+-- @param attacker [Entity entity that started the fight]
+-- @param target [Entity entity that was attacked]
+-- @return [Combat started combat]
 function CombatSystem:start_combat(attacker, target)
   local combat = Combat.new()
   self:add_member(combat, attacker)
@@ -56,6 +74,11 @@ local hitgroup_adjust = {
   [HITGROUP_GEAR]       = 0
 }
 
+--- Rolls whether an attack hits, adjusting for weapon range, recoil and the body part, and announces the result.
+-- @param attacker [Entity attacking entity]
+-- @param target [Entity entity being attacked]
+-- @param damage_info [CTakeDamageInfo damage of the attack]
+-- @return [Boolean true if the attack missed, false if it hit]
 function CombatSystem:calculate_hit(attacker, target, damage_info)
   local random = Dice.fudge()
   local hitgroup = damage_info:get_hitgroup()
@@ -123,6 +146,9 @@ function CombatSystem:calculate_hit(attacker, target, damage_info)
   end
 end
 
+--- Rolls an entity's initiative, using the reflexes attribute for players.
+-- @param entity [Entity combat member]
+-- @return [Number initiative roll]
 function CombatSystem:dice_initiative(entity)
   local dice = Dice.fudge()
 

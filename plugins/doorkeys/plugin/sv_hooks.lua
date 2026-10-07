@@ -1,3 +1,7 @@
+--- Lets players lock and unlock doors that one of their keys belongs to.
+-- @param actor [Player player trying to lock the door]
+-- @param entity [Entity door]
+-- @return [Boolean true if the player has a key for the door, nil otherwise]
 function PLUGIN:PlayerCanLockDoor(actor, entity)
   local keys = actor:find_items('key')
 

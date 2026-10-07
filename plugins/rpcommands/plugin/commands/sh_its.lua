@@ -5,6 +5,8 @@ CMD.category = 'permission.categories.roleplay'
 CMD.aliases = { 'action', 'itstatic', 'describe' }
 CMD.arguments = 1
 
+--- Places a static text at the player's position unless another one is within 50 units, with a 5 second cooldown.
+-- @param actor [Player player running the command]
 function CMD:on_run(actor, ...)
   local cur_time = CurTime()
 

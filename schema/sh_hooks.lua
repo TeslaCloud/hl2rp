@@ -1,3 +1,8 @@
+--- Only opens the weapon selection with the slot keys while the walk key is held.
+-- @param client [Player local player]
+-- @param bind [String bind that was pressed]
+-- @param pressed [Boolean whether the key was pressed or released]
+-- @return [Boolean false to keep the weapon selection closed, nil otherwise]
 function SCHEMA:ShouldOpenWepselect(client, bind, pressed)
   if bind and bind:find('slot') and pressed and !client:KeyDown(IN_WALK) then
     return false
@@ -63,6 +68,9 @@ do
     ['npc_zombine'] = 'npc.hl2.zombine'
   }
 
+  --- Returns the translated name of Half-Life 2 NPCs.
+  -- @param entity [Entity entity to get the name of]
+  -- @return [String NPC name, nil for other entities]
   function SCHEMA:GetEntityName(entity)
     local class = entity:GetClass():lower()
     local name = default_npcs[class]

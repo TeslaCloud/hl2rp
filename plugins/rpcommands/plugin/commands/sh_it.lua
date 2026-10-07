@@ -5,6 +5,8 @@ CMD.category = 'permission.categories.roleplay'
 CMD.alias = 'do'
 CMD.arguments = 1
 
+--- Describes something in the environment to players looking near the speaker, with a volume-based radius.
+-- @param actor [Player player running the command]
 function CMD:on_run(actor, ...)
   local text, volume = RPCommands:get_phrase_volume(table.concat({ ... }, ' '):spelling())
   local msg_table = {

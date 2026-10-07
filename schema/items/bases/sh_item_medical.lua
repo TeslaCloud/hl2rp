@@ -9,6 +9,9 @@ ItemMedical.description = 'An item that can be used to heal or relieve.'
 ItemMedical.category = 'item.category.medical'
 ItemMedical.use_text = 'item.action.apply'
 
+--- Heals the player over time, refusing if they are at full health or already healing.
+-- @param actor [Player player using the item]
+-- @return [Boolean false if the item was not used, nil otherwise]
 function ItemMedical:on_use(actor)
   local player_health = actor:Health()
   local max_health = actor:GetMaxHealth()
@@ -29,12 +32,10 @@ function ItemMedical:on_use(actor)
     { sender = actor }
   }
 
-  -- Sanity Check [ Limit to max_health ]
   if self.health_regen > missing_health then
     health_regen = missing_health
   end
 
-  -- Sanity Check [ Disallow if at max_health ]
   if player_health >= max_health then
     Chatbox.add_text(actor, unpack(max_msg_table))
     return false

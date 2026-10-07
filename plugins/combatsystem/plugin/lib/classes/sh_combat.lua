@@ -1,5 +1,6 @@
 class 'Combat'
 
+--- Registers the combat with the combat system and sets up its initial state.
 function Combat:init()
   self.id = CombatSystem:add(self)
   self.round = 1
@@ -9,6 +10,7 @@ function Combat:init()
   self.members = {}
 end
 
+--- Freezes all members, rolls the turn order and gives the first member their turn.
 function Combat:start()
   self.started = true
   self:freeze_members()
@@ -17,6 +19,7 @@ function Combat:start()
   self:turn(self:get_acting_member(), true)
 end
 
+--- Ends the combat, notifies the players and releases all members.
 function Combat:finish()
   self.finished = true
   self:notify_finish()
@@ -26,6 +29,7 @@ function Combat:finish()
   CombatSystem:remove(self.id)
 end
 
+--- Sorts the members by rolled initiative, keeping the initiator first, and sends the order to the players.
 function Combat:calculate_turn_order()
   local order = self.members
   local initiator, victim = order[1], order[2]
@@ -70,10 +74,14 @@ function Combat:calculate_turn_order()
   self:message_initiative(order)
 end
 
+--- Sends the turn order to every player in the combat.
+-- @param order [List<Table> entries with entity and initiative fields]
 function Combat:message_initiative(order)
   Cable.send(self:get_players(), 'fl_combat_turn_order', order)
 end
 
+--- Returns the members of the combat that are valid players.
+-- @return [List<Player> players in the combat]
 function Combat:get_players()
   local players = {}
 
@@ -86,14 +94,20 @@ function Combat:get_players()
   return players
 end
 
+--- Returns the member whose turn it currently is.
+-- @return [Entity acting member]
 function Combat:get_acting_member()
   return self.members[self.current_member]
 end
 
+--- Returns all members of the combat in turn order.
+-- @return [List<Entity> members]
 function Combat:get_members()
   return self.members
 end
 
+--- Advances to the next member in the turn order, starting a new round after the last one.
+-- @return [Entity member whose turn it is now]
 function Combat:pop_member()
   local i = self.current_member
 
@@ -110,10 +124,14 @@ function Combat:pop_member()
   return self.members[i]
 end
 
+--- Increments the round counter.
 function Combat:round_end()
   self.round = self.round + 1
 end
 
+--- Adds a player or NPC to the combat, freezing them if the combat has already started.
+-- @param entity [Entity player or NPC to add]
+-- @param position=nil [Number position in the turn order, appended to the end by default]
 function Combat:add_member(entity, position)
   if !IsValid(entity) or (!entity:IsNPC() and !entity:IsPlayer())
   or table.HasValue(self.members, entity) then return end
@@ -129,6 +147,9 @@ function Combat:add_member(entity, position)
   end
 end
 
+--- Removes a member from the combat, unfreezing them and ending their turn.
+-- @param id [Entity member, or Number index of the member in the turn order]
+-- @param all=nil [Boolean true to keep the member in the list, used when removing every member]
 function Combat:remove_member(id, all)
   local entity
 
@@ -163,6 +184,7 @@ function Combat:remove_member(id, all)
   end
 end
 
+--- Releases every member and clears the member list.
 function Combat:remove_members()
   for k, v in pairs(self:get_members()) do
     if IsValid(v) then
@@ -173,6 +195,7 @@ function Combat:remove_members()
   self.members = nil
 end
 
+--- Freezes every valid member of the combat.
 function Combat:freeze_members()
   for k, v in pairs(self:get_members()) do
     if IsValid(v) then
@@ -181,6 +204,7 @@ function Combat:freeze_members()
   end
 end
 
+--- Finishes the combat if fewer than two members remain or no member is still hostile or willing to fight.
 function Combat:check()
   if self.finished then return end
 
@@ -207,6 +231,9 @@ function Combat:check()
   self:finish()
 end
 
+--- Starts an entity's turn. Players get 60 seconds and use up move turns as they walk, NPCs act for 4 seconds.
+-- @param entity [Entity member whose turn it is]
+-- @param first=nil [Boolean whether this is the first turn of the combat]
 function Combat:turn(entity, first)
   if IsValid(entity) then
     local timer_name = 'combat_action_'..self.id
@@ -263,18 +290,24 @@ function Combat:turn(entity, first)
   end
 end
 
+--- Sends a combat chat message to every player in the combat.
+-- @param text [String language phrase of the message]
+-- @param arguments=nil [Table phrase arguments]
 function Combat:send_message(text, arguments)
   Cable.send(self:get_players(), 'fl_combat_message', text, arguments)
 end
 
+--- Notifies every player in the combat whose turn it is.
 function Combat:notify_turn()
   Cable.send(self:get_players(), 'fl_combat_notify_turn', self:get_acting_member())
 end
 
+--- Notifies every player in the combat that it has ended.
 function Combat:notify_finish()
   Cable.send(self:get_players(), 'fl_combat_notify_finish')
 end
 
+--- Ends the acting member's turn, gives the turn to the next member and checks whether the combat is over.
 function Combat:next_turn()
   if self.finished then return end
 

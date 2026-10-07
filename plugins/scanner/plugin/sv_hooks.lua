@@ -1,3 +1,6 @@
+--- Puts the player in control of a scanner they spawn.
+-- @param actor [Player player that spawned the NPC]
+-- @param entity [NPC spawned NPC]
 function Scanners:PlayerSpawnedNPC(actor, entity)
   if entity:GetClass() == 'npc_cscanner' then
     actor:control_scanner(entity)
@@ -6,6 +9,9 @@ end
 
 local light_mat = Material('effects/flashlight001')
 
+--- Handles scanner controls: mouse 1 takes a photo, F toggles the spotlight and E exits the scanner.
+-- @param actor [Player player that pressed the button]
+-- @param button [Number BUTTON_CODE of the pressed button]
 function Scanners:PlayerButtonDown(actor, button)
   if actor:controls_scanner() then
     local cur_time = CurTime()
@@ -54,6 +60,8 @@ function Scanners:PlayerButtonDown(actor, button)
   end
 end
 
+--- Keeps a controlled scanner following its marker.
+-- @param actor [Player player being checked]
 function Scanners:PlayerOneSecond(actor)
   if actor:controls_scanner() then
     local scanner = actor:get_scanner()
@@ -62,6 +70,9 @@ function Scanners:PlayerOneSecond(actor)
   end
 end
 
+--- Moves the scanner's marker according to the player's movement and mouse input and blocks their own movement.
+-- @param actor [Player player controlling the scanner]
+-- @param cmd [CUserCmd command being processed]
 function Scanners:StartCommand(actor, cmd)
   if actor:controls_scanner() then
     local scanner = actor:get_scanner()

@@ -12,6 +12,8 @@ CMD.aliases = {
   'removeitstatic'
 }
 
+--- Removes the static text the player is looking at if they placed it or are staff.
+-- @param actor [Player player running the command]
 function CMD:on_run(actor)
   local trace = actor:GetEyeTraceNoCursor()
 

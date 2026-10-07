@@ -33,10 +33,13 @@ local allowed_ents = {
   prop_vehicle_zapc   = true,
   prop_physics        = true,
   hunter_flechette    = true,
-  npc_tripmine        = true,
-  prop_vehicle_zapc   = true
+  npc_tripmine        = true
 }
 
+--- Lets whitelisted projectiles and NPCs pass through forcefields and asks ShouldForcefieldCollide for players.
+-- @param a [Entity first entity]
+-- @param b [Entity second entity]
+-- @return [Boolean whether the entities collide, nil to use the default]
 function Forcefields:ShouldCollide(a, b)
   local activator
   local entity
@@ -58,7 +61,7 @@ function Forcefields:ShouldCollide(a, b)
 
   if IsValid(entity) and entity:GetClass() == 'fl_forcefield' then
     if IsValid(activator) then
-      if activator:KeyDown(IN_USE) then return true end -- if the player is pressing 'use' key they should always collide so that using works.
+      if activator:KeyDown(IN_USE) then return true end
 
       if activator:is_combine() or activator:get_nv('forcefield_collide') == false then
         return false
@@ -71,6 +74,11 @@ function Forcefields:ShouldCollide(a, b)
   end
 end
 
+--- Decides whether a player collides with a forcefield based on its mode.
+-- @param activator [Player player touching the forcefield]
+-- @param field [Entity forcefield]
+-- @param mode [Number index into Forcefields.modes]
+-- @return [Boolean false to let the player through, true to block them, nil to use the default]
 function Forcefields:ShouldForcefieldCollide(activator, field, mode)
   if mode == 2 and IsValid(activator) then
     if activator:get_faction_id() == 'cwu' then

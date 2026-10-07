@@ -7,6 +7,10 @@ CMD.arguments = 2
 CMD.immunity = true
 CMD.aliases = { 'muteooc', 'oocmute', 'plygag' }
 
+--- Mutes the target players in OOC chat for a duration and notifies them and the staff.
+-- @param actor [Player player running the command]
+-- @param targets [List<Player> players to gag]
+-- @param duration [String gag duration, parsed like a ban time]
 function CMD:on_run(actor, targets, duration, ...)
   local reason = table.concat({ ... }, ' ')
   duration = Bolt:interpret_ban_time(duration)

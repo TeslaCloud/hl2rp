@@ -2,6 +2,7 @@ include('shared.lua')
 
 local material = Material('effects/com_shield003a')
 
+--- Builds the clientside collision mesh between the forcefield and the wall to its right.
 function ENT:Initialize()
   local data = {}
     data.start = self:GetPos() + Vector(0, 0, 50) + self:GetRight() * -16
@@ -22,8 +23,8 @@ function ENT:Initialize()
   self:EnableCustomCollisions(true)
 end
 
+--- Draws the forcefield and its shield on both sides when the local player is within 2048 units.
 function ENT:Draw()
-  -- 2048 units
   if PLAYER:GetPos():DistToSqr(self:GetPos()) > 4194304 then return end
 
   local post = self:GetDTEntity(0)
@@ -53,7 +54,8 @@ function ENT:Draw()
   end
 end
 
--- I took a peek at how Chessnut drew his forcefields.
+--- Draws one side of the shield as a textured quad up to the post, unless the forcefield is off.
+-- @param vertex [Vector position of the post relative to the forcefield]
 function ENT:draw_shield(vertex)
   if self:GetDTInt(0) != 4 then
     local dist = self:GetDTEntity(0):GetPos():Distance(self:GetPos())

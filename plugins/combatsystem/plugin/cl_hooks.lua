@@ -1,3 +1,6 @@
+--- Draws circles around the local player's turn start position showing how far they can walk and run this turn.
+-- @param depth [Boolean whether the depth pass is being drawn]
+-- @param skybox [Boolean whether the skybox is being drawn]
 function CombatSystem:PostDrawTranslucentRenderables(depth, skybox)
   if depth or skybox then return end
 
@@ -24,6 +27,8 @@ function CombatSystem:PostDrawTranslucentRenderables(depth, skybox)
   end
 end
 
+--- Prevents the local player from attacking while their weapon is frozen.
+-- @return [Boolean false if the weapon is frozen, nil otherwise]
 function CombatSystem:CanPlayerAttack()
   local weapon = PLAYER:GetActiveWeapon()
 
@@ -32,6 +37,9 @@ function CombatSystem:CanPlayerAttack()
   end
 end
 
+--- Strips the reload key from the command while the local player's weapon is frozen.
+-- @param actor [Player player the command belongs to]
+-- @param user_cmd [CUserCmd command being processed]
 function CombatSystem:StartCommand(actor, user_cmd)
   local weapon = PLAYER:GetActiveWeapon()
 
@@ -40,6 +48,7 @@ function CombatSystem:StartCommand(actor, user_cmd)
   end
 end
 
+--- Draws the remaining attack and move turns, the turn timer and the skip hint during the local player's turn.
 function CombatSystem:HUDPaint()
   if PLAYER:in_combat() and !PLAYER:is_frozen() then
     local turns = PLAYER:get_nv('fl_combat_turns', {})
@@ -125,6 +134,8 @@ function CombatSystem:HUDPaint()
   end
 end
 
+--- Shows a short centered notification, replacing the previous one.
+-- @param text [String text to display]
 function CombatSystem:create_notify(text)
   if IsValid(Flux.combat_notify) then
     Flux.combat_notify:safe_remove()
@@ -147,6 +158,9 @@ function CombatSystem:create_notify(text)
   Flux.combat_notify = notify
 end
 
+--- Prints a combat message to chat, colored by whether it is good, bad or neutral for the local player.
+-- @param text [String language phrase of the message]
+-- @param arguments=nil [Table phrase arguments, entities are replaced with their names]
 function CombatSystem:create_message(text, arguments)
   local color = Color('lightgray')
 

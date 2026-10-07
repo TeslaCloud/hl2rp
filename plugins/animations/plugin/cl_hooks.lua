@@ -1,3 +1,5 @@
+--- Adds the animations panel to the context menu, listing every animation the local player's model supports.
+-- @param context_menu [Panel context menu the panel is parented to]
 function Animations:ContextMenuCreated(context_menu)
   if !Theme.initialized() then return end
 
@@ -20,6 +22,7 @@ function Animations:ContextMenuCreated(context_menu)
   local list = vgui.Create('DScrollPanel', panel)
   list:Dock(FILL)
 
+  --- Refills the list with a button and model preview tooltip for each animation the player's model can play.
   function panel:rebuild()
     list:Clear()
 
@@ -57,10 +60,13 @@ function Animations:ContextMenuCreated(context_menu)
   Flux.animations_panel = panel
 end
 
+--- Rebuilds the animations panel so it matches the player's current model.
 function Animations:OnContextMenuOpen()
   Flux.animations_panel:rebuild()
 end
 
+--- Hides the crosshair while the local player is playing an animation.
+-- @return [Boolean false while animating, nil otherwise]
 function Animations:ShouldHUDPaintCrosshair()
   if PLAYER:get_nv('fl_animation') then
     return false

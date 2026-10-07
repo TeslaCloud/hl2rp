@@ -1,5 +1,6 @@
 local PANEL = {}
 
+--- Builds the recognize menu with range buttons, a real name button, a fake name entry and the name history.
 function PANEL:Init()
   local scr_w, scr_h = ScrW(), ScrH()
   local margin = math.scale(4)
@@ -171,6 +172,8 @@ function PANEL:Init()
   end
 end
 
+--- Closes the menu when F2 is pressed.
+-- @param key [Number KEY_ enum of the pressed key]
 function PANEL:OnKeyCodePressed(key)
   if key == KEY_F2 then
     self:safe_remove()

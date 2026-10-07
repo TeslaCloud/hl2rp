@@ -34,14 +34,21 @@ FACTION:add_rank('OWS')
 FACTION:add_rank('GUARD')
 FACTION:add_rank('EOW')
 
+--- Generates a random unit ID from 100 to 999.
+-- @return [Number unit ID]
 function FACTION:generate_id()
   return math.random(100, 999)
 end
 
+--- Returns the unit ID at the end of the player's current name, or a new random one.
+-- @param target [Player player to get the unit ID of]
+-- @return [String or Number unit ID]
 function FACTION:get_unit_id(target)
   return target:name():match('%d+$') or self:generate_id()
 end
 
+--- Gives the player a random civilian name when they leave the faction.
+-- @param target [Player player leaving the faction]
 function FACTION:on_player_leave(target)
   if target:is_human() then
     Characters.set_name(target, SCHEMA:get_random_name(target:get_gender()))

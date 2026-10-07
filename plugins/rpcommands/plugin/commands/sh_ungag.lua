@@ -7,6 +7,9 @@ CMD.arguments = 1
 CMD.immunity = true
 CMD.aliases = { 'unmuteooc', 'oocunmute', 'plyungag' }
 
+--- Lifts the OOC mute of the target players and notifies the staff.
+-- @param actor [Player player running the command]
+-- @param targets [List<Player> players to ungag]
 function CMD:on_run(actor, targets)
   for k, v in ipairs(targets) do
     v:set_player_data('ooc_mute', nil)

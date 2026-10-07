@@ -1,6 +1,10 @@
 do
   local player_meta = FindMetaTable('Player')
 
+  --- Checks whether the player recognizes a target. Players always recognize themselves, bots and others while
+  -- noclipping, and the PlayerRecognizeTarget hook can override the result.
+  -- @param target [Player player to check]
+  -- @return [Boolean whether the target is recognized, String name they are known by]
   function player_meta:recognizes(target)
     if !IsValid(target) or self == target or !self:get_character() or target:IsBot() or
     self:GetMoveType() == MOVETYPE_NOCLIP then
@@ -24,6 +28,9 @@ do
     return false
   end
 
+  --- Checks whether the player knows a target by their real name.
+  -- @param target [Player player to check]
+  -- @return [Boolean whether the target is known by their real name]
   function player_meta:knows_real_name(target)
     local is_known, known_name = self:recognizes(target)
 
@@ -31,6 +38,9 @@ do
   end
 
   if SERVER then
+    --- Makes the player recognize a target by a name, updating the stored and networked recognizes.
+    -- @param target [Player player to recognize]
+    -- @param name=nil [String name to know them by, the target's real name by default]
     function player_meta:add_recognize(target, name)
       if !IsValid(target) or self:IsBot() then return end
 
@@ -65,6 +75,8 @@ do
       self:set_nv('fl_recognizes', recognizes)
     end
 
+    --- Makes the player forget a target, deleting the stored recognize.
+    -- @param target [Player player to forget]
     function player_meta:remove_recognize(target)
       if !IsValid(target) then return end
 

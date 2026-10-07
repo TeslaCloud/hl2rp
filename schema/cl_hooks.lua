@@ -5,6 +5,7 @@ local mat = CreateMaterial('fl_mat_'..os.time(), 'UnlitGeneric', {
 })
 local alpha_text_color = Color(255, 0, 0, 75)
 
+--- Applies the desaturated color grading and vignette and draws the alpha version notice.
 function SCHEMA:HUDPaint()
   local w, h = ScrW(), ScrH()
   local text_offset = math.scale(90)
@@ -35,6 +36,8 @@ function SCHEMA:HUDPaint()
   )
 end
 
+--- Plays a train horn when the player creates their first character.
+-- @param char [Character created character]
 function SCHEMA:FirstCharacterCreated(char)
   surface.PlaySound('ambient/alarms/train_horn2.wav')
 end

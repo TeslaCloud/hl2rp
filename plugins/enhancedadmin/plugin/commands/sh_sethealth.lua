@@ -7,6 +7,9 @@ CMD.arguments = 2
 CMD.immunity = true
 CMD.aliases = { 'plysethealth', 'hp' }
 
+--- Sets the health of the target players to a positive value and notifies them and the staff.
+-- @param actor [Player player running the command]
+-- @param targets [List<Player> players to set the health of]
 function CMD:on_run(actor, targets, ...)
   local value = tonumber(table.concat({ ... }, ' '))
 

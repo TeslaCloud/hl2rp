@@ -15,6 +15,8 @@ ITEM:add_button('create_key_copy', {
   end
 })
 
+--- Asks the player which of their keys to copy with this kit.
+-- @param actor [Player player using the kit]
 function ITEM:on_create_key_copy(actor)
   Cable.send(actor, 'fl_key_copy', self.instance_id)
 end

@@ -1,3 +1,4 @@
+--- Rebuilds the clientside collision mesh of every forcefield between its two posts.
 function Forcefields:update_forcefields()
   for k, v in pairs(ents.FindByClass('fl_forcefield')) do
     if IsValid(v:GetDTEntity(0)) then
@@ -18,6 +19,7 @@ function Forcefields:update_forcefields()
   end
 end
 
+--- Builds the forcefield collision meshes once the local player has loaded in.
 function Forcefields:PlayerInitialized()
   Forcefields:update_forcefields()
 end

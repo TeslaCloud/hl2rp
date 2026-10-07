@@ -1,3 +1,7 @@
+--- Opens the recognize menu when the show team key is pressed.
+-- @param client [Player local player]
+-- @param bind [String bind that was pressed]
+-- @param pressed [Boolean whether the key was pressed or released]
 function Recognizes:PlayerBindPress(client, bind, pressed)
   if bind:find('gm_showteam') then
     local recognize_menu = vgui.Create('fl_recognize')
@@ -6,12 +10,21 @@ function Recognizes:PlayerBindPress(client, bind, pressed)
   end
 end
 
+--- Replaces the name above players the local player does not recognize with a stranger label.
+-- @param target [Player player whose info is drawn]
+-- @param x [Number x position of the info]
+-- @param y [Number y position of the info]
+-- @param distance [Number distance to the player]
+-- @param lines [Table info lines to draw, keyed by line ID]
 function Recognizes:PreDrawPlayerInfo(target, x, y, distance, lines)
   if !PLAYER:recognizes(target) and lines['name'] then
     lines['name'].text = target:get_gender() == 'female' and t'ui.hud.stranger_female' or t'ui.hud.stranger_male'
   end
 end
 
+--- Returns the name the local player knows a player by, or the start of their physical description.
+-- @param target [Player player to get the name of]
+-- @return [String displayed name]
 function Recognizes:GetPlayerName(target)
   local is_known, known_name = PLAYER:recognizes(target)
 
@@ -22,18 +35,29 @@ function Recognizes:GetPlayerName(target)
   end
 end
 
+--- Shows real names in out of character messages.
+-- @param target [Player player whose name is processed]
+-- @param message_data [Table chat message data]
+-- @return [Boolean false for non-IC messages, nil otherwise]
 function Recognizes:ShouldProcessPlayerName(target, message_data)
   if !message_data.ic then
     return false
   end
 end
 
+--- Hides the character card of players the local player does not recognize.
+-- @param card [Panel character card]
+-- @param target [Player player the card belongs to]
+-- @return [Boolean false if the player is not recognized, nil otherwise]
 function Recognizes:IsCharacterCardVisible(card, target)
   if !PLAYER:recognizes(target) then
     return false
   end
 end
 
+--- Adds a recognize submenu to introduce yourself to a player by real name, a new fake name or a recent one.
+-- @param menu [Panel interaction menu]
+-- @param target [Player player the menu was opened for]
 function Recognizes:CreatePlayerInteractions(menu, target)
   local recognize_menu, recognize_menu_option = menu:AddSubMenu(t'ui.recognize.title')
   recognize_menu_option:SetIcon('icon16/user_comment.png')
@@ -76,6 +100,8 @@ function Recognizes:CreatePlayerInteractions(menu, target)
   end
 end
 
+--- Moves players the local player does not recognize out of their faction into a players online category.
+-- @param players_table [Table lists of players keyed by faction category]
 function Recognizes:PreRebuildFactionCategories(players_table)
   local players_online = {}
 

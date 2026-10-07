@@ -1,5 +1,8 @@
 Config.set('radio_chat_color', Color(100, 228, 100))
 
+--- Returns the first enabled radio in a player's hotbar.
+-- @param owner [Player player to check]
+-- @return [Item enabled radio, nil if there is none]
 function Communications.get_active_radio(owner)
   for k, v in pairs(owner:get_items('hotbar')) do
     if v:is('radio') and v:is_enabled() then
@@ -8,6 +11,10 @@ function Communications.get_active_radio(owner)
   end
 end
 
+--- Sends a radio message on a frequency, heard by nearby players and anyone tuned to it.
+-- @param speaker [Player player talking]
+-- @param text [String message]
+-- @param frequency [Number frequency to talk on]
 function Communications.speak_radio(speaker, text, frequency)
   local color = Config.get('radio_chat_color')
   local msg_table = {
@@ -26,6 +33,10 @@ function Communications.speak_radio(speaker, text, frequency)
   Chatbox.add_text(nil, unpack(msg_table))
 end
 
+--- Lets radio messages be heard only by the sender and players with an enabled radio on the same frequency.
+-- @param listener [Player player that would hear the message]
+-- @param message_data [Table message data, radio messages have a frequency field]
+-- @return [Boolean whether the listener hears a radio message, nil for other messages]
 function Communications:PlayerCanHear(listener, message_data)
   local frequency = message_data.frequency
 

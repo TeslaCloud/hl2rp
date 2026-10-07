@@ -4,6 +4,9 @@ CMD.syntax = 'command.roll.syntax'
 CMD.category = 'permission.categories.roleplay'
 CMD.arguments = 0
 
+--- Rolls a random number up to a maximum and shows it to nearby players.
+-- @param actor [Player player running the command]
+-- @param range=100 [String maximum value of the roll]
 function CMD:on_run(actor, range)
   range = math.max(1, tonumber(range) or 100)
 

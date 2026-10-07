@@ -8,6 +8,8 @@ ITEM.width = 3
 ITEM.height = 4
 ITEM.weight = 4
 
+--- Returns the camera placement for the uniform's inventory icon.
+-- @return [Table icon origin, angles and fov]
 function ITEM:get_icon_data()
   return { origin = Vector(150, 1, 55), angles = Angle(5, 180, 0), fov = 11 }
 end

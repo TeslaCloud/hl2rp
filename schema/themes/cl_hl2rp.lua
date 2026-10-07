@@ -2,6 +2,7 @@ THEME.author = 'TeslaCloud Studios'
 THEME.id = 'hl2rp'
 THEME.parent = 'factory'
 
+--- Sets the blue accent colors, the bottom centered main menu sidebar, the menu music, logo and bar font.
 function THEME:on_loaded()
   local scrw, scrh = ScrW(), ScrH()
   local accent_color = Color(58, 87, 167)
@@ -29,12 +30,20 @@ function THEME:on_loaded()
   self:set_font('text_bar', self:get_font('main_font'), math.max(math.scale(14), 14), { weight = 600 })
 end
 
+--- Draws a translucent background behind the chatbox messages.
+-- @param panel [Panel chatbox panel]
+-- @param width [Number width of the panel]
+-- @param height [Number height of the panel]
 function THEME:ChatboxPaintBackground(panel, width, height)
   DisableClipping(true)
     draw.box(0, -8, width, height - panel.text_entry:GetTall(), self:get_color('menu_background'))
   DisableClipping(false)
 end
 
+--- Draws the blurred main menu with the schema logo banner, description, author, schema title and Flux version.
+-- @param panel [Panel main menu panel]
+-- @param width [Number width of the panel]
+-- @param height [Number height of the panel]
 function THEME:PaintMainMenu(panel, width, height)
   local title, desc, author = SCHEMA:get_name()..' '..(SCHEMA.version or 'UNKNOWN'), SCHEMA:get_description(), t(
     'ui.main_menu.developed_by',
@@ -94,6 +103,10 @@ function THEME:PaintMainMenu(panel, width, height)
   )
 end
 
+--- Draws the character's name on its panel and outlines the panel of the active character.
+-- @param panel [Panel character panel]
+-- @param w [Number width of the panel]
+-- @param h [Number height of the panel]
 function THEME:PaintCharPanel(panel, w, h)
   if panel.char_data then
     local char_data = panel.char_data
@@ -114,18 +127,30 @@ function THEME:PaintCharPanel(panel, w, h)
   end
 end
 
+--- Draws the character creation title.
+-- @param panel [Panel character creation panel]
+-- @param w [Number width of the panel]
+-- @param h [Number height of the panel]
 function THEME:PaintCharCreationMainPanel(panel, w, h)
   local title = t'ui.char_create.text'
   local title_w, title_h = util.text_size(title, Theme.get_font('main_menu_title'))
   draw.SimpleText(title, Theme.get_font('main_menu_title'), w * 0.5 - title_w * 0.5, h / 8)
 end
 
+--- Draws the character loading title.
+-- @param panel [Panel character loading panel]
+-- @param w [Number width of the panel]
+-- @param h [Number height of the panel]
 function THEME:PaintCharCreationLoadPanel(panel, w, h)
   local title = t'ui.char_create.load'
   local title_w, title_h = util.text_size(title, Theme.get_font('main_menu_title'))
   draw.SimpleText(title, Theme.get_font('main_menu_title'), w * 0.5 - title_w * 0.5, h / 8)
 end
 
+--- Draws the title of a character creation stage at the top of its panel.
+-- @param panel [Panel character creation stage panel]
+-- @param w [Number width of the panel]
+-- @param h [Number height of the panel]
 function THEME:PaintCharCreationBasePanel(panel, w, h)
   if isstring(panel.text) then
     local text_w, text_h = util.text_size(t(panel.text), Theme.get_font('main_menu_large'))
@@ -139,6 +164,8 @@ function THEME:PaintCharCreationBasePanel(panel, w, h)
   end
 end
 
+--- Draws the thin accent colored outline of a bar.
+-- @param bar_info [Table bar position, size and values]
 function THEME:DrawBarBackground(bar_info)
   local height = self:get_option('bar_height')
 
@@ -154,6 +181,8 @@ function THEME:DrawBarBackground(bar_info)
   )
 end
 
+--- Draws the hindered part of a bar from its right end.
+-- @param bar_info [Table bar position, size and values]
 function THEME:DrawBarHindrance(bar_info)
   local length = bar_info.width * (bar_info.hinder_value / bar_info.max_value)
   local bar_height = self:get_option('bar_height')
@@ -162,25 +191,30 @@ function THEME:DrawBarHindrance(bar_info)
   draw.RoundedBox(2, bar_info.x + bar_info.width - length, bar_y, length - 2, bar_height - 4, bar_info.hinder_color)
 end
 
+--- Draws the fill of a bar, showing the gap between its current and target fill in the bar color.
+-- Also hinders the health bar at 30.
+-- @param bar_info [Table bar position, size and values]
 function THEME:DrawBarFill(bar_info)
   Flux.Bars:hinder_value('health', 30)
 
   local bar_height = self:get_option('bar_height')
-  local barX = bar_info.x + 2
+  local bar_x = bar_info.x + 2
   local bar_y = bar_info.y + bar_info.height - (bar_height - 2)
   local height = bar_height - 4
 
   if bar_info.real_fill_width < bar_info.fill_width then
-    draw.RoundedBox(2, barX, bar_y, (bar_info.fill_width or bar_info.width) - 4, height, bar_info.color)
-    draw.RoundedBox(2, barX, bar_y, bar_info.real_fill_width - 4, height, self:get_color('accent'))
+    draw.RoundedBox(2, bar_x, bar_y, (bar_info.fill_width or bar_info.width) - 4, height, bar_info.color)
+    draw.RoundedBox(2, bar_x, bar_y, bar_info.real_fill_width - 4, height, self:get_color('accent'))
   elseif bar_info.real_fill_width > bar_info.fill_width then
-    draw.RoundedBox(2, barX, bar_y, bar_info.real_fill_width - 4, height, bar_info.color)
-    draw.RoundedBox(2, barX, bar_y, (bar_info.fill_width or bar_info.width) - 4, height, self:get_color('accent'))
+    draw.RoundedBox(2, bar_x, bar_y, bar_info.real_fill_width - 4, height, bar_info.color)
+    draw.RoundedBox(2, bar_x, bar_y, (bar_info.fill_width or bar_info.width) - 4, height, self:get_color('accent'))
   else
-    draw.RoundedBox(2, barX, bar_y, (bar_info.fill_width or bar_info.width) - 4, height, self:get_color('accent'))
+    draw.RoundedBox(2, bar_x, bar_y, (bar_info.fill_width or bar_info.width) - 4, height, self:get_color('accent'))
   end
 end
 
+--- Draws the bar's label and, when shown, its hindrance text at the right end.
+-- @param bar_info [Table bar position, size and values]
 function THEME:DrawBarTexts(bar_info)
   local font = Theme.get_font(bar_info.font)
   local accent_color = self:get_color('accent')

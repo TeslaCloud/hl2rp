@@ -1,5 +1,8 @@
 Config.set('recog_must_see', true)
 
+--- Networks the names a character recognizes others by once it is loaded.
+-- @param owner [Player player the character belongs to]
+-- @param character [Character loaded character]
 function Recognizes:PostCharacterLoaded(owner, character)
   local recognizes = {}
 
@@ -12,6 +15,10 @@ function Recognizes:PostCharacterLoaded(owner, character)
   owner:set_nv('fl_recognizes', recognizes)
 end
 
+--- Prevents players from recognizing themselves or, if recog_must_see is set, players they cannot see.
+-- @param actor [Player player introducing themselves]
+-- @param target [Player player that would recognize them]
+-- @return [Boolean false to prevent recognizing, nil otherwise]
 function Recognizes:PlayerCanRecognize(actor, target)
   if actor == target then
     return false

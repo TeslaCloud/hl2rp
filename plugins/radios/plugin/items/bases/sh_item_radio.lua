@@ -26,23 +26,33 @@ ItemRadio:add_button('frequency', {
   end
 })
 
+--- Checks whether the radio is turned on.
+-- @return [Boolean whether the radio is enabled, true by default]
 function ItemRadio:is_enabled()
   return self:get_data('enabled', true)
 end
 
+--- Turns the radio on or off.
+-- @param actor [Player player toggling the radio]
 function ItemRadio:on_toggle(actor)
   self:set_data('enabled', !self:is_enabled())
 end
 
+--- Returns the frequency the radio is tuned to.
+-- @return [Number frequency, the item's default or 100.1 if it was never set]
 function ItemRadio:get_frequency()
   return self:get_data('frequency', self.frequency or 100.1)
 end
 
+--- Tunes the radio to a frequency and plays the tuning sound.
+-- @param frequency [Number new frequency]
 function ItemRadio:set_frequency(frequency)
   self:set_data('frequency', frequency)
   self:play_sound('set_frequency')
 end
 
+--- Asks the player to enter a new frequency for the radio.
+-- @param actor [Player player changing the frequency]
 function ItemRadio:change_frequency(actor)
   Cable.send(actor, 'fl_get_radio_frequency', self.instance_id, self:get_frequency())
 end

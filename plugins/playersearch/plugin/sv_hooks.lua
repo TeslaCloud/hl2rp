@@ -1,3 +1,6 @@
+--- Opens the target's inventory for the searching player.
+-- @param actor [Player player doing the search]
+-- @param target [Player player being searched]
 function PlayerSearch:start(actor, target)
   target.requested_search = nil
 
@@ -7,6 +10,9 @@ function PlayerSearch:start(actor, target)
   actor.search_target = target
 end
 
+--- Ends a search and closes the searcher's inventory window.
+-- @param actor [Player player doing the search, may be nil]
+-- @param target [Player player being searched]
 function PlayerSearch:stop(actor, target)
   if IsValid(actor) then
     actor.search_target = nil
@@ -19,6 +25,9 @@ function PlayerSearch:stop(actor, target)
   end
 end
 
+--- Ends the search when the searcher closes the searched player's inventory.
+-- @param actor [Player player that closed the inventory]
+-- @param inventory [Inventory closed inventory]
 function PlayerSearch:OnInventoryClosed(actor, inventory)
   local target = inventory.owner
 
@@ -28,6 +37,8 @@ function PlayerSearch:OnInventoryClosed(actor, inventory)
   end
 end
 
+--- Stops searches that are no longer allowed and clears the searcher of players nobody is searching anymore.
+-- @param actor [Player player being checked]
 function PlayerSearch:PlayerOneSecond(actor)
   local target = actor.search_target
 
@@ -45,6 +56,10 @@ function PlayerSearch:PlayerOneSecond(actor)
   end
 end
 
+--- Checks the search cooldowns, pending requests and existing searches before a search can be requested.
+-- @param actor [Player player requesting the search]
+-- @param target [Player player to search]
+-- @return [Boolean false and String error phrase if the search cannot start, nil otherwise]
 function PlayerSearch:CanStartSearch(actor, target)
   local cur_time = CurTime()
 
@@ -71,6 +86,10 @@ function PlayerSearch:CanStartSearch(actor, target)
   end
 end
 
+--- Requires the searched player to be a valid non-bot player within 100 units who is facing away.
+-- @param actor [Player player doing the search]
+-- @param target [Player player being searched]
+-- @return [Boolean false and String error phrase if the search is not allowed, nil otherwise]
 function PlayerSearch:CanSearch(actor, target)
   if target:facing(actor) then
     return false, 'error.must_not_look'

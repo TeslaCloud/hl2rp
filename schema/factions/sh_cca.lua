@@ -10,7 +10,7 @@ FACTION.default_class = 'recruit'
 FACTION.name_template = '{data:city}.{data:index}{rank}:{data:tagline}-{callback:get_unit_id}'
 FACTION:set_data('tagline', 'TAGLINE')
 FACTION:set_data('city', 'C24')
-FACTION:set_data('index', 'i5') -- i1, i2, i3, i4, i5
+FACTION:set_data('index', 'i5')
 FACTION.stats = {
   ['strength'] = 1,
   ['endurance'] = 1
@@ -53,17 +53,24 @@ FACTION.models = {
   }
 }
 
-FACTION:add_rank '' -- Regular Civil Protection
-FACTION:add_rank '.RL' -- Rank Leader
+FACTION:add_rank ''
+FACTION:add_rank '.RL'
 
+--- Generates a random unit ID from 1 to 9.
+-- @return [Number unit ID]
 function FACTION:generate_id()
   return math.random(1, 9)
 end
 
+--- Returns the unit ID at the end of the player's current name, or a new random one.
+-- @param target [Player player to get the unit ID of]
+-- @return [String or Number unit ID]
 function FACTION:get_unit_id(target)
   return target:name():match('%d+$') or self:generate_id()
 end
 
+--- Gives the player a random civilian name when they leave the faction.
+-- @param target [Player player leaving the faction]
 function FACTION:on_player_leave(target)
   if target:is_human() then
     Characters.set_name(target, SCHEMA:get_random_name(target:get_gender()))

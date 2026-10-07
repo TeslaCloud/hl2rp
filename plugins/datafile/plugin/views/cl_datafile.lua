@@ -2,6 +2,7 @@ local PANEL = {}
 PANEL.cur_panel = nil
 PANEL.panels = {}
 
+--- Sets up the centered datafile window and its sidebar.
 function PANEL:Init()
   local scrw, scrh = ScrW(), ScrH()
   local width, height = self:get_menu_size()
@@ -16,6 +17,9 @@ function PANEL:Init()
   self.sidebar.Paint = function(pnl, w, h) end
 end
 
+--- Draws the outlined, translucent window background.
+-- @param w [Number width of the panel]
+-- @param h [Number height of the panel]
 function PANEL:Paint(w, h)
   DisableClipping(true)
 
@@ -26,6 +30,8 @@ function PANEL:Paint(w, h)
   draw.RoundedBox(0, 0, 0, w, h, Theme.get_color('background'):alpha(150))
 end
 
+--- Returns the scaled size of the datafile window.
+-- @return [Number width, Number height]
 function PANEL:get_menu_size()
   return math.scale(1280), math.scale(900)
 end

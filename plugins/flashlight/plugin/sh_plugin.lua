@@ -1,4 +1,8 @@
 if SERVER then
+  --- Only lets players turn on their flashlight while they have a flashlight item equipped.
+  -- @param actor [Player player toggling the flashlight]
+  -- @param on [Boolean whether the flashlight is being turned on]
+  -- @return [Boolean whether the flashlight can be toggled]
   function PLUGIN:PlayerSwitchFlashlight(actor, on)
     if on and !actor:has_item_equipped('flashlight') then
       return false
@@ -13,6 +17,10 @@ if SERVER then
     return true
   end
 
+  --- Turns off the previous owner's flashlight when their flashlight item leaves their inventory.
+  -- @param item_table [Item transferred item]
+  -- @param new_inventory [Inventory inventory the item was moved to]
+  -- @param old_inventory [Inventory inventory the item was moved from]
   function PLUGIN:ItemTransferred(item_table, new_inventory, old_inventory)
     if old_inventory then
       local owner = old_inventory.owner

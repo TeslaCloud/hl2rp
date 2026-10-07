@@ -3,6 +3,10 @@ include('shared.lua')
 AddCSLuaFile('cl_init.lua')
 AddCSLuaFile('shared.lua')
 
+--- Spawns a forcefield where the player is looking, facing along the hit surface.
+-- @param owner [Player player spawning the forcefield]
+-- @param trace [Table eye trace of the player]
+-- @return [Entity spawned forcefield, nil if the trace hit nothing]
 function ENT:SpawnFunction(owner, trace)
   if !trace.Hit then return end
 
@@ -16,11 +20,13 @@ function ENT:SpawnFunction(owner, trace)
   return entity
 end
 
+--- Sets up the networked mode and post entity variables.
 function ENT:SetupDataTables()
   self:DTVar('Int', 0, 'Mode')
   self:DTVar('Entity', 0, 'Dummy')
 end
 
+--- Snaps the forcefield to the floor, spawns its post at the wall to the right and builds the collision mesh.
 function ENT:Initialize()
   self:SetModel('models/props_combine/combine_fence01b.mdl')
   self:SetSolid(SOLID_VPHYSICS)
@@ -119,6 +125,8 @@ function ENT:Initialize()
   self:SetPersistent(true)
 end
 
+--- Starts the touch sound when a non-combine player walks into the active forcefield.
+-- @param ent [Entity entity that started touching]
 function ENT:StartTouch(ent)
   if !self.on then return end
 
@@ -136,6 +144,8 @@ function ENT:StartTouch(ent)
   end
 end
 
+--- Keeps the touch sound playing while a non-combine player touches the active forcefield.
+-- @param ent [Entity entity touching the forcefield]
 function ENT:Touch(ent)
   if !self.on then return end
 
@@ -148,6 +158,8 @@ function ENT:Touch(ent)
   end
 end
 
+--- Fades out the touch sound when a non-combine player stops touching the active forcefield.
+-- @param ent [Entity entity that stopped touching]
 function ENT:EndTouch(ent)
   if !self.on then return end
 
@@ -160,6 +172,7 @@ function ENT:EndTouch(ent)
   end
 end
 
+--- Plays the shield hum while the forcefield is on and keeps it frozen in place.
 function ENT:Think()
   if IsValid(self) and self.on then
     self.shield_loop:Play()
@@ -175,17 +188,26 @@ function ENT:Think()
   end
 end
 
+--- Stops the shield hum when the forcefield is removed.
 function ENT:OnRemove()
   if self.shield_loop then
     self.shield_loop:Stop()
   end
 end
 
+--- Restores the saved mode and on state of the forcefield.
+-- @param mode [Number index into Forcefields.modes]
+-- @param is_on [Boolean whether the forcefield is on]
 function ENT:RestoreMode(mode, is_on)
   self.on = is_on
   self.mode = mode
 end
 
+--- Cycles a combine player through the forcefield modes, turning the shield off in mode 4.
+-- @param act [Player player using the forcefield]
+-- @param call [Entity caller of the use]
+-- @param type [Number USE_ type]
+-- @param val [Number use value]
 function ENT:Use(act, call, type, val)
   local cur_time = CurTime()
 
@@ -223,6 +245,7 @@ function ENT:Use(act, call, type, val)
   end
 end
 
+--- Stops the shield hum and touch sounds when the forcefield is removed.
 function ENT:OnRemove()
   if self.shield_loop then
     self.shield_loop:Stop()
