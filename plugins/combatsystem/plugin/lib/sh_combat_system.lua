@@ -22,7 +22,7 @@ function CombatSystem:add_member(combat, member)
 end
 
 function CombatSystem:add_entities_around(combat, member)
-  local entities = ents.find_in_sphere(member:GetPos(), 500)
+  local entities = ents.FindInSphere(member:GetPos(), 500)
   local pos = member:EyePos()
 
   for k, v in pairs(entities) do
@@ -76,7 +76,7 @@ function CombatSystem:calculate_hit(attacker, target, damage_info)
           combat = combat
         }
 
-        hook.run('AdjustAttackDistance', data)
+        hook.Run('AdjustAttackDistance', data)
 
         if data.effective_distance > 0 then
           if data.distance > data.effective_distance then

@@ -20,7 +20,7 @@ end
 function Combat:finish()
   self.finished = true
   self:notify_finish()
-  timer.remove('combat_action_'..self.id)
+  timer.Remove('combat_action_'..self.id)
   self:remove_members()
 
   CombatSystem:remove(self.id)
@@ -59,7 +59,7 @@ function Combat:calculate_turn_order()
 
   table.insert(order, 1, { entity = initiator, initiative = 'notification.combat.initiator' })
 
-  hook.run('AdjustCombatTurnOrder', order, initiator, victim)
+  hook.Run('AdjustCombatTurnOrder', order, initiator, victim)
 
   self.members = {}
 
@@ -116,7 +116,7 @@ end
 
 function Combat:add_member(entity, position)
   if !IsValid(entity) or (!entity:IsNPC() and !entity:IsPlayer())
-  or table.has_value(self.members, entity) then return end
+  or table.HasValue(self.members, entity) then return end
 
   entity:set_nv('combat_id', self.id)
   position = position or #self.members + 1
@@ -134,7 +134,7 @@ function Combat:remove_member(id, all)
 
   if isentity(id) then
     entity = id
-    id = table.key_from_value(self.members, entity)
+    id = table.KeyFromValue(self.members, entity)
   elseif isnumber(id) then
     entity = self.members[id]
   end
@@ -144,7 +144,7 @@ function Combat:remove_member(id, all)
     entity:unfreeze()
 
     if entity:IsPlayer() then
-      timer.remove('combat_turn_'..entity:SteamID())
+      timer.Remove('combat_turn_'..entity:SteamID())
       
       Cable.send(entity, 'fl_combat_end_turn')
     end
@@ -225,22 +225,22 @@ function Combat:turn(entity, first)
         Cable.send(entity, 'fl_combat_start_turn', last_pos)
 
         entity:restore_turns()
-        timer.create('combat_turn_'..entity:SteamID(), 60, 1, function()
+        timer.Create('combat_turn_'..entity:SteamID(), 60, 1, function()
           if !self.finished and self:get_acting_member() == entity then
             self:next_turn()
           end
         end)
 
-        timer.create(timer_name, 1, 0, function()
+        timer.Create(timer_name, 1, 0, function()
           if !IsValid(entity) or self.finished then
-            timer.remove(timer_name)
+            timer.Remove(timer_name)
 
             return
           end
 
           if last_pos:Distance(entity:GetPos()) > entity:GetWalkSpeed() * 0.5 then
             if entity:get_turns(TURN_MOVE) <= 1 then
-              timer.remove(timer_name)
+              timer.Remove(timer_name)
             end
 
             last_pos = entity:GetPos()
@@ -253,7 +253,7 @@ function Combat:turn(entity, first)
       if first or !IsValid(entity) then
         self:next_turn()
       else
-        timer.create(timer_name, 4, 1, function()
+        timer.Create(timer_name, 4, 1, function()
           if !self.finished then
             self:next_turn()
           end
@@ -284,7 +284,7 @@ function Combat:next_turn()
     member:freeze()
 
     if member:IsPlayer() then
-      timer.remove('combat_turn_'..member:SteamID())
+      timer.Remove('combat_turn_'..member:SteamID())
       
       Cable.send(member, 'fl_combat_end_turn')
     end

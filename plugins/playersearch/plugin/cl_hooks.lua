@@ -6,9 +6,9 @@ function PlayerSearch:CreatePlayerInteractions(menu, target)
   end
 end
 
-Cable.receive('fl_request_player_search', function(player)
+Cable.receive('fl_request_player_search', function(actor)
   if PLAYER:IsBot() then
-    Cable.send('fl_start_player_search', player)
+    Cable.send('fl_start_player_search', actor)
 
     return
   end
@@ -17,11 +17,11 @@ Cable.receive('fl_request_player_search', function(player)
     Flux.tab_menu:close_menu()
   end
 
-  Derma_Query(t('ui.search.message', { player = player:name() }), t'ui.search.title',
+  Derma_Query(t('ui.search.message', { player = actor:name() }), t'ui.search.title',
   t'ui.search.allow', function()
-    Cable.send('fl_start_player_search', player)
+    Cable.send('fl_start_player_search', actor)
   end,
   t'ui.search.resist', function()
-    Cable.send('fl_resist_player_search', player)
+    Cable.send('fl_resist_player_search', actor)
   end)
 end)

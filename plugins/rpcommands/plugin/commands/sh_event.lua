@@ -5,7 +5,7 @@ CMD.permission = 'assistant'
 CMD.category = 'permission.categories.roleplay'
 CMD.arguments = 1
 
-function CMD:on_run(player, ...)
+function CMD:on_run(actor, ...)
   local text = table.concat({ ... }, ' ')
 
   Chatbox.add_text(nil, Color('orange'):lighten(30), text)

@@ -5,23 +5,23 @@ CMD.category = 'permission.categories.general'
 CMD.arguments = 1
 CMD.alias = 'help'
 
-function CMD:on_run(player, ...)
+function CMD:on_run(actor, ...)
   local text = table.concat({ ... }, ' ')
 
   local msg_table = {
     Color(184, 59, 94),
     '@report ',
-    hook.run('ChatboxGetPlayerColor', player, text, team_chat) or _team.GetColor(player:Team()),
-    get_player_name(player),
-    hook.run('ChatboxGetMessageColor', player, text, team_chat) or Color(255, 255, 255),
+    hook.Run('ChatboxGetPlayerColor', actor, text, team_chat) or team.GetColor(actor:Team()),
+    get_player_name(actor),
+    hook.Run('ChatboxGetMessageColor', actor, text, team_chat) or Color(255, 255, 255),
     ': ',
     text:chomp(' '),
-    { sender = player }
+    { sender = actor }
   }
 
   local recipients = Bolt:get_staff()
 
-  if !table.HasValue(Bolt:get_staff(), player) then table.insert(recipients, player) end
+  if !table.HasValue(Bolt:get_staff(), actor) then table.insert(recipients, actor) end
 
   Chatbox.add_text(recipients, unpack(msg_table))
 end

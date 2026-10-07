@@ -7,7 +7,7 @@ do
       return true, target:name(true)
     end
 
-    local recognizes_override, name_override = hook.run('PlayerRecognizeTarget', player, target)
+    local recognizes_override, name_override = hook.Run('PlayerRecognizeTarget', self, target)
 
     if recognizes_override then
       return true, name_override or target:name(true)

@@ -12,7 +12,7 @@ if SERVER then
   function player_meta:control_scanner(entity)
     entity:AddEntityRelationship(self, D_NU, 99)
 
-    local marker = entity.marker or ents.create('path_corner')
+    local marker = entity.marker or ents.Create('path_corner')
     local target_name = 'scanner_'..entity:EntIndex()
     marker:SetKeyValue('targetname', target_name)
     marker:SetPos(entity:GetPos())

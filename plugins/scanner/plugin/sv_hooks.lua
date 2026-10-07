@@ -1,15 +1,15 @@
-function Scanners:PlayerSpawnedNPC(player, entity)
+function Scanners:PlayerSpawnedNPC(actor, entity)
   if entity:GetClass() == 'npc_cscanner' then
-    player:control_scanner(entity)
+    actor:control_scanner(entity)
   end
 end
 
 local light_mat = Material('effects/flashlight001')
 
-function Scanners:PlayerButtonDown(player, button)
-  if player:controls_scanner() then
+function Scanners:PlayerButtonDown(actor, button)
+  if actor:controls_scanner() then
     local cur_time = CurTime()
-    local scanner = player:get_scanner()
+    local scanner = actor:get_scanner()
     local marker = scanner.marker
 
     if button == MOUSE_FIRST and (!scanner.next_flash or scanner.next_flash < cur_time) then
@@ -30,7 +30,7 @@ function Scanners:PlayerButtonDown(player, button)
         local att = scanner:GetAttachment(1)
         local pos, ang = WorldToLocal(att.Pos, att.Ang, scanner:GetPos(), scanner:GetAngles())
 
-        scanner.flashlight = ents.create('env_projectedtexture')
+        scanner.flashlight = ents.Create('env_projectedtexture')
         scanner.flashlight:SetParent(scanner)
         scanner.flashlight:SetLocalPos(pos)
         scanner.flashlight:SetLocalAngles(ang)
@@ -49,22 +49,22 @@ function Scanners:PlayerButtonDown(player, button)
     end
 
     if button == KEY_E then
-      player:exit_scanner()
+      actor:exit_scanner()
     end
   end
 end
 
-function Scanners:PlayerOneSecond(player)
-  if player:controls_scanner() then
-    local scanner = player:get_scanner()
+function Scanners:PlayerOneSecond(actor)
+  if actor:controls_scanner() then
+    local scanner = actor:get_scanner()
 
     scanner:Fire('SetFollowTarget', scanner.target_name)
   end
 end
 
-function Scanners:StartCommand(player, cmd)
-  if player:controls_scanner() then
-    local scanner = player:get_scanner()
+function Scanners:StartCommand(actor, cmd)
+  if actor:controls_scanner() then
+    local scanner = actor:get_scanner()
     local marker = scanner.marker
 
     if IsValid(scanner) and IsValid(marker) then
@@ -79,7 +79,7 @@ function Scanners:StartCommand(player, cmd)
       local forward = scanner:GetForward() * cmd:GetForwardMove() * speed
       local right = scanner:GetRight() * cmd:GetSideMove() * speed
       local up = scanner:GetUp() * cmd:GetUpMove() * speed
-      local aim = util.AimVector(scanner:GetAimVector():Angle(), player:GetFOV(), cmd:GetMouseX(), cmd:GetMouseY(), 0, 0) * 32
+      local aim = util.AimVector(scanner:GetAimVector():Angle(), actor:GetFOV(), cmd:GetMouseX(), cmd:GetMouseY(), 0, 0) * 32
 
       aim = aim + forward + right + up
 

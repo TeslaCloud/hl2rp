@@ -6,7 +6,7 @@ function Logging:print_admin_log(type, text)
 end
 
 -- Logs when damage is taken/given to another player.
-hook.Add('PlayerHurt', 'Damage_Log', function(target, player, health, damage)
-    local text = (target:GetName() .. ' has taken ' .. math.Round(damage) .. ' damage from ' .. player:GetName())
+hook.Add('PlayerHurt', 'Damage_Log', function(target, attacker, health, damage)
+    local text = (target:GetName() .. ' has taken ' .. math.Round(damage) .. ' damage from ' .. attacker:GetName())
     Logging:print_admin_log(LOG_DAMAGE, text)
 end)

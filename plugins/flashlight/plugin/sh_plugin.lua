@@ -1,10 +1,10 @@
 if SERVER then
-  function PLUGIN:PlayerSwitchFlashlight(player, on)
-    if (on and !player:has_item_equipped('flashlight')) then
+  function PLUGIN:PlayerSwitchFlashlight(actor, on)
+    if (on and !actor:has_item_equipped('flashlight')) then
       return false
     end
 
-    local hooked = hook.run('PlayerSwitchedFlashlight', player, on)
+    local hooked = hook.Run('PlayerSwitchedFlashlight', actor, on)
 
     if hooked != nil then
       return hooked
@@ -15,11 +15,11 @@ if SERVER then
 
   function PLUGIN:ItemTransferred(item_table, new_inventory, old_inventory)
     if old_inventory then
-      local player = old_inventory.owner
+      local owner = old_inventory.owner
 
-      if item_table.id == 'flashlight' and IsValid(player) and player:FlashlightIsOn()
-      and !player:has_item_equipped('flashlight') then
-        player:Flashlight(false)
+      if item_table.id == 'flashlight' and IsValid(owner) and owner:FlashlightIsOn()
+      and !owner:has_item_equipped('flashlight') then
+        owner:Flashlight(false)
       end
     end
   end

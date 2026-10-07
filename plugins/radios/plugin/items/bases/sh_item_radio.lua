@@ -29,7 +29,7 @@ function ItemRadio:is_enabled()
   return self:get_data('enabled', true)
 end
 
-function ItemRadio:on_toggle(player)
+function ItemRadio:on_toggle(actor)
   self:set_data('enabled', !self:is_enabled())
 end
 
@@ -42,6 +42,6 @@ function ItemRadio:set_frequency(frequency)
   self:play_sound('set_frequency')
 end
 
-function ItemRadio:change_frequency(player)
-  Cable.send(player, 'fl_get_radio_frequency', self.instance_id, self:get_frequency())
+function ItemRadio:change_frequency(actor)
+  Cable.send(actor, 'fl_get_radio_frequency', self.instance_id, self:get_frequency())
 end

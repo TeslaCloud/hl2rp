@@ -5,17 +5,17 @@ CMD.category = 'permission.categories.roleplay'
 CMD.alias = 'do'
 CMD.arguments = 1
 
-function CMD:on_run(player, ...)
+function CMD:on_run(actor, ...)
   local text, volume = RPCommands:get_phrase_volume(table.concat({...}, ' '):spelling())
   local msg_table = {
     Config.get('chat_it_color'):saturate(volume * 10):lighten(volume * 10),
     Config.get('default_font_size'),
-    '(', player, ') ', text
+    '(', actor, ') ', text
   }
 
   table.insert(msg_table, {
-    sender = player,
-    position = player:EyePos(),
+    sender = actor,
+    position = actor:EyePos(),
     radius = Config.get('talk_radius') * (volume == 0 and 1 or (volume < 0 and (0.8 + volume * 0.2) or (1.2 + volume * 0.4))),
     hear_when_look = true,
     ic = true

@@ -20,8 +20,8 @@ end
 require_relative 'cl_hooks'
 require_relative 'sv_hooks'
 
-function Animations:Move(player, move_data)
-  if player:get_nv('fl_animation_angle') then
+function Animations:Move(actor, move_data)
+  if actor:get_nv('fl_animation_angle') then
     move_data:SetVelocity(vector_origin)
     move_data:SetForwardSpeed(0)
     move_data:SetSideSpeed(0)
@@ -29,16 +29,16 @@ function Animations:Move(player, move_data)
     if move_data:KeyPressed(IN_FORWARD) or move_data:KeyPressed(IN_MOVELEFT)
     or move_data:KeyPressed(IN_MOVERIGHT) or move_data:KeyPressed(IN_BACK)
     or move_data:KeyPressed(IN_JUMP) then
-      player:leave_animation()
+      actor:leave_animation()
     end
   end
 end
 
-function Animations:UpdateAnimation(player)
-  local angle = player:get_nv('fl_animation_angle')
+function Animations:UpdateAnimation(actor)
+  local angle = actor:get_nv('fl_animation_angle')
 
   if angle then
-    player:SetRenderAngles(angle)
+    actor:SetRenderAngles(angle)
   end
 end
 

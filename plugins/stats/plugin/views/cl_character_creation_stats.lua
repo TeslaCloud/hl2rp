@@ -57,7 +57,7 @@ function PANEL:on_open(parent)
     
     pnl:Clear()
 
-    local panel = vgui.create('DPanel', pnl)
+    local panel = vgui.Create('DPanel', pnl)
     panel:SetDrawBackground(false)
     panel:Dock(TOP)
 
@@ -66,13 +66,13 @@ function PANEL:on_open(parent)
     if selected_attribute.icon then
       local size = math.scale(48)
 
-      icon = vgui.create('DImage', panel)
+      icon = vgui.Create('DImage', panel)
       icon:SetImage(selected_attribute.icon)
       icon:SetKeepAspect(true)
       icon:SetSize(size, size)
     end 
 
-    local title = vgui.create('DLabel', panel)
+    local title = vgui.Create('DLabel', panel)
     title:SetText(t(selected_attribute.name))
     title:SetFont(Font.size(Theme.get_font('text_bold'), math.scale(48)))
     title:SetColor(color_white)
@@ -82,7 +82,7 @@ function PANEL:on_open(parent)
 
     panel:SetTall(math.max(title:GetTall(), icon and icon:GetTall() or 0) + math.scale(16))
 
-    local desc = vgui.create('DLabel', pnl)
+    local desc = vgui.Create('DLabel', pnl)
     desc:SetText(t(selected_attribute.description))
     desc:SetFont(Theme.get_font('text_normal'))
     desc:SetColor(color_white)
@@ -95,18 +95,18 @@ function PANEL:on_open(parent)
     local value = 4 - raw_value
     local level = stat_translate[value]
 
-    panel = vgui.create('DPanel', pnl)
+    panel = vgui.Create('DPanel', pnl)
     panel:SetDrawBackground(false)
     panel:Dock(TOP)
 
-    local current_level = vgui.create('DLabel', panel)
+    local current_level = vgui.Create('DLabel', panel)
     current_level:SetText(t('ui.char_create.cur_level')..': ')
     current_level:SetFont(Font.size(Theme.get_font('text_bold'), math.scale(32)))
     current_level:SetColor(color_white)
     current_level:SetContentAlignment(1)
     current_level:SizeToContents()
 
-    local level_name = vgui.create('DLabel', panel)
+    local level_name = vgui.Create('DLabel', panel)
     level_name:SetText(t('attribute.level.'..level))
     level_name:SetFont(Theme.get_font('text_normal_large'))
     level_name:SetColor(color_white)
@@ -117,7 +117,7 @@ function PANEL:on_open(parent)
     current_level:SetPos(0, panel:GetTall() - current_level:GetTall() - math.scale(1))
     level_name:SetPos(current_level:GetWide(), panel:GetTall() - level_name:GetTall())
 
-    local level_desc = vgui.create('DLabel', pnl)
+    local level_desc = vgui.Create('DLabel', pnl)
     level_desc:SetText(t(selected_attribute.levels[level]))
     level_desc:SetFont(Theme.get_font('text_normal'))
     level_desc:SetColor(color_white)
@@ -129,7 +129,7 @@ function PANEL:on_open(parent)
     local effects = selected_attribute.effects
 
     if selected_attribute.effects then
-      local effect_title = vgui.create('DLabel', pnl)
+      local effect_title = vgui.Create('DLabel', pnl)
       effect_title:SetText(t('ui.char_create.effects'))
       effect_title:SetFont(Font.size(Theme.get_font('text_bold'), math.scale(32)))
       effect_title:SetColor(color_white)
@@ -139,7 +139,7 @@ function PANEL:on_open(parent)
       effect_title:SetTall(effect_title:GetTall() + math.scale(32))
 
       for k, v in pairs(effects) do
-        local effect = vgui.create('DLabel', pnl)
+        local effect = vgui.Create('DLabel', pnl)
         effect:SetText(t(v.text)..' '..t(v.get_value(raw_value)))
         effect:SetFont(Theme.get_font('text_normal'))
         effect:SetColor(v.get_color(raw_value))
@@ -150,7 +150,7 @@ function PANEL:on_open(parent)
   end
 
   for k, v in pairs(Attributes.get_by_type(ATTRIBUTE_STAT)) do
-    local stat_line = vgui.create('DPanel', self.attributes_list)
+    local stat_line = vgui.Create('DPanel', self.attributes_list)
     stat_line:SetTall(math.scale(64))
     stat_line:Dock(TOP)
     stat_line:DockMargin(0, 0, 0, math.scale(4))
@@ -169,7 +169,7 @@ function PANEL:on_open(parent)
       end
     end
 
-    local counter = vgui.create('fl_counter', stat_line)
+    local counter = vgui.Create('fl_counter', stat_line)
     counter:Dock(RIGHT)
     counter:set_value(v.default)
     counter:set_min_max(v.min, v.max)
@@ -199,13 +199,13 @@ function PANEL:on_open(parent)
     if v.icon then
       local size = stat_line:GetTall() * 0.75
 
-      icon = vgui.create('DImage', stat_line)
+      icon = vgui.Create('DImage', stat_line)
       icon:SetImage(v.icon)
       icon:SetSize(size, size)
       icon:SetPos(math.scale_x(4), stat_line:GetTall() * 0.5 - size * 0.5)
     end
 
-    local title = vgui.create('DLabel', stat_line)
+    local title = vgui.Create('DLabel', stat_line)
     title:SetText(t(v.name))
     title:SetFont(Theme.get_font('main_menu_titles'))
     title:SetColor(color_white)
@@ -239,7 +239,7 @@ function PANEL:on_open(parent)
       end
 
       while self.points > 0 do
-        local stat = table.random(self.stats)
+        local stat = table.Random(self.stats)
         local number = stat.counter:get_value()
 
         if number < stat.attribute_table.max then

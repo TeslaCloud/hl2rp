@@ -7,10 +7,10 @@ CMD.arguments = 2
 CMD.immunity = true
 CMD.aliases = { 'plysethealth', 'hp' }
 
-function CMD:on_run(player, targets, ...)
+function CMD:on_run(actor, targets, ...)
   local value = tonumber(table.concat({ ... }, ' '))
   if value <= 0 then
-    player:notify('error.sethealth.invalid_value', { health = value })
+    actor:notify('error.sethealth.invalid_value', { health = value })
     return
   end
 
@@ -20,7 +20,7 @@ function CMD:on_run(player, targets, ...)
   end
 
   self:notify_staff('command.sethealth.message', {
-    player = get_player_name(player),
+    player = get_player_name(actor),
     target = util.player_list_to_string(targets),
     health = value
   })

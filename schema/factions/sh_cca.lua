@@ -60,12 +60,12 @@ function FACTION:generate_id()
   return math.random(1, 9)
 end
 
-function FACTION:get_unit_id(player)
-  return player:name():match('%d+$') or self:generate_id()
+function FACTION:get_unit_id(target)
+  return target:name():match('%d+$') or self:generate_id()
 end
 
-function FACTION:on_player_leave(player)
-  if player:is_human() then
-    Characters.set_name(player, SCHEMA:get_random_name(player:get_gender()))
+function FACTION:on_player_leave(target)
+  if target:is_human() then
+    Characters.set_name(target, SCHEMA:get_random_name(target:get_gender()))
   end
 end

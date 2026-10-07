@@ -9,9 +9,9 @@ ItemMedical.description = 'An item that can be used to heal or relieve.'
 ItemMedical.category = 'item.category.medical'
 ItemMedical.use_text = 'item.action.apply'
 
-function ItemMedical:on_use(player)
-  local player_health = player:Health()
-  local max_health = player:GetMaxHealth()
+function ItemMedical:on_use(actor)
+  local player_health = actor:Health()
+  local max_health = actor:GetMaxHealth()
   local missing_health = max_health - player_health
   local health_regen = self.health_regen
 
@@ -19,14 +19,14 @@ function ItemMedical:on_use(player)
     Color('pink'),
     { icon = 'fa-heartbeat', size = 16, margin = 8, is_data = true },
     'You are already full health.',
-    { sender = player }
+    { sender = actor }
   }
 
   local exist_msg_table = {
     Color('pink'),
     { icon = 'fa-heartbeat', size = 16, margin = 8, is_data = true },
     'You are already healing.',
-    { sender = player }
+    { sender = actor }
   }
 
   -- Sanity Check [ Limit to max_health ]
@@ -36,27 +36,27 @@ function ItemMedical:on_use(player)
 
   -- Sanity Check [ Disallow if at max_health ]
   if (player_health >= max_health) then
-    Chatbox.add_text(player, unpack(max_msg_table))
+    Chatbox.add_text(actor, unpack(max_msg_table))
     return false
   end
 
   if !timer.Exists('health_replenish') then
     timer.Create('health_replenish', self.health_delay, self.health_ticks, function()
-      if player:Health() < player:GetMaxHealth() then
-        player:SetHealth(player:Health() + self.health_regen)
+      if actor:Health() < actor:GetMaxHealth() then
+        actor:SetHealth(actor:Health() + self.health_regen)
       else
-        player:SetHealth(player:GetMaxHealth())
+        actor:SetHealth(actor:GetMaxHealth())
       end
     end)
   else
-    Chatbox.add_text(player, unpack(exist_msg_table))
+    Chatbox.add_text(actor, unpack(exist_msg_table))
     return false
   end
 
   if !timer.Exists('health_sanity_check') then
     timer.Create('health_sanity_check', (self.health_delay * self.health_ticks) + 1, 1, function()
-      if player:Health() > player:GetMaxHealth() then
-        player:SetHealth(player:GetMaxHealth())
+      if actor:Health() > actor:GetMaxHealth() then
+        actor:SetHealth(actor:GetMaxHealth())
       end
     end)
   end

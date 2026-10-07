@@ -7,6 +7,7 @@ Areas.register_type(
   'scanner_depot',
   'Scanner Depot',
   'An area where the scanners spawn.',
-  function(player, area, poly, has_entered, cur_pos, cur_time)
+  Color(255, 0, 255),
+  function(actor, area, has_entered, pos, cur_time)
   end
 )

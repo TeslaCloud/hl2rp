@@ -3,7 +3,7 @@ require_relative 'sv_hooks'
 local function KeySelect(entity)
   local keys = PLAYER:find_items('key')
 
-  local selector = vgui.create('fl_selector')
+  local selector = vgui.Create('fl_selector')
   selector:set_title(t'ui.key.add.title')
   selector:set_text(t'ui.key.add.message')
   selector:set_value(t'ui.key.add.select')
@@ -54,13 +54,13 @@ end
 
 if CLIENT then
   Cable.receive('fl_key_show_list', function(keys, entity)
-    local frame = vgui.create('DFrame')
+    local frame = vgui.Create('DFrame')
     frame:SetSize(math.scale(300), math.scale(300))
     frame:Center()
     frame:MakePopup()
     frame:SetTitle(t'ui.key.title')
 
-    local list = vgui.create('DScrollPanel', frame)
+    local list = vgui.Create('DScrollPanel', frame)
     list:Dock(FILL)
 
     function frame:rebuild()
@@ -70,7 +70,7 @@ if CLIENT then
         for k, v in pairs(keys) do
           local item_table = Item.find_instance_by_id(v)
 
-          local line = vgui.create('fl_base_panel')
+          local line = vgui.Create('fl_base_panel')
           line:Dock(TOP)
           line.Paint = function(pnl, w, h)
             draw.RoundedBox(0, 0, 0, w, h, Color(0, 0, 0, 100))
@@ -78,7 +78,7 @@ if CLIENT then
 
           local button_size = line:GetTall() - 4
 
-          local delete = vgui.create('fl_button', line)
+          local delete = vgui.Create('fl_button', line)
           delete:SetSize(button_size, button_size)
           delete:SetDrawBackground(false)
           delete:SetTooltip(t'ui.key.delete.title')
@@ -92,13 +92,13 @@ if CLIENT then
             function()
               Cable.send('fl_key_remove', v, entity)
 
-              table.remove_by_value(keys, v)
+              table.RemoveByValue(keys, v)
 
               frame:rebuild()
             end, t'ui.no')
           end
 
-          local label = vgui.create('DLabel', line)
+          local label = vgui.Create('DLabel', line)
           label:SetText('['..item_table.instance_id..']'..t(item_table:get_name()))
           label:SetFont(Theme.get_font('main_menu_normal'))
           label:SetTextColor(color_white)
@@ -111,7 +111,7 @@ if CLIENT then
         end
       end
 
-      local add_button = vgui.create('DButton')
+      local add_button = vgui.Create('DButton')
       add_button:SetText(t'door.properties.keys_list.add')
       add_button:Dock(TOP)
       add_button.DoClick = function(btn)
@@ -127,7 +127,7 @@ if CLIENT then
   Cable.receive('fl_key_copy', function(instance_id)
     local keys = PLAYER:find_items('key')
 
-    local selector = vgui.create('fl_selector')
+    local selector = vgui.Create('fl_selector')
     selector:set_title(t'ui.key.copy.title')
     selector:set_text(t'ui.key.copy.message')
     selector:set_value(t'ui.key.copy.select')

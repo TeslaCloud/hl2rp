@@ -1,8 +1,8 @@
-concommand.Add('fl_punch', function(player)
-  Cable.send('fl_punch_cable', player)
+concommand.Add('fl_punch', function(client)
+  Cable.send('fl_punch_cable', client)
 end)
 
-Cable.receive('fl_punch_animation', function(player)
-  player.AutomaticFrameAdvance = true
-  player:SetAnimation(player:LookupSequence("ACT_MELEE_ATTACK1"))
+Cable.receive('fl_punch_animation', function(actor)
+  actor.AutomaticFrameAdvance = true
+  actor:SetAnimation(actor:LookupSequence("ACT_MELEE_ATTACK1"))
 end)

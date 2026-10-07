@@ -1,7 +1,7 @@
 function Animations:ContextMenuCreated(context_menu)
   if !Theme.initialized() then return end
 
-  local panel = vgui.create('fl_base_panel', context_menu)
+  local panel = vgui.Create('fl_base_panel', context_menu)
   panel:SetSize(math.scale_size(200, 224))
   panel:SetPos(math.scale_x(100), ScrH() * 0.7)
   panel:DockPadding(math.scale_x(4), math.scale(4), math.scale_x(4), math.scale(4))
@@ -9,7 +9,7 @@ function Animations:ContextMenuCreated(context_menu)
     draw.RoundedBox(0, 0, 0, w, h, Color(0, 0, 0, 100))
   end
 
-  local title = vgui.create('DLabel', panel)
+  local title = vgui.Create('DLabel', panel)
   title:SetText(t'ui.animations.title')
   title:SetFont(Theme.get_font('text_normal'))
   title:SetColor(color_white)
@@ -17,7 +17,7 @@ function Animations:ContextMenuCreated(context_menu)
   title:SizeToContents()
   title:Dock(TOP)
 
-  local list = vgui.create('DScrollPanel', panel)
+  local list = vgui.Create('DScrollPanel', panel)
   list:Dock(FILL)
 
   function panel:rebuild()
@@ -28,7 +28,7 @@ function Animations:ContextMenuCreated(context_menu)
       or v.anim and PLAYER:LookupSequence(v.anim) == -1
       or v.exit and PLAYER:LookupSequence(v.exit) == -1 then continue end
 
-      local line = vgui.create('fl_button', list)
+      local line = vgui.Create('fl_button', list)
       line:Dock(TOP)
       line:set_text(t(v.name))
       line:set_text_offset(math.scale_x(4))
@@ -37,10 +37,10 @@ function Animations:ContextMenuCreated(context_menu)
         PLAYER:play_animation(pnl.animation)
       end
 
-      local preview_back = vgui.create('fl_base_panel')
+      local preview_back = vgui.Create('fl_base_panel')
       preview_back:SetSize(math.scale_size(150, 150))
 
-      local preview_model = vgui.create('DModelPanel', preview_back)
+      local preview_model = vgui.Create('DModelPanel', preview_back)
       preview_model:Dock(FILL)
       preview_model:SetModel(PLAYER:GetModel())
       preview_model.Entity:SetSequence(v.anim)

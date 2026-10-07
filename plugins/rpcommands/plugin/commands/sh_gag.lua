@@ -7,16 +7,16 @@ CMD.arguments = 2
 CMD.immunity = true
 CMD.aliases = { 'muteooc', 'oocmute', 'plygag' }
 
-function CMD:on_run(player, targets, duration, ...)
+function CMD:on_run(actor, targets, duration, ...)
   local reason = table.concat({ ... }, ' ')
-  duration = Flux.admin:interpret_ban_time(duration)
+  duration = Bolt:interpret_ban_time(duration)
 
   if !reason or reason == '' then
     reason = 'ui.no_reason'
   end
 
   if !isnumber(duration) then
-    player:notify('error.invalid_time', {
+    actor:notify('error.invalid_time', {
       time = tostring(duration)
     })
 
@@ -29,7 +29,7 @@ function CMD:on_run(player, targets, duration, ...)
   end
 
   self:notify_staff('command.gag.message', {
-    admin = get_player_name(player),
+    admin = get_player_name(actor),
     target = util.player_list_to_string(targets),
     time = Flux.Lang:nice_time(duration),
     reason = reason

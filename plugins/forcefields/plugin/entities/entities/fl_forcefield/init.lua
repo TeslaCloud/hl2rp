@@ -3,7 +3,7 @@ include('shared.lua')
 AddCSLuaFile('cl_init.lua')
 AddCSLuaFile('shared.lua')
 
-function ENT:SpawnFunction(player, trace)
+function ENT:SpawnFunction(owner, trace)
   if !trace.Hit then return end
 
   local entity = ents.Create('fl_forcefield')
@@ -11,7 +11,7 @@ function ENT:SpawnFunction(player, trace)
   entity:SetPos(trace.HitPos + Vector(0, 0, 40))
   entity:SetAngles(Angle(0, trace.HitNormal:Angle().y - 90, 0))
   entity:Spawn()
-  entity.owner = player
+  entity.owner = owner
 
   return entity
 end

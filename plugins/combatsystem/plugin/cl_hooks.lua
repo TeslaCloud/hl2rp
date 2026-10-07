@@ -32,7 +32,7 @@ function CombatSystem:CanPlayerAttack()
   end
 end
 
-function CombatSystem:StartCommand(player, user_cmd)
+function CombatSystem:StartCommand(actor, user_cmd)
   local weapon = PLAYER:GetActiveWeapon()
 
   if IsValid(weapon) and PLAYER:IsFrozen() then
@@ -90,10 +90,10 @@ function CombatSystem:create_notify(text)
     Flux.combat_notify:safe_remove()
   end
 
-  local notify = vgui.create('DNotify')
+  local notify = vgui.Create('DNotify')
   notify:SetLife(2)
 
-  local label = vgui.create('DLabel', notify)
+  local label = vgui.Create('DLabel', notify)
   label:Dock(FILL)
   label:SetText(text)
   label:SetTextColor(color_white)
@@ -126,9 +126,9 @@ function CombatSystem:create_message(text, arguments)
         arguments[k] = t(v)
       elseif isentity(v) and IsValid(v) then
         if v:IsPlayer() then
-          arguments[k] = hook.run('GetPlayerName', v) or v:name()
+          arguments[k] = hook.Run('GetPlayerName', v) or v:name()
         else
-          arguments[k] = hook.run('GetEntityName', v) or tostring(v) or v:GetClass()
+          arguments[k] = hook.Run('GetEntityName', v) or tostring(v) or v:GetClass()
         end
       end
     end
@@ -139,14 +139,14 @@ end
 
 Cable.receive('fl_combat_notify_turn', function(entity)
   local text = t('notification.combat.turn', { entity = t(entity:get_name()) })
-  local sound = 'ui/freeze_cam.wav'
+  local sound_path = 'ui/freeze_cam.wav'
 
   if entity == PLAYER then
     text = t'notification.combat.your_turn'
-    sound = 'ui/achievement_earned.wav'
+    sound_path = 'ui/achievement_earned.wav'
   end
 
-  PLAYER:EmitSound(sound, 75, 100, 0.5)
+  PLAYER:EmitSound(sound_path, 75, 100, 0.5)
   CombatSystem:create_notify(text)
 end)
 
@@ -160,11 +160,11 @@ Cable.receive('fl_combat_message', function(text, arguments)
 end)
 
 Cable.receive('fl_combat_turn_order', function(order)
-  timer.simple(0, function()
+  timer.Simple(0, function()
     CombatSystem:create_message('notification.combat.turn_order')
 
     for k, v in pairs(order) do
-      timer.simple(0, function()
+      timer.Simple(0, function()
         CombatSystem:create_message('{entity} - {initiative}', { entity = v.entity, initiative = v.initiative })
       end)
     end

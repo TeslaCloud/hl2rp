@@ -37,22 +37,22 @@ function RPCommands:HUDPaint()
   end
 end
 
-function RPCommands:DisplayTypingTextType(player, text)
-  if text:starts('/me') or text:starts('*') then
+function RPCommands:DisplayTypingTextType(target, text)
+  if text:start_with('/me') or text:start_with('*') then
     return t'ui.hud.display_typing.performing'
-  elseif text:starts('/w') or text:starts('(') then
+  elseif text:start_with('/w') or text:start_with('(') then
     return t'ui.hud.display_typing.whispering'
-  elseif text:starts('/y') or text:ends('!!') then
+  elseif text:start_with('/y') or text:end_with('!!') then
     return t'ui.hud.display_typing.yelling'
   elseif !text:is_command() then
     return t'ui.hud.display_typing.talking'
   end
 end
 
-function RPCommands:DisplayTypingAdjustFadeoffMultiplier(player, text)
-  if text:starts('/w') or text:starts('(') then
+function RPCommands:DisplayTypingAdjustFadeoffMultiplier(target, text)
+  if text:start_with('/w') or text:start_with('(') then
     return 0.025
-  elseif text:starts('/y') or text:ends('!!') then
+  elseif text:start_with('/y') or text:end_with('!!') then
     return 1.75
   end
 end
@@ -69,6 +69,6 @@ Cable.receive('fl_static_text_remove', function(id)
   table.remove(RPCommands.texts, id)
 end)
 
-Cable.receive('fl_notify_self', function(player, notification_color, message)
+Cable.receive('fl_notify_self', function(receiver, notification_color, message)
   chat.AddText(notification_color, message)
 end)

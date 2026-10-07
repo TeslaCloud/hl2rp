@@ -38,14 +38,14 @@ local allowed_ents = {
 }
 
 function Forcefields:ShouldCollide(a, b)
-  local player
+  local activator
   local entity
 
   if a:IsPlayer() then
-    player = a
+    activator = a
     entity = b
   elseif b:IsPlayer() then
-    player = b
+    activator = b
     entity = a
   end
 
@@ -56,23 +56,23 @@ function Forcefields:ShouldCollide(a, b)
   end
 
   if IsValid(entity) and entity:GetClass() == 'fl_forcefield' then
-    if IsValid(player) then
-      if player:KeyDown(IN_USE) then return true end -- if the player is pressing 'use' key they should always collide so that using works.
+    if IsValid(activator) then
+      if activator:KeyDown(IN_USE) then return true end -- if the player is pressing 'use' key they should always collide so that using works.
 
-      if player:is_combine() or player:get_nv('forcefield_collide') == false then
+      if activator:is_combine() or activator:get_nv('forcefield_collide') == false then
         return false
       end
 
-      return Plugin.call('ShouldForcefieldCollide', player, entity, entity:GetDTInt(0) or 1)
+      return Plugin.call('ShouldForcefieldCollide', activator, entity, entity:GetDTInt(0) or 1)
     else
       return true
     end
   end
 end
 
-function Forcefields:ShouldForcefieldCollide(player, field, mode)
-  if mode == 2 and IsValid(player) then
-    if player:get_faction_id() == 'cwu' then
+function Forcefields:ShouldForcefieldCollide(activator, field, mode)
+  if mode == 2 and IsValid(activator) then
+    if activator:get_faction_id() == 'cwu' then
       return false
     end
   end

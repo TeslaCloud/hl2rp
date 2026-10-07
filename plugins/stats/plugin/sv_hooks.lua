@@ -1,10 +1,10 @@
-function Stats:AdjustMessageData(player, message_data)
+function Stats:AdjustMessageData(listener, message_data)
   if message_data.ic then
-    message_data.radius = message_data.radius + (player:get_attribute('perception'):m()) * 1.5
+    message_data.radius = message_data.radius + (listener:get_attribute('perception'):m()) * 1.5
   end
 end
 
-function Stats:PlayerCreateCharacter(player, data)
+function Stats:PlayerCreateCharacter(actor, data)
   local max_points = self:default_attribute_points()
   local sum = 0
 

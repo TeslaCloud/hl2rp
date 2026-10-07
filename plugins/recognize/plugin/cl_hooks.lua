@@ -1,6 +1,6 @@
-function Recognizes:PlayerBindPress(player, bind, pressed)
+function Recognizes:PlayerBindPress(client, bind, pressed)
   if bind:find('gm_showteam') then
-    local recognize_menu = vgui.create('fl_recognize')
+    local recognize_menu = vgui.Create('fl_recognize')
     recognize_menu:MakePopup()
     recognize_menu:SetPos(ScrW() * 0.5 - recognize_menu:GetWide() * 0.5, ScrH() * 0.6)
   end
@@ -22,7 +22,7 @@ function Recognizes:GetPlayerName(target)
   end
 end
 
-function Recognizes:ShouldProcessPlayerName(player, message_data)
+function Recognizes:ShouldProcessPlayerName(target, message_data)
   if !message_data.ic then
     return false
   end
@@ -56,7 +56,7 @@ function Recognizes:CreatePlayerInteractions(menu, target)
       if text and text != '' then
         Cable.send('fl_recognize', 'target', text, target)
 
-        if text != PLAYER:name(true) and !table.has_value(history, text) then
+        if text != PLAYER:name(true) and !table.HasValue(history, text) then
           table.insert(history, 1, text)
 
           if #history > 5 then

@@ -5,8 +5,8 @@ CMD.category = 'permission.categories.roleplay'
 CMD.alias = 'w'
 CMD.arguments = 1
 
-function CMD:on_run(player, ...)
+function CMD:on_run(actor, ...)
   local text = table.concat({...}, ' ')
 
-  Chatbox.player_say(player, '('..text..')')
+  Chatbox.player_say(actor, '('..text..')')
 end

@@ -39,17 +39,17 @@ function SCHEMA:human_faction(faction)
   return self.human_factions[faction] or false
 end
 
-function SCHEMA:is_combine(player)
-  if IsValid(player) and player:IsPlayer() then
-    return self:combine_faction(player:get_faction_id())
+function SCHEMA:is_combine(target)
+  if IsValid(target) and target:IsPlayer() then
+    return self:combine_faction(target:get_faction_id())
   end
 
   return false
 end
 
-function SCHEMA:is_human(player)
-  if IsValid(player) and player:IsPlayer() then
-    return self:human_faction(player:get_faction_id())
+function SCHEMA:is_human(target)
+  if IsValid(target) and target:IsPlayer() then
+    return self:human_faction(target:get_faction_id())
   end
 
   return false
@@ -113,13 +113,13 @@ end
 
 function SCHEMA:get_random_name(gender, char_data)
   if char_data.faction and char_data.faction == 'vortigaunt' then
-    return table.random(self.vort_names)..' '..table.random(self.vort_last_names)
+    return table.Random(self.vort_names)..' '..table.Random(self.vort_last_names)
   end
 
   gender = (gender == 'no_gender' and 'male') or gender
 
-  local last_name = table.random(self.last_names)
-  local first_name = table.random(self[gender..'_names'])
+  local last_name = table.Random(self.last_names)
+  local first_name = table.Random(self[gender..'_names'])
 
   return first_name..' '..last_name
 end

@@ -9,10 +9,10 @@ function PANEL:Init()
   self:SetTitle(t'ui.recognize.title')
   self:set_draggable(true)
 
-  self.list = vgui.create('DScrollPanel', self)
+  self.list = vgui.Create('DScrollPanel', self)
   self.list:Dock(FILL)
 
-  self.label = vgui.create('DLabel', self.list)
+  self.label = vgui.Create('DLabel', self.list)
   self.label:Dock(TOP)
   self.label:SetText(t'ui.recognize.message')
   self.label:SetFont(Theme.get_font('text_normal_smaller'))
@@ -43,7 +43,7 @@ function PANEL:Init()
     }
   }
 
-  self.range_buttons = vgui.create('fl_base_panel', self.list)
+  self.range_buttons = vgui.Create('fl_base_panel', self.list)
   self.range_buttons:SetSize((icon_size + margin) * #range_buttons, icon_size)
   self.range_buttons:DockMargin(0, margin, 0, 0)
   self.range_buttons:Dock(TOP)
@@ -53,7 +53,7 @@ function PANEL:Init()
   self.ranges = {}
 
   for k, v in pairs(range_buttons) do
-    local button = vgui.create('fl_button', self.range_buttons)
+    local button = vgui.Create('fl_button', self.range_buttons)
     button:SetSize(icon_size, icon_size)
     button:SetDrawBackground(true)
     button:set_icon(v.icon)
@@ -76,7 +76,7 @@ function PANEL:Init()
     self.ranges[k] = button
   end
 
-  self.range_label = vgui.create('DLabel', self.range_buttons)
+  self.range_label = vgui.Create('DLabel', self.range_buttons)
   self.range_label:Dock(RIGHT)
   self.range_label:SetText(t'ui.recognize.range'..': ')
   self.range_label:SetFont(Theme.get_font('text_normal_smaller'))
@@ -85,7 +85,7 @@ function PANEL:Init()
 
   total_height = total_height + icon_size + margin
 
-  self.real_name_button = vgui.create('fl_button', self.list)
+  self.real_name_button = vgui.Create('fl_button', self.list)
   self.real_name_button:SetFont(Theme.get_font('text_normal_smaller'))
   self.real_name_button:DockMargin(0, margin, 0, margin)
   self.real_name_button:Dock(TOP)
@@ -104,17 +104,17 @@ function PANEL:Init()
 
   local history = Data.load('name_history/'..PLAYER:name(true), {})
 
-  self.fake_name = vgui.create('fl_base_panel', self.list)
+  self.fake_name = vgui.Create('fl_base_panel', self.list)
   self.fake_name:SetTall(math.scale(24))
   self.fake_name:DockMargin(0, 0, 0, margin)
   self.fake_name:Dock(TOP)
 
-  self.fake_name.text_entry = vgui.create('DTextEntry', self.fake_name)
+  self.fake_name.text_entry = vgui.Create('DTextEntry', self.fake_name)
   self.fake_name.text_entry:SetSize(self:GetWide() * 0.5 - margin, self.fake_name:GetTall())
   self.fake_name.text_entry:SetFont(Theme.get_font('main_menu_normal'))
   self.fake_name.text_entry:SetText(PLAYER:name(true))
 
-  self.fake_name.button = vgui.create('fl_button', self.fake_name)
+  self.fake_name.button = vgui.Create('fl_button', self.fake_name)
   self.fake_name.button:MoveRightOf(self.fake_name.text_entry, margin)
   self.fake_name.button:SetSize(self:GetWide() * 0.5 - margin, self.fake_name:GetTall())
   self.fake_name.button:SetFont(Theme.get_font('text_normal_smaller'))
@@ -128,7 +128,7 @@ function PANEL:Init()
     if text and text != '' then
       Cable.send('fl_recognize', self.range.type, text)
 
-      if text != PLAYER:name(true) and !table.has_value(history, text) then
+      if text != PLAYER:name(true) and !table.HasValue(history, text) then
         table.insert(history, 1, text)
 
         if #history > 5 then
@@ -145,7 +145,7 @@ function PANEL:Init()
   total_height = total_height + self.fake_name:GetTall()
 
   if history and #history > 0 then
-    self.name_history = vgui.create('DListView', self.list)
+    self.name_history = vgui.Create('DListView', self.list)
     self.name_history:Dock(TOP)
     self.name_history:AddColumn(t'ui.recognize.previous_names'..':')
 

@@ -23,31 +23,31 @@ function RPCommands.remove_static_text(id)
   Cable.send(nil, 'fl_static_text_remove', id)
 end
 
-function RPCommands:PlayerCanHearPlayersVoice(player, talker)
-  if player:EyePos():Distance(talker:EyePos()) > Config.get('talk_radius') then
+function RPCommands:PlayerCanHearPlayersVoice(listener, talker)
+  if listener:EyePos():Distance(talker:EyePos()) > Config.get('talk_radius') then
     return false
   end
 end
 
-function RPCommands:ChatboxAdjustPlayerSay(player, text, message_data)
+function RPCommands:ChatboxAdjustPlayerSay(actor, text, message_data)
   table.Empty(message_data)
 
-  local msg_table = self:format_message(player, text)
+  local msg_table = self:format_message(actor, text)
 
   table.Merge(message_data, msg_table)
   Log:print(Chatbox.message_to_string(msg_table, ' '), 'player_ic')
 end
 
-function RPCommands:PlayerCanHear(player, message_data)
+function RPCommands:PlayerCanHear(listener, message_data)
   if message_data.hear_when_look then
-    local look_pos = player:GetEyeTraceNoCursor().HitPos
+    local look_pos = listener:GetEyeTraceNoCursor().HitPos
 
     return message_data.sender:GetPos():Distance(look_pos) <= message_data.radius
   end
 end
 
-function RPCommands:PlayerCanUseOOC(player)
-  if (player:get_player_data('ooc_mute', 0) > CurTime()) then
+function RPCommands:PlayerCanUseOOC(actor)
+  if (actor:get_player_data('ooc_mute', 0) > CurTime()) then
     return false
   end
 end
@@ -70,34 +70,34 @@ function RPCommands:load()
   self.texts = texts
 end
 
-function RPCommands:PlayerInitialized(player)
-  Cable.send(player, 'fl_static_text_set', self.texts)
+function RPCommands:PlayerInitialized(actor)
+  Cable.send(actor, 'fl_static_text_set', self.texts)
 end
 
 function RPCommands:get_phrase_volume(text)
   local volume = 0
 
-  if text:starts('(') then
+  if text:start_with('(') then
     local count = text:match('^([(]+)'):len()
     local end_count = (text:match('([)]+)$') or ''):len()
 
     volume = volume - count
 
     text = text:sub(count + 1, -end_count - 1)
-  elseif text:ends('!!') then
+  elseif text:end_with('!!') then
     volume = volume + text:match('([!]+)$'):len() - 1
   end
 
   volume = math.clamp(volume, -3, 3)
 
-  text:trim()
+  text:strip()
 
   return text, volume
 end
 
 function RPCommands:get_phrase_table(text)
   local msg_table = {}
-  local is_emote = text:starts('*')
+  local is_emote = text:start_with('*')
   local text_parts = {}
 
   for k, v in pairs(text:split('*')) do
@@ -121,7 +121,7 @@ function RPCommands:get_phrase_table(text)
       table.insert(msg_table, is_emote and '" ' or ' "')
     end
 
-    local part = v:trim()
+    local part = v:strip()
 
     if is_emote then
       table.insert(msg_table, Config.get('chat_me_color'))
@@ -147,19 +147,19 @@ function RPCommands:get_phrase_table(text)
   return msg_table
 end
 
-function RPCommands:format_message(player, text)
+function RPCommands:format_message(speaker, text)
   local text, volume = self:get_phrase_volume(text)
-  local is_emote = text:starts('*')
+  local is_emote = text:start_with('*')
   local color = Config.get(is_emote and 'chat_me_color' or 'chat_ic_color')
 
   local msg_table = {
     color,
     Config.get('default_font_size') + volume * 2,
-    player, ' '
+    speaker, ' '
   }
 
   if !is_emote then
-    table.add(msg_table, { volume == 0 and t'ui.chat.say' or (volume < 0 and t'ui.chat.whisper' or t'ui.chat.yell'), ': ' })
+    table.Add(msg_table, { volume == 0 and t'ui.chat.say' or (volume < 0 and t'ui.chat.whisper' or t'ui.chat.yell'), ': ' })
 
     if volume == 3 then
       text = text:utf8upper()
@@ -170,11 +170,11 @@ function RPCommands:format_message(player, text)
     end
   end
 
-  table.add(msg_table, self:get_phrase_table(text))
+  table.Add(msg_table, self:get_phrase_table(text))
 
   table.insert(msg_table, {
-    sender = player,
-    position = player:EyePos(),
+    sender = speaker,
+    position = speaker:EyePos(),
     radius = Config.get('talk_radius') * (volume == 0 and 1 or (volume < 0 and (0.8 + volume * 0.2) or (1.2 + volume * 0.4))),
     ic = true
   })
@@ -182,6 +182,6 @@ function RPCommands:format_message(player, text)
   return msg_table
 end
 
-function RPCommands:NotifySelf(player, notification_color, message)
-  Cable.send(player, 'fl_notify_self', player, notification_color, message)
+function RPCommands:NotifySelf(receiver, notification_color, message)
+  Cable.send(receiver, 'fl_notify_self', receiver, notification_color, message)
 end

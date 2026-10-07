@@ -1,49 +1,49 @@
-function SCHEMA:PlayerHurt(player, attacker)
-  if player:Alive() then
+function SCHEMA:PlayerHurt(victim, attacker)
+  if victim:Alive() then
     local cur_time = CurTime()
 
-    if !player.next_sound or player.next_sound <= cur_time then
-      local faction = player:get_faction_id()
+    if !victim.next_sound or victim.next_sound <= cur_time then
+      local faction = victim:get_faction_id()
 
-      if player:is_human() then
-        local limb = player:LastHitGroup()
-        local gender = player:get_gender()
-        local sound
+      if victim:is_human() then
+        local limb = victim:LastHitGroup()
+        local gender = victim:get_gender()
+        local sound_path
 
         if math.random(1, 3) == 1 then
           if limb == HITGROUP_LEFTARM or limb == HITGROUP_RIGHTARM then
-            sound = 'vo/npc/'..gender..'01/myarm0'..math.random(1, 2)..'.wav'
+            sound_path = 'vo/npc/'..gender..'01/myarm0'..math.random(1, 2)..'.wav'
           elseif limb == HITGROUP_LEFTLEG or limb == HITGROUP_RIGHTLEG then
-            sound = 'vo/npc/'..gender..'01/myleg0'..math.random(1, 2)..'.wav'
+            sound_path = 'vo/npc/'..gender..'01/myleg0'..math.random(1, 2)..'.wav'
           elseif limb == HITGROUP_STOMACH or limb == HITGROUP_GEAR then
-            sound = 'vo/npc/'..gender..'01/mygut0'..math.random(1, 2)..'.wav'
+            sound_path = 'vo/npc/'..gender..'01/mygut0'..math.random(1, 2)..'.wav'
           end
         end
 
-        if !sound then
-          sound = 'vo/npc/'..gender..'01/pain0'..math.random(1, 9)..'.wav'
+        if !sound_path then
+          sound_path = 'vo/npc/'..gender..'01/pain0'..math.random(1, 9)..'.wav'
         end
 
-        player:EmitSound(sound)
+        victim:EmitSound(sound_path)
       elseif faction == 'cca' then
-        player:EmitSound('npc/metropolice/pain'..math.random(1, 4)..'.wav')
+        victim:EmitSound('npc/metropolice/pain'..math.random(1, 4)..'.wav')
       elseif faction == 'overwatch' then
-        player:EmitSound('npc/combine_soldier/pain'..math.random(1, 3)..'.wav')
+        victim:EmitSound('npc/combine_soldier/pain'..math.random(1, 3)..'.wav')
       end
 
-      player.next_sound = cur_time + 1
+      victim.next_sound = cur_time + 1
     end
   end
 end
 
-function SCHEMA:PlayerDeath(player, attacker)
-  if player:Alive() then
-    local faction = player:get_faction_id()
+function SCHEMA:PlayerDeath(victim, attacker)
+  if victim:Alive() then
+    local faction = victim:get_faction_id()
 
     if faction == 'cca' then
-      player:EmitSound('npc/metropolice/die'..math.random(1, 4)..'.wav')
+      victim:EmitSound('npc/metropolice/die'..math.random(1, 4)..'.wav')
     elseif faction == 'overwatch' then
-      player:EmitSound('npc/combine_soldier/die'..math.random(1, 3)..'.wav')
+      victim:EmitSound('npc/combine_soldier/die'..math.random(1, 3)..'.wav')
     end
   end
 end
@@ -62,12 +62,12 @@ function SCHEMA:ScaleEntityDamage(entity, hitgroup, damage_info)
   end
 end
 
-function SCHEMA:ScalePlayerDamage(player, hitgroup, damage_info)
-  hook.run('ScaleEntityDamage', player, hitgroup, damage_info)
+function SCHEMA:ScalePlayerDamage(victim, hitgroup, damage_info)
+  hook.Run('ScaleEntityDamage', victim, hitgroup, damage_info)
 end
 
 function SCHEMA:ScaleNPCDamage(entity, hitgroup, damage_info)
-  hook.run('ScaleEntityDamage', entity, hitgroup, damage_info)
+  hook.Run('ScaleEntityDamage', entity, hitgroup, damage_info)
 end
 
 local weapon_scales = {
@@ -98,26 +98,26 @@ function SCHEMA:EntityTakeDamage(entity, damage_info)
   end
 end
 
-function SCHEMA:PlayerOneSecond(player)
-  if player:Alive() and player:is_human() and player:Health() < 50 then
+function SCHEMA:PlayerOneSecond(actor)
+  if actor:Alive() and actor:is_human() and actor:Health() < 50 then
     local cur_time = CurTime()
 
-    if !player.next_moan or player.next_moan <= cur_time then
-      player:EmitSound('vo/npc/'..player:get_gender()..'01/moan0'..math.random(1, 5)..'.wav')
+    if !actor.next_moan or actor.next_moan <= cur_time then
+      actor:EmitSound('vo/npc/'..actor:get_gender()..'01/moan0'..math.random(1, 5)..'.wav')
 
-      player.next_moan = cur_time + math.max(player:Health(), 15)
+      actor.next_moan = cur_time + math.max(actor:Health(), 15)
     end
   end
 end
 
-function SCHEMA:PlayerUseDoor(player, entity)
-  if entity:is_combine_door() and player:has_item('card_cp') or player:has_item('card_cp_officer') then
+function SCHEMA:PlayerUseDoor(activator, entity)
+  if entity:is_combine_door() and activator:has_item('card_cp') or activator:has_item('card_cp_officer') then
     entity:Fire('Open')
   end
 end
 
 function SCHEMA:InitialDoorsLoad()
-  for k, v in ipairs(ents.all()) do
+  for k, v in ipairs(ents.GetAll()) do
     if v:is_combine_door() then
       v.conditions = {{
         id = 'has_item',

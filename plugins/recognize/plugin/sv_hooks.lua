@@ -1,6 +1,6 @@
 Config.set('recog_must_see', true)
 
-function Recognizes:PostCharacterLoaded(player, character)
+function Recognizes:PostCharacterLoaded(owner, character)
   local recognizes = {}
 
   if character.recognizes then
@@ -9,28 +9,28 @@ function Recognizes:PostCharacterLoaded(player, character)
     end
   end
 
-  player:set_nv('fl_recognizes', recognizes)
+  owner:set_nv('fl_recognizes', recognizes)
 end
 
-function Recognizes:PlayerCanRecognize(player, target)
-  if player == target then
+function Recognizes:PlayerCanRecognize(actor, target)
+  if actor == target then
     return false
   end
 
-  if Config.get('recog_must_see') and util.vector_obstructed(player:EyePos(), target:EyePos(), { player, target }) then
+  if Config.get('recog_must_see') and util.vector_obstructed(actor:EyePos(), target:EyePos(), { actor, target }) then
     return false
   end
 end
 
-Cable.receive('fl_recognize', function(player, type, name, target)
+Cable.receive('fl_recognize', function(actor, type, name, target)
   local targets = {}
 
-  name = name or player:name(true)
+  name = name or actor:name(true)
 
   if type == 'target' then
-    local target = target or player:GetEyeTraceNoCursor().Entity
+    local target = target or actor:GetEyeTraceNoCursor().Entity
 
-    if IsValid(target) and target:EyePos():Distance(player:EyePos()) <= Config.get('talk_radius') * 4 then
+    if IsValid(target) and target:EyePos():Distance(actor:EyePos()) <= Config.get('talk_radius') * 4 then
       table.insert(targets, target)
     end
   else
@@ -40,18 +40,18 @@ Cable.receive('fl_recognize', function(player, type, name, target)
       yell = Config.get('talk_radius') * 2
     }
 
-    for k, v in ipairs(_player.all()) do
-      if player:EyePos():Distance(v:EyePos()) <= ranges[type] then
+    for k, v in ipairs(player.GetAll()) do
+      if actor:EyePos():Distance(v:EyePos()) <= ranges[type] then
         table.insert(targets, v)
       end
     end
   end
 
   for k, v in ipairs(targets) do
-    if hook.run('PlayerCanRecognize', player, v) != false then
-      local is_known, known_name = v:recognizes(player)
+    if hook.Run('PlayerCanRecognize', actor, v) != false then
+      local is_known, known_name = v:recognizes(actor)
 
-      if !v:knows_real_name(player) then
+      if !v:knows_real_name(actor) then
         if !is_known then
           v:notify('notification.recognize.new_name', { name = name }, Color('green'):lighten(100))
         else
@@ -59,13 +59,13 @@ Cable.receive('fl_recognize', function(player, type, name, target)
         end
       end
 
-      v:add_recognize(player, name)
+      v:add_recognize(actor, name)
     end
   end
 
-  if name == player:name(true) then
-    player:notify('notification.recognize.true_name', { name = name }, Color('green'):lighten(100))
+  if name == actor:name(true) then
+    actor:notify('notification.recognize.true_name', { name = name }, Color('green'):lighten(100))
   else
-    player:notify('notification.recognize.false_name', { name = name }, Color('salmon'))
+    actor:notify('notification.recognize.false_name', { name = name }, Color('salmon'))
   end
 end)

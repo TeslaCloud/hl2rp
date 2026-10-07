@@ -1,5 +1,5 @@
-function SCHEMA:ShouldOpenWepselect(player, bind, pressed)
-  if bind and bind:find('slot') and pressed and !player:KeyDown(IN_WALK) then
+function SCHEMA:ShouldOpenWepselect(client, bind, pressed)
+  if bind and bind:find('slot') and pressed and !client:KeyDown(IN_WALK) then
     return false
   end
 end

@@ -39,7 +39,7 @@ function player_meta:play_animation(animation)
     local sequence, duration = self:LookupSequence(anim)
 
     if sequence != -1 then
-      timer.simple(full_duration, function()
+      timer.Simple(full_duration, function()
         if IsValid(self) then
           self:set_animation(anim, 0)
         end
@@ -48,7 +48,7 @@ function player_meta:play_animation(animation)
   end
 
   if anim_duration > 0 then
-    timer.simple(full_duration + anim_duration, function()
+    timer.Simple(full_duration + anim_duration, function()
       if IsValid(self) then
         self:leave_animation()
       end
@@ -71,7 +71,7 @@ function player_meta:leave_animation()
     duration = 0
   end
 
-  timer.simple(duration, function()
+  timer.Simple(duration, function()
     if IsValid(self) then
       self:stop_animation()
       self.leaving_animation = nil

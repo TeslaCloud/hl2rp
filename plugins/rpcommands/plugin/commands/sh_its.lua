@@ -5,21 +5,21 @@ CMD.category = 'permission.categories.roleplay'
 CMD.aliases = { 'action', 'itstatic', 'describe' }
 CMD.arguments = 1
 
-function CMD:on_run(player, ...)
+function CMD:on_run(actor, ...)
   local cur_time = CurTime()
 
-  if player.next_its and player.next_its >= cur_time then
-    player:notify('error.wait')
+  if actor.next_its and actor.next_its >= cur_time then
+    actor:notify('error.wait')
 
     return
   end
 
-  local pos = player:GetPos()
+  local pos = actor:GetPos()
   local text = table.concat({ ... }, ' '):chomp(' '):spelling()
 
   for k, v in pairs(RPCommands.texts) do
     if v.pos:Distance(pos) <= 50 then
-      player:notify('error.its_too_close')
+      actor:notify('error.its_too_close')
 
       return
     end
@@ -28,15 +28,15 @@ function CMD:on_run(player, ...)
   local data = {
     pos = pos + Vector(0, 0, 30),
     text = text,
-    name = player:Name(true),
-    steamid = player:SteamID(),
+    name = actor:Name(true),
+    steamid = actor:SteamID(),
     time = to_datetime(os.time())
   }
 
   RPCommands.add_static_text(data)
 
-  player.next_its = cur_time + 5
-  player:notify('notification.static_text.added')
+  actor.next_its = cur_time + 5
+  actor:notify('notification.static_text.added')
 
-  Log:print(player:Name(true)..' ('..player:SteamID()..') added static text: '..text..'; pos: '..tostring(pos), 'player_action')
+  Log:print(actor:Name(true)..' ('..actor:SteamID()..') added static text: '..text..'; pos: '..tostring(pos), 'player_action')
 end

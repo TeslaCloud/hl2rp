@@ -51,7 +51,7 @@ function player_meta:restore_turns()
     turns[TURN_ATTACK] = weapon_item.turns
   end
 
-  hook.run('AdjustPlayerTurns', self, turns)
+  hook.Run('AdjustPlayerTurns', self, turns)
 
   self:set_nv('fl_combat_turns', turns)
 
@@ -69,7 +69,7 @@ function player_meta:dice(attribute)
     roll = roll
   }
 
-  hook.run('AdjustDiceThrow', adjust_data)
+  hook.Run('AdjustDiceThrow', adjust_data)
 
   return adjust_data.value + adjust_data.roll
 end
