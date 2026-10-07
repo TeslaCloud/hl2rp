@@ -112,7 +112,7 @@ do
 end
 
 function SCHEMA:get_random_name(gender, char_data)
-  if char_data.faction and char_data.faction == 'vortigaunt' then
+  if char_data and char_data.faction == 'vortigaunt' then
     return table.Random(self.vort_names)..' '..table.Random(self.vort_last_names)
   end
 

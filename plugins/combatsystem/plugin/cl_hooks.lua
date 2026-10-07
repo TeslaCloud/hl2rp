@@ -27,7 +27,7 @@ end
 function CombatSystem:CanPlayerAttack()
   local weapon = PLAYER:GetActiveWeapon()
 
-  if IsValid(weapon) and PLAYER:IsFrozen() then
+  if IsValid(weapon) and weapon:is_frozen() then
     return false
   end
 end
@@ -35,13 +35,13 @@ end
 function CombatSystem:StartCommand(actor, user_cmd)
   local weapon = PLAYER:GetActiveWeapon()
 
-  if IsValid(weapon) and PLAYER:IsFrozen() then
+  if IsValid(weapon) and weapon:is_frozen() then
     user_cmd:RemoveKey(IN_RELOAD)
   end
 end
 
 function CombatSystem:HUDPaint()
-  if PLAYER:in_combat() and !PLAYER:IsFrozen() then
+  if PLAYER:in_combat() and !PLAYER:is_frozen() then
     local turns = PLAYER:get_nv('fl_combat_turns', {})
     local scrw, scrh = ScrC()
     local x, y = scrw, scrh
