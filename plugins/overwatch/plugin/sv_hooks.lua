@@ -2,7 +2,7 @@ Cable.receive('fl_punch_cable', function(actor)
   local team_name = team.GetName(actor:Team())
 
   if team_name == 'faction.combine.overwatch.title' then
-    Cable.send(actor, 'fl_punch_animation', actor)
+    actor:play_gesture(ACT_MELEE_ATTACK1)
 
     if actor:GetEyeTrace() then
       local target = actor:GetEyeTrace().Entity
