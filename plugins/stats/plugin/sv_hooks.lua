@@ -7,19 +7,37 @@ function Stats:AdjustMessageData(listener, message_data)
   end
 end
 
---- Rejects new characters whose attribute points do not add up to the default amount.
+--- Rejects new characters unless each stat has a whole level in its range and the levels add up to the default points.
 -- @param actor [Player player creating the character]
 -- @param data [Table character creation data]
--- @return [Number CHAR_ERR_ATTRIBUTE_SUM if the sum is wrong, nil otherwise]
+-- @return [Number CHAR_ERR_ATTRIBUTE_SUM if the stat levels are not valid, nil otherwise]
 function Stats:PlayerCreateCharacter(actor, data)
-  local max_points = self:default_attribute_points()
-  local sum = 0
+  local levels = data.attributes
 
-  for k, v in pairs(data.attributes) do
-    sum = sum + v
+  if !istable(levels) then
+    return CHAR_ERR_ATTRIBUTE_SUM
   end
 
-  if sum != max_points then
+  local stats = Attributes.get_by_type(ATTRIBUTE_STAT)
+  local sum = 0
+
+  for k, v in pairs(levels) do
+    if !stats[k] then
+      return CHAR_ERR_ATTRIBUTE_SUM
+    end
+  end
+
+  for k, v in pairs(stats) do
+    local level = levels[k]
+
+    if !isnumber(level) or level != math.floor(level) or level < v.min or level > v.max then
+      return CHAR_ERR_ATTRIBUTE_SUM
+    end
+
+    sum = sum + level
+  end
+
+  if sum != self:default_attribute_points() then
     return CHAR_ERR_ATTRIBUTE_SUM
   end
 end

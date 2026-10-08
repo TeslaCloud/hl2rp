@@ -18,7 +18,7 @@ en:
     gag:
       description: Mute player's OOC chats.
       syntax: <name> <duration> [reason]
-      message: "{admin} has muted {target} from the OOC chat {time} ({reason})."
+      message: "{admin} has muted {target} from the OOC chat for {time} ({reason})."
     ungag:
       description: Unmute player's OOC chats.
       syntax: <player>
@@ -37,7 +37,9 @@ en:
   error:
     its_too_close: Too close to other static texts!
   notification:
-    mute: You cannot use Out-Of-Character chat for another {time}.
+    mute:
+      "1": "You cannot use Out-Of-Character chat for another {time} second."
+      "2": "You cannot use Out-Of-Character chat for another {time} seconds."
     muted: You have been muted for {time}.
     unmuted: You have been unmuted.
     static_text:

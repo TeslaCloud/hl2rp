@@ -29,13 +29,13 @@ function CMD:on_run(actor, targets, duration, ...)
 
   for k, v in ipairs(targets) do
     v:set_player_data('ooc_mute', CurTime() + duration)
-    v:notify('notification.muted', { time = Flux.Lang:nice_time(duration) })
+    v:notify('notification.muted', { time = Flux.Lang:duration(duration) })
   end
 
   self:notify_staff('command.gag.message', {
     admin = get_player_name(actor),
     target = util.player_list_to_string(targets),
-    time = Flux.Lang:nice_time(duration),
+    time = Flux.Lang:duration(duration),
     reason = reason
   })
 end

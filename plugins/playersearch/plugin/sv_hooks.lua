@@ -10,7 +10,7 @@ function PlayerSearch:start(actor, target)
   actor.search_target = target
 end
 
---- Ends a search and closes the searcher's inventory window.
+--- Ends a search, closing the searched player's inventories and their window for the searcher.
 -- @param actor [Player player doing the search, may be nil]
 -- @param target [Player player being searched]
 function PlayerSearch:stop(actor, target)
@@ -18,6 +18,10 @@ function PlayerSearch:stop(actor, target)
     actor.search_target = nil
 
     Cable.send(actor, 'fl_inventory_close')
+
+    if IsValid(target) then
+      actor:close_player_inventory(target)
+    end
   end
 
   if IsValid(target) then
@@ -71,7 +75,7 @@ function PlayerSearch:CanStartSearch(actor, target)
     return false, 'error.cant_now'
   end
 
-  if target.requested_search then
+  if IsValid(target.requested_search) then
     return false, 'error.search.request'
   end
 
@@ -91,14 +95,6 @@ end
 -- @param target [Player player being searched]
 -- @return [Boolean false and String error phrase if the search is not allowed, nil otherwise]
 function PlayerSearch:CanSearch(actor, target)
-  if target:facing(actor) then
-    return false, 'error.must_not_look'
-  end
-
-  if actor:GetPos():Distance(target:GetPos()) > 100 then
-    return false, 'error.too_far'
-  end
-
   if !IsValid(target) then
     return false, 'error.invalid_entity'
   end
@@ -106,13 +102,23 @@ function PlayerSearch:CanSearch(actor, target)
   if target:IsBot() then
     return false, 'error.invalid_entity'
   end
+
+  if target:facing(actor) then
+    return false, 'error.must_not_look'
+  end
+
+  if actor:GetPos():Distance(target:GetPos()) > 100 then
+    return false, 'error.too_far'
+  end
 end
 
 Cable.receive('fl_request_player_search', function(actor, target)
+  if !isentity(target) or !IsValid(target) or !target:IsPlayer() or target == actor then return end
+
   local success, error_text = hook.Run('CanStartSearch', actor, target)
 
   if success != false then
-    target.requested_search = true
+    target.requested_search = actor
 
     Cable.send(target, 'fl_request_player_search', actor)
   else
@@ -126,9 +132,13 @@ Cable.receive('fl_request_player_search', function(actor, target)
 end)
 
 Cable.receive('fl_resist_player_search', function(target, actor)
+  local requester = target.requested_search
+
+  if !IsValid(requester) or requester != actor then return end
+
   actor:notify('notification.search.resist', { player = target })
 
-  target.requested_search = false
+  target.requested_search = nil
 
   local cur_time = CurTime()
 
@@ -136,5 +146,19 @@ Cable.receive('fl_resist_player_search', function(target, actor)
 end)
 
 Cable.receive('fl_start_player_search', function(target, actor)
+  local requester = target.requested_search
+
+  if !IsValid(requester) or requester != actor then return end
+
+  target.requested_search = nil
+
+  local success, error_text = hook.Run('CanSearch', actor, target)
+
+  if success == false then
+    actor:notify(error_text)
+
+    return
+  end
+
   PlayerSearch:start(actor, target)
 end)

@@ -33,5 +33,3 @@ depends:
 depends_development:
   - devhud
   - profiler
-#  - linter
-#  - fdoc
