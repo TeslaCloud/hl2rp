@@ -138,7 +138,7 @@ end
 
 --- Makes every combine door require the CP officer card and saves the doors.
 function SCHEMA:InitialDoorsLoad()
-  for k, v in ipairs(ents.GetAll()) do
+  for k, v in ents.Iterator() do
     if v:is_combine_door() then
       v.conditions = { {
         id = 'has_item',

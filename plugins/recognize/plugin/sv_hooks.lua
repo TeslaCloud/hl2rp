@@ -47,7 +47,7 @@ Cable.receive('fl_recognize', function(actor, type, name, target)
       yell = Config.get('talk_radius') * 2
     }
 
-    for k, v in ipairs(player.GetAll()) do
+    for k, v in player.Iterator() do
       if actor:EyePos():Distance(v:EyePos()) <= ranges[type] then
         table.insert(targets, v)
       end
