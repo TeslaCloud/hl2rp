@@ -6,7 +6,6 @@ FACTION.material = 'flux/hl2rp/factions/overwatch.jpg'
 FACTION.has_name = false
 FACTION.has_gender = false
 FACTION.whitelisted = true
-FACTION.default_class = 'soldier'
 FACTION.name_template = 'OW.{data:squad}-{rank}.{callback:get_unit_id}'
 FACTION:set_data('squad', 'ECHO')
 FACTION.stats = {

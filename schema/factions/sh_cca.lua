@@ -6,7 +6,6 @@ FACTION.material = 'flux/hl2rp/factions/cca.jpg'
 FACTION.has_name = false
 FACTION.has_gender = true
 FACTION.whitelisted = true
-FACTION.default_class = 'recruit'
 FACTION.name_template = '{data:city}.{data:index}{rank}:{data:tagline}-{callback:get_unit_id}'
 FACTION:set_data('tagline', 'TAGLINE')
 FACTION:set_data('city', 'C24')

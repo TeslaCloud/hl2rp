@@ -7,8 +7,11 @@
 -- every plugin and before the gamemode, so a value returned from here would keep the
 -- gamemode from seeing the damage. The Damage and Limbs plugins hook the same events and
 -- return nothing either, except that the Damage plugin blocks damage that a handler of its
--- PrePlayerTakeDamage hook has cancelled: their multipliers and those of the schema multiply,
--- and limb damage is worked out from the health a player has lost after all of them.
+-- PrePlayerTakeDamage hook has cancelled. The hit location multipliers of players are the
+-- `damage_scale_*` configs of the Damage plugin, which hl2rp.yml sets to double the damage
+-- of the head, the arms and the legs; the schema only doubles those hits on NPCs, which the
+-- plugin does not cover. Limb damage is worked out from the health a player has lost after
+-- every multiplier.
 
 --- Plays a pain sound for the hurt player at most once a second, picked by faction, gender and hit limb.
 -- @param victim [Player player that was hurt]
@@ -67,12 +70,16 @@ function SCHEMA:PlayerDeath(victim, inflictor, attacker)
   end
 end
 
---- Doubles damage dealt to any limb other than the torso. The damage is scaled in place and
--- nothing is returned.
+--- Doubles damage dealt to any limb other than the torso of an NPC. Players are left alone:
+-- the `damage_scale_*` configs of the Damage plugin, set in hl2rp.yml, double their head,
+-- arm and leg hits, and doubling them here as well would multiply the two. The damage is
+-- scaled in place and nothing is returned.
 -- @param entity [Entity entity being damaged]
 -- @param hitgroup [Number HITGROUP_ enum of the hit body part]
 -- @param damage_info [CTakeDamageInfo damage being dealt]
 function SCHEMA:ScaleEntityDamage(entity, hitgroup, damage_info)
+  if entity:IsPlayer() then return end
+
   local limbgroup = self:hitgroup_to_limb(hitgroup)
 
   if limbgroup != LIMBGROUP_TORSO then

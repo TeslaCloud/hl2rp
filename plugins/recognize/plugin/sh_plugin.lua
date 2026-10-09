@@ -65,13 +65,6 @@ function Recognizes:get_known_name(viewer, target)
   return self:get_unrecognized_name(target)
 end
 
---- Escapes a name so that it can be given as an argument of a notification.
--- @param name [Any]
--- @return [String the name with its percent signs doubled]
-function Recognizes:escape_name(name)
-  return (tostring(name):gsub('%%', '%%%%'))
-end
-
 require_relative 'cl_hooks'
 require_relative 'sv_plugin'
 require_relative 'sv_hooks'

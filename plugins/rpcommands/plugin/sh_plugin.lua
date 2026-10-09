@@ -25,6 +25,12 @@ RPCommands.speech_commands = {
   whisper = { '(', ')' },
   yell = { '', '!!' }
 }
+RPCommands.typing_kinds = {
+  talking = { color = 'chat_ic_color', volume = 0 },
+  whispering = { color = 'chat_whisper_color', volume = -1 },
+  yelling = { color = 'chat_yell_color', volume = 1 },
+  performing = { color = 'chat_me_color', volume = 0 }
+}
 
 --- Registers the permission that exempts a player from the OOC and LOOC cooldowns.
 function RPCommands:RegisterPermissions()
@@ -86,6 +92,40 @@ function RPCommands:get_phrase_volume(text)
   text:strip()
 
   return text, volume
+end
+
+--- Reads a chat color from the config. A color that has arrived as a plain table is turned
+-- back into a Color.
+-- @param key [String config key of the color]
+-- @return [Color the color, or nil if the config does not hold one]
+function RPCommands:get_chat_color(key)
+  local value = Config.get(key)
+
+  if IsColor(value) then
+    return value
+  end
+
+  if istable(value) and isnumber(value.r) and isnumber(value.g) and isnumber(value.b) then
+    return Color(value.r, value.g, value.b, isnumber(value.a) and value.a or 255)
+  end
+end
+
+--- Registers the kinds of speech of the plugin with the Display Typing plugin, if it is
+-- loaded, on both realms: the server reads the range of a kind to decide who is sent the
+-- typing bubble, the client its label and color. Each kind is named by its
+-- 'ui.hud.display_typing' phrase and has the range of its default volume;
+-- `RPCommands:DisplayTypingGetKind` refines the color and the range for each text on the
+-- client.
+function RPCommands:OnPluginsLoaded()
+  if !DisplayTyping or !isfunction(DisplayTyping.register_kind) then return end
+
+  for id, data in pairs(self.typing_kinds) do
+    DisplayTyping:register_kind(id, {
+      name = 'ui.hud.display_typing.'..id,
+      color = CLIENT and self:get_chat_color(data.color) or nil,
+      range = self:get_volume_range(data.volume)
+    })
+  end
 end
 
 require_relative 'sv_plugin'

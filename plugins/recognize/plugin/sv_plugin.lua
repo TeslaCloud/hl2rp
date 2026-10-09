@@ -293,11 +293,11 @@ function Recognizes:introduce(actor, kind, name, target)
 
       if !v:knows_real_name(actor) then
         if !is_known then
-          v:notify('notification.recognize.new_name', { name = self:escape_name(name) }, Color('green'):lighten(100))
+          v:notify('notification.recognize.new_name', { name = tostring(name) }, Color('green'):lighten(100))
         else
           v:notify('notification.recognize.change_name', {
-            name = self:escape_name(known_name),
-            new_name = self:escape_name(name)
+            name = tostring(known_name),
+            new_name = tostring(name)
           }, Color('salmon'))
         end
       end
@@ -307,9 +307,9 @@ function Recognizes:introduce(actor, kind, name, target)
   end
 
   if name == real_name then
-    actor:notify('notification.recognize.true_name', { name = self:escape_name(name) }, Color('green'):lighten(100))
+    actor:notify('notification.recognize.true_name', { name = tostring(name) }, Color('green'):lighten(100))
   else
-    actor:notify('notification.recognize.false_name', { name = self:escape_name(name) }, Color('salmon'))
+    actor:notify('notification.recognize.false_name', { name = tostring(name) }, Color('salmon'))
   end
 
   return true
@@ -337,7 +337,7 @@ function Recognizes:player_forget(actor, target)
 
   if !actor:remove_recognize(target) then return false end
 
-  actor:notify('notification.recognize.forgotten', { name = self:escape_name(known_name) }, Color('salmon'))
+  actor:notify('notification.recognize.forgotten', { name = tostring(known_name) }, Color('salmon'))
 
   return true
 end

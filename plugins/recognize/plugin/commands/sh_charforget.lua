@@ -21,7 +21,7 @@ function CMD:on_run(actor, targets, ...)
   local forgotten = Flux.Command:str_to_player(actor, selector)
 
   if !istable(forgotten) or #forgotten == 0 then
-    Flux.Player:notify(actor, 'error.command.player_invalid', { player = Recognizes:escape_name(selector) })
+    Flux.Player:notify(actor, 'error.command.player_invalid', { player = tostring(selector) })
 
     return
   end
@@ -35,7 +35,7 @@ function CMD:on_run(actor, targets, ...)
       if known_name and v:remove_recognize(v2) then
         count = count + 1
 
-        v:notify('notification.recognize.forgotten', { name = Recognizes:escape_name(known_name) }, Color('salmon'))
+        v:notify('notification.recognize.forgotten', { name = tostring(known_name) }, Color('salmon'))
       end
     end
   end
@@ -47,8 +47,8 @@ function CMD:on_run(actor, targets, ...)
   end
 
   self:notify_staff('command.charforget.message', {
-    player = Recognizes:escape_name(get_player_name(actor)),
-    target = Recognizes:escape_name(util.player_list_to_string(targets)),
-    forgotten = Recognizes:escape_name(util.player_list_to_string(forgotten))
+    player = tostring(get_player_name(actor)),
+    target = tostring(util.player_list_to_string(targets)),
+    forgotten = tostring(util.player_list_to_string(forgotten))
   })
 end

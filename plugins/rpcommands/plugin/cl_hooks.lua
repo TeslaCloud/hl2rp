@@ -4,29 +4,6 @@
 -- bubble is labelled, colored like the chat line the text will become, and seen as far as
 -- that line will be heard.
 
-local typing_kinds = {
-  talking = { color = 'chat_ic_color', volume = 0 },
-  whispering = { color = 'chat_whisper_color', volume = -1 },
-  yelling = { color = 'chat_yell_color', volume = 1 },
-  performing = { color = 'chat_me_color', volume = 0 }
-}
-
---- Reads a chat color from the config. A color that has arrived as a plain table is turned
--- back into a Color.
--- @param key [String config key of the color]
--- @return [Color the color, or nil if the config does not hold one]
-local function get_chat_color(key)
-  local value = Config.get(key)
-
-  if IsColor(value) then
-    return value
-  end
-
-  if istable(value) and isnumber(value.r) and isnumber(value.g) and isnumber(value.b) then
-    return Color(value.r, value.g, value.b, isnumber(value.a) and value.a or 255)
-  end
-end
-
 --- Checks whether a text starts with one of the given chat prefixes.
 -- @param text [String lowercase text]
 -- @param prefixes [List<String> lowercase prefixes]
@@ -113,21 +90,6 @@ function RPCommands:OnPlayerChat(speaker, text, team_chat, is_dead)
   end
 end
 
---- Registers the kinds of speech of the plugin with the Display Typing plugin, if it is loaded.
--- Each kind is named by its 'ui.hud.display_typing' phrase and has the range of its default
--- volume; `RPCommands:DisplayTypingGetKind` refines the color and the range for each text.
-function RPCommands:OnPluginsLoaded()
-  if !DisplayTyping or !isfunction(DisplayTyping.register_kind) then return end
-
-  for id, data in pairs(typing_kinds) do
-    DisplayTyping:register_kind(id, {
-      name = 'ui.hud.display_typing.'..id,
-      color = get_chat_color(data.color),
-      range = self:get_volume_range(data.volume)
-    })
-  end
-end
-
 --- Keeps the colors of the registered kinds of speech in step with the chat colors, which
 -- arrive from the server after the kinds have been registered.
 -- @param key [String config key]
@@ -136,11 +98,11 @@ end
 function RPCommands:OnConfigReceived(key, old_value, new_value)
   if !DisplayTyping or !isfunction(DisplayTyping.find_kind) then return end
 
-  for id, data in pairs(typing_kinds) do
+  for id, data in pairs(self.typing_kinds) do
     local kind = data.color == key and DisplayTyping:find_kind(id)
 
     if kind then
-      kind.color = get_chat_color(key)
+      kind.color = self:get_chat_color(key)
     end
   end
 end
@@ -213,7 +175,7 @@ function RPCommands:DisplayTypingGetKind(target, text)
   return {
     id = id,
     name = 'ui.hud.display_typing.'..id,
-    color = get_chat_color(typing_kinds[id].color),
+    color = self:get_chat_color(self.typing_kinds[id].color),
     range = self:get_volume_range(volume),
     live = true
   }

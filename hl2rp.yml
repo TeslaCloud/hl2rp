@@ -1,3 +1,6 @@
+damage_scale_head: 2
+damage_scale_arms: 2
+damage_scale_legs: 2
 depends:
   - 3dtexts
   - admin
@@ -31,13 +34,11 @@ depends:
   - pickup_objects
   - displaytyping
   - settings
-  - classes
   - cinematics
   - spawnpoints
   - spawnsaver
   - damage
   - limbs
-  - quiz
   - vendors
   - propprotection
   - mapcleaner

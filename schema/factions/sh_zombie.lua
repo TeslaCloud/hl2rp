@@ -4,7 +4,6 @@ FACTION.phys_desc = 'faction.zombie.phys_desc'
 FACTION.color = Color(7, 135, 32)
 FACTION.material = 'flux/hl2rp/factions/citizen.jpg'
 FACTION.name_template = '{name}'
-FACTION.default_class = 'zombie'
 FACTION.name = 'faction.zombie.title'
 FACTION.has_gender = false
 FACTION.ooc_hidden = false

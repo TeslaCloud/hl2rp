@@ -28,7 +28,7 @@ function CMD:on_run(actor, targets, mode)
   mode = isstring(mode) and mode:utf8lower() or 'own'
 
   if !modes[mode] then
-    Flux.Player:notify(actor, 'error.recognize.invalid_mode', { mode = Recognizes:escape_name(mode) })
+    Flux.Player:notify(actor, 'error.recognize.invalid_mode', { mode = tostring(mode) })
 
     return
   end
@@ -46,7 +46,7 @@ function CMD:on_run(actor, targets, mode)
         Recognizes:forget_character(v:get_character_id())
       end
 
-      table.insert(names, Recognizes:escape_name(v:name(true)))
+      table.insert(names, tostring(v:name(true)))
     end
   end
 
@@ -57,7 +57,7 @@ function CMD:on_run(actor, targets, mode)
   end
 
   self:notify_staff('command.charclearrecognition.message.'..mode, {
-    player = Recognizes:escape_name(get_player_name(actor)),
+    player = tostring(get_player_name(actor)),
     target = table.concat(names, ', ')
   })
 end
