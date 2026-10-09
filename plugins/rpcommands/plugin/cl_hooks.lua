@@ -1,3 +1,59 @@
+--- Client side of the RolePlay Commands plugin: draws the static texts, hides what players say
+-- through the engine instead of the chatbox, and tells the Display Typing plugin what kind of
+-- speech a player is typing (talking, whispering, yelling or performing), so that the typing
+-- bubble is labelled, colored like the chat line the text will become, and seen as far as
+-- that line will be heard.
+
+local typing_kinds = {
+  talking = { color = 'chat_ic_color', volume = 0 },
+  whispering = { color = 'chat_whisper_color', volume = -1 },
+  yelling = { color = 'chat_yell_color', volume = 1 },
+  performing = { color = 'chat_me_color', volume = 0 }
+}
+
+--- Reads a chat color from the config. A color that has arrived as a plain table is turned
+-- back into a Color.
+-- @param key [String config key of the color]
+-- @return [Color the color, or nil if the config does not hold one]
+local function get_chat_color(key)
+  local value = Config.get(key)
+
+  if IsColor(value) then
+    return value
+  end
+
+  if istable(value) and isnumber(value.r) and isnumber(value.g) and isnumber(value.b) then
+    return Color(value.r, value.g, value.b, isnumber(value.a) and value.a or 255)
+  end
+end
+
+--- Checks whether a text starts with one of the given chat prefixes.
+-- @param text [String lowercase text]
+-- @param prefixes [List<String> lowercase prefixes]
+-- @return [Boolean]
+local function has_prefix(text, prefixes)
+  for k, v in ipairs(prefixes) do
+    if text:start_with(v) then
+      return true
+    end
+  end
+
+  return false
+end
+
+--- Checks whether a text is a radio message. The Radios plugin gives such a text a kind of
+-- speech of its own, but it is loaded after this plugin, so its answer to the
+-- DisplayTypingGetKind hook would never be asked for if this plugin claimed the text first.
+-- @param text [String the text being typed, or its outline]
+-- @return [Boolean false if the Radios plugin is not loaded]
+local function is_radio_text(text)
+  if !Communications or !isfunction(Communications.is_radio_text) then
+    return false
+  end
+
+  return Communications.is_radio_text(text) == true
+end
+
 --- Draws nearby visible static texts, fading with distance and screen position. Staff holding Alt also see
 -- who placed each text and when.
 function RPCommands:HUDPaint()
@@ -39,31 +95,155 @@ function RPCommands:HUDPaint()
   end
 end
 
---- Returns the typing indicator text for emotes, whispers, yells and regular talking.
+--- Keeps what players say through the engine out of the chat. What is typed into the chatbox
+-- reaches the server through the chatbox itself and comes back as a line of roleplay chat.
+-- Plain text sent with the `say` console command does not: the base gamemode would show it
+-- to every player on the server under the real name of the speaker, past the talk radius,
+-- recognition and the speaking rules. Chat prefixes and commands in such a text are handled
+-- by the server before it gets here, and the lines of the server console are added by the
+-- Chatbox plugin.
+-- @param speaker [Player the speaker, an invalid entity for the server console]
+-- @param text [String the message]
+-- @param team_chat [Boolean whether the message was sent to the team chat]
+-- @param is_dead [Boolean whether the speaker is dead]
+-- @return [Boolean true to hide what a player has said, nil for the server console]
+function RPCommands:OnPlayerChat(speaker, text, team_chat, is_dead)
+  if IsValid(speaker) then
+    return true
+  end
+end
+
+--- Registers the kinds of speech of the plugin with the Display Typing plugin, if it is loaded.
+-- Each kind is named by its 'ui.hud.display_typing' phrase and has the range of its default
+-- volume; `RPCommands:DisplayTypingGetKind` refines the color and the range for each text.
+function RPCommands:OnPluginsLoaded()
+  if !DisplayTyping or !isfunction(DisplayTyping.register_kind) then return end
+
+  for id, data in pairs(typing_kinds) do
+    DisplayTyping:register_kind(id, {
+      name = 'ui.hud.display_typing.'..id,
+      color = get_chat_color(data.color),
+      range = self:get_volume_range(data.volume)
+    })
+  end
+end
+
+--- Keeps the colors of the registered kinds of speech in step with the chat colors, which
+-- arrive from the server after the kinds have been registered.
+-- @param key [String config key]
+-- @param old_value [Any value the client had before]
+-- @param new_value [Any value that has been received]
+function RPCommands:OnConfigReceived(key, old_value, new_value)
+  if !DisplayTyping or !isfunction(DisplayTyping.find_kind) then return end
+
+  for id, data in pairs(typing_kinds) do
+    local kind = data.color == key and DisplayTyping:find_kind(id)
+
+    if kind then
+      kind.color = get_chat_color(key)
+    end
+  end
+end
+
+--- Tells what kind of in character speech a text is going to be once it is sent, the same way
+-- the server will read it: an action if the phrase starts with an asterisk, else a whisper or
+-- a yell if it has a volume, else regular speech. The `me`, `whisper` and `yell` commands are
+-- recognized by their exact names and aliases, so that `/w` does not match `/warn`. Works on
+-- the outlines that the Display Typing plugin sends in place of a text as well, since they
+-- keep the command and the punctuation at both ends.
+-- @param text [String the text being typed, or its outline]
+-- @return [String 'talking', 'whispering', 'yelling' or 'performing', Number volume of the
+--   phrase from -3 to 3; nothing for out of character chat, for radio messages, for other
+--   commands and for a text without a phrase]
+function RPCommands:get_typing_kind(text)
+  if !isstring(text) or !utf8.len(text) then return end
+
+  local lower = text:lower()
+
+  if has_prefix(lower, self.ooc_prefixes) or has_prefix(lower, self.looc_prefixes) then return end
+  if is_radio_text(text) then return end
+
+  local is_command, prefix_length = text:is_command()
+
+  if is_command then
+    local prefix = text:utf8sub(1, prefix_length)
+    local name, arguments = text:match('^([%w_]+)(.*)$', #prefix + 1)
+    local command = name and Flux.Command:find_by_id(name)
+
+    if !command or !self.speech_commands[command.id] then return end
+    if arguments != '' and !arguments:find('^%s') then return end
+
+    text = self:wrap_speech(command.id, arguments:strip())
+  else
+    text = text:strip()
+  end
+
+  if text == '' then return end
+
+  local phrase, volume = self:get_phrase_volume(text)
+
+  if phrase:start_with('*') then
+    return 'performing', volume
+  elseif volume < 0 then
+    return 'whispering', volume
+  elseif volume > 0 then
+    return 'yelling', volume
+  end
+
+  return 'talking', volume
+end
+
+--- Gives the typing bubble of a player the kind of speech they are typing: its label, the
+-- color of the chat line it will become and the range that line will be heard from, which
+-- follows the volume of the phrase. A knocked out player gets no bubble for in character
+-- speech, which they cannot say.
+-- @param target [Player player that is typing]
+-- @param text [String text being typed, or its outline]
+-- @return [Map/Boolean kind definition for the Display Typing plugin, false to show no bubble,
+--   nil for anything that is not in character speech]
+function RPCommands:DisplayTypingGetKind(target, text)
+  local id, volume = self:get_typing_kind(text)
+
+  if !id then return end
+
+  if IsValid(target) and isfunction(target.is_knocked_out) and target:is_knocked_out() then
+    return false
+  end
+
+  return {
+    id = id,
+    name = 'ui.hud.display_typing.'..id,
+    color = get_chat_color(typing_kinds[id].color),
+    range = self:get_volume_range(volume),
+    live = true
+  }
+end
+
+--- Returns the typing indicator text for emotes, whispers, yells and regular talking. Only
+-- asked when `RPCommands:DisplayTypingGetKind` has not decided the kind of speech.
 -- @param target [Player player that is typing]
 -- @param text [String text being typed]
 -- @return [String indicator text, nil for other commands]
 function RPCommands:DisplayTypingTextType(target, text)
-  if text:start_with('/me') or text:start_with('*') then
-    return t'ui.hud.display_typing.performing'
-  elseif text:start_with('/w') or text:start_with('(') then
-    return t'ui.hud.display_typing.whispering'
-  elseif text:start_with('/y') or text:end_with('!!') then
-    return t'ui.hud.display_typing.yelling'
-  elseif !text:is_command() then
-    return t'ui.hud.display_typing.talking'
+  local id = self:get_typing_kind(text)
+
+  if id then
+    return t('ui.hud.display_typing.'..id)
   end
 end
 
---- Shrinks the typing indicator range for whispers and extends it for yells.
+--- Shrinks the typing indicator range for whispers and extends it for yells, by as much as
+-- the volume of the phrase changes its hearing radius.
 -- @param target [Player player that is typing]
 -- @param text [String text being typed]
--- @return [Number range multiplier, nil for regular talking]
+-- @return [Number multiplier of the squared range, nil for regular talking]
 function RPCommands:DisplayTypingAdjustFadeoffMultiplier(target, text)
-  if text:start_with('/w') or text:start_with('(') then
-    return 0.025
-  elseif text:start_with('/y') or text:end_with('!!') then
-    return 1.75
+  local id, volume = self:get_typing_kind(text)
+
+  if id and volume != 0 then
+    local range = self:get_volume_range(volume)
+
+    return range * range
   end
 end
 

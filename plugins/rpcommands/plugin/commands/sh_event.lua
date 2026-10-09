@@ -1,3 +1,5 @@
+--- The `event` staff command: shows a line that describes an event to every player.
+
 CMD.name = 'Event'
 CMD.description = 'command.event.description'
 CMD.syntax = 'command.event.syntax'

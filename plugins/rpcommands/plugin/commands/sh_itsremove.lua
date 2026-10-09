@@ -1,3 +1,5 @@
+--- The `itsremove` command: removes the static text the caller is looking at.
+
 CMD.name = 'Itsremove'
 CMD.description = 'command.itsremove.description'
 CMD.permission = 'assistant'
@@ -11,6 +13,7 @@ CMD.aliases = {
   'removeits',
   'removeitstatic'
 }
+CMD.no_console = true
 
 --- Removes the static text the player is looking at if they placed it or are staff.
 -- @param actor [Player player running the command]
@@ -23,7 +26,8 @@ function CMD:on_run(actor)
       actor:notify('notification.static_text.removed')
 
       Log:print(
-        actor:Name(true)..' ('..actor:SteamID()..') removed static text: '..text..'; pos: '..tostring(pos),
+        actor:Name(true)..' ('..actor:SteamID()..') removed static text: '..tostring(v.text)..
+        '; pos: '..tostring(v.pos),
         'player_action'
       )
 

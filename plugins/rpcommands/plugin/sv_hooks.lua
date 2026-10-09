@@ -1,4 +1,11 @@
-Config.set('talk_radius', 350)
+--- Server hooks of the RolePlay Commands plugin and the pipeline that turns a typed phrase into
+-- a line of in character chat: `RPCommands:get_phrase_volume` (shared, in sh_plugin.lua) reads
+-- how loud the phrase is, `RPCommands:get_phrase_table` splits it into speech and actions, and
+-- `RPCommands:format_message` puts the chat line together. The file also sets the chat colors
+-- and keeps the static texts.
+--
+-- The talk radius is the 'talk_radius' config, which is defined in config/config.yml and can
+-- be edited in game. The chat colors are set here in code.
 
 local ic_color = Color('khaki')
 Config.set('chat_ic_color', ic_color)
@@ -37,12 +44,21 @@ function RPCommands:PlayerCanHearPlayersVoice(listener, talker)
   end
 end
 
---- Replaces regular chat messages with formatted in character speech and logs them.
+--- Replaces regular chat messages with formatted in character speech and logs them. A phrase
+-- that the player may not say (see `RPCommands:can_say_ic`), or that has nothing in it but
+-- markup, is replaced with a message that nobody hears and that
+-- `RPCommands:ChatboxShouldSendMessage` cancels.
 -- @param actor [Player player that sent the message]
 -- @param text [String message text]
 -- @param message_data [Table message data, replaced in place]
 function RPCommands:ChatboxAdjustPlayerSay(actor, text, message_data)
   table.Empty(message_data)
+
+  if !self:has_phrase_content(text) or !self:can_say_ic(actor, text) then
+    table.insert(message_data, { radius = -1, refused = true })
+
+    return
+  end
 
   local msg_table = self:format_message(actor, text)
 
@@ -50,23 +66,33 @@ function RPCommands:ChatboxAdjustPlayerSay(actor, text, message_data)
   Log:print(Chatbox.message_to_string(msg_table, ' '), 'player_ic')
 end
 
+--- Cancels the message that stands in for a phrase a player was not allowed to say.
+-- @param message_data [Table chat message data]
+-- @param listeners [List<Player> players the message is meant for]
+-- @return [Boolean false for a refused phrase, nil otherwise]
+function RPCommands:ChatboxShouldSendMessage(message_data, listeners)
+  if message_data.refused then
+    return false
+  end
+end
+
 --- Lets look-based messages be heard by players looking within the message radius of the sender.
 -- @param listener [Player player that would hear the message]
 -- @param message_data [Table chat message data]
 -- @return [Boolean whether the listener hears a look-based message, nil for other messages]
 function RPCommands:PlayerCanHear(listener, message_data)
-  if message_data.hear_when_look then
+  if message_data.hear_when_look and IsValid(message_data.sender) and isnumber(message_data.radius) then
     local look_pos = listener:GetEyeTraceNoCursor().HitPos
 
     return message_data.sender:GetPos():Distance(look_pos) <= message_data.radius
   end
 end
 
---- Prevents gagged players from using OOC chat.
+--- Prevents gagged players from using the OOC and LOOC chats.
 -- @param actor [Player player trying to use OOC]
 -- @return [Boolean false while the player is gagged, nil otherwise]
 function RPCommands:PlayerCanUseOOC(actor)
-  if actor:get_player_data('ooc_mute', 0) > CurTime() then
+  if self:get_ooc_mute_left(actor) > 0 then
     return false
   end
 end
@@ -97,30 +123,6 @@ end
 -- @param actor [Player player that has loaded in]
 function RPCommands:PlayerInitialized(actor)
   Cable.send(actor, 'fl_static_text_set', self.texts)
-end
-
---- Determines how loud a phrase is from its leading parentheses or trailing exclamation marks.
--- @param text [String phrase]
--- @return [String phrase without the parentheses, Number volume from -3 to 3]
-function RPCommands:get_phrase_volume(text)
-  local volume = 0
-
-  if text:start_with('(') then
-    local count = text:match('^([(]+)'):len()
-    local end_count = (text:match('([)]+)$') or ''):len()
-
-    volume = volume - count
-
-    text = text:sub(count + 1, -end_count - 1)
-  elseif text:end_with('!!') then
-    volume = volume + text:match('([!]+)$'):len() - 1
-  end
-
-  volume = math.clamp(volume, -3, 3)
-
-  text:strip()
-
-  return text, volume
 end
 
 --- Splits a phrase into alternating speech and asterisk emote parts with quotes and colors.
@@ -213,18 +215,20 @@ function RPCommands:format_message(speaker, text)
   table.insert(msg_table, {
     sender = speaker,
     position = speaker:EyePos(),
-    radius =
-      Config.get('talk_radius') * (volume == 0 and 1 or (volume < 0 and (0.8 + volume * 0.2) or (1.2 + volume * 0.4))),
+    radius = Config.get('talk_radius') * self:get_volume_range(volume),
     ic = true
   })
 
   return msg_table
 end
 
---- Sends a colored chat message to a single player.
+--- Sends a colored chat message to a single player. Nothing is sent for a player who is not
+-- valid, as the message would reach everyone instead.
 -- @param receiver [Player player to send the message to]
 -- @param notification_color [Color color of the message]
 -- @param message [String message]
 function RPCommands:NotifySelf(receiver, notification_color, message)
+  if !IsValid(receiver) then return end
+
   Cable.send(receiver, 'fl_notify_self', receiver, notification_color, message)
 end
