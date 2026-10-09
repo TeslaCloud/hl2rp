@@ -30,6 +30,19 @@ depends:
   - shared_flashlight
   - pickup_objects
   - displaytyping
+  - settings
+  - classes
+  - cinematics
+  - spawnpoints
+  - spawnsaver
+  - damage
+  - limbs
+  - quiz
+  - vendors
+  - propprotection
+  - mapcleaner
+  - gametime
+  - screeneffects
 depends_development:
   - devhud
   - profiler
