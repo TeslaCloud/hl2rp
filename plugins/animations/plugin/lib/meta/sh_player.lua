@@ -1,93 +1,47 @@
+--- Player extensions of the Animations plugin: starting and leaving an animation, and asking
+-- which one a player is playing. The server does the work; a client can only ask the server
+-- on behalf of its own local player.
+-- @module [Player]
+
 local player_meta = FindMetaTable('Player')
 
---- Plays the enter and loop sequences of a registered animation, freezing the player in third person.
--- Clientside it asks the server to start the animation. Animations with a duration end on their own.
--- @param animation [String ID of the registered animation]
-function player_meta:play_animation(animation)
+--- Makes the player play a registered animation, see `Animations:play`. Clientside it asks
+-- the server to start the animation for the local player, or to make them leave the one
+-- they are playing, as the context menu does; the server notifies the player if it refuses.
+-- Does nothing clientside when called on another player.
+-- @param id [String ID of the registered animation]
+-- @return [Boolean whether the animation has started, String phrase that says why not,
+--   Map arguments of the phrase or nil; nothing clientside]
+function player_meta:play_animation(id)
   if CLIENT then
-    Cable.send('fl_animation_start', animation)
-  end
-
-  local animation_table = Animations:get(animation)
-
-  if !animation_table then return end
-  if self:get_nv('fl_animation') then return end
-
-  local anim_duration = animation_table.duration
-  local full_duration = 0
-  local enter = animation_table.enter
-  local anim = animation_table.anim
-  local exit = animation_table.exit
-
-  if SERVER then
-    self:set_nv('fl_animation', animation)
-    self:set_nv('fl_animation_angle', self:GetAngles())
-    self:set_nv('fl_third_person', true)
-
-    self:freeze_move()
-    self:freeze_gun()
-  end
-
-  if enter then
-    local sequence, duration = self:LookupSequence(enter)
-
-    if sequence != -1 then
-      self:set_animation(enter, 0)
-
-      full_duration = duration
+    if self == LocalPlayer() then
+      Cable.send('fl_animations_play', id)
     end
+
+    return
   end
 
-  if anim then
-    local sequence, duration = self:LookupSequence(anim)
-
-    if sequence != -1 then
-      timer.Simple(full_duration, function()
-        if IsValid(self) then
-          self:set_animation(anim, 0)
-        end
-      end)
-    end
-  end
-
-  if anim_duration > 0 then
-    timer.Simple(full_duration + anim_duration, function()
-      if IsValid(self) then
-        self:leave_animation()
-      end
-    end)
-  end
+  return Animations:play(self, id)
 end
 
---- Plays the exit sequence of the current animation, then restores the player's movement and view.
+--- Makes the player leave the animation they are playing, with its exit sequence if it has
+-- one, see `Animations:leave`. Clientside it asks the server to do so for the local player
+-- and does nothing when called on another player.
+-- @return [Boolean false if the player is not playing an animation; nothing clientside]
 function player_meta:leave_animation()
-  if self.leaving_animation then return end
+  if CLIENT then
+    if self == LocalPlayer() then
+      Cable.send('fl_animations_leave')
+    end
 
-  local animation_table = Animations:get(self:get_nv('fl_animation'))
-  local exit = animation_table.exit
-  local sequence, duration = self:LookupSequence(exit)
-
-  self.leaving_animation = true
-
-  if sequence != -1 then
-    self:set_animation(exit)
-  else
-    duration = 0
+    return
   end
 
-  timer.Simple(duration, function()
-    if IsValid(self) then
-      self:stop_animation()
-      self.leaving_animation = nil
+  return Animations:leave(self)
+end
 
-      if SERVER then
-        self:set_nv('fl_animation_angle', nil)
-        self:set_nv('fl_animation', nil)
-        self:set_nv('fl_third_person', false)
-
-        self:unfreeze_move()
-        self:unfreeze_gun()
-      end
-    end
-  end)
+--- Returns the animation of the Animations plugin that the player is playing.
+-- @return [String ID of the animation, nil if the player is not playing one]
+function player_meta:get_played_animation()
+  return self:get_nv('fl_animation')
 end

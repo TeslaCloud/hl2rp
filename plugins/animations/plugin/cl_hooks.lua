@@ -1,3 +1,8 @@
+--- Client side of the Animations plugin: the panel in the context menu that lists the
+-- animations of the local player's model, and the crosshair being hidden during one.
+-- The panel only sends requests: the animation itself, the movement lock and the third
+-- person view all come from the server.
+
 --- Adds the animations panel to the context menu, listing every animation the local player's model supports.
 -- @param context_menu [Panel context menu the panel is parented to]
 function Animations:ContextMenuCreated(context_menu)
@@ -19,19 +24,31 @@ function Animations:ContextMenuCreated(context_menu)
   title:SizeToContents()
   title:Dock(TOP)
 
-  local list = vgui.Create('DScrollPanel', panel)
-  list:Dock(FILL)
+  local scroll = vgui.Create('DScrollPanel', panel)
+  scroll:Dock(FILL)
 
-  --- Refills the list with a button and model preview tooltip for each animation the player's model can play.
+  panel.previews = {}
+
+  --- Refills the list with a button and model preview tooltip for each animation the
+  -- player's model can play, in the order the animations were registered in. Clicking a
+  -- button asks the server to start the animation, or to leave the one being played.
   function panel:rebuild()
-    list:Clear()
+    scroll:Clear()
 
-    for k, v in pairs(Animations:all()) do
-      if v.enter and PLAYER:LookupSequence(v.enter) == -1
-      or v.anim and PLAYER:LookupSequence(v.anim) == -1
-      or v.exit and PLAYER:LookupSequence(v.exit) == -1 then continue end
+    for k, v in ipairs(self.previews) do
+      if IsValid(v) then
+        v:Remove()
+      end
+    end
 
-      local line = vgui.Create('fl_button', list)
+    self.previews = {}
+
+    for k, v in ipairs(Animations:get_list()) do
+      local sequences = Animations:get_sequences(PLAYER, v)
+
+      if !sequences then continue end
+
+      local line = vgui.Create('fl_button', scroll)
       line:Dock(TOP)
       line:set_text(t(v.name))
       line:set_text_offset(math.scale_x(4))
@@ -46,14 +63,19 @@ function Animations:ContextMenuCreated(context_menu)
       local preview_model = vgui.Create('DModelPanel', preview_back)
       preview_model:Dock(FILL)
       preview_model:SetModel(PLAYER:GetModel())
-      preview_model.Entity:SetSequence(v.anim)
       preview_model.LayoutEntity = function(pnl, entity)
         pnl:RunAnimation()
       end
 
+      if IsValid(preview_model.Entity) then
+        preview_model.Entity:SetSequence(sequences.variants[1])
+      end
+
       line:SetTooltipPanel(preview_back)
 
-      list:AddItem(line)
+      table.insert(self.previews, preview_back)
+
+      scroll:AddItem(line)
     end
   end
 
@@ -62,7 +84,11 @@ end
 
 --- Rebuilds the animations panel so it matches the player's current model.
 function Animations:OnContextMenuOpen()
-  Flux.animations_panel:rebuild()
+  local panel = Flux.animations_panel
+
+  if IsValid(panel) then
+    panel:rebuild()
+  end
 end
 
 --- Hides the crosshair while the local player is playing an animation.
