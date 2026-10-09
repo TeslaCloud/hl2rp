@@ -55,18 +55,22 @@ function THEME:PaintMainMenu(panel, width, height)
   local desc_w, desc_h = util.text_size(desc, self:get_font('main_menu_titles'))
   local author_w, author_h = util.text_size(author, self:get_font('main_menu_titles'))
   local version_w, version_h = util.text_size(version, self:get_font('main_menu_titles'))
-  local logo_offset = math.scale(panel.schema_logo_offset or 450)
+  -- The panel stores an already scaled offset, so it must not be scaled again here.
+  local logo_offset = panel.schema_logo_offset or math.scale(450)
+  local bar_height = math.scale(128)
+  local padding = math.scale(16)
+  local text_padding = math.scale(8)
 
   draw.blur_box(0, 0, width, height)
 
   surface.SetDrawColor(self:get_color('menu_background'):lighten(40))
-  surface.DrawRect(0, logo_offset, width, height / 8)
+  surface.DrawRect(0, logo_offset, width, bar_height)
 
   if logo then
     draw.textured_rect(
       logo,
       width * 0.5 - math.scale(200),
-      logo_offset + 16,
+      logo_offset + padding,
       math.scale(400),
       math.scale(96),
       Color(255, 255, 255)
@@ -76,29 +80,29 @@ function THEME:PaintMainMenu(panel, width, height)
   draw.SimpleText(
     desc,
     self:get_font('main_menu_titles'),
-    16,
-    logo_offset + 128 - desc_h - 8,
+    padding,
+    logo_offset + bar_height - desc_h - text_padding,
     self:get_color('schema_text')
   )
   draw.SimpleText(
     author,
     self:get_font('main_menu_titles'),
-    width - author_w - 16,
-    logo_offset + 128 - author_h - 8,
+    width - author_w - padding,
+    logo_offset + bar_height - author_h - text_padding,
     self:get_color('schema_text')
   )
   draw.SimpleText(
     title,
     self:get_font('main_menu_titles'),
-    width - title_w - 8,
-    logo_offset + height - title_h - 8,
+    width - title_w - text_padding,
+    logo_offset + height - title_h - text_padding,
     self:get_color('schema_text')
   )
   draw.SimpleText(
     version,
     self:get_font('main_menu_titles'),
-    8,
-    logo_offset + height - version_h - 8,
+    text_padding,
+    logo_offset + height - version_h - text_padding,
     self:get_color('schema_text')
   )
 end
@@ -116,7 +120,7 @@ function THEME:PaintCharPanel(panel, w, h)
       char_data.name,
       self:get_font('main_menu_titles'),
       w * 0.5 - name_w * 0.5,
-      4,
+      math.scale(4),
       self:get_color('schema_text')
     )
 
