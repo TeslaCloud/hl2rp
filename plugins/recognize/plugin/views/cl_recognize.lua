@@ -1,3 +1,8 @@
+--- The recognize menu (`fl_recognize`), which the Recognize plugin opens on the ShowTeam key:
+-- the player picks who hears the introduction (the player they look at, or everyone within
+-- whisper, talk or yell range) and introduces themselves under their real name or a false
+-- one. The false names used before are kept on the client and offered again.
+
 local PANEL = {}
 
 --- Builds the recognize menu with range buttons, a real name button, a fake name entry and the name history.

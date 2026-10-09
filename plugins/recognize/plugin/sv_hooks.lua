@@ -1,18 +1,12 @@
-Config.set('recog_must_see', true)
+--- Server-side hooks of the Recognize plugin: networks the recognitions of a loaded
+-- character, decides who an introduction reaches, erases recognitions when a character
+-- dies or is deleted and names the characters on the access lists of doors.
 
 --- Networks the names a character recognizes others by once it is loaded.
 -- @param owner [Player player the character belongs to]
 -- @param character [Character loaded character]
 function Recognizes:PostCharacterLoaded(owner, character)
-  local recognizes = {}
-
-  if character.recognizes then
-    for k, v in pairs(character.recognizes) do
-      recognizes[v.target_id] = v.name
-    end
-  end
-
-  owner:set_nv('fl_recognizes', recognizes)
+  self:sync(owner)
 end
 
 --- Prevents players from recognizing themselves or, if recog_must_see is set, players they cannot see.
@@ -29,50 +23,45 @@ function Recognizes:PlayerCanRecognize(actor, target)
   end
 end
 
-Cable.receive('fl_recognize', function(actor, type, name, target)
-  local targets = {}
+--- Erases recognitions when a character dies, as the configs ask for: the character
+-- forgets everyone (`recog_forget_on_death`), and everyone who knew the character by its
+-- real name forgets it (`recog_forgotten_on_death`). Nothing happens while the
+-- recognition system is off.
+-- @param victim [Player]
+-- @param inflictor [Entity]
+-- @param attacker [Entity]
+function Recognizes:PlayerDeath(victim, inflictor, attacker)
+  if !self:is_enabled() or victim:IsBot() or !victim:is_character_loaded() then return end
 
-  name = name or actor:name(true)
-
-  if type == 'target' then
-    local target = target or actor:GetEyeTraceNoCursor().Entity
-
-    if IsValid(target) and target:EyePos():Distance(actor:EyePos()) <= Config.get('talk_radius') * 4 then
-      table.insert(targets, target)
-    end
-  else
-    local ranges = {
-      whisper = Config.get('talk_radius') * 0.25,
-      talk = Config.get('talk_radius'),
-      yell = Config.get('talk_radius') * 2
-    }
-
-    for k, v in player.Iterator() do
-      if actor:EyePos():Distance(v:EyePos()) <= ranges[type] then
-        table.insert(targets, v)
-      end
-    end
+  if Config.get('recog_forget_on_death') and victim:clear_recognizes() > 0 then
+    victim:notify('notification.recognize.forgot_everyone', nil, Color('salmon'))
   end
 
-  for k, v in ipairs(targets) do
-    if hook.Run('PlayerCanRecognize', actor, v) != false then
-      local is_known, known_name = v:recognizes(actor)
-
-      if !v:knows_real_name(actor) then
-        if !is_known then
-          v:notify('notification.recognize.new_name', { name = name }, Color('green'):lighten(100))
-        else
-          v:notify('notification.recognize.change_name', { name = known_name, new_name = name }, Color('salmon'))
-        end
-      end
-
-      v:add_recognize(actor, name)
-    end
+  if Config.get('recog_forgotten_on_death') then
+    self:forget_character(victim:get_character_id(), victim:name(true))
   end
+end
 
-  if name == actor:name(true) then
-    actor:notify('notification.recognize.true_name', { name = name }, Color('green'):lighten(100))
-  else
-    actor:notify('notification.recognize.false_name', { name = name }, Color('salmon'))
-  end
-end)
+--- Deletes the recognitions of a character that is about to be deleted, and makes every
+-- other character forget it.
+-- @param actor [Player player who deletes the character]
+-- @param id [Number ID of the character]
+-- @param character [Character the character that is about to be deleted]
+function Recognizes:OnCharacterDelete(actor, id, character)
+  self:clear_records(character)
+  self:forget_character(id)
+end
+
+--- Puts a character on the access list of a door under the name that the player who gives
+-- the access knows it by, so that the list does not give away a real name. A stranger is
+-- listed by the start of their physical description.
+-- @param actor [Player the player who gives the access]
+-- @param target [Player the player whose active character receives it]
+-- @param entity [Entity the door, or the main door of its group]
+-- @return [String the name to list the character under, nil while the recognition system
+--   is off]
+function Recognizes:GetDoorAccessName(actor, target, entity)
+  if !self:is_enabled() then return end
+
+  return self:get_known_name(actor, target)
+end

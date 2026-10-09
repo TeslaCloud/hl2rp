@@ -1,9 +1,14 @@
---- Opens the recognize menu when the show team key is pressed.
+--- Client-side hooks of the Recognize plugin: opens the recognize menu, shows strangers as
+-- strangers on the target ID, in chat and on the scoreboard, and adds the options to
+-- introduce yourself to a player and to forget them to the player menus.
+
+--- Opens the recognize menu when the show team key is pressed, unless the recognition
+-- system is off.
 -- @param client [Player local player]
 -- @param bind [String bind that was pressed]
 -- @param pressed [Boolean whether the key was pressed or released]
 function Recognizes:PlayerBindPress(client, bind, pressed)
-  if bind:find('gm_showteam') then
+  if bind:find('gm_showteam') and self:is_enabled() then
     local recognize_menu = vgui.Create('fl_recognize')
     recognize_menu:MakePopup()
     recognize_menu:SetPos(ScrW() * 0.5 - recognize_menu:GetWide() * 0.5, ScrH() * 0.6)
@@ -26,13 +31,9 @@ end
 -- @param target [Player player to get the name of]
 -- @return [String displayed name]
 function Recognizes:GetPlayerName(target)
-  local is_known, known_name = PLAYER:recognizes(target)
+  if !IsValid(PLAYER) then return end
 
-  if is_known then
-    return known_name
-  else
-    return '['..target:get_phys_desc():utf8sub(1, 32)..'...]'
-  end
+  return self:get_known_name(PLAYER, target)
 end
 
 --- Shows real names in out of character messages.
@@ -55,10 +56,14 @@ function Recognizes:IsCharacterCardVisible(card, target)
   end
 end
 
---- Adds a recognize submenu to introduce yourself to a player by real name, a new fake name or a recent one.
+--- Adds a recognize submenu to introduce yourself to a player by real name, a new fake name or a recent one,
+-- and to forget the player if the character of the local player has them stored. Nothing
+-- is added while the recognition system is off.
 -- @param menu [Panel interaction menu]
 -- @param target [Player player the menu was opened for]
 function Recognizes:CreatePlayerInteractions(menu, target)
+  if !self:is_enabled() then return end
+
   local recognize_menu, recognize_menu_option = menu:AddSubMenu(t'ui.recognize.title')
   recognize_menu_option:SetIcon('icon16/user_comment.png')
 
@@ -98,6 +103,31 @@ function Recognizes:CreatePlayerInteractions(menu, target)
       Cable.send('fl_recognize', 'target', v, target)
     end)
   end
+
+  if PLAYER:get_recognize(target) then
+    recognize_menu:AddOption(t'ui.recognize.forget', function()
+      surface.PlaySound('buttons/blip1.wav')
+
+      if IsValid(target) then
+        Cable.send('fl_recognize_forget', target)
+      end
+    end):SetIcon('icon16/user_delete.png')
+  end
+end
+
+--- Adds the option to forget a player to the menu of their scoreboard card, if the
+-- character of the local player has them stored.
+-- @param menu [Panel the DermaMenu being filled]
+-- @param target [Player the player the card shows]
+-- @param card [Panel the fl_scoreboard_player card that was clicked]
+function Recognizes:CreateScoreboardPlayerMenu(menu, target, card)
+  if !self:is_enabled() or target == PLAYER or !PLAYER:get_recognize(target) then return end
+
+  menu:AddOption(t'ui.recognize.forget', function()
+    if IsValid(target) then
+      Cable.send('fl_recognize_forget', target)
+    end
+  end):SetIcon('icon16/user_delete.png')
 end
 
 --- Moves players the local player does not recognize out of their faction into a players online category.
