@@ -5,3 +5,4 @@ depends:
   - "sh_prefixes.lua"
   - rpcommands
   - items
+  - inventory

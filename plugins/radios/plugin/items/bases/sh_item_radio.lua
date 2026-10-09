@@ -1,3 +1,10 @@
+--- ItemRadio is the base class for radios: items that let the character who keeps one in
+-- their hotbar speak and listen on a frequency.
+-- A radio can be turned on and off and retuned through its item menu. A derived item may
+-- set `frequency`, the frequency its instances are tuned to until a player changes it
+-- (100.1 by default).
+-- @module [ItemRadio]
+
 class 'ItemRadio' extends 'ItemEquipable'
 
 ItemRadio.name = 'item.radio.name'
@@ -51,8 +58,12 @@ function ItemRadio:set_frequency(frequency)
   self:play_sound('set_frequency')
 end
 
---- Asks the player to enter a new frequency for the radio.
+--- Asks the player to enter a new frequency for the radio. Called on the server when the
+-- frequency button of the item menu is pressed; the answer is checked by
+-- `Communications.tune_radio` before the radio is retuned.
 -- @param actor [Player player changing the frequency]
 function ItemRadio:change_frequency(actor)
-  Cable.send(actor, 'fl_get_radio_frequency', self.instance_id, self:get_frequency())
+  if !SERVER then return end
+
+  Communications.request_frequency(actor, self)
 end

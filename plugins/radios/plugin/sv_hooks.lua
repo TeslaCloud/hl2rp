@@ -1,79 +1,65 @@
-Config.set('radio_chat_color', Color(100, 228, 100))
+--- Server-side hooks of the Radios plugin: lets radio messages reach the players who are
+-- tuned in, follows a transmission through the chatbox and registers the chat prefixes
+-- that players speak on the radio with.
 
---- Returns the first enabled radio in a player's hotbar.
--- @param owner [Player player to check]
--- @return [Item enabled radio, nil if there is none]
-function Communications.get_active_radio(owner)
-  for k, v in pairs(owner:get_items('hotbar')) do
-    if v:is('radio') and v:is_enabled() then
-      return v
-    end
-  end
-end
-
---- Sends a radio message on a frequency, heard by nearby players and anyone tuned to it.
--- @param speaker [Player player talking]
--- @param text [String message]
--- @param frequency [Number frequency to talk on]
-function Communications.speak_radio(speaker, text, frequency)
-  local color = Config.get('radio_chat_color')
-  local msg_table = {
-    color,
-    Config.get('default_font_size'),
-    speaker, ' talks on radio: "', text:chomp(' '):spelling(), '"',
-    {
-      sender = speaker,
-      position = speaker:EyePos(),
-      radius = Config.get('talk_radius') * 0.5,
-      ic = true,
-      frequency = frequency
-    }
-  }
-
-  Chatbox.add_text(nil, unpack(msg_table))
-end
-
---- Lets radio messages be heard only by the sender and players with an enabled radio on the same frequency.
+--- Makes radio messages reach their listeners wherever they are: the speaker and, while
+-- `Communications.speak_radio` is sending the message, the listeners of that transmission;
+-- for any other message with a frequency, the players with an enabled radio tuned to it in
+-- their hotbar.
+--
+-- The chatbox only lets this hook force a message through, so the false returned for
+-- everyone else does not block anything: those players are still checked against the radius
+-- of the message, which is how the players near the speaker overhear it. That is intended.
 -- @param listener [Player player that would hear the message]
--- @param message_data [Table message data, radio messages have a frequency field]
--- @return [Boolean whether the listener hears a radio message, nil for other messages]
+-- @param message_data [Map message data, radio messages have a frequency field]
+-- @return [Boolean true if the listener receives the radio message over the radio, false if
+--   they can only overhear it, nil for other messages]
 function Communications:PlayerCanHear(listener, message_data)
   local frequency = message_data.frequency
 
-  if frequency then
-    if message_data.sender == listener then
-      return true
-    end
+  if !frequency then return end
 
-    for k, v in pairs(listener:get_items('hotbar')) do
-      if v:is('radio') and v:is_enabled() and v:get_frequency() == frequency then
-        return true
-      end
-    end
+  if message_data.sender == listener then
+    return true
+  end
 
-    return false
+  local transmission = self.transmission
+
+  if transmission and transmission.speaker == message_data.sender then
+    return transmission.listeners[listener] == true
+  end
+
+  return Communications.is_tuned_to(listener, frequency)
+end
+
+--- Keeps the list of the players a radio message is sent to out of the copy of the message
+-- that each of them receives, so that a client cannot tell who else is listening.
+-- @param listener [Player player the copy of the message is for]
+-- @param message_data [Map the copy of the message data, radio messages have a frequency
+--   field]
+function Communications:AdjustMessageData(listener, message_data)
+  if message_data.frequency then
+    message_data.listeners = nil
   end
 end
 
-Cable.receive('fl_set_radio_frequency', function(actor, instance_id, frequency)
-  local item_obj = Item.find_instance_by_id(instance_id)
+--- Notes who has received the radio message that `Communications.speak_radio` is sending,
+-- which also tells it that the message has not been cancelled.
+-- @param message_data [Map message data, radio messages have a frequency field]
+-- @param receivers [List<Player> the players the message has been sent to]
+function Communications:ChatboxMessageSent(message_data, receivers)
+  local transmission = self.transmission
 
-  if item_obj then
-    item_obj:set_frequency(frequency)
+  if transmission and message_data.frequency and transmission.speaker == message_data.sender then
+    transmission.receivers = receivers
   end
-end)
+end
 
 Prefixes:add('radio', {
-  prefix = { '/r ', '/radio', ';' },
+  prefix = Communications.prefixes,
   callback = function(actor, text, team_chat)
-    local item_obj = Communications.get_active_radio(actor)
+    if !IsValid(actor) then return end
 
-    if item_obj then
-      local frequency = item_obj:get_frequency()
-
-      Communications.speak_radio(actor, text, frequency)
-    else
-      actor:notify('notification.no_active_radio')
-    end
+    Communications.say_radio(actor, text)
   end
 })

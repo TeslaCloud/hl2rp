@@ -1,12 +1,13 @@
-Cable.receive('fl_get_radio_frequency', function(instance_id, frequency)
-  Derma_StringRequest(t'ui.radio.frequency', t'ui.radio.frequency_message', frequency,
-  function(text)
-    local number = tonumber(text)
+--- Client-side hooks of the Radios plugin: tells the Display Typing plugin when a player is
+-- typing a radio message.
 
-    if number and string.find(text, '^%d%d%d.%d$') then
-      Cable.send('fl_set_radio_frequency', instance_id, frequency)
-    else
-      PLAYER:notify('error.frequency')
-    end
-  end, nil, t'ui.radio.set', t'ui.cancel')
-end)
+--- Shows players who are typing a message with a radio prefix as 'radioing'. The text may be
+-- the outline of what is typed (see `DisplayTyping:outline`), which is matched the same way.
+-- @param target [Player player that is typing]
+-- @param text [String text being typed, or its outline]
+-- @return [String 'radioing' for a radio message, nil for anything else]
+function Communications:DisplayTypingGetKind(target, text)
+  if Communications.is_radio_text(text) then
+    return 'radioing'
+  end
+end

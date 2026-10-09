@@ -1,11 +1,17 @@
 en:
   error:
     frequency: Invalid frequency. It should be in XXX.X format.
+    radio:
+      unavailable: You can no longer use that radio.
   notification:
     no_active_radio: You don't have an active radio. Put the turned on radio to the hotbar inventory.
+    radio:
+      frequency_set: "The radio is now tuned to {frequency}."
   item:
     category:
-      radio: Communications
+      communication: Communications
+    slot:
+      communication: Communication
     option:
       enable: Turn On
       disable: Turn Off
@@ -14,7 +20,11 @@ en:
       name: Radio
       description: Ordinary civil radio, which allows to transmit messages at a small distance.
   ui:
+    chat:
+      radio: "talks on radio"
+    hud:
+      display_typing:
+        radioing: RADIOING...
     radio:
       frequency: Set Radio Frequency
       frequency_message: Enter the frequency at which the radio can receive or send messages. It should be in XXX.X format.
-      set: Set
