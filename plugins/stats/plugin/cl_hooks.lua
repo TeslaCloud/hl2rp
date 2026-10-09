@@ -1,3 +1,6 @@
+--- Client side of the Stats plugin: adds the stats stage to character creation and words the
+-- refusal of a character whose stat levels the server did not accept.
+
 --- Registers the stats character creation panel with the theme.
 -- @param current_theme [Theme theme that was loaded]
 function Stats:OnThemeLoaded(current_theme)

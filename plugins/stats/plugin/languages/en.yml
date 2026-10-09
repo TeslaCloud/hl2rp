@@ -171,12 +171,83 @@ en:
       terrible:
         You are weak-minded. It is difficult for you to pronounce words. 
         Difficult situations are almost impossible for you.
+    determination:
+      title: Determination
+      short: DET
+      description:
+        Willpower and resolve of your character. Determines how well they hold
+        together under pain, fear and pressure.
+      superb:
+        Your will is unbreakable. Pain, fear and exhaustion are things you notice
+        and then set aside. You carry on long after anyone else would have given up.
+      great:
+        You are remarkably strong-willed. It takes a lot to shake you, and wounds
+        that would stop most people only slow you down.
+      good:
+        Your resolve is above average. You keep your head in a tight spot and can
+        push through pain when it matters.
+      fair:
+        Your willpower is that of the average person. You can grit your teeth for
+        a while, but pain and fear get to you like they do to anyone.
+      mediocre:
+        You are somewhat weak-willed. Pressure wears you down quickly, and a bad
+        wound takes most of the fight out of you.
+      poor:
+        You have little resolve. You give in to pain and intimidation easily and
+        tend to back down when things get rough.
+      terrible:
+        You have no will of your own. The slightest pain or threat is enough to
+        break you completely.
+  config:
+    stats:
+      title: Stats
+      desc: Character stats and what they change in play.
+      creation_points:
+        name: Stat points at creation
+        desc: How many points a new character has to spread over its stats. The chosen stat levels have to add up to this number.
+      faction_bonuses:
+        name: Faction stat bonuses
+        desc: Give characters the stat bonuses of their faction, as boosts that last for as long as they are in it.
+      perception_hearing:
+        name: Hearing range per perception level
+        desc: Meters added to the range at which a character hears in-character speech for every level of perception, and taken off for every level below zero. 0 turns the effect off.
+      endurance_stamina:
+        name: "Stamina per endurance level, %"
+        desc: Percent by which stamina drains slower and regenerates faster for every level of endurance, and the other way round below zero. 0 turns the effect off.
+      endurance_recovery:
+        name: "Recovery per endurance level, %"
+        desc: Percent by which health regeneration and the recovery of hurt limbs speed up for every level of endurance, and slow down below zero. Needs the Damage and Limb Damage plugins. 0 turns the effect off.
+      strength_lifting:
+        name: "Lifting per strength level, %"
+        desc: Percent by which the heaviest object a character can pick up and the force of their throw grow for every level of strength, and shrink below zero. 0 turns the effect off.
+      reflexes_fall:
+        name: "Fall damage per reflexes level, %"
+        desc: Percent of fall damage a character is spared for every level of reflexes, and takes on top for every level below zero. Needs the Damage plugin. 0 turns the effect off.
+      intelligence_prices:
+        name: "Vendor prices per intelligence level, %"
+        desc: Percent by which vendors sell cheaper to a character for every level of intelligence, and dearer below zero. A price never falls below what the vendor pays for the item. Needs the Vendors plugin. 0 turns the effect off.
+      intelligence_learning:
+        name: "Skill progress per intelligence level, %"
+        desc: Percent by which the progress a character gains in skills grows for every level of intelligence, and shrinks below zero. 0 turns the effect off.
+      determination_pain:
+        name: "Injury penalties per determination level, %"
+        desc: Percent by which the slowdown and the aim drift of hurt limbs weaken for every level of determination, and grow below zero. Needs the Limb Damage plugin. 0 turns the effect off.
   error:
     attribute:
       sum: Attribute sum is not equal to the maximum amount of the attributes.
   ui:
     effect:
       hearing_radius: Hearing Radius
+      stamina_drain: Stamina Drain
+      stamina_regen: Stamina Regeneration
+      health_regen: Health Regeneration
+      limb_recovery: Limb Recovery
+      carry_mass: Carry Weight
+      throw_force: Throw Force
+      fall_damage: Fall Damage
+      vendor_prices: Vendor Prices
+      skill_progress: Skill Progress
+      limb_penalties: Injury Penalties
     char_create:
       invalid_points: Invalid amount of points
       excess_points: You must assign all points
@@ -184,4 +255,5 @@ en:
       stats_random: Randomize
       stats: Stats
       cur_level: Current level
+      faction_bonus: "Faction bonus: {bonus}"
       effects: Effects

@@ -1,14 +1,58 @@
+--- The stats stage of character creation (`fl_character_creation_stats`): a list of the
+-- stats with a counter each, the points that are left to spend, a button that spreads the
+-- points at random, and a panel that describes the selected stat, the level picked for it,
+-- the bonus the chosen faction adds and what the stat changes in play at that level.
+-- The picked levels are handed over as the `attributes` field of the creation data, which
+-- the server checks again.
+
 local PANEL = {}
 PANEL.id = 'stats'
 PANEL.text = 'ui.char_create.stats'
-PANEL.stats = {}
+
+--- Creates the icon of a stat: a FontAwesome icon if its name starts with 'fa-', otherwise
+-- an image.
+-- @param parent [Panel panel to put the icon in]
+-- @param icon [String FontAwesome icon name or path of an image]
+-- @param size [Number width and height of the icon]
+-- @return [Panel the icon, or nil if the stat has none]
+local function create_icon(parent, icon, size)
+  if !isstring(icon) or icon == '' then return end
+
+  if icon:start_with('fa-') then
+    local icon_size = math.floor(size * 0.75)
+    local panel = vgui.Create('DPanel', parent)
+    panel:SetSize(size, size)
+    panel:SetMouseInputEnabled(false)
+    panel.Paint = function(pnl, w, h)
+      FontAwesome:draw(icon, w * 0.5, h * 0.5, icon_size, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    end
+
+    return panel
+  end
+
+  local image = vgui.Create('DImage', parent)
+  image:SetImage(icon)
+  image:SetKeepAspect(true)
+  image:SetSize(size, size)
+
+  return image
+end
 
 --- Sets up the available attribute points.
 function PANEL:Init()
+  self.stats = {}
+  self.bonuses = {}
   self.start_points = Stats:default_attribute_points()
-  self.points = self.points or self.start_points
+  self.points = self.start_points
 
   self:DockPadding(0, math.scale(48), 0, 0)
+end
+
+--- Returns the bonus that the faction chosen earlier in character creation adds to a stat.
+-- @param attribute_id [String ID of the stat]
+-- @return [Number bonus levels, 0 if the faction gives none]
+function PANEL:get_bonus(attribute_id)
+  return self.bonuses[attribute_id] or 0
 end
 
 --- Draws the remaining attribute points in the bottom right corner.
@@ -23,11 +67,13 @@ function PANEL:PaintOver(w, h)
 end
 
 --- Builds the list of stat attributes with point counters, the attribute details panel and the randomize button,
--- restoring previously entered values.
+-- restoring previously entered values. The points that are left are worked out from the
+-- restored levels, so that they always match what the server is going to check.
 -- @param parent [Panel character creation menu]
 function PANEL:on_open(parent)
   local scrw, scrh = ScrW(), ScrH()
   local fa_icon_size = math.scale(16)
+  local faction_table = Factions and Factions.find_by_id(parent.char_data.faction)
   local selected_attribute
   local stat_translate = {
     'superb',
@@ -38,6 +84,8 @@ function PANEL:on_open(parent)
     'poor',
     'terrible'
   }
+
+  self.bonuses = Stats:faction_bonuses_enabled() and Stats:get_faction_bonuses(faction_table) or {}
 
   self.attributes_list = vgui.Create('DScrollPanel', self)
   self.attributes_list:SetSize(scrw * 0.15 - math.scale_x(4))
@@ -68,16 +116,7 @@ function PANEL:on_open(parent)
     panel:SetDrawBackground(false)
     panel:Dock(TOP)
 
-    local icon
-
-    if selected_attribute.icon then
-      local size = math.scale(48)
-
-      icon = vgui.Create('DImage', panel)
-      icon:SetImage(selected_attribute.icon)
-      icon:SetKeepAspect(true)
-      icon:SetSize(size, size)
-    end
+    local icon = create_icon(panel, selected_attribute.icon, math.scale(48))
 
     local title = vgui.Create('DLabel', panel)
     title:SetText(t(selected_attribute.name))
@@ -133,9 +172,28 @@ function PANEL:on_open(parent)
     level_desc:SetAutoStretchVertical(true)
     level_desc:Dock(TOP)
 
-    local effects = selected_attribute.effects
+    local bonus = self:get_bonus(selected_attribute.attribute_id)
 
-    if selected_attribute.effects then
+    if bonus != 0 then
+      local bonus_label = vgui.Create('DLabel', pnl)
+      bonus_label:SetText(t('ui.char_create.faction_bonus', { bonus = Stats:format_change(bonus) }))
+      bonus_label:SetFont(Theme.get_font('text_normal'))
+      bonus_label:SetColor(Stats:get_change_color(bonus))
+      bonus_label:SizeToContents()
+      bonus_label:DockMargin(0, math.scale(8), 0, 0)
+      bonus_label:Dock(TOP)
+    end
+
+    local active_effects = {}
+
+    for k, v in ipairs(selected_attribute.effects or {}) do
+      if !isfunction(v.is_active) or v.is_active() then
+        table.insert(active_effects, v)
+      end
+    end
+
+    if #active_effects > 0 then
+      local effect_level = raw_value + bonus
       local effect_title = vgui.Create('DLabel', pnl)
       effect_title:SetText(t('ui.char_create.effects'))
       effect_title:SetFont(Font.size(Theme.get_font('text_bold'), math.scale(32)))
@@ -145,11 +203,11 @@ function PANEL:on_open(parent)
       effect_title:Dock(TOP)
       effect_title:SetTall(effect_title:GetTall() + math.scale(32))
 
-      for k, v in pairs(effects) do
+      for k, v in ipairs(active_effects) do
         local effect = vgui.Create('DLabel', pnl)
-        effect:SetText(t(v.text)..' '..t(v.get_value(raw_value)))
+        effect:SetText(t(v.text)..' '..t(v.get_value(effect_level)))
         effect:SetFont(Theme.get_font('text_normal'))
-        effect:SetColor(v.get_color(raw_value))
+        effect:SetColor(v.get_color(effect_level))
         effect:SizeToContents()
         effect:Dock(TOP)
       end
@@ -188,7 +246,7 @@ function PANEL:on_open(parent)
         selected_attribute = v
       end
 
-      if self.points - diff < 0 then
+      if diff > 0 and self.points - diff < 0 then
         return false
       else
         surface.PlaySound('buttons/blip1.wav')
@@ -201,15 +259,11 @@ function PANEL:on_open(parent)
       self.attribute_panel:rebuild()
     end
 
-    local icon
+    local icon_size = stat_line:GetTall() * 0.75
+    local icon = create_icon(stat_line, v.icon, icon_size)
 
-    if v.icon then
-      local size = stat_line:GetTall() * 0.75
-
-      icon = vgui.Create('DImage', stat_line)
-      icon:SetImage(v.icon)
-      icon:SetSize(size, size)
-      icon:SetPos(math.scale_x(4), stat_line:GetTall() * 0.5 - size * 0.5)
+    if icon then
+      icon:SetPos(math.scale_x(4), stat_line:GetTall() * 0.5 - icon_size * 0.5)
     end
 
     local title = vgui.Create('DLabel', stat_line)
@@ -219,7 +273,6 @@ function PANEL:on_open(parent)
     title:SetPos(icon and icon:GetWide() + math.scale_x(24) or 0, stat_line:GetTall() * 0.5 - title:GetTall() * 0.5)
     title:SizeToContents()
 
-    stat_line.level_info = level_info
     stat_line.counter = counter
     self.stats[k] = stat_line
   end
@@ -263,20 +316,29 @@ function PANEL:on_open(parent)
     end
   end
 
-  local pool = parent.char_data.attribute_pool
+  local saved_levels = parent.char_data.attributes
+  local spent = 0
 
-  if pool then
-    self.points = pool
-  end
+  if istable(saved_levels) then
+    for k, v in pairs(self.stats) do
+      local attribute_table = v.attribute_table
+      local level = tonumber(saved_levels[k])
 
-  if parent.char_data.attributes then
-    for k, v in pairs(parent.char_data.attributes) do
-      self.stats[k].counter:set_value(v)
+      if level then
+        level = math.Clamp(math.floor(level), attribute_table.min, attribute_table.max)
+
+        v.counter:set_value(level)
+
+        spent = spent + level - attribute_table.default
+      end
     end
   end
+
+  self.points = self.start_points - spent
 end
 
---- Stores the chosen attribute values and remaining points in the character data.
+--- Stores the chosen attribute values in the character data. The points that are left are
+-- not stored: they follow from the values when the stage is opened again.
 -- @param parent [Panel character creation menu]
 function PANEL:on_close(parent)
   local stats_table = {}
@@ -286,8 +348,7 @@ function PANEL:on_close(parent)
   end
 
   parent:collect_data({
-    attributes = stats_table,
-    attribute_pool = self.points
+    attributes = stats_table
   })
 end
 

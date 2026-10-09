@@ -1,3 +1,7 @@
+--- Perception stat: the awareness of a character, from -3 (terrible) to 3 (superb).
+-- Every level extends the range at which the character hears in-character speech by the
+-- `stats_perception_hearing` config, in meters. Levels below zero shorten it.
+
 ATTRIBUTE.name = 'attribute.perception.title'
 ATTRIBUTE.description = 'attribute.perception.description'
 ATTRIBUTE.icon = 'flux/icons/eye-target.png'
@@ -17,12 +21,5 @@ ATTRIBUTE.levels = {
 }
 
 ATTRIBUTE.effects = {
-  {
-    text = 'ui.effect.hearing_radius',
-    get_value = function(value)
-      return (value > 0 and '+' or value < 0 and '-' or '')..Unit:format((value:abs() * 1.5):m():round(), 'metric')
-    end,
-    get_color =
-      function(value) return (value > 0 and Color('lightgreen')) or value < 0 and Color('pink') or color_white end
-  }
+  Stats:distance_effect('ui.effect.hearing_radius', 'stats_perception_hearing')
 }

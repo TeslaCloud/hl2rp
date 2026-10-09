@@ -1,3 +1,7 @@
+--- Reflexes stat: the dexterity and reaction of a character, from -3 (terrible) to 3 (superb).
+-- Every level lowers the fall damage the character takes by the `stats_reflexes_fall`
+-- config. Levels below zero raise it.
+
 ATTRIBUTE.name = 'attribute.reflexes.title'
 ATTRIBUTE.description = 'attribute.reflexes.description'
 ATTRIBUTE.icon = 'flux/icons/body-balance.png'
@@ -14,4 +18,10 @@ ATTRIBUTE.levels = {
   mediocre = 'attribute.reflexes.mediocre',
   poor = 'attribute.reflexes.poor',
   terrible = 'attribute.reflexes.terrible'
+}
+
+ATTRIBUTE.effects = {
+  Stats:percent_effect('ui.effect.fall_damage', 'stats_reflexes_fall', true, function()
+    return Damage != nil
+  end)
 }

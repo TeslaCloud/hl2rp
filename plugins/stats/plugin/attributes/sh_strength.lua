@@ -1,3 +1,8 @@
+--- Strength stat: the physical power of a character, from -3 (terrible) to 3 (superb).
+-- Every level raises the mass of the heaviest object the character can pick up and the
+-- force they throw it with by the `stats_strength_lifting` config. Levels below zero lower
+-- both.
+
 ATTRIBUTE.name = 'attribute.strength.title'
 ATTRIBUTE.description = 'attribute.strength.description'
 ATTRIBUTE.icon = 'flux/icons/weight-lifting-up.png'
@@ -14,4 +19,13 @@ ATTRIBUTE.levels = {
   mediocre = 'attribute.strength.mediocre',
   poor = 'attribute.strength.poor',
   terrible = 'attribute.strength.terrible'
+}
+
+ATTRIBUTE.effects = {
+  Stats:percent_effect('ui.effect.carry_mass', 'stats_strength_lifting', false, function()
+    return Config.find('pickup_max_mass') != nil
+  end),
+  Stats:percent_effect('ui.effect.throw_force', 'stats_strength_lifting', false, function()
+    return (tonumber(Config.get('pickup_throw_force')) or 0) > 0
+  end)
 }
