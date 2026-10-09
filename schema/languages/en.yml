@@ -1,6 +1,29 @@
 en:
+  class:
+    citizen:
+      title: Citizen
+      desc: An ordinary resident of the city, assigned no duties by the Combine.
+    recruit:
+      title: Recruit
+      desc: A newly enlisted Civil Protection unit that patrols the streets.
+    slave:
+      title: Enslaved Vortigaunt
+      desc: A vortigaunt kept in shackles and put to menial work by the Combine.
+    soldier:
+      title: Soldier
+      desc: A transhuman soldier of the Combine Overwatch.
+    vortigaunt:
+      title: Vortigaunt
+      desc: A free vortigaunt, hiding from the Combine.
+    zombie:
+      title: Zombie
+      desc: A headcrab, or the body that one has taken over.
   currency:
     tokens: Tokens
+  error:
+    item:
+      nothing_to_treat: You have no wounds that this could treat.
+      already_healing: You are already healing.
   faction:
     admin:
       title: City Administrator
@@ -10,9 +33,14 @@ en:
       title: Citizen
       desc: A regular citizen living under combine authority.
       phys_desc: Wearing some dirty citizen clothes.
-    xen:
-      vort_title: Vortigaunt
-      vort_slave_title: Enslaved Vortigaunt
+    vortigaunt:
+      title: Vortigaunt
+      description: An alien from Xen, hunted and enslaved by the Combine.
+      phys_desc: A hunched, green-skinned creature with one large red eye.
+    zombie:
+      title: Zombie
+      description: A headcrab, or a body that one has taken over.
+      phys_desc: A mangled body with a headcrab latched onto its head.
     combine:
       overwatch:
         title: Combine Overwatch

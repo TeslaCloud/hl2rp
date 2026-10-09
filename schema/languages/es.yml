@@ -1,6 +1,29 @@
 es:
+  class:
+    citizen:
+      title: Ciudadano
+      desc: Un residente corriente de la ciudad, sin tareas asignadas por el Combine.
+    recruit:
+      title: Recluta
+      desc: Una unidad de Protección Civil recién alistada que patrulla las calles.
+    slave:
+      title: Vortigaunt esclavizado
+      desc: Un vortigaunt encadenado al que el Combine obliga a hacer trabajos serviles.
+    soldier:
+      title: Soldado
+      desc: Un soldado transhumano del Overwatch del Combine.
+    vortigaunt:
+      title: Vortigaunt
+      desc: Un vortigaunt libre que se oculta del Combine.
+    zombie:
+      title: Zombi
+      desc: Un headcrab o el cuerpo del que se ha apoderado.
+  error:
+    item:
+      nothing_to_treat: No tienes heridas que esto pueda tratar.
+      already_healing: Ya te estás curando.
   faction:
-    administrator:
+    admin:
       title: City Administrator
       desc: A person who controls the city.
       phys_desc: Wearing a strict, fancy looking suit.
@@ -8,9 +31,14 @@ es:
       title: Citizen
       desc: A regular citizen living under combine authority.
       phys_desc: Wearing some dirty citizen clothes.
-    xen:
-      vort_title: Vortigaunt
-      vort_slave_title: Enslaved Vortigaunt
+    vortigaunt:
+      title: Vortigaunt
+      description: Un alienígena de Xen, perseguido y esclavizado por el Combine.
+      phys_desc: Una criatura encorvada de piel verde con un gran ojo rojo.
+    zombie:
+      title: Zombi
+      description: Un headcrab o un cuerpo del que se ha apoderado.
+      phys_desc: Un cuerpo destrozado con un headcrab aferrado a la cabeza.
     combine:
       overwatch:
         title: Combine Overwatch
@@ -24,6 +52,9 @@ es:
     action:
       eat: Comer
       drink: Beber
+      apply: Aplicar
+    category:
+      medical: Material médico
     breens_water:
       print_name: Agua de Breen
       description: Una lata de color azul llena de agua. Hay una etiqueta donde pone 'Reserva privada de Breen'.
@@ -36,6 +67,12 @@ es:
     canned_food:
       print_name: Comida enlatada marca Combine
       description: Envase de plástico repleto de, huh... comida sintética.
+    medical_bandage:
+      print_name: Venda esterilizada
+      description: Un rollo fino de vendas estériles.
+    medical_fak:
+      print_name: Botiquín de primeros auxilios
+      description: Un equipo profesional de primeros auxilios.
     pistol:
       print_name: Pistola 9x19mm
       description: Pistola sotisficada que utiliza balas del calibre 9x19mm.

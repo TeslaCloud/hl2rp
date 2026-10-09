@@ -1,3 +1,6 @@
+--- The Sterilized Bandage: a medical item that gives back 30 health over 10 seconds and, when
+-- the Limbs plugin is loaded, takes 30 points of damage off every hurt limb.
+
 ITEM:base_off 'medical'
 
 ITEM.name = 'item.medical_bandage.print_name'
@@ -11,3 +14,4 @@ ITEM.max_stack = 1
 ITEM.health_ticks = 10
 ITEM.health_regen = 3
 ITEM.health_delay = 1
+ITEM.limb_heal = 30
