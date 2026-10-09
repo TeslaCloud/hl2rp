@@ -1,3 +1,5 @@
 name: Flashlight
 description: Adds flashlight item that lets players use flashlight.
 author: TeslaCloud Studios
+depends:
+  - shared_flashlight

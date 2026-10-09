@@ -1,10 +1,12 @@
 if SERVER then
   --- Only lets players turn on their flashlight while they have a flashlight item equipped.
+  -- The engine always asks to turn its flashlight on while the shared flashlight stands in
+  -- for it, so a lit flashlight is let through: the toggle is turning it off.
   -- @param actor [Player player toggling the flashlight]
   -- @param on [Boolean whether the flashlight is being turned on]
   -- @return [Boolean whether the flashlight can be toggled]
   function PLUGIN:PlayerSwitchFlashlight(actor, on)
-    if on and !actor:has_item_equipped('flashlight') then
+    if on and !actor:is_flashlight_on() and !actor:has_item_equipped('flashlight') then
       return false
     end
 
@@ -25,9 +27,9 @@ if SERVER then
     if old_inventory then
       local owner = old_inventory.owner
 
-      if item_table.id == 'flashlight' and IsValid(owner) and owner:FlashlightIsOn()
+      if item_table.id == 'flashlight' and IsValid(owner) and owner:is_flashlight_on()
       and !owner:has_item_equipped('flashlight') then
-        owner:Flashlight(false)
+        owner:set_flashlight(false)
       end
     end
   end
