@@ -25,7 +25,7 @@ FACTION.menu_sound = {
 
 FACTION.model_classes = {
   male = 'civil_protection',
-  female = 'player'
+  female = 'female'
 }
 
 FACTION.models = {
