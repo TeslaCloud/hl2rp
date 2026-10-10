@@ -3,12 +3,14 @@
 -- whisper, talk or yell range) and introduces themselves under their real name or a false
 -- one. The false names used before are kept on the client and offered again.
 
+local scale = math.scale
+
 local PANEL = {}
 
 --- Builds the recognize menu with range buttons, a real name button, a fake name entry and the name history.
 function PANEL:Init()
   local scr_w, scr_h = ScrW(), ScrH()
-  local margin = math.scale(4)
+  local margin = scale(4)
   local total_height = 0
 
   self:SetWide(scr_w * 0.25)
@@ -29,7 +31,7 @@ function PANEL:Init()
 
   total_height = total_height + self.label:GetTall()
 
-  local icon_size = math.scale(32)
+  local icon_size = scale(32)
   local range_buttons = {
     target = {
       name = t'ui.recognize.types.target',
@@ -95,7 +97,7 @@ function PANEL:Init()
   self.real_name_button:SetFont(Theme.get_font('text_normal_smaller'))
   self.real_name_button:DockMargin(0, margin, 0, margin)
   self.real_name_button:Dock(TOP)
-  self.real_name_button:SetTall(math.scale(24))
+  self.real_name_button:SetTall(scale(24))
   self.real_name_button:set_text(t'ui.recognize.character_name')
   self.real_name_button:set_centered(true)
   self.real_name_button.DoClick = function(btn)
@@ -111,7 +113,7 @@ function PANEL:Init()
   local history = Data.load('name_history/'..PLAYER:name(true), {})
 
   self.fake_name = vgui.Create('fl_base_panel', self.list)
-  self.fake_name:SetTall(math.scale(24))
+  self.fake_name:SetTall(scale(24))
   self.fake_name:DockMargin(0, 0, 0, margin)
   self.fake_name:Dock(TOP)
 
@@ -163,7 +165,7 @@ function PANEL:Init()
       self.fake_name.text_entry:SetValue(line:GetColumnText(1))
     end
 
-    self.name_history:SetTall((#self.name_history:GetLines() + 1) * math.scale(17))
+    self.name_history:SetTall((#self.name_history:GetLines() + 1) * scale(17))
 
     total_height = total_height + self.name_history:GetTall() + margin
   end

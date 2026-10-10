@@ -3,6 +3,9 @@
 -- The panel only sends requests: the animation itself, the movement lock and the third
 -- person view all come from the server.
 
+local scale_x = math.scale_x
+local panel_color = Color(0, 0, 0, 100)
+
 --- Adds the animations panel to the context menu, listing every animation the local player's model supports.
 -- @param context_menu [Panel context menu the panel is parented to]
 function Animations:ContextMenuCreated(context_menu)
@@ -10,10 +13,10 @@ function Animations:ContextMenuCreated(context_menu)
 
   local panel = vgui.Create('fl_base_panel', context_menu)
   panel:SetSize(math.scale_size(200, 224))
-  panel:SetPos(math.scale_x(100), ScrH() * 0.7)
-  panel:DockPadding(math.scale_x(4), math.scale(4), math.scale_x(4), math.scale(4))
+  panel:SetPos(scale_x(100), ScrH() * 0.7)
+  panel:DockPadding(scale_x(4), math.scale(4), scale_x(4), math.scale(4))
   panel.Paint = function(pnl, w, h)
-    draw.RoundedBox(0, 0, 0, w, h, Color(0, 0, 0, 100))
+    draw.RoundedBox(0, 0, 0, w, h, panel_color)
   end
 
   local title = vgui.Create('DLabel', panel)
@@ -35,13 +38,18 @@ function Animations:ContextMenuCreated(context_menu)
   function panel:rebuild()
     scroll:Clear()
 
-    for k, v in ipairs(self.previews) do
-      if IsValid(v) then
-        v:Remove()
+    local previews = self.previews
+
+    for i = 1, #previews do
+      local preview = previews[i]
+
+      if IsValid(preview) then
+        preview:Remove()
       end
     end
 
-    self.previews = {}
+    previews = {}
+    self.previews = previews
 
     for k, v in ipairs(Animations:get_list()) do
       local sequences = Animations:get_sequences(PLAYER, v)
@@ -51,7 +59,7 @@ function Animations:ContextMenuCreated(context_menu)
       local line = vgui.Create('fl_button', scroll)
       line:Dock(TOP)
       line:set_text(t(v.name))
-      line:set_text_offset(math.scale_x(4))
+      line:set_text_offset(scale_x(4))
       line.animation = v.id
       line.DoClick = function(pnl)
         PLAYER:play_animation(pnl.animation)
@@ -73,7 +81,7 @@ function Animations:ContextMenuCreated(context_menu)
 
       line:SetTooltipPanel(preview_back)
 
-      table.insert(self.previews, preview_back)
+      previews[#previews + 1] = preview_back
 
       scroll:AddItem(line)
     end

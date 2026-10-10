@@ -54,6 +54,8 @@ function PLUGIN:RegisterDoorProperties()
 end
 
 if CLIENT then
+  local line_color = Color(0, 0, 0, 100)
+
   Cable.receive('fl_key_show_list', function(keys, entity)
     local frame = vgui.Create('DFrame')
     frame:SetSize(math.scale(300), math.scale(300))
@@ -75,7 +77,7 @@ if CLIENT then
           local line = vgui.Create('fl_base_panel')
           line:Dock(TOP)
           line.Paint = function(pnl, w, h)
-            draw.RoundedBox(0, 0, 0, w, h, Color(0, 0, 0, 100))
+            draw.RoundedBox(0, 0, 0, w, h, line_color)
           end
 
           local button_size = line:GetTall() - 4

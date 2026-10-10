@@ -16,6 +16,9 @@ local ranges = {
   yell = 2
 }
 
+local color_light_green = Color('green'):lighten(100)
+local color_salmon = Color('salmon')
+
 --- Gives up a stored recognition that has been taken off the list of its character. A
 -- saved record is deleted from the database, and a record that is still being inserted is
 -- marked, so that it deletes itself once it has an ID.
@@ -156,7 +159,7 @@ function Recognizes:forget_character(character_id, name)
         local loaded_id = tonumber(character.id)
 
         if loaded_id then
-          table.insert(loaded_ids, loaded_id)
+          loaded_ids[#loaded_ids + 1] = loaded_id
         end
 
         if removed > 0 then
@@ -263,23 +266,29 @@ function Recognizes:introduce(actor, kind, name, target)
       target = actor:GetEyeTraceNoCursor().Entity
     end
 
+    local reach = radius * 4
+
     if isentity(target) and IsValid(target) and target:IsPlayer() and
-    target:EyePos():Distance(actor:EyePos()) <= radius * 4 then
-      table.insert(targets, target)
+    target:EyePos():DistToSqr(actor:EyePos()) <= reach * reach then
+      targets[1] = target
     end
   elseif isstring(kind) and ranges[kind] then
     local distance = radius * ranges[kind]
+    local distance_sqr = distance * distance
+    local eye_pos = actor:EyePos()
 
     for k, v in player.Iterator() do
-      if actor:EyePos():Distance(v:EyePos()) <= distance then
-        table.insert(targets, v)
+      if eye_pos:DistToSqr(v:EyePos()) <= distance_sqr then
+        targets[#targets + 1] = v
       end
     end
   else
     return false
   end
 
-  for k, v in ipairs(targets) do
+  for i = 1, #targets do
+    local listener = targets[i]
+
     --- Asks whether a player may learn the name that another player introduces
     -- themselves under. Called on the server for every player an introduction reaches,
     -- the one who introduces themselves included. The Recognize plugin refuses it for
@@ -288,28 +297,28 @@ function Recognizes:introduce(actor, kind, name, target)
     -- @param actor [Player the player who introduces themselves]
     -- @param target [Player the player who would learn the name]
     -- @return [Boolean return false to keep the target from learning the name]
-    if hook.Run('PlayerCanRecognize', actor, v) != false and v:is_character_loaded() then
-      local is_known, known_name = v:recognizes(actor)
+    if hook.Run('PlayerCanRecognize', actor, listener) != false and listener:is_character_loaded() then
+      local is_known, known_name = listener:recognizes(actor)
 
-      if !v:knows_real_name(actor) then
+      if !listener:knows_real_name(actor) then
         if !is_known then
-          v:notify('notification.recognize.new_name', { name = tostring(name) }, Color('green'):lighten(100))
+          listener:notify('notification.recognize.new_name', { name = tostring(name) }, color_light_green)
         else
-          v:notify('notification.recognize.change_name', {
+          listener:notify('notification.recognize.change_name', {
             name = tostring(known_name),
             new_name = tostring(name)
-          }, Color('salmon'))
+          }, color_salmon)
         end
       end
 
-      v:add_recognize(actor, name)
+      listener:add_recognize(actor, name)
     end
   end
 
   if name == real_name then
-    actor:notify('notification.recognize.true_name', { name = tostring(name) }, Color('green'):lighten(100))
+    actor:notify('notification.recognize.true_name', { name = tostring(name) }, color_light_green)
   else
-    actor:notify('notification.recognize.false_name', { name = tostring(name) }, Color('salmon'))
+    actor:notify('notification.recognize.false_name', { name = tostring(name) }, color_salmon)
   end
 
   return true
@@ -337,7 +346,7 @@ function Recognizes:player_forget(actor, target)
 
   if !actor:remove_recognize(target) then return false end
 
-  actor:notify('notification.recognize.forgotten', { name = tostring(known_name) }, Color('salmon'))
+  actor:notify('notification.recognize.forgotten', { name = tostring(known_name) }, color_salmon)
 
   return true
 end

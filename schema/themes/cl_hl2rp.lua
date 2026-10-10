@@ -1,3 +1,8 @@
+local math_scale = math.scale
+local text_size = util.text_size
+local get_font = Theme.get_font
+local logo_color = Color(255, 255, 255)
+
 THEME.author = 'TeslaCloud Studios'
 THEME.id = 'hl2rp'
 THEME.parent = 'factory'
@@ -12,7 +17,7 @@ function THEME:on_loaded()
   self:set_color('accent_light', accent_color:lighten(20))
   self:set_color('menu_background', Color(0, 0, 0, 100))
 
-  self:set_option('menu_sidebar_width', scrw / 4)
+  self:set_option('menu_sidebar_width', scrw * 0.25)
   self:set_option('menu_sidebar_x', scrw * 0.5)
   self:set_option('menu_sidebar_y', scrh * 0.25 * 3)
   self:set_option('menu_sidebar_logo_space', 0)
@@ -27,7 +32,7 @@ function THEME:on_loaded()
 
   self:set_material('schema_logo', 'materials/flux/hl2rp/logo.png')
 
-  self:set_font('text_bar', self:get_font('main_font'), math.max(math.scale(14), 14), { weight = 600 })
+  self:set_font('text_bar', self:get_font('main_font'), math.max(math_scale(14), 14), { weight = 600 })
 end
 
 --- Draws a translucent background behind the chatbox messages.
@@ -51,15 +56,17 @@ function THEME:PaintMainMenu(panel, width, height)
   )
   local version = 'Flux '..(GAMEMODE.version or 'UNKNOWN')
   local logo = self:get_material('schema_logo')
-  local title_w, title_h = util.text_size(title, self:get_font('main_menu_titles'))
-  local desc_w, desc_h = util.text_size(desc, self:get_font('main_menu_titles'))
-  local author_w, author_h = util.text_size(author, self:get_font('main_menu_titles'))
-  local version_w, version_h = util.text_size(version, self:get_font('main_menu_titles'))
+  local font = self:get_font('main_menu_titles')
+  local text_color = self:get_color('schema_text')
+  local title_w, title_h = text_size(title, font)
+  local desc_w, desc_h = text_size(desc, font)
+  local author_w, author_h = text_size(author, font)
+  local version_w, version_h = text_size(version, font)
   -- The panel stores an already scaled offset, so it must not be scaled again here.
-  local logo_offset = panel.schema_logo_offset or math.scale(450)
-  local bar_height = math.scale(128)
-  local padding = math.scale(16)
-  local text_padding = math.scale(8)
+  local logo_offset = panel.schema_logo_offset or math_scale(450)
+  local bar_height = math_scale(128)
+  local padding = math_scale(16)
+  local text_padding = math_scale(8)
 
   draw.blur_box(0, 0, width, height)
 
@@ -69,41 +76,41 @@ function THEME:PaintMainMenu(panel, width, height)
   if logo then
     draw.textured_rect(
       logo,
-      width * 0.5 - math.scale(200),
+      width * 0.5 - math_scale(200),
       logo_offset + padding,
-      math.scale(400),
-      math.scale(96),
-      Color(255, 255, 255)
+      math_scale(400),
+      math_scale(96),
+      logo_color
     )
   end
 
   draw.SimpleText(
     desc,
-    self:get_font('main_menu_titles'),
+    font,
     padding,
     logo_offset + bar_height - desc_h - text_padding,
-    self:get_color('schema_text')
+    text_color
   )
   draw.SimpleText(
     author,
-    self:get_font('main_menu_titles'),
+    font,
     width - author_w - padding,
     logo_offset + bar_height - author_h - text_padding,
-    self:get_color('schema_text')
+    text_color
   )
   draw.SimpleText(
     title,
-    self:get_font('main_menu_titles'),
+    font,
     width - title_w - text_padding,
     logo_offset + height - title_h - text_padding,
-    self:get_color('schema_text')
+    text_color
   )
   draw.SimpleText(
     version,
-    self:get_font('main_menu_titles'),
+    font,
     text_padding,
     logo_offset + height - version_h - text_padding,
-    self:get_color('schema_text')
+    text_color
   )
 end
 
@@ -114,13 +121,14 @@ end
 function THEME:PaintCharPanel(panel, w, h)
   if panel.char_data then
     local char_data = panel.char_data
-    local name_w, name_h = util.text_size(char_data.name, self:get_font('main_menu_titles'))
+    local font = self:get_font('main_menu_titles')
+    local name_w, name_h = text_size(char_data.name, font)
 
     draw.SimpleText(
       char_data.name,
-      self:get_font('main_menu_titles'),
+      font,
       w * 0.5 - name_w * 0.5,
-      math.scale(4),
+      math_scale(4),
       self:get_color('schema_text')
     )
 
@@ -137,8 +145,9 @@ end
 -- @param h [Number height of the panel]
 function THEME:PaintCharCreationMainPanel(panel, w, h)
   local title = t'ui.char_create.text'
-  local title_w, title_h = util.text_size(title, Theme.get_font('main_menu_title'))
-  draw.SimpleText(title, Theme.get_font('main_menu_title'), w * 0.5 - title_w * 0.5, h / 8)
+  local font = get_font('main_menu_title')
+  local title_w, title_h = text_size(title, font)
+  draw.SimpleText(title, font, w * 0.5 - title_w * 0.5, h * 0.125)
 end
 
 --- Draws the character loading title.
@@ -147,8 +156,9 @@ end
 -- @param h [Number height of the panel]
 function THEME:PaintCharCreationLoadPanel(panel, w, h)
   local title = t'ui.char_create.load'
-  local title_w, title_h = util.text_size(title, Theme.get_font('main_menu_title'))
-  draw.SimpleText(title, Theme.get_font('main_menu_title'), w * 0.5 - title_w * 0.5, h / 8)
+  local font = get_font('main_menu_title')
+  local title_w, title_h = text_size(title, font)
+  draw.SimpleText(title, font, w * 0.5 - title_w * 0.5, h * 0.125)
 end
 
 --- Draws the title of a character creation stage at the top of its panel.
@@ -157,10 +167,12 @@ end
 -- @param h [Number height of the panel]
 function THEME:PaintCharCreationBasePanel(panel, w, h)
   if isstring(panel.text) then
-    local text_w, text_h = util.text_size(t(panel.text), Theme.get_font('main_menu_large'))
+    local text = t(panel.text)
+    local font = get_font('main_menu_large')
+    local text_w, text_h = text_size(text, font)
     draw.SimpleText(
-      t(panel.text),
-      Theme.get_font('main_menu_large'),
+      text,
+      font,
       w * 0.5 - text_w * 0.5,
       0,
       Theme.get_color('text')
@@ -205,29 +217,33 @@ function THEME:DrawBarFill(bar_info)
   local bar_x = bar_info.x + 2
   local bar_y = bar_info.y + bar_info.height - (bar_height - 2)
   local height = bar_height - 4
+  local accent_color = self:get_color('accent')
+  local real_fill_width = bar_info.real_fill_width
+  local fill_width = bar_info.fill_width
+  local target_width = (fill_width or bar_info.width) - 4
 
-  if bar_info.real_fill_width < bar_info.fill_width then
-    draw.RoundedBox(2, bar_x, bar_y, (bar_info.fill_width or bar_info.width) - 4, height, bar_info.color)
-    draw.RoundedBox(2, bar_x, bar_y, bar_info.real_fill_width - 4, height, self:get_color('accent'))
-  elseif bar_info.real_fill_width > bar_info.fill_width then
-    draw.RoundedBox(2, bar_x, bar_y, bar_info.real_fill_width - 4, height, bar_info.color)
-    draw.RoundedBox(2, bar_x, bar_y, (bar_info.fill_width or bar_info.width) - 4, height, self:get_color('accent'))
+  if real_fill_width < fill_width then
+    draw.RoundedBox(2, bar_x, bar_y, target_width, height, bar_info.color)
+    draw.RoundedBox(2, bar_x, bar_y, real_fill_width - 4, height, accent_color)
+  elseif real_fill_width > fill_width then
+    draw.RoundedBox(2, bar_x, bar_y, real_fill_width - 4, height, bar_info.color)
+    draw.RoundedBox(2, bar_x, bar_y, target_width, height, accent_color)
   else
-    draw.RoundedBox(2, bar_x, bar_y, (bar_info.fill_width or bar_info.width) - 4, height, self:get_color('accent'))
+    draw.RoundedBox(2, bar_x, bar_y, target_width, height, accent_color)
   end
 end
 
 --- Draws the bar's label and, when shown, its hindrance text at the right end.
 -- @param bar_info [Table bar position, size and values]
 function THEME:DrawBarTexts(bar_info)
-  local font = Theme.get_font(bar_info.font)
+  local font = get_font(bar_info.font)
   local accent_color = self:get_color('accent')
 
   draw.SimpleText(bar_info.text, font, bar_info.x, bar_info.y + bar_info.text_offset - 3, accent_color)
 
   if bar_info.hinder_display and bar_info.hinder_display <= bar_info.hinder_value then
     local width = bar_info.width
-    local text_wide = util.text_size(bar_info.hinder_text, font)
+    local text_wide = text_size(bar_info.hinder_text, font)
     local length = width * (bar_info.hinder_value / bar_info.max_value)
 
     draw.SimpleText(

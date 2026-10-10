@@ -3,6 +3,10 @@
 -- the hooks of the Chatbox, Stamina, Pickup Objects, Damage, Limb Damage, Vendors and
 -- Attributes plugins. A handler of a plugin that is not loaded is never called.
 
+local IsValid = IsValid
+local isnumber = isnumber
+local math_max = math.max
+
 --- Multiplies an amount that is handed out in whole points, keeping the fraction that gets
 -- cut off for the next call. Over time the player receives exactly the scaled amount, which
 -- rounding every call by itself would not give for small amounts.
@@ -14,9 +18,9 @@
 local function scale_whole(target, id, amount, scale)
   local carry = target.stat_effect_carry or {}
   local scaled = amount * scale + (carry[id] or 0)
-  local whole = math.max(math.floor(scaled), 0)
+  local whole = math_max(math.floor(scaled), 0)
 
-  carry[id] = math.max(scaled - whole, 0)
+  carry[id] = math_max(scaled - whole, 0)
   target.stat_effect_carry = carry
 
   return whole
@@ -111,11 +115,14 @@ function Stats:AdjustMessageData(listener, message_data)
   if !message_data.ic or !isnumber(radius) or radius <= 0 then return end
 
   local meters = tonumber(Config.get('stats_perception_hearing')) or 0
+
+  if meters == 0 then return end
+
   local level = listener:get_attribute('perception')
 
-  if meters == 0 or level == 0 then return end
+  if level == 0 then return end
 
-  message_data.radius = math.max(radius + Unit:meter(level * meters), self.min_hearing_radius)
+  message_data.radius = math_max(radius + Unit:meter(level * meters), self.min_hearing_radius)
 end
 
 --- Rejects new characters unless each stat has a whole level in its range and the levels add
@@ -278,7 +285,7 @@ function Stats:AdjustVendorPrice(actor, vendor, item_obj, price_info)
     local buy_price = Vendors:get_buy_price(vendor, item_obj, actor)
 
     if buy_price then
-      price = math.max(price, math.min(buy_price, price_info.price))
+      price = math_max(price, math.min(buy_price, price_info.price))
     end
   end
 

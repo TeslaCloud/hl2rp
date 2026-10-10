@@ -38,10 +38,13 @@ end
 function CombatSystem:add_entities_around(combat, member)
   local entities = ents.FindInSphere(member:GetPos(), 500)
   local pos = member:EyePos()
+  local filter = function(entity) return !isentity(entity) end
 
-  for k, v in pairs(entities) do
-    if !util.vector_obstructed(pos, v:EyePos(), function(entity) return !isentity(entity) end) then
-      combat:add_member(v)
+  for i = 1, #entities do
+    local entity = entities[i]
+
+    if !util.vector_obstructed(pos, entity:EyePos(), filter) then
+      combat:add_member(entity)
     end
   end
 end

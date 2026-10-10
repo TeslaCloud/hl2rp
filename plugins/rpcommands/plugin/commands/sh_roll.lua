@@ -2,6 +2,8 @@
 -- 'roll_versus' config is enabled, rolling while looking at a nearby player rolls for both of
 -- them in one line. Plugins can adjust any roll through the `PlayerAdjustRoll` hook.
 
+local config_get = Config.get
+
 CMD.name = 'Roll'
 CMD.description = 'command.roll.description'
 CMD.syntax = 'command.roll.syntax'
@@ -51,7 +53,7 @@ end
 -- @return [Player the opponent, Vector where the opponent is; nothing if versus rolls are
 --   disabled or the caller is not looking at a nearby player]
 local function find_opponent(actor)
-  if !Config.get('roll_versus') then return end
+  if !config_get('roll_versus') then return end
 
   local entity = actor:GetEyeTraceNoCursor().Entity
 
@@ -67,7 +69,9 @@ local function find_opponent(actor)
 
   local position = entity:GetPos()
 
-  if position:Distance(actor:GetPos()) > Config.get('talk_radius') then return end
+  local radius = config_get('talk_radius')
+
+  if position:DistToSqr(actor:GetPos()) > radius * radius then return end
 
   return target, position
 end
@@ -107,7 +111,7 @@ function CMD:on_run(actor, range)
   table.insert(msg_table, {
     sender = actor,
     position = position,
-    radius = Config.get('talk_radius'),
+    radius = config_get('talk_radius'),
     hear_when_look = true,
     ic = true
   })

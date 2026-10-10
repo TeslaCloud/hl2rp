@@ -7,6 +7,8 @@
 -- The talk radius is the 'talk_radius' config, which is defined in config/config.yml and can
 -- be edited in game. The chat colors are set here in code.
 
+local config_get = Config.get
+
 local ic_color = Color('khaki')
 Config.set('chat_ic_color', ic_color)
 Config.set('chat_whisper_color', ic_color:desaturate(40):darken(20))
@@ -39,7 +41,9 @@ end
 -- @param talker [Player player talking]
 -- @return [Boolean false if the talker is out of range, nil otherwise]
 function RPCommands:PlayerCanHearPlayersVoice(listener, talker)
-  if listener:EyePos():Distance(talker:EyePos()) > Config.get('talk_radius') then
+  local radius = config_get('talk_radius')
+
+  if listener:EyePos():DistToSqr(talker:EyePos()) > radius * radius then
     return false
   end
 end
@@ -81,10 +85,16 @@ end
 -- @param message_data [Table chat message data]
 -- @return [Boolean whether the listener hears a look-based message, nil for other messages]
 function RPCommands:PlayerCanHear(listener, message_data)
-  if message_data.hear_when_look and IsValid(message_data.sender) and isnumber(message_data.radius) then
+  local radius = message_data.radius
+
+  if message_data.hear_when_look and IsValid(message_data.sender) and isnumber(radius) then
+    if radius < 0 then
+      return false
+    end
+
     local look_pos = listener:GetEyeTraceNoCursor().HitPos
 
-    return message_data.sender:GetPos():Distance(look_pos) <= message_data.radius
+    return message_data.sender:GetPos():DistToSqr(look_pos) <= radius * radius
   end
 end
 
@@ -132,32 +142,43 @@ function RPCommands:get_phrase_table(text)
   local msg_table = {}
   local is_emote = text:start_with('*')
   local text_parts = {}
+  local pieces = text:split('*')
+  local count = 0
 
-  for k, v in pairs(text:split('*')) do
-    if v != '' and v:match('%S') then
-      table.insert(text_parts, v)
+  for i = 1, #pieces do
+    local piece = pieces[i]
+
+    if piece != '' and piece:match('%S') then
+      count = count + 1
+      text_parts[count] = piece
     end
   end
 
-  local count = #text_parts
+  local ic_color = config_get('chat_ic_color')
+  local me_color = config_get('chat_me_color')
+  local length = 0
 
   if !is_emote then
-    table.insert(msg_table, '"')
+    length = 1
+    msg_table[1] = '"'
   end
 
-  for k, v in pairs(text_parts) do
+  for k = 1, count do
     if k != 1 then
       if !is_emote then
-        table.insert(msg_table, Config.get('chat_ic_color'))
+        length = length + 1
+        msg_table[length] = ic_color
       end
 
-      table.insert(msg_table, is_emote and '" ' or ' "')
+      length = length + 1
+      msg_table[length] = is_emote and '" ' or ' "'
     end
 
-    local part = v:strip()
+    local part = text_parts[k]:strip()
 
     if is_emote then
-      table.insert(msg_table, Config.get('chat_me_color'))
+      length = length + 1
+      msg_table[length] = me_color
 
       if part:is_upper() then
         part = part:utf8lower()
@@ -168,13 +189,14 @@ function RPCommands:get_phrase_table(text)
       part = part:spelling(is_emote, k == 1 and count != 1)
     end
 
-    table.insert(msg_table, part)
+    length = length + 1
+    msg_table[length] = part
 
     is_emote = !is_emote
   end
 
   if is_emote then
-    table.insert(msg_table, '"')
+    msg_table[length + 1] = '"'
   end
 
   return msg_table
@@ -187,19 +209,17 @@ end
 function RPCommands:format_message(speaker, text)
   local text, volume = self:get_phrase_volume(text)
   local is_emote = text:start_with('*')
-  local color = Config.get(is_emote and 'chat_me_color' or 'chat_ic_color')
+  local color = config_get(is_emote and 'chat_me_color' or 'chat_ic_color')
 
   local msg_table = {
     color,
-    Config.get('default_font_size') + volume * 2,
+    config_get('default_font_size') + volume * 2,
     speaker, ' '
   }
 
   if !is_emote then
-    table.Add(msg_table, {
-      volume == 0 and t'ui.chat.say' or (volume < 0 and t'ui.chat.whisper' or t'ui.chat.yell'),
-      ': '
-    })
+    msg_table[5] = volume == 0 and t'ui.chat.say' or (volume < 0 and t'ui.chat.whisper' or t'ui.chat.yell')
+    msg_table[6] = ': '
 
     if volume == 3 then
       text = text:utf8upper()
@@ -215,7 +235,7 @@ function RPCommands:format_message(speaker, text)
   table.insert(msg_table, {
     sender = speaker,
     position = speaker:EyePos(),
-    radius = Config.get('talk_radius') * self:get_volume_range(volume),
+    radius = config_get('talk_radius') * self:get_volume_range(volume),
     ic = true
   })
 

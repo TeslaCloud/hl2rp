@@ -1,5 +1,7 @@
 mod 'Dice'
 
+local random = math.random
+
 --- Rolls several dice and sums them.
 -- @param number [Number amount of dice]
 -- @param edges [Number sides on each die]
@@ -8,7 +10,7 @@ function Dice.roll(number, edges)
   local value = 0
 
   for i = 1, number do
-    value = value + math.random(1, edges)
+    value = value + random(1, edges)
   end
 
   return value
@@ -37,7 +39,7 @@ end
 function Dice.gauss(from, to)
   local variance = (to - from) * 0.5
   local mean = from + variance
-  local number = math.sqrt(-2 * variance * math.log(math.random())) * math.cos(2 * math.pi * math.random()) + mean
+  local number = math.sqrt(-2 * variance * math.log(random())) * math.cos(2 * math.pi * random()) + mean
 
   number = math.Round(number)
 

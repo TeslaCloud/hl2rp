@@ -23,7 +23,7 @@ function CMD:on_run(actor, ...)
 
   local recipients = Bolt:get_staff()
 
-  if !table.HasValue(Bolt:get_staff(), actor) then table.insert(recipients, actor) end
+  if !table.HasValue(recipients, actor) then table.insert(recipients, actor) end
 
   Chatbox.add_text(recipients, unpack(msg_table))
 end

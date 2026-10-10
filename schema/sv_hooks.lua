@@ -13,6 +13,8 @@
 -- plugin does not cover. Limb damage is worked out from the health a player has lost after
 -- every multiplier.
 
+local random = math.random
+
 --- Plays a pain sound for the hurt player at most once a second, picked by faction, gender and hit limb.
 -- @param victim [Player player that was hurt]
 -- @param attacker [Entity entity that dealt the damage]
@@ -28,25 +30,25 @@ function SCHEMA:PlayerHurt(victim, attacker)
         local gender = victim:get_gender()
         local sound_path
 
-        if math.random(1, 3) == 1 then
+        if random(1, 3) == 1 then
           if limb == HITGROUP_LEFTARM or limb == HITGROUP_RIGHTARM then
-            sound_path = 'vo/npc/'..gender..'01/myarm0'..math.random(1, 2)..'.wav'
+            sound_path = 'vo/npc/'..gender..'01/myarm0'..random(1, 2)..'.wav'
           elseif limb == HITGROUP_LEFTLEG or limb == HITGROUP_RIGHTLEG then
-            sound_path = 'vo/npc/'..gender..'01/myleg0'..math.random(1, 2)..'.wav'
+            sound_path = 'vo/npc/'..gender..'01/myleg0'..random(1, 2)..'.wav'
           elseif limb == HITGROUP_STOMACH or limb == HITGROUP_GEAR then
-            sound_path = 'vo/npc/'..gender..'01/mygut0'..math.random(1, 2)..'.wav'
+            sound_path = 'vo/npc/'..gender..'01/mygut0'..random(1, 2)..'.wav'
           end
         end
 
         if !sound_path then
-          sound_path = 'vo/npc/'..gender..'01/pain0'..math.random(1, 9)..'.wav'
+          sound_path = 'vo/npc/'..gender..'01/pain0'..random(1, 9)..'.wav'
         end
 
         victim:EmitSound(sound_path)
       elseif faction == 'cca' then
-        victim:EmitSound('npc/metropolice/pain'..math.random(1, 4)..'.wav')
+        victim:EmitSound('npc/metropolice/pain'..random(1, 4)..'.wav')
       elseif faction == 'overwatch' then
-        victim:EmitSound('npc/combine_soldier/pain'..math.random(1, 3)..'.wav')
+        victim:EmitSound('npc/combine_soldier/pain'..random(1, 3)..'.wav')
       end
 
       victim.next_sound = cur_time + 1
@@ -63,9 +65,9 @@ function SCHEMA:PlayerDeath(victim, inflictor, attacker)
     local faction = victim:get_faction_id()
 
     if faction == 'cca' then
-      victim:EmitSound('npc/metropolice/die'..math.random(1, 4)..'.wav')
+      victim:EmitSound('npc/metropolice/die'..random(1, 4)..'.wav')
     elseif faction == 'overwatch' then
-      victim:EmitSound('npc/combine_soldier/die'..math.random(1, 3)..'.wav')
+      victim:EmitSound('npc/combine_soldier/die'..random(1, 3)..'.wav')
     end
   end
 end
@@ -151,13 +153,17 @@ end
 --- Makes badly hurt human players moan, more often the lower their health is.
 -- @param actor [Player player being checked]
 function SCHEMA:PlayerOneSecond(actor)
-  if actor:Alive() and actor:is_human() and actor:Health() < 50 then
+  if !actor:Alive() or !actor:is_human() then return end
+
+  local health = actor:Health()
+
+  if health < 50 then
     local cur_time = CurTime()
 
     if !actor.next_moan or actor.next_moan <= cur_time then
-      actor:EmitSound('vo/npc/'..actor:get_gender()..'01/moan0'..math.random(1, 5)..'.wav')
+      actor:EmitSound('vo/npc/'..actor:get_gender()..'01/moan0'..random(1, 5)..'.wav')
 
-      actor.next_moan = cur_time + math.max(actor:Health(), 15)
+      actor.next_moan = cur_time + math.max(health, 15)
     end
   end
 end

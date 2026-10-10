@@ -4,6 +4,7 @@ local mat = CreateMaterial('fl_mat_'..os.time(), 'UnlitGeneric', {
   ['$basetexture'] = texture
 })
 local alpha_text_color = Color(255, 0, 0, 75)
+local vignette_material = util.get_material('materials/flux/hl2rp/vignette.png')
 
 --- Applies the desaturated color grading and vignette and draws the alpha version notice.
 function SCHEMA:HUDPaint()
@@ -15,7 +16,7 @@ function SCHEMA:HUDPaint()
   Flux.set_color_mod('addb', 0.015)
 
   surface.SetDrawColor(255, 255, 255, 255)
-  surface.SetMaterial(util.get_material('materials/flux/hl2rp/vignette.png'))
+  surface.SetMaterial(vignette_material)
   surface.DrawTexturedRect(0, 0, w, h)
 
   local tw, th = draw.SimpleText(

@@ -32,6 +32,7 @@ local leave_keys = bit.bor(IN_FORWARD, IN_BACK, IN_MOVELEFT, IN_MOVERIGHT, IN_JU
 local blocked_keys = bit.bor(IN_JUMP, IN_DUCK, IN_ATTACK, IN_ATTACK2)
 local client_blocked_keys = bit.bor(IN_DUCK, IN_ATTACK, IN_ATTACK2)
 local keep_jump_out = bit.bnot(IN_JUMP)
+local band = bit.band
 
 --- Registers an animation that players can play from the context menu. Registering an ID
 -- again replaces the animation and keeps its place in the list.
@@ -83,9 +84,11 @@ end
 function Animations:get_list()
   local result = {}
 
-  for k, v in ipairs(order) do
-    if stored[v] then
-      table.insert(result, stored[v])
+  for i = 1, #order do
+    local data = stored[order[i]]
+
+    if data then
+      result[#result + 1] = data
     end
   end
 
@@ -105,9 +108,11 @@ function Animations:find_sequences(target, names)
 
   if !istable(names) then return found end
 
-  for k, v in ipairs(names) do
-    if target:LookupSequence(v) != -1 then
-      table.insert(found, v)
+  for i = 1, #names do
+    local name = names[i]
+
+    if target:LookupSequence(name) != -1 then
+      found[#found + 1] = name
     end
   end
 
@@ -177,8 +182,8 @@ function Animations:StartCommand(actor, user_cmd)
   local state = actor.animation_data
 
   if state then
-    local pressed = bit.band(user_cmd:GetButtons(), leave_keys)
-    local held = bit.band(state.held_keys or leave_keys, pressed)
+    local pressed = band(user_cmd:GetButtons(), leave_keys)
+    local held = band(state.held_keys or leave_keys, pressed)
 
     state.held_keys = held
 
@@ -208,7 +213,7 @@ function Animations:Move(actor, move_data)
   move_data:SetForwardSpeed(0)
   move_data:SetSideSpeed(0)
   move_data:SetUpSpeed(0)
-  move_data:SetButtons(bit.band(move_data:GetButtons(), keep_jump_out))
+  move_data:SetButtons(band(move_data:GetButtons(), keep_jump_out))
 end
 
 --- Keeps an animating player rendered at the angle they started the animation at.

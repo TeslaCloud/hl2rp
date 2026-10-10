@@ -5,6 +5,11 @@
 -- The picked levels are handed over as the `attributes` field of the creation data, which
 -- the server checks again.
 
+local math_scale = math.scale
+local math_scale_x = math.scale_x
+local get_font = Theme.get_font
+local panel_background = Color(0, 0, 0, 100)
+
 local PANEL = {}
 PANEL.id = 'stats'
 PANEL.text = 'ui.char_create.stats'
@@ -45,7 +50,7 @@ function PANEL:Init()
   self.start_points = Stats:default_attribute_points()
   self.points = self.start_points
 
-  self:DockPadding(0, math.scale(48), 0, 0)
+  self:DockPadding(0, math_scale(48), 0, 0)
 end
 
 --- Returns the bonus that the faction chosen earlier in character creation adds to a stat.
@@ -60,9 +65,10 @@ end
 -- @param h [Number height of the panel]
 function PANEL:PaintOver(w, h)
   local text = t'ui.char_create.stats_points'..self.points
-  local text_w, text_h = util.text_size(text, Theme.get_font('text_normal_large'))
+  local font = get_font('text_normal_large')
+  local text_w, text_h = util.text_size(text, font)
   surface.DisableClipping(true)
-    draw.SimpleText(text, Theme.get_font('text_normal_large'), w - text_w, h - text_h, Theme.get_color('schema_text'))
+    draw.SimpleText(text, font, w - text_w, h - text_h, Theme.get_color('schema_text'))
   surface.DisableClipping(false)
 end
 
@@ -72,7 +78,7 @@ end
 -- @param parent [Panel character creation menu]
 function PANEL:on_open(parent)
   local scrw, scrh = ScrW(), ScrH()
-  local fa_icon_size = math.scale(16)
+  local fa_icon_size = math_scale(16)
   local faction_table = Factions and Factions.find_by_id(parent.char_data.faction)
   local selected_attribute
   local stat_translate = {
@@ -88,21 +94,21 @@ function PANEL:on_open(parent)
   self.bonuses = Stats:faction_bonuses_enabled() and Stats:get_faction_bonuses(faction_table) or {}
 
   self.attributes_list = vgui.Create('DScrollPanel', self)
-  self.attributes_list:SetSize(scrw * 0.15 - math.scale_x(4))
-  self.attributes_list:DockMargin(0, 0, 0, math.scale(48))
+  self.attributes_list:SetSize(scrw * 0.15 - math_scale_x(4))
+  self.attributes_list:DockMargin(0, 0, 0, math_scale(48))
   self.attributes_list:Dock(LEFT)
-  self.attributes_list:GetCanvas():DockPadding(math.scale_x(4), math.scale(4), math.scale_x(4), math.scale(4))
+  self.attributes_list:GetCanvas():DockPadding(math_scale_x(4), math_scale(4), math_scale_x(4), math_scale(4))
   self.attributes_list.Paint = function(pnl, w, h)
-    draw.RoundedBox(0, 0, 0, w, h, Color(0, 0, 0, 100))
+    draw.RoundedBox(0, 0, 0, w, h, panel_background)
   end
 
   self.attribute_panel = vgui.Create('DScrollPanel', self)
-  self.attribute_panel:SetSize(scrw * 0.35 - math.scale_x(4))
-  self.attribute_panel:DockMargin(0, 0, 0, math.scale(48))
+  self.attribute_panel:SetSize(scrw * 0.35 - math_scale_x(4))
+  self.attribute_panel:DockMargin(0, 0, 0, math_scale(48))
   self.attribute_panel:Dock(RIGHT)
-  self.attribute_panel:GetCanvas():DockPadding(math.scale_x(48), math.scale(32), math.scale_x(48), math.scale(32))
+  self.attribute_panel:GetCanvas():DockPadding(math_scale_x(48), math_scale(32), math_scale_x(48), math_scale(32))
   self.attribute_panel.Paint = function(pnl, w, h)
-    draw.RoundedBox(0, 0, 0, w, h, Color(0, 0, 0, 100))
+    draw.RoundedBox(0, 0, 0, w, h, panel_background)
   end
 
   self.attribute_panel.rebuild = function(pnl)
@@ -116,21 +122,21 @@ function PANEL:on_open(parent)
     panel:SetDrawBackground(false)
     panel:Dock(TOP)
 
-    local icon = create_icon(panel, selected_attribute.icon, math.scale(48))
+    local icon = create_icon(panel, selected_attribute.icon, math_scale(48))
 
     local title = vgui.Create('DLabel', panel)
     title:SetText(t(selected_attribute.name))
-    title:SetFont(Font.size(Theme.get_font('text_bold'), math.scale(48)))
+    title:SetFont(Font.size(get_font('text_bold'), math_scale(48)))
     title:SetColor(color_white)
     title:SetContentAlignment(9)
-    title:SetPos(icon and icon:GetWide() + math.scale_x(16) or 0)
+    title:SetPos(icon and icon:GetWide() + math_scale_x(16) or 0)
     title:SizeToContents()
 
-    panel:SetTall(math.max(title:GetTall(), icon and icon:GetTall() or 0) + math.scale(16))
+    panel:SetTall(math.max(title:GetTall(), icon and icon:GetTall() or 0) + math_scale(16))
 
     local desc = vgui.Create('DLabel', pnl)
     desc:SetText(t(selected_attribute.description))
-    desc:SetFont(Theme.get_font('text_normal'))
+    desc:SetFont(get_font('text_normal'))
     desc:SetColor(color_white)
     desc:SetWrap(true)
     desc:SetMultiline(true)
@@ -147,25 +153,25 @@ function PANEL:on_open(parent)
 
     local current_level = vgui.Create('DLabel', panel)
     current_level:SetText(t('ui.char_create.cur_level')..': ')
-    current_level:SetFont(Font.size(Theme.get_font('text_bold'), math.scale(32)))
+    current_level:SetFont(Font.size(get_font('text_bold'), math_scale(32)))
     current_level:SetColor(color_white)
     current_level:SetContentAlignment(1)
     current_level:SizeToContents()
 
     local level_name = vgui.Create('DLabel', panel)
     level_name:SetText(t('attribute.level.'..level))
-    level_name:SetFont(Theme.get_font('text_normal_large'))
+    level_name:SetFont(get_font('text_normal_large'))
     level_name:SetColor(color_white)
     level_name:SetContentAlignment(2)
     level_name:SizeToContents()
 
-    panel:SetTall(current_level:GetTall() + math.scale(32))
-    current_level:SetPos(0, panel:GetTall() - current_level:GetTall() - math.scale(1))
+    panel:SetTall(current_level:GetTall() + math_scale(32))
+    current_level:SetPos(0, panel:GetTall() - current_level:GetTall() - math_scale(1))
     level_name:SetPos(current_level:GetWide(), panel:GetTall() - level_name:GetTall())
 
     local level_desc = vgui.Create('DLabel', pnl)
     level_desc:SetText(t(selected_attribute.levels[level]))
-    level_desc:SetFont(Theme.get_font('text_normal'))
+    level_desc:SetFont(get_font('text_normal'))
     level_desc:SetColor(color_white)
     level_desc:SetWrap(true)
     level_desc:SetMultiline(true)
@@ -177,10 +183,10 @@ function PANEL:on_open(parent)
     if bonus != 0 then
       local bonus_label = vgui.Create('DLabel', pnl)
       bonus_label:SetText(t('ui.char_create.faction_bonus', { bonus = Stats:format_change(bonus) }))
-      bonus_label:SetFont(Theme.get_font('text_normal'))
+      bonus_label:SetFont(get_font('text_normal'))
       bonus_label:SetColor(Stats:get_change_color(bonus))
       bonus_label:SizeToContents()
-      bonus_label:DockMargin(0, math.scale(8), 0, 0)
+      bonus_label:DockMargin(0, math_scale(8), 0, 0)
       bonus_label:Dock(TOP)
     end
 
@@ -196,17 +202,17 @@ function PANEL:on_open(parent)
       local effect_level = raw_value + bonus
       local effect_title = vgui.Create('DLabel', pnl)
       effect_title:SetText(t('ui.char_create.effects'))
-      effect_title:SetFont(Font.size(Theme.get_font('text_bold'), math.scale(32)))
+      effect_title:SetFont(Font.size(get_font('text_bold'), math_scale(32)))
       effect_title:SetColor(color_white)
       effect_title:SetContentAlignment(1)
       effect_title:SizeToContents()
       effect_title:Dock(TOP)
-      effect_title:SetTall(effect_title:GetTall() + math.scale(32))
+      effect_title:SetTall(effect_title:GetTall() + math_scale(32))
 
       for k, v in ipairs(active_effects) do
         local effect = vgui.Create('DLabel', pnl)
         effect:SetText(t(v.text)..' '..t(v.get_value(effect_level)))
-        effect:SetFont(Theme.get_font('text_normal'))
+        effect:SetFont(get_font('text_normal'))
         effect:SetColor(v.get_color(effect_level))
         effect:SizeToContents()
         effect:Dock(TOP)
@@ -216,9 +222,9 @@ function PANEL:on_open(parent)
 
   for k, v in pairs(Attributes.get_by_type(ATTRIBUTE_STAT)) do
     local stat_line = vgui.Create('DPanel', self.attributes_list)
-    stat_line:SetTall(math.scale(64))
+    stat_line:SetTall(math_scale(64))
     stat_line:Dock(TOP)
-    stat_line:DockMargin(0, 0, 0, math.scale(4))
+    stat_line:DockMargin(0, 0, 0, math_scale(4))
     stat_line.attribute_table = v
     stat_line.Paint = function(pnl, w, h)
       if selected_attribute and selected_attribute.attribute_id == pnl.attribute_table.attribute_id then
@@ -238,7 +244,7 @@ function PANEL:on_open(parent)
     counter:Dock(RIGHT)
     counter:set_value(v.default)
     counter:set_min_max(v.min, v.max)
-    counter:set_font(Theme.get_font('main_menu_titles'))
+    counter:set_font(get_font('main_menu_titles'))
     counter.on_click = function(btn, new_value, old_value)
       local diff = new_value - old_value
 
@@ -263,14 +269,14 @@ function PANEL:on_open(parent)
     local icon = create_icon(stat_line, v.icon, icon_size)
 
     if icon then
-      icon:SetPos(math.scale_x(4), stat_line:GetTall() * 0.5 - icon_size * 0.5)
+      icon:SetPos(math_scale_x(4), stat_line:GetTall() * 0.5 - icon_size * 0.5)
     end
 
     local title = vgui.Create('DLabel', stat_line)
     title:SetText(t(v.name))
-    title:SetFont(Theme.get_font('main_menu_titles'))
+    title:SetFont(get_font('main_menu_titles'))
     title:SetColor(color_white)
-    title:SetPos(icon and icon:GetWide() + math.scale_x(24) or 0, stat_line:GetTall() * 0.5 - title:GetTall() * 0.5)
+    title:SetPos(icon and icon:GetWide() + math_scale_x(24) or 0, stat_line:GetTall() * 0.5 - title:GetTall() * 0.5)
     title:SizeToContents()
 
     stat_line.counter = counter
@@ -279,10 +285,10 @@ function PANEL:on_open(parent)
 
   self.random = vgui.Create('fl_button', self)
   self.random:SetSize(self.attributes_list:GetWide(), Theme.get_option('menu_sidebar_button_height'))
-  self.random:SetPos(math.scale_x(8), scrh * 0.5 - self.random:GetTall())
+  self.random:SetPos(math_scale_x(8), scrh * 0.5 - self.random:GetTall())
   self.random:set_icon('fa-random')
   self.random:set_icon_size(fa_icon_size)
-  self.random:SetFont(Theme.get_font('text_normal'))
+  self.random:SetFont(get_font('text_normal'))
   self.random:SetTitle(t'ui.char_create.stats_random')
   self.random:SetDrawBackground(false)
   self.random.DoClick = function(btn)

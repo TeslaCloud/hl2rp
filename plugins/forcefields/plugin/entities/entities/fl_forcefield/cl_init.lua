@@ -1,21 +1,26 @@
 include('shared.lua')
 
 local material = Material('effects/com_shield003a')
+local render_mins = Vector(0, 0, -40)
+local flip_angle = Angle(0, 180, 0)
 
 --- Builds the clientside collision mesh between the forcefield and the wall to its right.
 function ENT:Initialize()
+  local start = self:GetPos() + Vector(0, 0, 50)
+  local right = self:GetRight()
   local data = {}
-    data.start = self:GetPos() + Vector(0, 0, 50) + self:GetRight() * -16
-    data.endpos = self:GetPos() + Vector(0, 0, 50) + self:GetRight() * -600
+    data.start = start + right * -16
+    data.endpos = start + right * -600
     data.filter = self
   local trace = util.TraceLine(data)
+  local post_pos = self:WorldToLocal(trace.HitPos - Vector(0, 0, 50))
 
   local verts = {
     { pos = Vector(0, 0, -35) },
     { pos = Vector(0, 0, 150) },
-    { pos = self:WorldToLocal(trace.HitPos - Vector(0, 0, 50)) + Vector(0, 0, 150) },
-    { pos = self:WorldToLocal(trace.HitPos - Vector(0, 0, 50)) + Vector(0, 0, 150) },
-    { pos = self:WorldToLocal(trace.HitPos - Vector(0, 0, 50)) - Vector(0, 0, 35) },
+    { pos = post_pos + Vector(0, 0, 150) },
+    { pos = post_pos + Vector(0, 0, 150) },
+    { pos = post_pos - Vector(0, 0, 35) },
     { pos = Vector(0, 0, -35) }
   }
 
@@ -25,28 +30,30 @@ end
 
 --- Draws the forcefield and its shield on both sides when the local player is within 2048 units.
 function ENT:Draw()
-  if PLAYER:GetPos():DistToSqr(self:GetPos()) > 4194304 then return end
+  local pos = self:GetPos()
+
+  if PLAYER:GetPos():DistToSqr(pos) > 4194304 then return end
 
   local post = self:GetDTEntity(0)
-  local angles = self:GetAngles()
+  local up = self:GetUp()
   local matrix = Matrix()
 
   self:DrawModel()
-  matrix:Translate(self:GetPos() + self:GetUp() * -40 + self:GetForward() * -2)
-  matrix:Rotate(angles)
+  matrix:Translate(pos + up * -40 + self:GetForward() * -2)
+  matrix:Rotate(self:GetAngles())
 
   render.SetMaterial(material)
 
   if IsValid(post) then
     local vertex = self:WorldToLocal(post:GetPos())
-    self:SetRenderBounds(vector_origin - Vector(0, 0, 40), vertex + self:GetUp() * 150)
+    self:SetRenderBounds(render_mins, vertex + up * 150)
 
     cam.PushModelMatrix(matrix)
       self:draw_shield(vertex)
     cam.PopModelMatrix()
 
     matrix:Translate(vertex)
-    matrix:Rotate(Angle(0, 180, 0))
+    matrix:Rotate(flip_angle)
 
     cam.PushModelMatrix(matrix)
       self:draw_shield(vertex)
@@ -62,14 +69,15 @@ function ENT:draw_shield(vertex)
     local mat_fac = 45
     local height = 5
     local width = dist / mat_fac
+    local top = self:GetUp() * 190
     mesh.Begin(MATERIAL_QUADS, 1)
     mesh.Position(vector_origin)
     mesh.TexCoord(0, 0, 0)
     mesh.AdvanceVertex()
-    mesh.Position(self:GetUp() * 190)
+    mesh.Position(top)
     mesh.TexCoord(0, 0, height)
     mesh.AdvanceVertex()
-    mesh.Position(vertex + self:GetUp() * 190)
+    mesh.Position(vertex + top)
     mesh.TexCoord(0, width, height)
     mesh.AdvanceVertex()
     mesh.Position(vertex)

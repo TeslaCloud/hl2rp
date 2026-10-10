@@ -1,20 +1,25 @@
 --- Rebuilds the clientside collision mesh of every forcefield between its two posts.
 function Forcefields:update_forcefields()
-  for k, v in pairs(ents.FindByClass('fl_forcefield')) do
-    if IsValid(v:GetDTEntity(0)) then
-      local start_pos = v:GetDTEntity(0):GetPos() - Vector(0, 0, 50)
+  local forcefields = ents.FindByClass('fl_forcefield')
+
+  for i = 1, #forcefields do
+    local forcefield = forcefields[i]
+    local post = forcefield:GetDTEntity(0)
+
+    if IsValid(post) then
+      local post_pos = forcefield:WorldToLocal(post:GetPos() - Vector(0, 0, 50))
       local verts = {
         { pos = Vector(0, 0, -35) },
         { pos = Vector(0, 0, 150) },
-        { pos = v:WorldToLocal(start_pos) + Vector(0, 0, 150) },
-        { pos = v:WorldToLocal(start_pos) + Vector(0, 0, 150) },
-        { pos = v:WorldToLocal(start_pos) - Vector(0, 0, 35) },
+        { pos = post_pos + Vector(0, 0, 150) },
+        { pos = post_pos + Vector(0, 0, 150) },
+        { pos = post_pos - Vector(0, 0, 35) },
         { pos = Vector(0, 0, -35) }
       }
 
-      v:PhysicsFromMesh(verts)
-      v:EnableCustomCollisions(true)
-      v:GetPhysicsObject():EnableCollisions(false)
+      forcefield:PhysicsFromMesh(verts)
+      forcefield:EnableCustomCollisions(true)
+      forcefield:GetPhysicsObject():EnableCollisions(false)
     end
   end
 end

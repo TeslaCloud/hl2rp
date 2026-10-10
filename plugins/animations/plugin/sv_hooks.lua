@@ -2,7 +2,7 @@
 -- menu panel, and everything that ends the animation of a player other than the player
 -- leaving it.
 
-local max_drift = 32
+local max_drift_sqr = 32 * 32
 
 Cable.receive('fl_animations_play', function(actor, id)
   if !isstring(id) then return end
@@ -51,7 +51,7 @@ function Animations:PlayerThink(actor, cur_time)
     state.airborne = true
   end
 
-  if actor:GetPos():DistToSqr(state.position) > max_drift * max_drift then
+  if actor:GetPos():DistToSqr(state.position) > max_drift_sqr then
     self:stop(actor)
   end
 end

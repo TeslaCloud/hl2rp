@@ -133,12 +133,13 @@ end
 --- Moves players the local player does not recognize out of their faction into a players online category.
 -- @param players_table [Table lists of players keyed by faction category]
 function Recognizes:PreRebuildFactionCategories(players_table)
+  local client = PLAYER
   local players_online = {}
 
   for k, v in pairs(players_table) do
     for k1, v1 in pairs(v) do
-      if !PLAYER:recognizes(v1) then
-        table.insert(players_online, v1)
+      if !client:recognizes(v1) then
+        players_online[#players_online + 1] = v1
         v[k1] = nil
       end
     end

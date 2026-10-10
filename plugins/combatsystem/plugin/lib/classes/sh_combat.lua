@@ -1,5 +1,11 @@
 class 'Combat'
 
+local IsValid = IsValid
+local pairs = pairs
+local timer_create = timer.Create
+local timer_remove = timer.Remove
+local cable_send = Cable.send
+
 --- Registers the combat with the combat system and sets up its initial state.
 function Combat:init()
   self.id = CombatSystem:add(self)
@@ -23,7 +29,7 @@ end
 function Combat:finish()
   self.finished = true
   self:notify_finish()
-  timer.Remove('combat_action_'..self.id)
+  timer_remove('combat_action_'..self.id)
   self:remove_members()
 
   CombatSystem:remove(self.id)
@@ -65,11 +71,13 @@ function Combat:calculate_turn_order()
 
   hook.Run('AdjustCombatTurnOrder', order, initiator, victim)
 
-  self.members = {}
+  local members = {}
 
   for k, v in pairs(order) do
-    table.insert(self.members, v.entity)
+    members[#members + 1] = v.entity
   end
+
+  self.members = members
 
   self:message_initiative(order)
 end
@@ -77,7 +85,7 @@ end
 --- Sends the turn order to every player in the combat.
 -- @param order [List<Table> entries with entity and initiative fields]
 function Combat:message_initiative(order)
-  Cable.send(self:get_players(), 'fl_combat_turn_order', order)
+  cable_send(self:get_players(), 'fl_combat_turn_order', order)
 end
 
 --- Returns the members of the combat that are valid players.
@@ -87,7 +95,7 @@ function Combat:get_players()
 
   for k, v in pairs(self.members) do
     if IsValid(v) and v:IsPlayer() then
-      table.insert(players, v)
+      players[#players + 1] = v
     end
   end
 
@@ -165,9 +173,9 @@ function Combat:remove_member(id, all)
     entity:unfreeze()
 
     if entity:IsPlayer() then
-      timer.Remove('combat_turn_'..entity:SteamID())
+      timer_remove('combat_turn_'..entity:SteamID())
 
-      Cable.send(entity, 'fl_combat_end_turn')
+      cable_send(entity, 'fl_combat_end_turn')
     end
   end
 
@@ -249,30 +257,33 @@ function Combat:turn(entity, first)
       else
         local last_pos = entity:GetPos()
 
-        Cable.send(entity, 'fl_combat_start_turn', last_pos)
+        cable_send(entity, 'fl_combat_start_turn', last_pos)
 
         entity:restore_turns()
-        timer.Create('combat_turn_'..entity:SteamID(), 60, 1, function()
+        timer_create('combat_turn_'..entity:SteamID(), 60, 1, function()
           if !self.finished and self:get_acting_member() == entity then
             self:next_turn()
           end
         end)
 
-        timer.Create(timer_name, 1, 0, function()
+        timer_create(timer_name, 1, 0, function()
           if !IsValid(entity) or self.finished then
-            timer.Remove(timer_name)
+            timer_remove(timer_name)
 
             return
           end
 
-          if last_pos:Distance(entity:GetPos()) > entity:GetWalkSpeed() * 0.5 then
+          local pos = entity:GetPos()
+          local max_step = entity:GetWalkSpeed() * 0.5
+
+          if last_pos:DistToSqr(pos) > max_step * max_step then
             if entity:get_turns(TURN_MOVE) <= 1 then
-              timer.Remove(timer_name)
+              timer_remove(timer_name)
             end
 
-            last_pos = entity:GetPos()
+            last_pos = pos
             entity:take_turn(TURN_MOVE)
-            Cable.send(entity, 'fl_combat_update_pos', last_pos)
+            cable_send(entity, 'fl_combat_update_pos', last_pos)
           end
         end)
       end
@@ -280,7 +291,7 @@ function Combat:turn(entity, first)
       if first or !IsValid(entity) then
         self:next_turn()
       else
-        timer.Create(timer_name, 4, 1, function()
+        timer_create(timer_name, 4, 1, function()
           if !self.finished then
             self:next_turn()
           end
@@ -294,17 +305,17 @@ end
 -- @param text [String language phrase of the message]
 -- @param arguments=nil [Table phrase arguments]
 function Combat:send_message(text, arguments)
-  Cable.send(self:get_players(), 'fl_combat_message', text, arguments)
+  cable_send(self:get_players(), 'fl_combat_message', text, arguments)
 end
 
 --- Notifies every player in the combat whose turn it is.
 function Combat:notify_turn()
-  Cable.send(self:get_players(), 'fl_combat_notify_turn', self:get_acting_member())
+  cable_send(self:get_players(), 'fl_combat_notify_turn', self:get_acting_member())
 end
 
 --- Notifies every player in the combat that it has ended.
 function Combat:notify_finish()
-  Cable.send(self:get_players(), 'fl_combat_notify_finish')
+  cable_send(self:get_players(), 'fl_combat_notify_finish')
 end
 
 --- Ends the acting member's turn, gives the turn to the next member and checks whether the combat is over.
@@ -317,9 +328,9 @@ function Combat:next_turn()
     member:freeze()
 
     if member:IsPlayer() then
-      timer.Remove('combat_turn_'..member:SteamID())
+      timer_remove('combat_turn_'..member:SteamID())
 
-      Cable.send(member, 'fl_combat_end_turn')
+      cable_send(member, 'fl_combat_end_turn')
     end
   else
     self:remove_member(self.current_member)

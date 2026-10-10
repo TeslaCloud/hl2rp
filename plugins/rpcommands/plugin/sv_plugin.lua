@@ -2,6 +2,8 @@
 -- out of character (the OOC mute, the OOC and LOOC cooldowns and the speaking veto), and the
 -- OOC and LOOC chat lines that the chat prefixes send.
 
+local config_get = Config.get
+
 local cooldowns = {
   ooc = {
     config = 'ooc_interval',
@@ -50,7 +52,7 @@ function RPCommands:check_ooc_cooldown(actor, kind)
 
   if !cooldown then return true end
 
-  local interval = tonumber(Config.get(cooldown.config)) or 0
+  local interval = tonumber(config_get(cooldown.config)) or 0
 
   if interval <= 0 or actor:can('bypass_chat_cooldown') then return true end
 
@@ -169,7 +171,7 @@ function RPCommands:say_ooc(actor, text, team_chat)
 
     msg_table = {
       hook.Run('ChatboxGetPlayerIcon', actor, text, team_chat) or {},
-      Config.get('ooc_avatars') and Chatbox.avatar(actor) or {},
+      config_get('ooc_avatars') and Chatbox.avatar(actor) or {},
       Color('red'), '[OOC] ',
       hook.Run('ChatboxGetPlayerColor', actor, text, team_chat) or team.GetColor(actor:Team()),
       actor:steam_name(),
@@ -217,7 +219,7 @@ function RPCommands:say_looc(actor, text, team_chat)
     {
       sender = actor,
       position = actor:GetPos(),
-      radius = Config.get('talk_radius'),
+      radius = config_get('talk_radius'),
       ic = true
     }
   }

@@ -85,11 +85,13 @@ function Scanners:StartCommand(actor, cmd)
         cmd:SetUpMove(-10000)
       end
 
-      local pos = scanner:GetPos() + scanner:GetUp() * -67 + scanner:GetForward() * 64
+      local scanner_forward = scanner:GetForward()
+      local scanner_up = scanner:GetUp()
+      local pos = scanner:GetPos() + scanner_up * -67 + scanner_forward * 64
       local speed = 0.0064
-      local forward = scanner:GetForward() * cmd:GetForwardMove() * speed
+      local forward = scanner_forward * cmd:GetForwardMove() * speed
       local right = scanner:GetRight() * cmd:GetSideMove() * speed
-      local up = scanner:GetUp() * cmd:GetUpMove() * speed
+      local up = scanner_up * cmd:GetUpMove() * speed
       local aim =
         util.AimVector(scanner:GetAimVector():Angle(), actor:GetFOV(), cmd:GetMouseX(), cmd:GetMouseY(), 0, 0) * 32
 

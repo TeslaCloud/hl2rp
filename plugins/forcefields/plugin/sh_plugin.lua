@@ -41,25 +41,29 @@ local allowed_ents = {
 -- @param b [Entity second entity]
 -- @return [Boolean whether the entities collide, nil to use the default]
 function Forcefields:ShouldCollide(a, b)
+  local a_class, b_class = a:GetClass(), b:GetClass()
+
+  if a_class != 'fl_forcefield' and b_class != 'fl_forcefield' then return end
+
+  if allowed_ents[a_class] or allowed_ents[b_class] then
+    return false
+  end
+
   local activator
   local entity
+  local entity_class
 
   if a:IsPlayer() then
     activator = a
     entity = b
+    entity_class = b_class
   elseif b:IsPlayer() then
     activator = b
     entity = a
+    entity_class = a_class
   end
 
-  local a_class, b_class = a:GetClass(), b:GetClass()
-
-  if (allowed_ents[a_class] or allowed_ents[b_class]) and
-     (a_class == 'fl_forcefield' or b_class == 'fl_forcefield') then
-    return false
-  end
-
-  if IsValid(entity) and entity:GetClass() == 'fl_forcefield' then
+  if entity_class == 'fl_forcefield' and IsValid(entity) then
     if IsValid(activator) then
       if activator:KeyDown(IN_USE) then return true end
 

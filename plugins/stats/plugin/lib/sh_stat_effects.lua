@@ -11,6 +11,13 @@
 -- This file is included before the attributes folder and before sh_plugin.lua, which is why
 -- it is the one that makes the plugin available as the `Stats` global.
 
+local tonumber = tonumber
+local config_get = Config.get
+local math_max = math.max
+local math_round = math.Round
+local positive_color = Color('lightgreen')
+local negative_color = Color('pink')
+
 if !Stats then
   PLUGIN:set_global('Stats')
 end
@@ -22,7 +29,7 @@ Stats.min_effect_scale = 0.1
 -- @param key [String config key of the effect, a percentage per level]
 -- @return [Number share per level, 0.1 for a config of 10; 0 while the config has no value]
 function Stats:get_effect_rate(key)
-  local percent = tonumber(Config.get(key))
+  local percent = tonumber(config_get(key))
 
   if !percent or percent != percent then
     return 0
@@ -51,7 +58,7 @@ function Stats:get_effect_scale(level, key, inverse)
     change = -change
   end
 
-  return math.max(1 + change, self.min_effect_scale)
+  return math_max(1 + change, self.min_effect_scale)
 end
 
 --- Returns the multiplier that the level of a player in a stat, boosts included, gives to
@@ -95,10 +102,10 @@ function Stats:get_change_color(change, inverse)
   end
 
   if (change > 0) != (inverse == true) then
-    return Color('lightgreen')
+    return positive_color
   end
 
-  return Color('pink')
+  return negative_color
 end
 
 --- Builds an entry of the `effects` list of a stat for an effect that changes a value by a
@@ -143,7 +150,7 @@ function Stats:percent_effect(text, key, inverse, is_available)
       return 0
     end
 
-    return math.Round((self:get_effect_scale(level, key, effect.inverse) - 1) * 100, 1)
+    return math_round((self:get_effect_scale(level, key, effect.inverse) - 1) * 100, 1)
   end
 
   effect.get_value = function(level)
@@ -172,11 +179,11 @@ function Stats:distance_effect(text, key)
   }
 
   effect.is_active = function()
-    return (tonumber(Config.get(key)) or 0) != 0
+    return (tonumber(config_get(key)) or 0) != 0
   end
 
   effect.get_change = function(level)
-    return math.Round((tonumber(level) or 0) * (tonumber(Config.get(key)) or 0), 1)
+    return math_round((tonumber(level) or 0) * (tonumber(config_get(key)) or 0), 1)
   end
 
   effect.get_value = function(level)

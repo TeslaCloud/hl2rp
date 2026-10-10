@@ -16,9 +16,13 @@ function Communications.get_radios(owner)
 
   if !hotbar then return radios end
 
-  for k, v in ipairs(hotbar:get_items()) do
-    if v:is('radio') and v:is_enabled() then
-      table.insert(radios, v)
+  local items = hotbar:get_items()
+
+  for i = 1, #items do
+    local item_obj = items[i]
+
+    if item_obj:is('radio') and item_obj:is_enabled() then
+      radios[#radios + 1] = item_obj
     end
   end
 
@@ -37,8 +41,10 @@ end
 -- @param frequency [Number frequency to look for]
 -- @return [Boolean]
 function Communications.is_tuned_to(owner, frequency)
-  for k, v in ipairs(Communications.get_radios(owner)) do
-    if v:get_frequency() == frequency then
+  local radios = Communications.get_radios(owner)
+
+  for i = 1, #radios do
+    if radios[i]:get_frequency() == frequency then
       return true
     end
   end
@@ -133,9 +139,12 @@ function Communications.speak_radio(speaker, text, frequency, item_obj)
 
   if info.text == '' then return false end
 
+  local tuned_in = info.listeners
+  local is_tuned_to = Communications.is_tuned_to
+
   for k, v in player.Iterator() do
-    if v == speaker or Communications.is_tuned_to(v, frequency) then
-      table.insert(info.listeners, v)
+    if v == speaker or is_tuned_to(v, frequency) then
+      tuned_in[#tuned_in + 1] = v
     end
   end
 
@@ -156,15 +165,16 @@ function Communications.speak_radio(speaker, text, frequency, item_obj)
 
   if !isstring(info.text) or info.text == '' then return false end
 
+  local transmission_listeners = { [speaker] = true }
   local transmission = {
     speaker = speaker,
-    listeners = { [speaker] = true }
+    listeners = transmission_listeners
   }
 
   if istable(info.listeners) then
     for k, v in pairs(info.listeners) do
       if IsValid(v) and v:IsPlayer() then
-        transmission.listeners[v] = true
+        transmission_listeners[v] = true
       end
     end
   end
@@ -173,7 +183,7 @@ function Communications.speak_radio(speaker, text, frequency, item_obj)
   local targets
 
   if info.eavesdrop == false or radius <= 0 then
-    targets = table.GetKeys(transmission.listeners)
+    targets = table.GetKeys(transmission_listeners)
     radius = -1
   end
 
@@ -200,10 +210,15 @@ function Communications.speak_radio(speaker, text, frequency, item_obj)
 
   if !transmission.receivers then return false end
 
+  local receivers = transmission.receivers
+  local over_radio = transmission.listeners
   local listeners, eavesdroppers = {}, {}
 
-  for k, v in ipairs(transmission.receivers) do
-    table.insert(transmission.listeners[v] and listeners or eavesdroppers, v)
+  for i = 1, #receivers do
+    local receiver = receivers[i]
+    local group = over_radio[receiver] and listeners or eavesdroppers
+
+    group[#group + 1] = receiver
   end
 
   Log:print(Chatbox.message_to_string(message), 'player_ic')

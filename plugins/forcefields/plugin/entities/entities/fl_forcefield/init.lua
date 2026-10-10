@@ -65,11 +65,14 @@ function ENT:Initialize()
     end
   end
 
+  local start = self:GetPos() + Vector(0, 0, 50)
+  local right = self:GetRight()
+
   data = {}
-    data.start = self:GetPos() + Vector(0, 0, 50) + self:GetRight() * -16
-    data.endpos = self:GetPos() + Vector(0, 0, 50) + self:GetRight() * -600
+    data.start = start + right * -16
+    data.endpos = start + right * -600
     data.filter = self
-  trace = util.TraceLine(data)
+  local trace = util.TraceLine(data)
 
   self.post = ents.Create('prop_physics')
   self.post:SetModel('models/props_combine/combine_fence01a.mdl')
@@ -83,12 +86,13 @@ function ENT:Initialize()
   self.post:MakePhysicsObjectAShadow(false, false)
   self:DeleteOnRemove(self.post)
 
+  local post_pos = self:WorldToLocal(self.post:GetPos())
   local verts = {
     { pos = Vector(0, 0, -35) },
     { pos = Vector(0, 0, 150) },
-    { pos = self:WorldToLocal(self.post:GetPos()) + Vector(0, 0, 150) },
-    { pos = self:WorldToLocal(self.post:GetPos()) + Vector(0, 0, 150) },
-    { pos = self:WorldToLocal(self.post:GetPos()) - Vector(0, 0, 35) },
+    { pos = post_pos + Vector(0, 0, 150) },
+    { pos = post_pos + Vector(0, 0, 150) },
+    { pos = post_pos - Vector(0, 0, 35) },
     { pos = Vector(0, 0, -35) }
   }
 
@@ -174,7 +178,7 @@ end
 
 --- Plays the shield hum while the forcefield is on and keeps it frozen in place.
 function ENT:Think()
-  if IsValid(self) and self.on then
+  if self.on then
     self.shield_loop:Play()
     self.shield_loop:ChangeVolume(0.4, 0)
   else
@@ -185,13 +189,6 @@ function ENT:Think()
 
   if IsValid(phys_obj) then
     phys_obj:EnableMotion(false)
-  end
-end
-
---- Stops the shield hum when the forcefield is removed.
-function ENT:OnRemove()
-  if self.shield_loop then
-    self.shield_loop:Stop()
   end
 end
 

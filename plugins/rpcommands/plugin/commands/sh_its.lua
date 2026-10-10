@@ -24,7 +24,7 @@ function CMD:on_run(actor, ...)
   local text = table.concat({ ... }, ' '):chomp(' '):spelling()
 
   for k, v in pairs(RPCommands.texts) do
-    if v.pos:Distance(pos) <= 50 then
+    if v.pos:DistToSqr(pos) <= 2500 then
       actor:notify('error.its_too_close')
 
       return

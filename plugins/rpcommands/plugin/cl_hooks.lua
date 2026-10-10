@@ -4,13 +4,17 @@
 -- bubble is labelled, colored like the chat line the text will become, and seen as far as
 -- that line will be heard.
 
+local IsValid = IsValid
+local isfunction = isfunction
+local text_size = util.text_size
+
 --- Checks whether a text starts with one of the given chat prefixes.
 -- @param text [String lowercase text]
 -- @param prefixes [List<String> lowercase prefixes]
 -- @return [Boolean]
 local function has_prefix(text, prefixes)
-  for k, v in ipairs(prefixes) do
-    if text:start_with(v) then
+  for i = 1, #prefixes do
+    if text:start_with(prefixes[i]) then
       return true
     end
   end
@@ -34,39 +38,44 @@ end
 --- Draws nearby visible static texts, fading with distance and screen position. Staff holding Alt also see
 -- who placed each text and when.
 function RPCommands:HUDPaint()
-  if IsValid(PLAYER) then
-    for k, v in pairs(RPCommands.texts) do
-      local client_pos = EyePos()
+  local client = PLAYER
+  local texts = RPCommands.texts
 
-      if client_pos:Distance(v.pos) <= 300 and !util.vector_obstructed(client_pos, v.pos, { PLAYER }) then
-        local scrw = ScrW()
-        local pos = v.pos:ToScreen()
-        local cx, cy = ScrC()
-        local cam_mult = (1 - math.Distance(cx, cy, pos.x, pos.y) / scrw * 1.5)
-        local distance_mult = (1 - client_pos:Distance(v.pos) / 300)
-        local alpha = 255 * cam_mult * distance_mult
-        local col1, col2 = Color(255, 255, 255, alpha), Color(0, 0, 0, alpha)
-        local font = Theme.get_font('menu_small')
-        local full_w, full_h = util.text_size(v.text, font)
-        local lines = util.wrap_text(v.text, font, scrw / 4, cx - full_w / 2)
+  if !IsValid(client) or !next(texts) then return end
 
-        if input.IsKeyDown(KEY_LALT) then
-          if PLAYER:is_assistant() then
-            table.insert(lines, v.name..' ('..v.steamid..')')
-            table.insert(lines, v.time)
-          end
-        end
+  local client_pos = EyePos()
+  local scrw = ScrW()
+  local cx, cy = ScrC()
+  local font = Theme.get_font('menu_small')
+  local show_author = input.IsKeyDown(KEY_LALT) and client:is_assistant()
+  local offset = 4
 
-        local offset = 4
-        local cur_y = pos.y - ((full_h + offset) * #lines) / 2
+  for k, v in pairs(texts) do
+    local text_pos = v.pos
 
-        for k1, v1 in pairs(lines) do
-          local w, h = util.text_size(v1, font)
+    if client_pos:DistToSqr(text_pos) <= 90000 and !util.vector_obstructed(client_pos, text_pos, client) then
+      local pos = text_pos:ToScreen()
+      local cam_mult = (1 - math.Distance(cx, cy, pos.x, pos.y) / scrw * 1.5)
+      local distance_mult = (1 - client_pos:Distance(text_pos) / 300)
+      local alpha = 255 * cam_mult * distance_mult
+      local col1, col2 = Color(255, 255, 255, alpha), Color(0, 0, 0, alpha)
+      local full_w, full_h = text_size(v.text, font)
+      local lines = util.wrap_text(v.text, font, scrw * 0.25, cx - full_w * 0.5)
 
-          draw.SimpleTextOutlined(v1, font, pos.x - w / 2, cur_y, col1, nil, nil, 1, col2)
+      if show_author then
+        lines[#lines + 1] = v.name..' ('..v.steamid..')'
+        lines[#lines + 1] = v.time
+      end
 
-          cur_y = cur_y + h + offset
-        end
+      local cur_y = pos.y - ((full_h + offset) * #lines) * 0.5
+
+      for i = 1, #lines do
+        local line = lines[i]
+        local w, h = text_size(line, font)
+
+        draw.SimpleTextOutlined(line, font, pos.x - w * 0.5, cur_y, col1, nil, nil, 1, col2)
+
+        cur_y = cur_y + h + offset
       end
     end
   end

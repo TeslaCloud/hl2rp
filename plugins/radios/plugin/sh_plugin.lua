@@ -28,9 +28,10 @@ function Communications.is_radio_text(text)
   if !isstring(text) then return false end
 
   local lower_text = text:utf8lower()
+  local prefixes = Communications.prefixes
 
-  for k, v in ipairs(Communications.prefixes) do
-    if lower_text:start_with(v) then
+  for i = 1, #prefixes do
+    if lower_text:start_with(prefixes[i]) then
       return true
     end
   end
