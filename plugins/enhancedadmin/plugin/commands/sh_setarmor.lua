@@ -1,7 +1,7 @@
 CMD.name = 'SetArmor'
 CMD.description = 'command.setarmor.description'
 CMD.syntax = 'command.setarmor.syntax'
-CMD.permission = 'moderator'
+CMD.permission = 'gamemaster'
 CMD.category = 'permission.categories.player_management'
 CMD.arguments = 2
 CMD.immunity = true

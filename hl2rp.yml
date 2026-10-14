@@ -15,6 +15,7 @@ depends:
   - inventory
   - mapscenes
   - observer
+  - gamemastery
   - ragdoll
   - stamina
   - staticents

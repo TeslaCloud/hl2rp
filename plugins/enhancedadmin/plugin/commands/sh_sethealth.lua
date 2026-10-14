@@ -1,7 +1,7 @@
 CMD.name = 'SetHealth'
 CMD.description = 'command.sethealth.description'
 CMD.syntax = 'command.sethealth.syntax'
-CMD.permission = 'moderator'
+CMD.permission = 'gamemaster'
 CMD.category = 'permission.categories.player_management'
 CMD.arguments = 2
 CMD.immunity = true
