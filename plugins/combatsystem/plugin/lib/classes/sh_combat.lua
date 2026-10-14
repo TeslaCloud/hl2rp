@@ -35,7 +35,23 @@ function Combat:finish()
   CombatSystem:remove(self.id)
 end
 
---- Sorts the members by rolled initiative, keeping the initiator first, and sends the order to the players.
+--- Returns the reflexes of a combat member used to break initiative ties.
+-- @param target [Entity the combat member]
+-- @return [Number reflexes modifier, 0 when the member has no attributes]
+local function get_reflexes(target)
+  if target.get_attribute_modifier then
+    return target:get_attribute_modifier('reflexes') or 0
+  elseif target.get_attribute then
+    return target:get_attribute('reflexes') or 0
+  end
+
+  return 0
+end
+
+--- Sorts the members by rolled initiative (see `CombatSystem:dice_initiative`), keeping the initiator first, and
+-- sends the order with every initiative roll to the players. Higher initiative goes first. On a tie a player goes
+-- before an NPC, then the member with higher reflexes goes first, and any remaining tie is settled by a random
+-- number rolled once per member before sorting.
 function Combat:calculate_turn_order()
   local order = self.members
   local initiator, victim = order[1], order[2]
@@ -45,26 +61,33 @@ function Combat:calculate_turn_order()
   for k, v in pairs(order) do
     order[k] = {
       entity = v,
-      initiative = CombatSystem:dice_initiative(v)
+      initiative = CombatSystem:dice_initiative(v),
+      tiebreak = math.random()
     }
   end
 
   table.sort(order, function(a, b)
-    if a.initiative > b.initiative then
-      return true
-    elseif a.initiative == b.initiative then
-      if a.entity:IsPlayer() and b.entity:IsNPC() then
-        return true
-      elseif a.entity:IsPlayer() and b.entity:IsPlayer() then
-        local ref_a, ref_b = a.entity:get_attribute('reflexes'), b.entity:get_attribute('reflexes')
-
-        if a > b then
-          return true
-        elseif a == b then
-          return math.random(1, 2) == 1
-        end
-      end
+    if a.initiative != b.initiative then
+      return a.initiative > b.initiative
     end
+
+    local a_player, b_player = a.entity:IsPlayer(), b.entity:IsPlayer()
+
+    if a_player != b_player then
+      return a_player and !b_player
+    end
+
+    local ref_a, ref_b = get_reflexes(a.entity), get_reflexes(b.entity)
+
+    if ref_a != ref_b then
+      return ref_a > ref_b
+    end
+
+    if a.tiebreak != b.tiebreak then
+      return a.tiebreak > b.tiebreak
+    end
+
+    return false
   end)
 
   table.insert(order, 1, { entity = initiator, initiative = 'notification.combat.initiator' })

@@ -38,12 +38,22 @@ depends:
   - spawnpoints
   - spawnsaver
   - damage
+  - d20
+  - levels
   - limbs
   - vendors
   - propprotection
   - mapcleaner
   - gametime
   - screeneffects
+  - rpcommands
+  - stats
+  - recognize
+  - radios
+  - playersearch
+  - logging
+  - doorkeys
+  - animations
 depends_development:
   - devhud
   - profiler

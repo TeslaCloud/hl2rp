@@ -138,10 +138,18 @@ function CombatSystem:ShowHelp(actor)
   end
 end
 
---- Starts or joins a combat when a player and an NPC or another player fight, then rolls whether the attack hits.
+--- Starts or joins a combat when a player and an NPC or another player fight, then rolls whether the attack hits
+-- (see `CombatSystem:calculate_hit`) and uses up an attack turn of a player attacker. A missed attack is blocked;
+-- a hit is left alone, so the damage that the D20 plugin has rolled for it is dealt.
+--
+-- The plugins of the schema load after those of the framework, so this handler runs after theirs. The damage of a
+-- hit on a player is rolled by `D20:ResolvePlayerDamage`, which the Damage plugin's `EntityTakeDamage` handler
+-- calls; the damage of a hit on an NPC is rolled by `D20:EntityTakeDamage`, as the Damage plugin only handles
+-- players. While the D20 plugin is enabled both have rolled by the time this handler runs, and the extra damage
+-- events of an attack they have rolled already (shotgun pellets) are blocked before they get here.
 -- @param entity [Entity entity being damaged]
 -- @param damage_info [CTakeDamageInfo damage being dealt]
--- @return [Boolean true to block the damage when the attack missed, nil if combat does not apply]
+-- @return [Boolean true to block the damage when the attack missed, nil when it hit or combat does not apply]
 function CombatSystem:EntityTakeDamage(entity, damage_info)
   local attacker = damage_info:GetAttacker()
 
@@ -162,13 +170,15 @@ function CombatSystem:EntityTakeDamage(entity, damage_info)
       combat = CombatSystem:start_combat(attacker, entity)
     end
 
-    local success = CombatSystem:calculate_hit(attacker, entity, damage_info)
+    local missed = CombatSystem:calculate_hit(attacker, entity, damage_info)
 
     if attacker:IsPlayer() then
       attacker:take_turn(TURN_ATTACK)
     end
 
-    return success
+    if missed then
+      return true
+    end
   end
 end
 

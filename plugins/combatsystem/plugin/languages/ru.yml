@@ -11,8 +11,10 @@ ru:
       skip: "Вы пропускаете свой ход."
       leave_try: "Вы пытаетесь покинуть бой."
       leave_interrupt: "Вам помешали покинуть бой!"
-      success: "{attacker} успешно атакует {target} в {limb}."
-      fail: "{attacker} атакует {target} в {limb}, но промахивается."
+      success: "{attacker} успешно атакует {target} в {limb}. ({roll} против КБ {armor_class})"
+      fail: "{attacker} атакует {target} в {limb}, но промахивается. ({roll} против КБ {armor_class})"
+      critical_success: "{attacker} lands a critical hit on {target} in the {limb}! ({roll} against AC {armor_class})"
+      critical_failure: "{attacker} attacks {target} in the {limb}, but fumbles and misses badly. ({roll} against AC {armor_class})"
   ui:
     hud:
       skip: Нажмите F1, чтобы пропустить или окончить свой ход.

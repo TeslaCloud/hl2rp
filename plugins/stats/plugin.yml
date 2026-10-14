@@ -1,5 +1,0 @@
-name: Character Stats
-description: Adds various stats for the characters.
-author: TeslaCloud Studios
-depends:
-  - attributes

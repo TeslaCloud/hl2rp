@@ -1,5 +1,5 @@
---- The First Aid Kit: a medical item that gives back 100 health over 50 seconds and, when the
--- Limbs plugin is loaded, heals every hurt limb completely.
+--- The First Aid Kit: a medical item that gives back 1d4 health a second for 5 seconds and,
+-- when the Limbs plugin is loaded, heals every hurt limb completely.
 
 ITEM:base_off 'medical'
 
@@ -11,7 +11,7 @@ ITEM.weight = 1.5
 ITEM.stackable = false
 ITEM.max_stack = 1
 
-ITEM.health_ticks = 50
-ITEM.health_regen = 2
+ITEM.health_ticks = 5
+ITEM.health_regen = '1d4'
 ITEM.health_delay = 1
 ITEM.limb_heal = 100

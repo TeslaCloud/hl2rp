@@ -1,3 +1,15 @@
+--- Combat bookkeeping and the rolls of the turn based combat. Every attack between a player
+-- and an NPC or another player is an attack roll of the D20 plugin (`D20:attack_roll`): a d20
+-- plus the attack modifier of the attacker against the armor class of the target. The combat
+-- adds a bonus to that roll for the range of the weapon, the recoil of a weak shooter and the
+-- body part that was aimed at. The turn order is rolled as initiative: a reflexes roll of the
+-- Stats plugin for players and a d20 plus the 'd20_npc_attack_bonus' config for NPCs.
+
+local tonumber = tonumber
+local isfunction = isfunction
+local math_ceil = math.ceil
+local config_get = Config.get
+
 if !CombatSystem then
   PLUGIN:set_global('CombatSystem')
 end
@@ -65,99 +77,150 @@ function CombatSystem:start_combat(attacker, target)
   return combat
 end
 
+--- Bonus of an attack roll by the body part that was aimed at.
 local hitgroup_adjust = {
   [HITGROUP_GENERIC]    = 0,
-  [HITGROUP_HEAD]       = -1,
+  [HITGROUP_HEAD]       = -2,
   [HITGROUP_CHEST]      = 0,
   [HITGROUP_STOMACH]    = 0,
-  [HITGROUP_LEFTARM]    = 1,
-  [HITGROUP_RIGHTARM]   = 1,
-  [HITGROUP_LEFTLEG]    = 1,
-  [HITGROUP_RIGHTLEG]   = 1,
+  [HITGROUP_LEFTARM]    = 2,
+  [HITGROUP_RIGHTARM]   = 2,
+  [HITGROUP_LEFTLEG]    = 2,
+  [HITGROUP_RIGHTLEG]   = 2,
   [HITGROUP_GEAR]       = 0
 }
 
---- Rolls whether an attack hits, adjusting for weapon range, recoil and the body part, and announces the result.
--- @param attacker [Entity attacking entity]
--- @param target [Entity entity being attacked]
+--- Rolls whether an attack hits with `D20:attack_roll` and announces the result to the
+-- combat. The attack roll gets a bonus that adds up the following:
+-- * range, for a player whose weapon item has an `effective_distance`: -2 for every step of
+--   the effective distance that the target is beyond it, +2 within 5 meters; the
+--   AdjustAttackDistance hook can change both distances first;
+-- * recoil: -2 for every shot the attacker has already fired this turn, while the strength
+--   modifier of the attacker is negative;
+-- * body part: -2 for the head, +2 for an arm or a leg, nothing for the rest.
+-- A natural 20 always hits and a natural 1 always misses; both are announced as critical.
+-- Every message carries the formatted roll and the armor class it was rolled against.
+-- Serverside only.
+-- @param attacker [Entity attacking player or NPC]
+-- @param target [Entity player or NPC being attacked]
 -- @param damage_info [CTakeDamageInfo damage of the attack]
 -- @return [Boolean true if the attack missed, false if it hit]
 function CombatSystem:calculate_hit(attacker, target, damage_info)
-  local random = Dice.fudge()
   local hitgroup = damage_info:get_hitgroup()
   local combat = attacker:get_combat() or target:get_combat()
-  local adjust = 2
+  local adjust = 0
 
   if attacker:IsPlayer() then
     local weapon_item = attacker:get_active_weapon_item()
 
-    if weapon_item then
-      if weapon_item.effective_distance then
-        local data = {
-          attacker = attacker,
-          target = target,
-          distance = attacker:EyePos():Distance(damage_info:GetDamagePosition()),
-          effective_distance = weapon_item.effective_distance or 0,
-          distance_adjust = 0,
-          combat = combat
-        }
+    if weapon_item and weapon_item.effective_distance then
+      local data = {
+        attacker = attacker,
+        target = target,
+        distance = attacker:EyePos():Distance(damage_info:GetDamagePosition()),
+        effective_distance = weapon_item.effective_distance or 0,
+        distance_adjust = 0,
+        combat = combat
+      }
 
-        hook.Run('AdjustAttackDistance', data)
+      --- Lets plugins change the distances that the range bonus of an attack roll in turn
+      -- based combat is worked out from. Called on the server for every attack of a player
+      -- whose weapon item has an `effective_distance`, before the attack roll. While the
+      -- effective distance stays above 0, the bonus is worked out afterwards: -2 for every
+      -- step of the effective distance that the target is beyond it and +2 within 5 meters;
+      -- in between, or with an effective distance of 0, the `distance_adjust` of the table
+      -- is used as it is. Every handler may change the table, so a handler should return
+      -- nothing to let the others run.
+      -- ```
+      -- -- Scopes double the effective distance of a weapon.
+      -- function MyPlugin:AdjustAttackDistance(data)
+      --   if data.attacker:has_item_equipped('scope') then
+      --     data.effective_distance = data.effective_distance * 2
+      --   end
+      -- end
+      -- ```
+      -- @param data [Map Modified in place: attacker (Player the attacking player), target
+      --   (Entity the entity being attacked), distance (Number units from the eyes of the
+      --   attacker to where the damage landed), effective_distance (Number units the weapon
+      --   is accurate up to), distance_adjust (Number bonus of the attack roll for the range,
+      --   0), combat (Combat the combat of the attack)]
+      hook.Run('AdjustAttackDistance', data)
 
-        if data.effective_distance > 0 then
-          if data.distance > data.effective_distance then
-            data.distance_adjust = -math.ceil((data.distance - data.effective_distance) / data.effective_distance)
-          elseif data.distance < (5):m() then
-            data.distance_adjust = 1
-          end
+      if data.effective_distance > 0 then
+        if data.distance > data.effective_distance then
+          data.distance_adjust = -2 * math_ceil((data.distance - data.effective_distance) / data.effective_distance)
+        elseif data.distance < (5):m() then
+          data.distance_adjust = 2
         end
-
-        adjust = adjust + data.distance_adjust
       end
+
+      adjust = adjust + data.distance_adjust
     end
 
-    if attacker.shots_done and attacker.shots_done > 0 and attacker:dice('strength') < 0 then
-      adjust = adjust - attacker.shots_done
+    if attacker.shots_done and attacker.shots_done > 0 and attacker:get_attribute_modifier('strength') < 0 then
+      adjust = adjust - 2 * attacker.shots_done
     end
   end
 
-  adjust = adjust + hitgroup_adjust[hitgroup]
+  adjust = adjust + (hitgroup_adjust[hitgroup] or 0)
 
   attacker.shots_done = (attacker.shots_done or 0) + 1
 
-  if random + adjust > 0 then
+  local hit, result, armor_class = D20:attack_roll(attacker, target, {
+    bonus = adjust,
+    hitgroup = hitgroup,
+    damage_info = damage_info
+  })
+
+  local arguments = {
+    attacker = attacker,
+    target = target,
+    limb = SCHEMA:get_hitgroup_name(hitgroup),
+    roll = Dice.format(result),
+    armor_class = armor_class
+  }
+
+  if hit then
     if target:IsPlayer() and target.combat_leaving then
       target.combat_leaving = false
       target:notify('notification.combat.leave_interrupt')
     end
 
-    combat:send_message('notification.combat.success', {
-      attacker = attacker,
-      target = target,
-      limb = SCHEMA:get_hitgroup_name(hitgroup)
-    })
+    if result.critical == 'success' then
+      combat:send_message('notification.combat.critical_success', arguments)
+    else
+      combat:send_message('notification.combat.success', arguments)
+    end
 
     return false
-  else
-    combat:send_message('notification.combat.fail', {
-      attacker = attacker,
-      target = target,
-      limb = SCHEMA:get_hitgroup_name(hitgroup)
-    })
-
-    return true
   end
+
+  if result.critical == 'failure' then
+    combat:send_message('notification.combat.critical_failure', arguments)
+  else
+    combat:send_message('notification.combat.fail', arguments)
+  end
+
+  return true
 end
 
---- Rolls an entity's initiative, using the reflexes attribute for players.
+--- Rolls the initiative of a combat member. A player rolls their reflexes
+-- (`Player:roll_attribute`), or a plain d20 when that roll cannot be made; anything else
+-- rolls a d20 plus the 'd20_npc_attack_bonus' config.
 -- @param entity [Entity combat member]
--- @return [Number initiative roll]
+-- @return [Number total of the initiative roll]
 function CombatSystem:dice_initiative(entity)
-  local dice = Dice.fudge()
+  local result
 
   if entity:IsPlayer() then
-    dice = entity:dice('reflexes')
+    if isfunction(entity.roll_attribute) then
+      result = entity:roll_attribute('reflexes')
+    end
+  else
+    result = Dice.roll('1d20 + bonus', { bonus = tonumber(config_get('d20_npc_attack_bonus', 2)) or 0 })
   end
 
-  return dice
+  result = result or Dice.roll('1d20')
+
+  return result.total
 end

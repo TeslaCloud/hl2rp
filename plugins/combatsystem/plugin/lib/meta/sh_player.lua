@@ -70,21 +70,3 @@ function player_meta:restore_turns()
   self.shots_done = 0
   self.turn_done = false
 end
-
---- Rolls a fudge die against one of the player's attributes.
--- @param attribute [String ID of the attribute]
--- @return [Number attribute value plus the roll, after the AdjustDiceThrow hook]
-function player_meta:dice(attribute)
-  local value = self:get_attribute(attribute)
-  local roll = Dice.fudge(value)
-  local adjust_data = {
-    player = self,
-    attribute = attribute,
-    value = value,
-    roll = roll
-  }
-
-  hook.Run('AdjustDiceThrow', adjust_data)
-
-  return adjust_data.value + adjust_data.roll
-end

@@ -1,17 +1,20 @@
 --- Server hooks of the schema: pain, death and moaning sounds, the damage multipliers of hit
--- locations and weapons, and the Combine doors.
+-- locations, the Combine doors, and the name Overwatch soldiers are shown under in the local
+-- OOC chat.
 --
--- The damage handlers (`ScalePlayerDamage`, `ScaleNPCDamage`, `ScaleEntityDamage` and
--- `EntityTakeDamage`) change the damage in place and return nothing. Flux stops calling the
--- handlers of a hook at the first one that returns a value, and the schema is called after
--- every plugin and before the gamemode, so a value returned from here would keep the
--- gamemode from seeing the damage. The Damage and Limbs plugins hook the same events and
--- return nothing either, except that the Damage plugin blocks damage that a handler of its
--- PrePlayerTakeDamage hook has cancelled. The hit location multipliers of players are the
--- `damage_scale_*` configs of the Damage plugin, which hl2rp.yml sets to double the damage
--- of the head, the arms and the legs; the schema only doubles those hits on NPCs, which the
--- plugin does not cover. Limb damage is worked out from the health a player has lost after
--- every multiplier.
+-- The damage of a hit is rolled by the D20 plugin from the dice of the weapon or of the
+-- attacker, so the schema does not scale damage by weapon. The damage handlers
+-- (`ScalePlayerDamage`, `ScaleNPCDamage` and `ScaleEntityDamage`) change the damage in place
+-- and return nothing. Flux stops calling the handlers of a hook at the first one that returns
+-- a value, and the schema is called after every plugin and before the gamemode, so a value
+-- returned from here would keep the gamemode from seeing the damage. The Damage, D20 and
+-- Limbs plugins hook the same events and return nothing either, except that they block
+-- damage that a handler of the PrePlayerTakeDamage hook has cancelled and the extra hits of
+-- one attack in the same tick. The hit location multipliers of players are the
+-- `damage_scale_*` configs of the Damage plugin, which hl2rp.yml sets to double the damage of
+-- the head, the arms and the legs; the schema only doubles those hits on NPCs, which the
+-- plugin does not cover. The D20 plugin applies both multipliers to the rolled damage again.
+-- Limb damage is worked out from the health a player has lost after every multiplier.
 
 local random = math.random
 
@@ -72,6 +75,16 @@ function SCHEMA:PlayerDeath(victim, inflictor, attacker)
   end
 end
 
+--- Shows the members of the Overwatch faction as 'Overwatch Soldier' in the local OOC chat,
+-- so that the line does not give away which soldier wrote it.
+-- @param actor [Player player who writes]
+-- @return [String 'Overwatch Soldier' for the Overwatch faction, nil for everyone else]
+function SCHEMA:GetPlayerOOCName(actor)
+  if actor:get_faction_id() == 'overwatch' then
+    return 'Overwatch Soldier'
+  end
+end
+
 --- Doubles damage dealt to any limb other than the torso of an NPC. Players are left alone:
 -- the `damage_scale_*` configs of the Damage plugin, set in hl2rp.yml, double their head,
 -- arm and leg hits, and doubling them here as well would multiply the two. The damage is
@@ -114,40 +127,6 @@ end
 -- @param damage_info [CTakeDamageInfo damage being dealt]
 function SCHEMA:ScaleNPCDamage(entity, hitgroup, damage_info)
   hook.Run('ScaleEntityDamage', entity, hitgroup, damage_info)
-end
-
-local weapon_scales = {
-  ['weapon_357'] = 0.67,
-  ['weapon_ar2'] = 3.1,
-  ['weapon_crowbar'] = 0.6,
-  ['weapon_pistol'] = 2.1,
-  ['weapon_shotgun'] = 3,
-  ['weapon_smg1'] = 2.1,
-  ['weapon_stunstick'] = 0.3
-}
-
---- Scales damage dealt by players according to the weapon they are holding. The damage is
--- scaled in place and nothing is returned: a returned value would block the damage or keep
--- the gamemode from handling it. The schema is called after every plugin, so the
--- PrePlayerTakeDamage hook of the Damage plugin sees the damage before this multiplier, and
--- its PostPlayerTakeDamage hook and the Limbs plugin see what was dealt in the end. A plugin
--- that returns a value from its own handler keeps this one from being called.
--- @param entity [Entity entity being damaged]
--- @param damage_info [CTakeDamageInfo damage being dealt]
-function SCHEMA:EntityTakeDamage(entity, damage_info)
-  local attacker = damage_info:GetAttacker()
-
-  if !IsValid(attacker) or !attacker:IsPlayer() then return end
-
-  local attacker_weapon = attacker:GetActiveWeapon()
-
-  if !IsValid(attacker_weapon) then return end
-
-  local scale = weapon_scales[attacker_weapon:GetClass():lower()]
-
-  if scale then
-    damage_info:ScaleDamage(scale)
-  end
 end
 
 --- Makes badly hurt human players moan, more often the lower their health is.
