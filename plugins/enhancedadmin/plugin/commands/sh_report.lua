@@ -1,12 +1,17 @@
+--- The `report` command: `/report <text>` sends a message to every member of the staff who
+-- is online.
+
 CMD.name = 'Report'
 CMD.description = 'command.report.description'
 CMD.syntax = 'command.report.syntax'
 CMD.category = 'permission.categories.general'
 CMD.arguments = 1
+CMD.arg_types = { 'text' }
 CMD.alias = 'help'
 
 --- Sends a report message to all online staff and to the reporting player.
 -- @param actor [Player player making the report]
+-- @param ... [Vararg words of the report]
 function CMD:on_run(actor, ...)
   local text = table.concat({ ... }, ' ')
 

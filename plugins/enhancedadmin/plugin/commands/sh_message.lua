@@ -1,14 +1,18 @@
+--- The `message` command: `/message <player> <text>` sends a private message to a player,
+-- the one whose name is typed exactly or the first one a target selector finds.
+
 CMD.name = 'Message'
 CMD.description = 'command.message.description'
 CMD.syntax = 'command.message.syntax'
 CMD.category = 'permission.categories.general'
 CMD.arguments = 2
-CMD.player_arg = 1
+CMD.arg_types = { 'player', 'text' }
 CMD.aliases = { 'pm', 'msg' }
 
 --- Sends a private message to a player and echoes it back to the sender.
 -- @param actor [Player player sending the message]
 -- @param targets [List<Player> recipients, only the first one is used]
+-- @param ... [Vararg words of the message]
 function CMD:on_run(actor, targets, ...)
   local text = table.concat({ ... }, ' ')
   local target = targets[1]
