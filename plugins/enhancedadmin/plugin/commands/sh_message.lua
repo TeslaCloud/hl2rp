@@ -12,9 +12,8 @@ CMD.aliases = { 'pm', 'msg' }
 --- Sends a private message to a player and echoes it back to the sender.
 -- @param actor [Player player sending the message]
 -- @param targets [List<Player> recipients, only the first one is used]
--- @param ... [Vararg words of the message]
-function CMD:on_run(actor, targets, ...)
-  local text = table.concat({ ... }, ' ')
+-- @param text [String the message, as it was typed]
+function CMD:on_run(actor, targets, text)
   local target = targets[1]
 
   local msg_table = {

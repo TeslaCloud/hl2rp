@@ -1,20 +1,23 @@
-en:
+ru:
   command:
     sethealth:
-      description: 'Set the health of a character to a custom value.'
-      syntax: <target> <value>
-      notification: 'Your health has been set to {health}.'
-      message: '{player} has set {target} health to {health}.'
+      description: 'Установить здоровье персонажа на заданное значение.'
+      syntax: <цель> <значение>
+      notification: 'Ваше здоровье установлено на {health}.'
+      message: '{player} установил(а) здоровье {target} на {health}.'
     setarmor:
-      description: 'Set the armor of a character to a custom value.'
-      syntax: <target> <value>
-      notification: 'Your armor has been set to {armor}.'
-      message: '{player} has set {target} armor to {armor}.'
-    staff:
-      description: 'Talk to fellow staff members.'
-      syntax: <message>
+      description: 'Установить броню персонажа на заданное значение.'
+      syntax: <цель> <значение>
+      notification: 'Ваша броня установлена на {armor}.'
+      message: '{player} установил(а) броню {target} на {armor}.'
+    report:
+      description: 'Сообщить администрации о проблеме.'
+      syntax: <сообщение>
+    message:
+      description: 'Отправить личное сообщение другому игроку.'
+      syntax: <цель> <сообщение>
   error:
     sethealth:
-      invalid_value: '[ERROR] {health} is not a valid health value.'
+      invalid_value: '[ОШИБКА] {health} — недопустимое значение здоровья.'
     setarmor:
-      invalid_value: '[ERROR] {armor} is not a valid armor value.'
+      invalid_value: '[ОШИБКА] {armor} — недопустимое значение брони.'

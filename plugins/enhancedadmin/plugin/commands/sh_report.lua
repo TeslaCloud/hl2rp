@@ -11,10 +11,8 @@ CMD.alias = 'help'
 
 --- Sends a report message to all online staff and to the reporting player.
 -- @param actor [Player player making the report]
--- @param ... [Vararg words of the report]
-function CMD:on_run(actor, ...)
-  local text = table.concat({ ... }, ' ')
-
+-- @param text [String the report, as it was typed]
+function CMD:on_run(actor, text)
   local msg_table = {
     Color(184, 59, 94),
     '@report ',
