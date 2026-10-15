@@ -25,7 +25,7 @@ function player_meta:take_turn(turn_type, amount)
     self:freeze_move()
   end
 
-  for k, v in pairs(turns) do
+  for _k, v in pairs(turns) do
     if v > 0 then
       return
     end

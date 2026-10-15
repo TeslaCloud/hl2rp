@@ -21,9 +21,9 @@ if SERVER then
 
   --- Turns off the previous owner's flashlight when their flashlight item leaves their inventory.
   -- @param item_table [Item transferred item]
-  -- @param new_inventory [Inventory inventory the item was moved to]
+  -- @param _new_inventory [Inventory inventory the item was moved to]
   -- @param old_inventory [Inventory inventory the item was moved from]
-  function PLUGIN:ItemTransferred(item_table, new_inventory, old_inventory)
+  function PLUGIN:ItemTransferred(item_table, _new_inventory, old_inventory)
     if old_inventory then
       local owner = old_inventory.owner
 

@@ -20,8 +20,8 @@ local random = math.random
 
 --- Plays a pain sound for the hurt player at most once a second, picked by faction, gender and hit limb.
 -- @param victim [Player player that was hurt]
--- @param attacker [Entity entity that dealt the damage]
-function SCHEMA:PlayerHurt(victim, attacker)
+-- @param _attacker [Entity entity that dealt the damage]
+function SCHEMA:PlayerHurt(victim, _attacker)
   if victim:Alive() then
     local cur_time = CurTime()
 
@@ -61,9 +61,9 @@ end
 
 --- Plays a death sound for dying CCA and Overwatch players.
 -- @param victim [Player player that died]
--- @param inflictor [Entity entity that dealt the fatal damage]
--- @param attacker [Entity entity responsible for the death]
-function SCHEMA:PlayerDeath(victim, inflictor, attacker)
+-- @param _inflictor [Entity entity that dealt the fatal damage]
+-- @param _attacker [Entity entity responsible for the death]
+function SCHEMA:PlayerDeath(victim, _inflictor, _attacker)
   if victim:Alive() then
     local faction = victim:get_faction_id()
 
@@ -162,7 +162,7 @@ end
 --- Makes every combine door require the CP officer card to lock and unlock it, and saves the
 -- doors. Runs once per map, when the Doors plugin finds no saved doors.
 function SCHEMA:InitialDoorsLoad()
-  for k, v in ents.Iterator() do
+  for _k, v in ents.Iterator() do
     if v:is_combine_door() then
       v.conditions = { {
         id = 'has_item',

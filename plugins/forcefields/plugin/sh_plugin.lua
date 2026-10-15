@@ -80,10 +80,10 @@ end
 
 --- Decides whether a player collides with a forcefield based on its mode.
 -- @param activator [Player player touching the forcefield]
--- @param field [Entity forcefield]
+-- @param _field [Entity forcefield]
 -- @param mode [Number index into Forcefields.modes]
 -- @return [Boolean false to let the player through, true to block them, nil to use the default]
-function Forcefields:ShouldForcefieldCollide(activator, field, mode)
+function Forcefields:ShouldForcefieldCollide(activator, _field, mode)
   if mode == 2 and IsValid(activator) then
     if activator:get_faction_id() == 'cwu' then
       return false

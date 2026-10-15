@@ -16,7 +16,7 @@ function Scanners:PlayerButtonDown(actor, button)
   if actor:controls_scanner() then
     local cur_time = CurTime()
     local scanner = actor:get_scanner()
-    local marker = scanner.marker
+    local _marker = scanner.marker
 
     if button == MOUSE_FIRST and (!scanner.next_flash or scanner.next_flash < cur_time) then
       scanner:EmitSound('npc/scanner/scanner_photo1.wav')

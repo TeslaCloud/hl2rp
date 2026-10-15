@@ -96,7 +96,7 @@ function Combat:calculate_turn_order()
 
   local members = {}
 
-  for k, v in pairs(order) do
+  for _k, v in pairs(order) do
     members[#members + 1] = v.entity
   end
 
@@ -116,7 +116,7 @@ end
 function Combat:get_players()
   local players = {}
 
-  for k, v in pairs(self.members) do
+  for _k, v in pairs(self.members) do
     if IsValid(v) and v:IsPlayer() then
       players[#players + 1] = v
     end
@@ -228,7 +228,7 @@ end
 
 --- Freezes every valid member of the combat.
 function Combat:freeze_members()
-  for k, v in pairs(self:get_members()) do
+  for _k, v in pairs(self:get_members()) do
     if IsValid(v) then
       v:freeze()
     end
@@ -245,12 +245,12 @@ function Combat:check()
     return
   end
 
-  for k, v in pairs(self.members) do
+  for _k, v in pairs(self.members) do
     if IsValid(v) then
       if v:IsPlayer() and !v:leaving_combat() then
         return
       elseif v:IsNPC() then
-        for k1, v1 in pairs(self.members) do
+        for _k1, v1 in pairs(self.members) do
           if IsValid(v1) and v != v1 and v:Disposition(v1) < D_LI then
             return
           end

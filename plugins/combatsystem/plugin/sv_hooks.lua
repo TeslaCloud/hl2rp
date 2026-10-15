@@ -23,9 +23,9 @@ end
 
 --- Removes a dead player from their combat and ends the combat if it is over.
 -- @param target [Player player that died]
--- @param inflictor [Entity entity that dealt the damage]
+-- @param _inflictor [Entity entity that dealt the damage]
 -- @param attacker [Entity entity responsible for the death]
-function CombatSystem:PlayerDeath(target, inflictor, attacker)
+function CombatSystem:PlayerDeath(target, _inflictor, attacker)
   local combat = target:get_combat() or attacker:get_combat()
 
   if combat then
@@ -67,9 +67,9 @@ end
 
 --- Keeps weapons lowered in combat while the player has no attack turn.
 -- @param actor [Player player holding the weapon]
--- @param weapon [Weapon held weapon]
+-- @param _weapon [Weapon held weapon]
 -- @return [Boolean false to keep the weapon lowered, nil otherwise]
-function CombatSystem:ShouldWeaponBeRaised(actor, weapon)
+function CombatSystem:ShouldWeaponBeRaised(actor, _weapon)
   if actor:in_combat() and (actor:is_frozen() or !actor:has_turn(TURN_ATTACK)) then
     return false
   end
@@ -77,10 +77,10 @@ end
 
 --- Prevents players from using items in combat without a move turn.
 -- @param actor [Player player using the item]
--- @param item_obj [Item item being used]
--- @param action [String action being performed]
+-- @param _item_obj [Item item being used]
+-- @param _action [String action being performed]
 -- @return [Boolean false to prevent the use, nil otherwise]
-function CombatSystem:PlayerCanUseItem(actor, item_obj, action, ...)
+function CombatSystem:PlayerCanUseItem(actor, _item_obj, _action, ...)
   if actor:in_combat() and (actor:is_frozen() or !actor:has_turn(TURN_MOVE)) then
     return false
   end
@@ -88,13 +88,13 @@ end
 
 --- Prevents players from moving inventory items in combat without a move turn.
 -- @param actor [Player player moving the item]
--- @param item_obj [Item item being moved]
--- @param instance_ids [List<Number> instance IDs being moved]
--- @param inventory_id [Number ID of the target inventory]
--- @param x [Number target slot column]
--- @param y [Number target slot row]
+-- @param _item_obj [Item item being moved]
+-- @param _instance_ids [List<Number> instance IDs being moved]
+-- @param _inventory_id [Number ID of the target inventory]
+-- @param _x [Number target slot column]
+-- @param _y [Number target slot row]
 -- @return [Boolean false to prevent the move, nil otherwise]
-function CombatSystem:PlayerCanMoveItem(actor, item_obj, instance_ids, inventory_id, x, y)
+function CombatSystem:PlayerCanMoveItem(actor, _item_obj, _instance_ids, _inventory_id, _x, _y)
   if actor:in_combat() and (actor:is_frozen() or !actor:has_turn(TURN_MOVE)) then
     return false
   end
@@ -102,9 +102,9 @@ end
 
 --- Uses up a move turn when a player uses an item in combat.
 -- @param actor [Player player that used the item]
--- @param item_obj [Item used item]
--- @param act [String action that was performed]
-function CombatSystem:PlayerUsedItem(actor, item_obj, act, ...)
+-- @param _item_obj [Item used item]
+-- @param _act [String action that was performed]
+function CombatSystem:PlayerUsedItem(actor, _item_obj, _act, ...)
   if actor:in_combat() and !actor:is_frozen() then
     actor:take_turn(TURN_MOVE)
   end
@@ -112,12 +112,12 @@ end
 
 --- Uses up a move turn when a player moves an inventory item in combat.
 -- @param actor [Player player that moved the item]
--- @param item_obj [Item moved item]
--- @param instance_ids [List<Number> moved instance IDs]
--- @param inventory_id [Number ID of the target inventory]
--- @param x [Number target slot column]
--- @param y [Number target slot row]
-function CombatSystem:OnItemMoved(actor, item_obj, instance_ids, inventory_id, x, y)
+-- @param _item_obj [Item moved item]
+-- @param _instance_ids [List<Number> moved instance IDs]
+-- @param _inventory_id [Number ID of the target inventory]
+-- @param _x [Number target slot column]
+-- @param _y [Number target slot row]
+function CombatSystem:OnItemMoved(actor, _item_obj, _instance_ids, _inventory_id, _x, _y)
   if actor:in_combat() and !actor:is_frozen() then
     actor:take_turn(TURN_MOVE)
   end
@@ -158,16 +158,16 @@ function CombatSystem:EntityTakeDamage(entity, damage_info)
   and !(attacker:IsNPC() and entity:IsNPC()) then
     local attacker_combat = attacker:get_combat()
     local entity_combat = entity:get_combat()
-    local combat = attacker_combat
+    local _combat = attacker_combat
 
     if attacker_combat and !entity_combat then
-      combat = attacker_combat
+      _combat = attacker_combat
       CombatSystem:add_member(attacker_combat, entity)
     elseif !attacker_combat and entity_combat then
-      combat = entity_combat
+      _combat = entity_combat
       CombatSystem:add_member(entity_combat, attacker)
     elseif !attacker_combat and !entity_combat then
-      combat = CombatSystem:start_combat(attacker, entity)
+      _combat = CombatSystem:start_combat(attacker, entity)
     end
 
     local missed = CombatSystem:calculate_hit(attacker, entity, damage_info)

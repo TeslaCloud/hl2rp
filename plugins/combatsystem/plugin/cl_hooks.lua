@@ -47,9 +47,9 @@ function CombatSystem:CanPlayerAttack()
 end
 
 --- Strips the reload key from the command while the local player's weapon is frozen.
--- @param actor [Player player the command belongs to]
+-- @param _actor [Player player the command belongs to]
 -- @param user_cmd [CUserCmd command being processed]
-function CombatSystem:StartCommand(actor, user_cmd)
+function CombatSystem:StartCommand(_actor, user_cmd)
   local weapon = PLAYER:GetActiveWeapon()
 
   if IsValid(weapon) and weapon:is_frozen() then
@@ -228,7 +228,7 @@ Cable.receive('fl_combat_turn_order', function(order)
   timer.Simple(0, function()
     CombatSystem:create_message('notification.combat.turn_order')
 
-    for k, v in pairs(order) do
+    for _k, v in pairs(order) do
       timer.Simple(0, function()
         CombatSystem:create_message('{entity} - {initiative}', { entity = v.entity, initiative = v.initiative })
       end)

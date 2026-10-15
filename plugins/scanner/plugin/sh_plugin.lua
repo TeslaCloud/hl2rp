@@ -8,6 +8,6 @@ Areas.register_type(
   'Scanner Depot',
   'An area where the scanners spawn.',
   Color(255, 0, 255),
-  function(actor, area, has_entered, pos, cur_time)
+  function(_actor, _area, _has_entered, _pos, _cur_time)
   end
 )

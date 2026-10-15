@@ -1,6 +1,6 @@
-local blur_texture = Material('pp/blurscreen')
+local _blur_texture = Material('pp/blurscreen')
 local texture = GetRenderTarget('fl_rt_'..os.time(), ScrW(), ScrH(), false)
-local mat = CreateMaterial('fl_mat_'..os.time(), 'UnlitGeneric', {
+local _mat = CreateMaterial('fl_mat_'..os.time(), 'UnlitGeneric', {
   ['$basetexture'] = texture
 })
 local alpha_text_color = Color(255, 0, 0, 75)
@@ -19,7 +19,7 @@ function SCHEMA:HUDPaint()
   surface.SetMaterial(vignette_material)
   surface.DrawTexturedRect(0, 0, w, h)
 
-  local tw, th = draw.SimpleText(
+  local _tw, th = draw.SimpleText(
     t'ui.hud.alpha.flux_alpha',
     Theme.get_font('text_large'),
     w - 16,
@@ -38,7 +38,7 @@ function SCHEMA:HUDPaint()
 end
 
 --- Plays a train horn when the player creates their first character.
--- @param char [Character created character]
-function SCHEMA:FirstCharacterCreated(char)
+-- @param _char [Character created character]
+function SCHEMA:FirstCharacterCreated(_char)
   surface.PlaySound('ambient/alarms/train_horn2.wav')
 end

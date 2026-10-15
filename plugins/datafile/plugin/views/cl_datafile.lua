@@ -14,7 +14,7 @@ function PANEL:Init()
   self.sidebar = vgui.Create('fl_sidebar', self)
   self.sidebar:SetSize(width * 0.2 - 8, height)
   self.sidebar:SetPos(0, 0)
-  self.sidebar.Paint = function(pnl, w, h) end
+  self.sidebar.Paint = function(_pnl, _w, _h) end
 end
 
 --- Draws the outlined, translucent window background.

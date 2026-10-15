@@ -202,10 +202,10 @@ end
 
 --- Cycles a combine player through the forcefield modes, turning the shield off in mode 4.
 -- @param act [Player player using the forcefield]
--- @param call [Entity caller of the use]
--- @param type [Number USE_ type]
--- @param val [Number use value]
-function ENT:Use(act, call, type, val)
+-- @param _call [Entity caller of the use]
+-- @param _type [Number USE_ type]
+-- @param _val [Number use value]
+function ENT:Use(act, _call, _type, _val)
   local cur_time = CurTime()
 
   if (self.nextUse or 0) < cur_time then

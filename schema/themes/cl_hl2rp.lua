@@ -59,9 +59,9 @@ function THEME:PaintMainMenu(panel, width, height)
   local font = self:get_font('main_menu_titles')
   local text_color = self:get_color('schema_text')
   local title_w, title_h = text_size(title, font)
-  local desc_w, desc_h = text_size(desc, font)
+  local _desc_w, desc_h = text_size(desc, font)
   local author_w, author_h = text_size(author, font)
-  local version_w, version_h = text_size(version, font)
+  local _version_w, version_h = text_size(version, font)
   -- The panel stores an already scaled offset, so it must not be scaled again here.
   local logo_offset = panel.schema_logo_offset or math_scale(450)
   local bar_height = math_scale(128)
@@ -122,7 +122,7 @@ function THEME:PaintCharPanel(panel, w, h)
   if panel.char_data then
     local char_data = panel.char_data
     local font = self:get_font('main_menu_titles')
-    local name_w, name_h = text_size(char_data.name, font)
+    local name_w, _name_h = text_size(char_data.name, font)
 
     draw.SimpleText(
       char_data.name,
@@ -140,36 +140,36 @@ function THEME:PaintCharPanel(panel, w, h)
 end
 
 --- Draws the character creation title.
--- @param panel [Panel character creation panel]
+-- @param _panel [Panel character creation panel]
 -- @param w [Number width of the panel]
 -- @param h [Number height of the panel]
-function THEME:PaintCharCreationMainPanel(panel, w, h)
+function THEME:PaintCharCreationMainPanel(_panel, w, h)
   local title = t'ui.char_create.text'
   local font = get_font('main_menu_title')
-  local title_w, title_h = text_size(title, font)
+  local title_w, _title_h = text_size(title, font)
   draw.SimpleText(title, font, w * 0.5 - title_w * 0.5, h * 0.125)
 end
 
 --- Draws the character loading title.
--- @param panel [Panel character loading panel]
+-- @param _panel [Panel character loading panel]
 -- @param w [Number width of the panel]
 -- @param h [Number height of the panel]
-function THEME:PaintCharCreationLoadPanel(panel, w, h)
+function THEME:PaintCharCreationLoadPanel(_panel, w, h)
   local title = t'ui.char_create.load'
   local font = get_font('main_menu_title')
-  local title_w, title_h = text_size(title, font)
+  local title_w, _title_h = text_size(title, font)
   draw.SimpleText(title, font, w * 0.5 - title_w * 0.5, h * 0.125)
 end
 
 --- Draws the title of a character creation stage at the top of its panel.
 -- @param panel [Panel character creation stage panel]
 -- @param w [Number width of the panel]
--- @param h [Number height of the panel]
-function THEME:PaintCharCreationBasePanel(panel, w, h)
+-- @param _h [Number height of the panel]
+function THEME:PaintCharCreationBasePanel(panel, w, _h)
   if isstring(panel.text) then
     local text = t(panel.text)
     local font = get_font('main_menu_large')
-    local text_w, text_h = text_size(text, font)
+    local text_w, _text_h = text_size(text, font)
     draw.SimpleText(
       text,
       font,
@@ -244,7 +244,7 @@ function THEME:DrawBarTexts(bar_info)
   if bar_info.hinder_display and bar_info.hinder_display <= bar_info.hinder_value then
     local width = bar_info.width
     local text_wide = text_size(bar_info.hinder_text, font)
-    local length = width * (bar_info.hinder_value / bar_info.max_value)
+    local _length = width * (bar_info.hinder_value / bar_info.max_value)
 
     draw.SimpleText(
       bar_info.hinder_text,
