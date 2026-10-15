@@ -18,6 +18,6 @@ ru:
       syntax: <цель> <сообщение>
   error:
     sethealth:
-      invalid_value: '[ОШИБКА] {health} — недопустимое значение здоровья.'
+      invalid_value: '[ОШИБКА] {health} - недопустимое значение здоровья.'
     setarmor:
-      invalid_value: '[ОШИБКА] {armor} — недопустимое значение брони.'
+      invalid_value: '[ОШИБКА] {armor} - недопустимое значение брони.'
