@@ -1,0 +1,23 @@
+es:
+  command:
+    sethealth:
+      description: 'Establece la salud de un personaje en un valor personalizado.'
+      syntax: <jugador> <valor>
+      notification: 'Tu salud se ha establecido en {health}.'
+      message: '{player} ha establecido la salud de {target} en {health}.'
+    setarmor:
+      description: 'Establece la armadura de un personaje en un valor personalizado.'
+      syntax: <jugador> <valor>
+      notification: 'Tu armadura se ha establecido en {armor}.'
+      message: '{player} ha establecido la armadura de {target} en {armor}.'
+    report:
+      description: 'Informa al equipo de staff sobre esos molestos problemas.'
+      syntax: <mensaje>
+    message:
+      description: 'Envía un mensaje privado a otro jugador.'
+      syntax: <jugador> <mensaje>
+  error:
+    sethealth:
+      invalid_value: '[ERROR] {health} no es un valor de salud válido.'
+    setarmor:
+      invalid_value: '[ERROR] {armor} no es un valor de armadura válido.'

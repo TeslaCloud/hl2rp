@@ -18,19 +18,21 @@ es:
     zombie:
       title: Zombi
       desc: Un headcrab o el cuerpo del que se ha apoderado.
+  currency:
+    tokens: Fichas
   error:
     item:
       nothing_to_treat: No tienes heridas que esto pueda tratar.
       already_healing: Ya te estás curando.
   faction:
     admin:
-      title: City Administrator
-      desc: A person who controls the city.
-      phys_desc: Wearing a strict, fancy looking suit.
+      title: Administrador de la Ciudad
+      desc: La persona que controla la ciudad.
+      phys_desc: Viste un traje elegante y sobrio.
     citizen:
-      title: Citizen
-      desc: A regular citizen living under combine authority.
-      phys_desc: Wearing some dirty citizen clothes.
+      title: Ciudadano
+      desc: Un ciudadano corriente que vive bajo la autoridad del Combine.
+      phys_desc: Viste ropa de ciudadano sucia.
     vortigaunt:
       title: Vortigaunt
       description: Un alienígena de Xen, perseguido y esclavizado por el Combine.
@@ -41,29 +43,66 @@ es:
       phys_desc: Un cuerpo destrozado con un headcrab aferrado a la cabeza.
     combine:
       overwatch:
-        title: Combine Overwatch
-        desc: Combine military soldiers.
-        phys_desc: Wearing heavy overwatch armor.
+        title: Overwatch del Combine
+        desc: Soldados militares del Combine.
+        phys_desc: Lleva una pesada armadura de Overwatch.
       cca:
-        title: Combine Civil Authority
-        desc: Combine police forces.
-        phys_desc: Wearing shiny metropolice unit uniform with brand new stunstick on his belt.
+        title: Protección Civil
+        desc: Fuerzas policiales del Combine.
+        phys_desc: Lleva un reluciente uniforme de Protección Civil con una porra eléctrica nueva en el cinturón.
   item:
     action:
       eat: Comer
       drink: Beber
       apply: Aplicar
     category:
+      cards: Tarjetas de acceso
       medical: Material médico
+    card_cp:
+      print_name: Tarjeta de acceso de Protección Civil
+      description: Una tarjeta de acceso Combine de alta tecnología que usan las unidades corrientes de Protección Civil. Funciona con el propio campo eléctrico del cuerpo. Transmite datos usando la sal del cuerpo como medio de transmisión.
+    card_cp_officer:
+      print_name: Tarjeta de acceso de oficial de Protección Civil
+      description: Una tarjeta de acceso Combine de alta tecnología que usan los oficiales de Protección Civil. Funciona con el propio campo eléctrico del cuerpo. Transmite datos usando la sal del cuerpo como medio de transmisión.
+    cca_uniform:
+      print_name: Uniforme de Protección Civil
+      description: Uniforme de unidad de Protección Civil con un par de botas negras y una máscara de gas.
     breens_water:
       print_name: Agua de Breen
-      description: Una lata de color azul llena de agua. Hay una etiqueta donde pone 'Reserva privada de Breen'.
+      description: Una lata de color azul llena de agua. Lleva impreso 'Reserva privada de Breen'.
     breens_water_gas:
-      print_name: Agua gaseosa de Breen
-      description: Una lata de color rojo llena de agua con gas. 'Un sabor diferente.' - Breen
+      print_name: Agua de Breen con gas
+      description: "Una lata de color rojo llena de agua con gas. 'Un sabor diferente.' - Breen"
     breens_water_limited:
-      print_name: Agua saborizada de Breen
-      description: Una lata de color amarillo llena de una clase de agua limita. 'Solo para leales.' - Breen
+      print_name: Agua de Breen con sabor
+      description: "Una lata de color amarillo llena de una clase de agua limitada. 'Solo para leales.' - Breen"
+    food_waterbottle:
+      print_name: Botella de agua
+      description: Una botella de plástico con agua. Refrescante.
+    food_whiskey:
+      print_name: Botella de whisky
+      description: Una botella de cristal de 375 ml con un licor fuerte. Huele a trigo fermentado.
+    food_vodka:
+      print_name: Botella de vodka
+      description: Una botella de cristal de 375 ml con un licor fuerte. Huele a etanol.
+    food_rum:
+      print_name: Una botella de ron
+      description: Una botella de cristal de 375 ml con un licor fuerte. Huele a azúcar fermentado.
+    food_gin:
+      print_name: Una botella de ginebra
+      description: Una botella de cristal de 375 ml con un licor fuerte. Huele a bayas fermentadas.
+    food_headcrab:
+      print_name: Carne de headcrab
+      description: Un trozo de headcrab cocinado. Sabe a pollo, pero más soso y duro.
+    food_pheadcrab:
+      print_name: Carne de headcrab venenoso tratada
+      description: Un trozo de headcrab venenoso cocinado y tratado. Se te duermen un poco los labios al comerlo...
+    food_melon:
+      print_name: Melón
+      description: Una esfera verde y deformada. Por dentro es rosada.
+    food_milk:
+      print_name: Botella de leche
+      description: Un galón de leche en un envase de plástico.
     canned_food:
       print_name: Comida enlatada marca Combine
       description: Envase de plástico repleto de, huh... comida sintética.
@@ -74,47 +113,47 @@ es:
       print_name: Botiquín de primeros auxilios
       description: Un equipo profesional de primeros auxilios.
     pistol:
-      print_name: Pistola 9x19mm
-      description: Pistola sotisficada que utiliza balas del calibre 9x19mm.
+      print_name: Pistola de 9 mm
+      description: Un arma compacta que dispara balas de 9x19 mm.
       ammo:
-        print_name: Munición 9x19mm
-        description: Cartucho de metal lleno de balas de 9x19mm.
+        print_name: Munición de 9 mm
+        description: Un contenedor metálico lleno de balas de 9x19 mm.
     smg:
       print_name: Subfusil
-      description: Un arma automática. Usa el calibre 4.6x30mm.
+      description: Un arma de defensa personal compacta que dispara balas de 4,6x30 mm.
       ammo:
-        print_name: Munición 4.6x30mm
-        description: Un cartucho de metal lleno de balas de 4.6x30mm.
+        print_name: Munición de 4,6x30 mm
+        description: Un contenedor metálico lleno de balas de 4,6x30 mm.
         grenade:
-          print_name: Granada(s) para SMG
-          description: Objecto explosivo utilizado en el lanza-granadas del Subfusil.
+          print_name: Granada de subfusil
+          description: Un explosivo que puede usarse como munición del lanzagranadas del subfusil.
     shotgun:
       print_name: SPAS-12
-      description: Escopeta semi-automática muy usada por guardas Combine. Usa cartuchos del 12.
+      description: Una escopeta usada sobre todo por los equipos de guardias de prisión de Overwatch. Dispara cartuchos del calibre 12.
       ammo:
-        print_name: Cartuchos del 12
-        description: Una caja de cartón llena de cartuchos del 12.
+        print_name: Calibre 12
+        description: Una caja de cartón llena de munición del calibre 12.
     revolver:
       print_name: "Magnum .357"
-      description: Un revolver reluciente de antes de la guerra. Utiliza balas .357.
+      description: Un revólver reluciente de antes de la guerra que dispara balas .357 Magnum.
       ammo:
-        print_name: "Balas .357"
-        description: Una pequeña caja llena de balas .357.
+        print_name: "Balas .357 Magnum"
+        description: Una caja de cartón llena de balas .357 Magnum.
     ar2:
-      print_name: Rifle de Pulsos (AR2)
-      description: Rifle de Pulso Edición Estándar Overwatch. Dispara energía oscura concentrada a sí como orbes.
+      print_name: Rifle de pulso (AR2)
+      description: Rifle de Pulso Edición Estándar Overwatch. Dispara energía oscura concentrada así como orbes.
       ammo:
-        print_name: Energía de Rifle de Pulsos
+        print_name: Energía de rifle de pulso
         description: Un pequeño cargador de metal que contiene cargas de energía oscura.
-        core:
-          print_name: Núcleo de energía AR2
-          description: Energía oscura concentrada en el interior de una esfera de metal.
+      core:
+        print_name: Núcleo de energía de rifle de pulso
+        description: Energía oscura concentrada en el interior de una esfera de metal.
     crossbow:
       print_name: Ballesta
-      description: Ballesta casera que dispara
+      description: Un arma de fabricación tosca que dispara virotes al rojo vivo.
       ammo:
-        print_name: Pernos de ballesta
-        description: Piezas ardientes de metal utilizadas para la ballesta.
+        print_name: Virotes de ballesta
+        description: Pequeñas piezas de metal que pueden usarse como munición de ballesta.
     crowbar:
       print_name: Palanca
       description: Palanca de color rojo. Qué más puedo decir sobre ella.
@@ -122,11 +161,83 @@ es:
       print_name: RPG
       description: Un arma de grado militar. Ten cuidado, puede no disparar por el lado deseado.
       ammo:
-        print_name: Misil RPG
-        description: Misil de color naranja. Utilizado en el RPG.
+        print_name: Misil de RPG
+        description: Un misil naranja, usado normalmente con un RPG.
     stunstick:
       print_name: Porra eléctrica
       description: Porra reglamentaria de la CPC con una funcionalidad especial para neutralizar enemigos.
     grenade:
       print_name: Granada
-      description: Objecto cilíndrico que contiene materiales explosivos.
+      description: Un pequeño tubo redondo lleno de sustancias explosivas.
+  npc:
+    hl2:
+      crow: Cuervo
+      monk: Padre Grigori
+      pigeon: Paloma
+      seagull: Gaviota
+      combine_camera: Cámara Combine
+      turret_ceiling: Torreta de techo
+      cscanner: Escáner de la ciudad
+      combine_dropship: Nave de transporte Combine
+      combine_elite: Élite Combine
+      combine_gunship: Cañonera Combine
+      combine_soldier: Soldado Combine
+      hunter: Cazador
+      helicopter: Helicóptero cazador
+      manhack: Manhack
+      metropolice: Policía metropolitana
+      prison_guard: Guardia de prisión
+      prison_shotgunner: Guardia de prisión con escopeta
+      rollermine: Rodamina
+      clawscanner: Escáner de escudo
+      shotgun_soldier: Soldado con escopeta
+      stalker: Stalker
+      strider: Strider
+      turret_floor: Torreta
+      alyx: Alyx Vance
+      barney: Barney Calhoun
+      citizen: Ciudadano
+      dog: Dog
+      magnusson: Dr. Arne Magnusson
+      kleiner: Dr. Isaac Kleiner
+      mossman: Dra. Judith Mossman
+      eli: Eli Vance
+      gman: G-Man
+      medic: Médico
+      odessa: Odessa Cubbage
+      rebel: Rebelde
+      refugee: Refugiado
+      vortigaunturiah: Uriah
+      vortigaunt: Vortigaunt
+      vortigauntslave: Vortigaunt esclavo
+      breen: Wallace Breen
+      antlion: Hormiga león
+      antlion_grub: Larva de hormiga león
+      antlionguard: Guardián hormiga león
+      antlionguardian: Guardián hormiga león del nido
+      antlion_worker: Obrera hormiga león
+      barnacle: Barnacle
+      headcrab_fast: Headcrab rápido
+      fastzombie: Zombi rápido
+      fastzombie_torso: Torso de zombi rápido
+      headcrab: Headcrab
+      headcrab_black: Headcrab venenoso
+      poisonzombie: Zombi venenoso
+      zombie: Zombi
+      zombie_torso: Torso de zombi
+      zombine: Zombine
+  ui:
+    hud:
+      alpha:
+        flux_alpha: FLUX ALFA
+        subtext: ¡Todo está sujeto a cambios!
+    limb:
+      body: Cuerpo
+      head: Cabeza
+      chest: Pecho
+      stomach: Estómago
+      right_arm: Brazo derecho
+      left_arm: Brazo izquierdo
+      right_leg: Pierna derecha
+      left_leg: Pierna izquierda
+      groin: Ingle
