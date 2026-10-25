@@ -1,0 +1,243 @@
+fr:
+  class:
+    citizen:
+      title: "Citoyen"
+      desc: "Un habitant ordinaire de la Cité, à qui le Cartel n'a assigné aucune tâche."
+    recruit:
+      title: "Recrue"
+      desc: "Une unité de la Protection civile fraîchement enrôlée qui patrouille dans les rues."
+    slave:
+      title: "Vortigaunt asservi"
+      desc: "Un vortigaunt enchaîné que le Cartel astreint à des travaux serviles."
+    soldier:
+      title: "Soldat"
+      desc: "Un soldat transhumain de l'Overwatch du Cartel."
+    vortigaunt:
+      title: "Vortigaunt"
+      desc: "Un vortigaunt libre qui se cache du Cartel."
+    zombie:
+      title: "Zombie"
+      desc: "Un headcrab, ou le corps dont il a pris le contrôle."
+  currency:
+    tokens: "Jetons"
+  error:
+    item:
+      nothing_to_treat: "Vous n'avez aucune blessure que ceci pourrait soigner."
+      already_healing: "Vous êtes déjà en train de vous soigner."
+  faction:
+    admin:
+      title: "Administrateur de la Cité"
+      desc: "La personne qui contrôle la Cité."
+      phys_desc: "Porte un costume strict et élégant."
+    citizen:
+      title: "Citoyen"
+      desc: "Un citoyen ordinaire qui vit sous l'autorité du Cartel."
+      phys_desc: "Porte des vêtements de citoyen sales."
+    vortigaunt:
+      title: "Vortigaunt"
+      description: "Un extraterrestre venu de Xen, traqué et réduit en esclavage par le Cartel."
+      phys_desc: "Une créature voûtée à la peau verte, dotée d'un grand œil rouge."
+    zombie:
+      title: "Zombie"
+      description: "Un headcrab, ou un corps dont il a pris le contrôle."
+      phys_desc: "Un corps mutilé avec un headcrab agrippé à la tête."
+    combine:
+      overwatch:
+        title: "Overwatch du Cartel"
+        desc: "Les soldats de l'armée du Cartel."
+        phys_desc: "Porte une lourde armure de l'Overwatch."
+      cca:
+        title: "Protection civile du Cartel"
+        desc: "Les forces de police du Cartel."
+        phys_desc: "Porte un uniforme rutilant de la police métropolitaine, avec une matraque électrique flambant neuve à la ceinture."
+  item:
+    action:
+      eat: "Manger"
+      drink: "Boire"
+      apply: "Appliquer"
+    category:
+      cards: "Cartes d'accès"
+      medical: "Médical"
+    card_cp:
+      print_name: "Carte d'accès de la Protection civile"
+      description: "Une carte d'accès du Cartel de haute technologie, utilisée par les unités ordinaires de la Protection civile. Elle fonctionne grâce au propre champ électrique du corps. Elle transmet les données en se servant du sel du corps comme support de transmission."
+    card_cp_officer:
+      print_name: "Carte d'accès d'officier de la Protection civile"
+      description: "Une carte d'accès du Cartel de haute technologie, utilisée par les officiers de la Protection civile. Elle fonctionne grâce au propre champ électrique du corps. Elle transmet les données en se servant du sel du corps comme support de transmission."
+    cca_uniform:
+      print_name: "Uniforme de la Protection civile"
+      description: "Uniforme d'unité de la Protection civile, avec une paire de bottes noires et un masque à gaz."
+    breens_water:
+      print_name: "Eau de Breen"
+      description: "Une canette bleue remplie d'eau. « Réserve privée de Breen » est imprimé dessus."
+    breens_water_gas:
+      print_name: "Eau de Breen pétillante"
+      description: "Une canette rouge remplie d'eau pétillante."
+    breens_water_limited:
+      print_name: "Eau de Breen aromatisée"
+      description: "Une canette jaune remplie d'eau aromatisée de catégorie limitée."
+    food_waterbottle:
+      print_name: "Bouteille d'eau"
+      description: "Une bouteille d'eau en plastique. Rafraîchissante."
+    food_whiskey:
+      print_name: "Bouteille de whisky"
+      description: "Une bouteille en verre de 375 ml d'alcool fort. Elle sent le blé fermenté."
+    food_vodka:
+      print_name: "Bouteille de vodka"
+      description: "Une bouteille en verre de 375 ml d'alcool fort. Elle sent l'éthanol."
+    food_rum:
+      print_name: "Une bouteille de rhum"
+      description: "Une bouteille en verre de 375 ml d'alcool fort. Elle sent le sucre fermenté."
+    food_gin:
+      print_name: "Une bouteille de gin"
+      description: "Une bouteille en verre de 375 ml d'alcool fort. Elle sent les baies fermentées."
+    food_headcrab:
+      print_name: "Viande de headcrab"
+      description: "Un morceau de headcrab cuit. Il a un goût de poulet, en plus fade et plus coriace."
+    food_pheadcrab:
+      print_name: "Viande de headcrab venimeux traitée"
+      description: "Un morceau de headcrab venimeux cuit et traité. Vos lèvres s'engourdissent un peu quand vous en mangez..."
+    food_melon:
+      print_name: "Melon"
+      description: "Une sphère verte et déformée. L'intérieur est rosé."
+    food_milk:
+      print_name: "Bouteille de lait"
+      description: "Un gallon de lait dans un récipient en plastique."
+    canned_food:
+      print_name: "Conserve de la marque du Cartel"
+      description: "Un récipient en plastique rempli de, beurk... nourriture."
+    medical_bandage:
+      print_name: "Bandage stérilisé"
+      description: "Une fine bande de pansements stériles."
+    medical_fak:
+      print_name: "Trousse de premiers secours"
+      description: "Un équipement professionnel de premiers secours."
+    pistol:
+      print_name: "Pistolet 9 mm"
+      description: "Une arme compacte qui tire des balles de 9x19 mm."
+      ammo:
+        print_name: "Munitions 9 mm"
+        description: "Une boîte en métal remplie de balles de 9x19 mm."
+    smg:
+      print_name: "Pistolet-mitrailleur"
+      description: "Une arme de défense personnelle compacte qui tire des balles de 4,6x30 mm."
+      ammo:
+        print_name: "Munitions 4,6x30 mm"
+        description: "Une boîte en métal remplie de balles de 4,6x30 mm."
+        grenade:
+          print_name: "Grenade de pistolet-mitrailleur"
+          description: "Un explosif qui sert de munition au lance-grenades du pistolet-mitrailleur."
+    shotgun:
+      print_name: "SPAS-12"
+      description: "Un fusil à pompe utilisé surtout par les équipes de gardiens de prison de l'Overwatch. Tire des cartouches de calibre 12."
+      ammo:
+        print_name: "Calibre 12"
+        description: "Une boîte en carton remplie de cartouches de calibre 12."
+    revolver:
+      print_name: ".357 Magnum"
+      description: "Un revolver rutilant d'avant-guerre qui tire des balles .357 Magnum."
+      ammo:
+        print_name: "Balles .357 Magnum"
+        description: "Une boîte en carton remplie de balles .357 Magnum."
+    ar2:
+      print_name: "Fusil à impulsion (AR2)"
+      description: "Fusil à impulsion réglementaire de l'Overwatch (OSIPR). Tire des rayons d'énergie."
+      ammo:
+        print_name: "Énergie de fusil à impulsion"
+        description: "Une petite cartouche en métal contenant des munitions d'énergie pour fusil à impulsion."
+      core:
+        print_name: "Noyau d'énergie de fusil à impulsion"
+        description: "Une boule d'énergie contenue dans une chambre en métal."
+    crossbow:
+      print_name: "Arbalète"
+      description: "Une arme de fabrication grossière qui tire des carreaux chauffés au rouge."
+      ammo:
+        print_name: "Carreaux d'arbalète"
+        description: "Des petites pièces de métal qui servent de munitions d'arbalète."
+    crowbar:
+      print_name: "Pied-de-biche"
+      description: "Une barre de métal aux extrémités recourbées, plus connue sous le nom de pied-de-biche."
+    rpg:
+      print_name: "RPG"
+      description: "Une arme qui ressemble à un tube vert. Il peut lui arriver de tirer par le mauvais bout."
+      ammo:
+        print_name: "Missile de RPG"
+        description: "Un missile orange, le plus souvent utilisé avec un RPG."
+    stunstick:
+      print_name: "Matraque électrique"
+      description: "Une matraque dotée d'une fonction d'électrochoc."
+    grenade:
+      print_name: "Grenade"
+      description: "Un petit tube rond rempli de substances explosives."
+  npc:
+    hl2:
+      crow: "Corbeau"
+      monk: "Père Grigori"
+      pigeon: "Pigeon"
+      seagull: "Mouette"
+      combine_camera: "Caméra du Cartel"
+      turret_ceiling: "Tourelle de plafond"
+      cscanner: "Scanner de la Cité"
+      combine_dropship: "Vaisseau de transport du Cartel"
+      combine_elite: "Élite du Cartel"
+      combine_gunship: "Canonnière du Cartel"
+      combine_soldier: "Soldat du Cartel"
+      hunter: "Chasseur"
+      helicopter: "Hélicoptère chasseur"
+      manhack: "Manhack"
+      metropolice: "Police métropolitaine"
+      prison_guard: "Gardien de prison"
+      prison_shotgunner: "Gardien de prison au fusil à pompe"
+      rollermine: "Mine roulante"
+      clawscanner: "Scanner à bouclier"
+      shotgun_soldier: "Soldat au fusil à pompe"
+      stalker: "Stalker"
+      strider: "Strider"
+      turret_floor: "Tourelle"
+      alyx: "Alyx Vance"
+      barney: "Barney Calhoun"
+      citizen: "Citoyen"
+      dog: "Dog"
+      magnusson: "Dr Arne Magnusson"
+      kleiner: "Dr Isaac Kleiner"
+      mossman: "Dr Judith Mossman"
+      eli: "Eli Vance"
+      gman: "G-Man"
+      medic: "Médecin"
+      odessa: "Odessa Cubbage"
+      rebel: "Rebelle"
+      refugee: "Réfugié"
+      vortigaunturiah: "Uriah"
+      vortigaunt: "Vortigaunt"
+      vortigauntslave: "Vortigaunt esclave"
+      breen: "Wallace Breen"
+      antlion: "Fourmilion"
+      antlion_grub: "Larve de fourmilion"
+      antlionguard: "Garde fourmilion"
+      antlionguardian: "Gardien fourmilion"
+      antlion_worker: "Fourmilion ouvrier"
+      barnacle: "Bernacle"
+      headcrab_fast: "Headcrab rapide"
+      fastzombie: "Zombie rapide"
+      fastzombie_torso: "Torse de zombie rapide"
+      headcrab: "Headcrab"
+      headcrab_black: "Headcrab venimeux"
+      poisonzombie: "Zombie venimeux"
+      zombie: "Zombie"
+      zombie_torso: "Torse de zombie"
+      zombine: "Zombine"
+  ui:
+    hud:
+      alpha:
+        flux_alpha: "FLUX ALPHA"
+        subtext: "Tout est susceptible de changer !"
+    limb:
+      body: "Corps"
+      head: "Tête"
+      chest: "Torse"
+      stomach: "Ventre"
+      right_arm: "Bras droit"
+      left_arm: "Bras gauche"
+      right_leg: "Jambe droite"
+      left_leg: "Jambe gauche"
+      groin: "Entrejambe"
