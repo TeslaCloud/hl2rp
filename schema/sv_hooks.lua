@@ -9,7 +9,7 @@
 -- a value, and the schema is called after every plugin and before the gamemode, so a value
 -- returned from here would keep the gamemode from seeing the damage. The Damage, D20 and
 -- Limbs plugins hook the same events and return nothing either, except that they block
--- damage that a handler of the PrePlayerTakeDamage hook has cancelled and the extra hits of
+-- damage that a handler of the PrePlayerTakeDamage hook has canceled and the extra hits of
 -- one attack in the same tick. The hit location multipliers of players are the
 -- `damage_scale_*` configs of the Damage plugin, which hl2rp.yml sets to double the damage of
 -- the head, the arms and the legs; the schema only doubles those hits on NPCs, which the
