@@ -17,6 +17,10 @@ if SERVER then
   -- The player's weapons are stored and stripped until they exit the scanner.
   -- @param entity [NPC scanner to control]
   function player_meta:control_scanner(entity)
+    if self:controls_scanner() then
+      self:exit_scanner()
+    end
+
     entity:AddEntityRelationship(self, D_NU, 99)
 
     local marker = entity.marker or ents.Create('path_corner')
@@ -64,6 +68,6 @@ if SERVER then
     self:SetViewEntity(self)
     self:Freeze(false)
 
-    Cable.send(self, 'fl_scanner_update', entity)
+    Cable.send(self, 'fl_scanner_update', nil)
   end
 end

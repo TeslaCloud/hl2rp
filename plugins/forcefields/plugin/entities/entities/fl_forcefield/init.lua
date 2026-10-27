@@ -118,7 +118,7 @@ function ENT:Initialize()
 
   self.shield_loop = CreateSound(self, 'ambient/machines/combine_shield_loop3.wav')
 
-  if self.mode == 4 then
+  if self.mode == 6 then
     self.on = false
     self:SetSkin(1)
     self.post:SetSkin(1)
@@ -162,11 +162,9 @@ function ENT:Touch(ent)
   end
 end
 
---- Fades out the touch sound when a non-combine player stops touching the active forcefield.
+--- Fades out the touch sound when a non-combine player stops touching the forcefield.
 -- @param ent [Entity entity that stopped touching]
 function ENT:EndTouch(ent)
-  if !self.on then return end
-
   if ent:IsPlayer() then
     if !ent:is_combine() then
       if ent.shield_touch then
@@ -200,12 +198,14 @@ function ENT:RestoreMode(mode, is_on)
   self.mode = mode
 end
 
---- Cycles a combine player through the forcefield modes, turning the shield off in mode 4.
+--- Cycles a combine player through the forcefield modes, turning the shield off in the 'Off' mode.
 -- @param act [Player player using the forcefield]
 -- @param _call [Entity caller of the use]
 -- @param _type [Number USE_ type]
 -- @param _val [Number use value]
 function ENT:Use(act, _call, _type, _val)
+  if !IsValid(act) or !act:IsPlayer() or !act:is_combine() then return end
+
   local cur_time = CurTime()
 
   if (self.next_use or 0) < cur_time then
@@ -214,32 +214,31 @@ function ENT:Use(act, _call, _type, _val)
     return
   end
 
-  if act:is_combine() then
-    self.mode = (self.mode or 1) + 1
+  self.mode = (self.mode or 1) + 1
+  self:SetDTInt(0, self.mode)
+
+  if self.mode > #Forcefields.modes then
+    self.mode = 1
     self:SetDTInt(0, self.mode)
-
-    if self.mode > #Forcefields.modes then
-      self.mode = 1
-      self:SetDTInt(0, self.mode)
-    end
-
-    if self.mode == 4 then
-      self.on = false
-      self:SetSkin(1)
-      self.post:SetSkin(1)
-      self:EmitSound('shield/deactivate.wav')
-      self:SetCollisionGroup(COLLISION_GROUP_WORLD)
-    else
-      self.on = true
-      self:SetSkin(0)
-      self.post:SetSkin(0)
-      self:EmitSound('shield/activate.wav')
-      self:SetCollisionGroup(COLLISION_GROUP_NONE)
-    end
-
-    self:EmitSound('buttons/combine_button5.wav', 140, 100 + (self.mode - 1) * 15)
-    act:notify('Changed force field mode to: '..Forcefields.modes[self.mode])
   end
+
+  if self.mode == 6 then
+    self.on = false
+    self:SetSkin(1)
+    self.post:SetSkin(1)
+    self:EmitSound('shield/deactivate.wav')
+    self:SetCollisionGroup(COLLISION_GROUP_WORLD)
+  else
+    self.on = true
+    self:SetSkin(0)
+    self.post:SetSkin(0)
+    self:EmitSound('shield/activate.wav')
+    self:SetCollisionGroup(COLLISION_GROUP_NONE)
+  end
+
+  self:CollisionRulesChanged()
+  self:EmitSound('buttons/combine_button5.wav', 140, 100 + (self.mode - 1) * 15)
+  act:notify('Changed force field mode to: '..Forcefields.modes[self.mode])
 end
 
 --- Stops the shield hum and touch sounds when the forcefield is removed.

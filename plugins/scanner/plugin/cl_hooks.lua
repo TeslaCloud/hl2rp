@@ -34,6 +34,8 @@ Cable.receive('fl_scanner_update', function(entity)
 end)
 
 Cable.receive('fl_scanner_flash', function(entity)
+  if !IsValid(entity) then return end
+
   local flash = DynamicLight(entity:EntIndex())
   flash.pos = entity:GetPos()
   flash.r = 255

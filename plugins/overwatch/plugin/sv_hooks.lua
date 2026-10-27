@@ -2,6 +2,11 @@ Cable.receive('fl_punch_cable', function(actor)
   local team_name = team.GetName(actor:Team())
 
   if team_name == 'faction.combine.overwatch.title' then
+    local cur_time = CurTime()
+
+    if !actor:Alive() or actor:is_ragdolled() or (actor.next_punch or 0) > cur_time then return end
+
+    actor.next_punch = cur_time + 1
     actor:play_gesture(ACT_MELEE_ATTACK1)
 
     local trace = actor:GetEyeTrace()
@@ -9,7 +14,7 @@ Cable.receive('fl_punch_cable', function(actor)
     if trace then
       local target = trace.Entity
 
-      if target:IsPlayer() then
+      if IsValid(target) and target:IsPlayer() then
         local distance_sqr = actor:GetPos():DistToSqr(target:GetPos())
 
         if !target:is_ragdolled() and distance_sqr < 2500 then

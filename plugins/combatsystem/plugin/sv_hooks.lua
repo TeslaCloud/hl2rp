@@ -1,3 +1,14 @@
+local function leave_combat(combat, entity)
+  local was_acting = combat:get_acting_member() == entity
+
+  combat:remove_member(entity)
+  combat:check()
+
+  if was_acting and !combat.finished then
+    combat:next_turn()
+  end
+end
+
 --- Removes a killed NPC from its combat and ends the combat if it is over.
 -- @param npc [NPC killed NPC]
 -- @param attacker [Entity entity that killed the NPC]
@@ -5,8 +16,7 @@ function CombatSystem:OnNPCKilled(npc, attacker)
   local combat = npc:get_combat() or attacker:get_combat()
 
   if combat then
-    combat:remove_member(npc)
-    combat:check()
+    leave_combat(combat, npc)
   end
 end
 
@@ -16,8 +26,7 @@ function CombatSystem:EntityRemoved(entity)
   local combat = entity:get_combat()
 
   if combat then
-    combat:remove_member(entity)
-    combat:check()
+    leave_combat(combat, entity)
   end
 end
 
@@ -29,8 +38,7 @@ function CombatSystem:PlayerDeath(target, _inflictor, attacker)
   local combat = target:get_combat() or attacker:get_combat()
 
   if combat then
-    combat:remove_member(target)
-    combat:check()
+    leave_combat(combat, target)
   end
 end
 
@@ -172,7 +180,7 @@ function CombatSystem:EntityTakeDamage(entity, damage_info)
 
     local missed = CombatSystem:calculate_hit(attacker, entity, damage_info)
 
-    if attacker:IsPlayer() then
+    if attacker:IsPlayer() and !attacker:is_frozen() then
       attacker:take_turn(TURN_ATTACK)
     end
 

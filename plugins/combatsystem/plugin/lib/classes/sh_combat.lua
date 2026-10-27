@@ -191,6 +191,8 @@ function Combat:remove_member(id, all)
     entity = self.members[id]
   end
 
+  if !id then return end
+
   if IsValid(entity) then
     entity:set_nv('combat_id', false)
     entity:unfreeze()
@@ -205,7 +207,7 @@ function Combat:remove_member(id, all)
   if !all then
     table.remove(self.members, id)
 
-    if self.current_member == id then
+    if self.current_member >= id then
       self.current_member = self.current_member - 1
 
       if self.current_member <= 0 then

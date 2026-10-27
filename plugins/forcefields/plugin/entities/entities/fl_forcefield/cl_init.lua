@@ -64,7 +64,7 @@ end
 --- Draws one side of the shield as a textured quad up to the post, unless the forcefield is off.
 -- @param vertex [Vector position of the post relative to the forcefield]
 function ENT:draw_shield(vertex)
-  if self:GetDTInt(0) != 4 then
+  if self:GetDTInt(0) != 6 then
     local dist = self:GetDTEntity(0):GetPos():Distance(self:GetPos())
     local mat_fac = 45
     local height = 5

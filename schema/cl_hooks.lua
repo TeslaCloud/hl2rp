@@ -1,8 +1,3 @@
-local _blur_texture = Material('pp/blurscreen')
-local texture = GetRenderTarget('fl_rt_'..os.time(), ScrW(), ScrH(), false)
-local _mat = CreateMaterial('fl_mat_'..os.time(), 'UnlitGeneric', {
-  ['$basetexture'] = texture
-})
 local alpha_text_color = Color(255, 0, 0, 75)
 local vignette_material = util.get_material('materials/flux/hl2rp/vignette.png')
 

@@ -19,7 +19,12 @@ function Forcefields:update_forcefields()
 
       forcefield:PhysicsFromMesh(verts)
       forcefield:EnableCustomCollisions(true)
-      forcefield:GetPhysicsObject():EnableCollisions(false)
+
+      local phys_obj = forcefield:GetPhysicsObject()
+
+      if IsValid(phys_obj) then
+        phys_obj:EnableCollisions(false)
+      end
     end
   end
 end

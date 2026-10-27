@@ -13,6 +13,9 @@ function player_meta:take_turn(turn_type, amount)
   amount = amount or 1
 
   local turns = self:get_nv('fl_combat_turns', {})
+
+  if !turns[turn_type] then return end
+
   self.turn_done = true
   turns[turn_type] = turns[turn_type] - amount
   self:set_nv('fl_combat_turns', turns)
@@ -31,7 +34,11 @@ function player_meta:take_turn(turn_type, amount)
     end
   end
 
-  self:get_combat():next_turn()
+  local combat = self:get_combat()
+
+  if combat and combat:get_acting_member() == self then
+    combat:next_turn()
+  end
 end
 
 --- Returns how many turns of a type the player has left.
