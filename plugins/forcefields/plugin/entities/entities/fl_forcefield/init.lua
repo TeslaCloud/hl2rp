@@ -208,8 +208,8 @@ end
 function ENT:Use(act, _call, _type, _val)
   local cur_time = CurTime()
 
-  if (self.nextUse or 0) < cur_time then
-    self.nextUse = cur_time + 1
+  if (self.next_use or 0) < cur_time then
+    self.next_use = cur_time + 1
   else
     return
   end

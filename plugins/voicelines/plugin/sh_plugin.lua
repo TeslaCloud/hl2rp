@@ -181,7 +181,9 @@ end
 -- @return [Map the category, or nil if the ID or the data are not valid]
 function VoiceLines:register_category(id, data)
   if !isstring(id) or id == '' or !istable(data) then
-    ErrorNoHalt("[Flux - Voice Lines] Not adding the '"..tostring(id).."' category! Its ID or its data are not valid!\n")
+    ErrorNoHalt(
+      "[Flux - Voice Lines] Not adding the '"..tostring(id).."' category! Its ID or its data are not valid!\n"
+    )
 
     return
   end
@@ -240,16 +242,22 @@ function VoiceLines:register_line(category_id, id, data)
   local category = categories[category_id]
 
   if !category or !isstring(id) or id == '' or !istable(data) then
-    ErrorNoHalt("[Flux - Voice Lines] Not adding the '"..tostring(id).."' line to the '"..tostring(category_id).."' category! The category does not exist, or the ID or the data of the line are not valid!\n")
+    ErrorNoHalt(
+      "[Flux - Voice Lines] Not adding the '"..tostring(id).."' line to the '"..tostring(category_id)..
+        "' category! The category does not exist, or the ID or the data of the line are not valid!\n"
+    )
 
     return
   end
 
-  local sound = clean_variants(data.sound, clean_sound)
+  local sound_variants = clean_variants(data.sound, clean_sound)
   local text = clean_variants(data.text)
 
-  if !sound or !text then
-    ErrorNoHalt("[Flux - Voice Lines] Not adding the '"..id.."' line to the '"..category_id.."' category! It needs a sound and a text!\n")
+  if !sound_variants or !text then
+    ErrorNoHalt(
+      "[Flux - Voice Lines] Not adding the '"..id.."' line to the '"..category_id..
+        "' category! It needs a sound and a text!\n"
+    )
 
     return
   end
@@ -264,7 +272,7 @@ function VoiceLines:register_line(category_id, id, data)
     end
   end
 
-  local line = { id = id, category = category_id, sound = sound, text = text, aliases = aliases }
+  local line = { id = id, category = category_id, sound = sound_variants, text = text, aliases = aliases }
 
   category.lines[id] = line
   mark_changed()

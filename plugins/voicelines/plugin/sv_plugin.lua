@@ -85,7 +85,7 @@ end
 function VoiceLines:play(speaker, category, line, receivers, volume, radio_listeners)
   if !IsValid(speaker) or !self:can_play(speaker) then return false end
 
-  local sound = self:get_sound(line, self:get_gender(speaker))
+  local sound_path = self:get_sound(line, self:get_gender(speaker))
   local level, sound_volume = self:get_sound_level(volume)
   local filter = RecipientFilter()
 
@@ -95,12 +95,17 @@ function VoiceLines:play(speaker, category, line, receivers, volume, radio_liste
     end
   end
 
-  get_sound_source(speaker):EmitSound(sound, level, 100, sound_volume, CHAN_VOICE, 0, 0, filter)
+  get_sound_source(speaker):EmitSound(sound_path, level, 100, sound_volume, CHAN_VOICE, 0, 0, filter)
 
   radio_listeners = radio_listeners or {}
 
   if #radio_listeners > 0 then
-    Cable.send(radio_listeners, 'fl_voice_line_radio', sound, math.Clamp(tonumber(config_get('voice_line_radio_volume')) or 0.5, 0, 1))
+    Cable.send(
+      radio_listeners,
+      'fl_voice_line_radio',
+      sound_path,
+      math.Clamp(tonumber(config_get('voice_line_radio_volume')) or 0.5, 0, 1)
+    )
   end
 
   speaker.fl_next_voice_line_at = CurTime() + (tonumber(config_get('voice_line_interval')) or 0)

@@ -29,10 +29,10 @@ end
 -- character.
 -- @param line [Map]
 function VoiceLines:preview(line)
-  local sound = self:get_sound(line, self:get_gender(PLAYER))
+  local sound_path = self:get_sound(line, self:get_gender(PLAYER))
 
-  if isstring(sound) then
-    surface.PlaySound(sound)
+  if isstring(sound_path) then
+    surface.PlaySound(sound_path)
   end
 end
 
@@ -53,8 +53,8 @@ Flux.Help:add_page('voice_lines', {
   end
 })
 
-Cable.receive('fl_voice_line_radio', function(sound, volume)
-  if !isstring(sound) then return end
+Cable.receive('fl_voice_line_radio', function(sound_path, volume)
+  if !isstring(sound_path) then return end
 
-  EmitSound(sound, vector_origin, -2, CHAN_STATIC, math.Clamp(tonumber(volume) or 0.5, 0, 1), 0)
+  EmitSound(sound_path, vector_origin, -2, CHAN_STATIC, math.Clamp(tonumber(volume) or 0.5, 0, 1), 0)
 end)

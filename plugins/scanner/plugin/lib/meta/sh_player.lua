@@ -41,13 +41,13 @@ if SERVER then
     entity:Fire('SetDistanceOverride', 64)
     entity:Fire('SetFollowTarget', target_name)
 
-    entity:CallOnRemove('fl_scanner_removed', function(entity)
-      if IsValid(entity.marker) then
-        entity.marker:Remove()
+    entity:CallOnRemove('fl_scanner_removed', function(scanner)
+      if IsValid(scanner.marker) then
+        scanner.marker:Remove()
       end
 
-      if IsValid(entity.pilot) then
-        entity.pilot:exit_scanner()
+      if IsValid(scanner.pilot) then
+        scanner.pilot:exit_scanner()
       end
     end)
   end
