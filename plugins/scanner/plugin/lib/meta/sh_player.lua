@@ -56,13 +56,20 @@ if SERVER then
     end)
   end
 
-  --- Releases the player's scanner and restores their view and weapons.
+  --- Releases the player's scanner and restores their view and the weapons that were stored
+  -- when they took control, if any are still stored.
   function player_meta:exit_scanner()
     local scanner = self.scanner
-    scanner.pilot = nil
-    scanner:Fire('SetFollowTarget', scanner.target_name)
 
-    self:give_weapons(self.weapons)
+    if IsValid(scanner) then
+      scanner.pilot = nil
+      scanner:Fire('SetFollowTarget', scanner.target_name)
+    end
+
+    if self.weapons then
+      self:give_weapons(self.weapons)
+    end
+
     self.weapons = nil
     self.scanner = nil
     self:SetViewEntity(self)

@@ -3,6 +3,7 @@ FACTION.description = 'faction.vortigaunt.description'
 FACTION.phys_desc = 'faction.vortigaunt.phys_desc'
 FACTION.color = Color(7, 135, 32)
 FACTION.material = 'flux/hl2rp/factions/citizen.jpg'
+FACTION.whitelisted = true
 FACTION.name_template = '{name}'
 FACTION.name = 'faction.vortigaunt.title'
 FACTION.has_gender = false

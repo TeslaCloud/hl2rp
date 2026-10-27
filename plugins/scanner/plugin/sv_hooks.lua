@@ -7,6 +7,27 @@ function Scanners:PlayerSpawnedNPC(actor, entity)
   end
 end
 
+--- Takes a player who dies while piloting a scanner out of it. The weapons stored when they
+-- took control are dropped, since they respawn with their loadout.
+-- @param victim [Player player that died]
+-- @param _inflictor [Entity]
+-- @param _attacker [Entity]
+function Scanners:PlayerDeath(victim, _inflictor, _attacker)
+  if victim:controls_scanner() then
+    victim.weapons = nil
+    victim:exit_scanner()
+  end
+end
+
+--- Releases the scanner of a player who disconnects while piloting it.
+-- @param actor [Player player that is disconnecting]
+function Scanners:PlayerDisconnected(actor)
+  if actor:controls_scanner() then
+    actor.weapons = nil
+    actor:exit_scanner()
+  end
+end
+
 local light_mat = Material('effects/flashlight001')
 
 --- Handles scanner controls: mouse 1 takes a photo, F toggles the spotlight and E exits the scanner.
