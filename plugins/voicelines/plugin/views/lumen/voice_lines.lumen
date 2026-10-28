@@ -68,10 +68,10 @@ return function(_props)
 
       for _k2, line in ipairs(group.lines) do
         if VoiceLines:line_matches_query(line, search) then
-          total = total + 1
+          total += 1
 
           if shown < max_shown then
-            shown = shown + 1
+            shown += 1
             lines[#lines + 1] = line
           end
         end
@@ -109,9 +109,7 @@ return function(_props)
     {Lumen.map(groups, function(group)
       return <view key={group.category.id} style={{ gap = 4 }}>
         <text style={{ font = 'menu_normal', margin_top = 8, color = 'text_muted' }}>{t(group.category.name)}</text>
-        {Lumen.map(group.lines, function(line)
-          return <Line key={line.category..'.'..line.id} line={line} gender={gender} />
-        end)}
+        {Lumen.map(group.lines, line -> <Line key={line.category..'.'..line.id} line={line} gender={gender} />)}
       </view>
     end)}
   </view>

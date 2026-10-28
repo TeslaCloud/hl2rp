@@ -17,7 +17,7 @@ function player_meta:take_turn(turn_type, amount)
   if !turns[turn_type] then return end
 
   self.turn_done = true
-  turns[turn_type] = turns[turn_type] - amount
+  turns[turn_type] -= amount
   self:set_nv('fl_combat_turns', turns)
 
   if turns[TURN_ATTACK] <= 0 then

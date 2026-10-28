@@ -24,7 +24,7 @@ Currencies:register_currency('tokens', {
     [50]        = 'models/props_junk/cardboard_box004a.mdl',
     [200]       = 'models/props_junk/cardboard_box003a.mdl',
     [1000]      = 'models/props_junk/cardboard_box002a.mdl',
-    [10000]     = 'models/props_junk/wood_crate001a.mdl'
+    [10_000]    = 'models/props_junk/wood_crate001a.mdl'
   }
 })
 
@@ -103,7 +103,7 @@ local entity_meta = FindMetaTable('Entity')
 -- @return [Boolean whether the entity is a combine door]
 function entity_meta:is_combine_door()
   if IsValid(self) and self:is_door() and !self:HasSpawnFlags(256) and !self:HasSpawnFlags(8192) and
-     !self:HasSpawnFlags(32768) then
+     !self:HasSpawnFlags(32_768) then
     return true
   end
 

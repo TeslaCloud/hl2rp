@@ -100,9 +100,9 @@ function Scanners:StartCommand(actor, cmd)
 
     if IsValid(scanner) and IsValid(marker) then
       if cmd:KeyDown(IN_JUMP) then
-        cmd:SetUpMove(10000)
+        cmd:SetUpMove(10_000)
       elseif cmd:KeyDown(IN_DUCK) then
-        cmd:SetUpMove(-10000)
+        cmd:SetUpMove(-10_000)
       end
 
       local scanner_forward = scanner:GetForward()

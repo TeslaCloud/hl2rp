@@ -48,7 +48,5 @@ Flux.Help:add_page('voice_lines', {
   title = 'ui.voice_lines.title',
   component = 'voice_lines',
   priority = 30,
-  visible = function(_page)
-    return #VoiceLines:get_local_available() > 0
-  end
+  visible = _page -> #VoiceLines:get_local_available() > 0
 })

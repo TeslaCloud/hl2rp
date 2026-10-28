@@ -32,7 +32,7 @@ end
 function ENT:Draw()
   local pos = self:GetPos()
 
-  if PLAYER:GetPos():DistToSqr(pos) > 4194304 then return end
+  if PLAYER:GetPos():DistToSqr(pos) > 4_194_304 then return end
 
   local post = self:GetDTEntity(0)
   local up = self:GetUp()

@@ -50,7 +50,7 @@ end
 function CombatSystem:add_entities_around(combat, member)
   local entities = ents.FindInSphere(member:GetPos(), 500)
   local pos = member:EyePos()
-  local filter = function(entity) return !isentity(entity) end
+  local filter = entity -> !isentity(entity)
 
   for i = 1, #entities do
     local entity = entities[i]
@@ -154,15 +154,15 @@ function CombatSystem:calculate_hit(attacker, target, damage_info)
         end
       end
 
-      adjust = adjust + data.distance_adjust
+      adjust += data.distance_adjust
     end
 
     if attacker.shots_done and attacker.shots_done > 0 and attacker:get_attribute_modifier('strength') < 0 then
-      adjust = adjust - 2 * attacker.shots_done
+      adjust -= 2 * attacker.shots_done
     end
   end
 
-  adjust = adjust + (hitgroup_adjust[hitgroup] or 0)
+  adjust += hitgroup_adjust[hitgroup] or 0
 
   attacker.shots_done = (attacker.shots_done or 0) + 1
 

@@ -142,7 +142,7 @@ end
 function Combat:pop_member()
   local i = self.current_member
 
-  i = i + 1
+  i += 1
 
   if i > #self.members then
     i = 1
@@ -157,7 +157,7 @@ end
 
 --- Increments the round counter.
 function Combat:round_end()
-  self.round = self.round + 1
+  self.round += 1
 end
 
 --- Adds a player or NPC to the combat, freezing them if the combat has already started.
@@ -208,7 +208,7 @@ function Combat:remove_member(id, all)
     table.remove(self.members, id)
 
     if self.current_member >= id then
-      self.current_member = self.current_member - 1
+      self.current_member -= 1
 
       if self.current_member <= 0 then
         self.current_member = #self.members

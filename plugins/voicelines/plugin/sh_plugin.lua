@@ -59,7 +59,7 @@ VoiceLines.version = (VoiceLines.version or 0) + 1
 -- that they are out of date.
 local function mark_changed()
   index_dirty = true
-  VoiceLines.version = VoiceLines.version + 1
+  VoiceLines.version += 1
 end
 
 --- Turns a sound path of a line into a path relative to the sound folder.
@@ -354,7 +354,7 @@ function VoiceLines:get_lines(category)
     list[#list + 1] = line
   end
 
-  table.sort(list, function(a, b) return a.id < b.id end)
+  table.sort(list, |a, b| -> a.id < b.id)
 
   return list
 end
@@ -365,8 +365,8 @@ function VoiceLines:count()
   local category_count, line_count = 0, 0
 
   for _id, category in pairs(categories) do
-    category_count = category_count + 1
-    line_count = line_count + table.Count(category.lines)
+    category_count += 1
+    line_count += table.Count(category.lines)
   end
 
   return category_count, line_count
