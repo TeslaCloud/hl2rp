@@ -13,7 +13,7 @@ end
 -- @param npc [NPC killed NPC]
 -- @param attacker [Entity entity that killed the NPC]
 function CombatSystem:OnNPCKilled(npc, attacker)
-  local combat = npc:get_combat() or attacker:get_combat()
+  local combat = npc:get_combat() or IsValid(attacker) and attacker:get_combat()
 
   if combat then
     leave_combat(combat, npc)
@@ -35,7 +35,7 @@ end
 -- @param _inflictor [Entity entity that dealt the damage]
 -- @param attacker [Entity entity responsible for the death]
 function CombatSystem:PlayerDeath(target, _inflictor, attacker)
-  local combat = target:get_combat() or attacker:get_combat()
+  local combat = target:get_combat() or IsValid(attacker) and attacker:get_combat()
 
   if combat then
     leave_combat(combat, target)
@@ -166,16 +166,13 @@ function CombatSystem:EntityTakeDamage(entity, damage_info)
   and !(attacker:IsNPC() and entity:IsNPC()) then
     local attacker_combat = attacker:get_combat()
     local entity_combat = entity:get_combat()
-    local _combat = attacker_combat
 
     if attacker_combat and !entity_combat then
-      _combat = attacker_combat
       CombatSystem:add_member(attacker_combat, entity)
     elseif !attacker_combat and entity_combat then
-      _combat = entity_combat
       CombatSystem:add_member(entity_combat, attacker)
     elseif !attacker_combat and !entity_combat then
-      _combat = CombatSystem:start_combat(attacker, entity)
+      CombatSystem:start_combat(attacker, entity)
     end
 
     local missed = CombatSystem:calculate_hit(attacker, entity, damage_info)

@@ -5,7 +5,7 @@
 
 local config_get = Config.get
 
--- The line that `VoiceLines:say` is making a player say: actor, category and line. It is only
+--- The line that `VoiceLines:say` is making a player say: actor, category and line. It is only
 -- set while `Chatbox.submit` runs, which turns the text into a message right away.
 local forced = nil
 
@@ -161,7 +161,3 @@ function VoiceLines:say(actor, category_id, line_id)
 
   return success
 end
-
-Cable.receive('fl_voice_line_say', function(actor, category_id, line_id)
-  VoiceLines:say(actor, category_id, line_id)
-end)

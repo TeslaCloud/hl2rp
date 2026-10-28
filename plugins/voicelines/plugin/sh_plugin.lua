@@ -665,5 +665,7 @@ function VoiceLines:OnPluginsLoaded()
 end
 
 require_relative 'cl_plugin'
+require_relative 'cl_nethooks'
 require_relative 'sv_plugin'
 require_relative 'sv_hooks'
+require_relative 'sv_nethooks'

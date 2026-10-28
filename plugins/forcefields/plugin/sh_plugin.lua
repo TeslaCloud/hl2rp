@@ -85,7 +85,7 @@ end
 -- @return [Boolean false to let the player through, true to block them, nil to use the default]
 function Forcefields:ShouldForcefieldCollide(activator, _field, mode)
   if (mode == 2 or mode == 4) and IsValid(activator) then
-    if activator:get_faction_id() == 'cwu' then
+    if activator:get_faction_id() == 'citizen' and activator:is_rank('cwu') then
       return false
     end
   end

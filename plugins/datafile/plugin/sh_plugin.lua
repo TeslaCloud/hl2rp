@@ -1,3 +1,3 @@
 PLUGIN:set_global 'Datafile'
 
-require_relative 'cl_hooks.lua'
+require_relative 'cl_hooks'

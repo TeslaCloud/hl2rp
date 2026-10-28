@@ -49,7 +49,6 @@ return function(_props)
     end
   end
 
-  -- The selected category is gone, after a change of character for example: show all of them.
   use_effect(function()
     if is_stale then
       set_selected(nil)

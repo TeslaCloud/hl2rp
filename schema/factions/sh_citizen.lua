@@ -39,3 +39,6 @@ FACTION.models = {
     'models/teslacloud/citizens/female07.mdl'
   }
 }
+
+FACTION:add_rank ''
+FACTION:add_rank 'CWU'

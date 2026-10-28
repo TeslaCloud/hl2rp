@@ -62,7 +62,6 @@ function THEME:PaintMainMenu(panel, width, height)
   local _desc_w, desc_h = text_size(desc, font)
   local author_w, author_h = text_size(author, font)
   local _version_w, version_h = text_size(version, font)
-  -- The panel stores an already scaled offset, so it must not be scaled again here.
   local logo_offset = panel.schema_logo_offset or math_scale(450)
   local bar_height = math_scale(128)
   local padding = math_scale(16)
@@ -244,7 +243,6 @@ function THEME:DrawBarTexts(bar_info)
   if bar_info.hinder_display and bar_info.hinder_display <= bar_info.hinder_value then
     local width = bar_info.width
     local text_wide = text_size(bar_info.hinder_text, font)
-    local _length = width * (bar_info.hinder_value / bar_info.max_value)
 
     draw.SimpleText(
       bar_info.hinder_text,

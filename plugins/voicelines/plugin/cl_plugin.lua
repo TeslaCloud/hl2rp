@@ -1,6 +1,6 @@
 --- Client side of the Voice Lines plugin: the Voice Lines page of the Help tab, which lists the
 -- lines the character of the local player may use, lets the player listen to them and asks
--- the server to say them, and the sound of the lines heard over the radio.
+-- the server to say them.
 
 local available_cache = {}
 
@@ -52,9 +52,3 @@ Flux.Help:add_page('voice_lines', {
     return #VoiceLines:get_local_available() > 0
   end
 })
-
-Cable.receive('fl_voice_line_radio', function(sound_path, volume)
-  if !isstring(sound_path) then return end
-
-  EmitSound(sound_path, vector_origin, -2, CHAN_STATIC, math.Clamp(tonumber(volume) or 0.5, 0, 1), 0)
-end)

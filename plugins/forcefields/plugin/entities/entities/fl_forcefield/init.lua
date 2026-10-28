@@ -41,7 +41,7 @@ function ENT:Initialize()
   self.mode = self.mode or 1
   self:SetDTInt(0, self.mode)
 
-  local data = {}
+  local data
 
   if !self.no_correct then
     data = {}
@@ -215,12 +215,12 @@ function ENT:Use(act, _call, _type, _val)
   end
 
   self.mode = (self.mode or 1) + 1
-  self:SetDTInt(0, self.mode)
 
   if self.mode > #Forcefields.modes then
     self.mode = 1
-    self:SetDTInt(0, self.mode)
   end
+
+  self:SetDTInt(0, self.mode)
 
   if self.mode == 6 then
     self.on = false
@@ -241,15 +241,10 @@ function ENT:Use(act, _call, _type, _val)
   act:notify('Changed force field mode to: '..Forcefields.modes[self.mode])
 end
 
---- Stops the shield hum and touch sounds when the forcefield is removed.
+--- Stops the shield hum when the forcefield is removed.
 function ENT:OnRemove()
   if self.shield_loop then
     self.shield_loop:Stop()
     self.shield_loop = nil
-  end
-
-  if self.shield_touch then
-    self.shield_touch:Stop()
-    self.shield_touch = nil
   end
 end

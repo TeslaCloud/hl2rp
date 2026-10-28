@@ -1,6 +1,4 @@
 local PANEL = {}
-PANEL.cur_panel = nil
-PANEL.panels = {}
 
 --- Sets up the centered datafile window and its sidebar.
 function PANEL:Init()

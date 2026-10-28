@@ -1,7 +1,5 @@
 Cable.receive('fl_punch_cable', function(actor)
-  local team_name = team.GetName(actor:Team())
-
-  if team_name == 'faction.combine.overwatch.title' then
+  if actor:get_faction_id() == 'overwatch' then
     local cur_time = CurTime()
 
     if !actor:Alive() or actor:is_ragdolled() or (actor.next_punch or 0) > cur_time then return end
