@@ -316,10 +316,6 @@ function VoiceLines:find_line(category_id, id)
   return category and category.lines[id] or nil
 end
 
---- Sorts categories by their order, and by their IDs when the order is the same.
--- @param a [Map category]
--- @param b [Map category]
--- @return [Boolean]
 local function category_before(a, b)
   if a.order != b.order then
     return a.order < b.order

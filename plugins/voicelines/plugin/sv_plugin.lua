@@ -55,10 +55,6 @@ function VoiceLines:can_play(target)
   return CurTime() >= (target.fl_next_voice_line_at or 0)
 end
 
---- Returns the entity the sound of a player comes from: their ragdoll while they have one,
--- else the player.
--- @param target [Player]
--- @return [Entity]
 local function get_sound_source(target)
   if isfunction(target.get_ragdoll_entity) then
     local ragdoll = target:get_ragdoll_entity()
