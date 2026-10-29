@@ -21,7 +21,6 @@ depends:
   - stamina
   - staticents
   - thirdperson
-  - adminesp
   - crosshair
   - hints
   - visiblelegs
