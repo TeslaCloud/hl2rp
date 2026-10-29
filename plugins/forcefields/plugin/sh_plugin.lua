@@ -78,14 +78,19 @@ function Forcefields:ShouldCollide(a, b)
   end
 end
 
---- Decides whether a player collides with a forcefield based on its mode.
+--- Decides whether a player collides with a forcefield based on its mode. CWU members pass in
+-- modes 2 to 4, and in mode 3 so does anyone who carries a CP card or a CP officer card.
 -- @param activator [Player player touching the forcefield]
 -- @param _field [Entity forcefield]
 -- @param mode [Number index into Forcefields.modes]
 -- @return [Boolean false to let the player through, true to block them, nil to use the default]
 function Forcefields:ShouldForcefieldCollide(activator, _field, mode)
-  if (mode == 2 or mode == 4) and IsValid(activator) then
+  if mode >= 2 and mode <= 4 and IsValid(activator) then
     if activator:get_faction_id() == 'citizen' and activator:is_rank('cwu') then
+      return false
+    end
+
+    if mode == 3 and (activator:has_item('card_cp') or activator:has_item('card_cp_officer')) then
       return false
     end
   end
