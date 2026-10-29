@@ -22,7 +22,7 @@ FACTION.menu_sound = {
 }
 
 FACTION.model_classes = {
-  universal = 'ota'
+  universal = 'combine_soldier'
 }
 
 FACTION.models.universal = {
