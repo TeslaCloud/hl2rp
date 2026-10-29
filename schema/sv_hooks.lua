@@ -64,14 +64,12 @@ end
 -- @param _inflictor [Entity entity that dealt the fatal damage]
 -- @param _attacker [Entity entity responsible for the death]
 function SCHEMA:PlayerDeath(victim, _inflictor, _attacker)
-  if victim:Alive() then
-    local faction = victim:get_faction_id()
+  local faction = victim:get_faction_id()
 
-    if faction == 'cca' then
-      victim:EmitSound('npc/metropolice/die'..random(1, 4)..'.wav')
-    elseif faction == 'overwatch' then
-      victim:EmitSound('npc/combine_soldier/die'..random(1, 3)..'.wav')
-    end
+  if faction == 'cca' then
+    victim:EmitSound('npc/metropolice/die'..random(1, 4)..'.wav')
+  elseif faction == 'overwatch' then
+    victim:EmitSound('npc/combine_soldier/die'..random(1, 3)..'.wav')
   end
 end
 
