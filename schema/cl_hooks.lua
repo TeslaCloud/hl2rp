@@ -3,7 +3,7 @@ local vignette_material = util.get_material('materials/flux/hl2rp/vignette.png')
 
 --- Turns on the desaturated color grading once the local player exists.
 function SCHEMA:PostInitPostEntity()
-  enable_color_mod()
+  Flux.enable_color_mod()
   Flux.set_color_mod('color', 0.85)
   Flux.set_color_mod('addb', 0.015)
 end
