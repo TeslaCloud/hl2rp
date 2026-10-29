@@ -1,12 +1,12 @@
 PLUGIN:set_global('Forcefields')
 
 Forcefields.modes = {
-  'CCA only',
-  'CCA + CWU',
-  'CCA, CWU + Card',
-  'CCA, CWU, NO CARD',
-  'Everyone',
-  'Off'
+  'forcefield.modes.cca_only',
+  'forcefield.modes.cca_cwu',
+  'forcefield.modes.cca_cwu_card',
+  'forcefield.modes.cca_cwu_no_card',
+  'forcefield.modes.everyone',
+  'forcefield.modes.off'
 }
 
 local allowed_ents = {

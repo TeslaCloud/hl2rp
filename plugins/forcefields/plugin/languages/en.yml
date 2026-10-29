@@ -1,0 +1,12 @@
+en:
+  forcefield:
+    modes:
+      cca_only: "CCA only"
+      cca_cwu: "CCA + CWU"
+      cca_cwu_card: "CCA, CWU + Card"
+      cca_cwu_no_card: "CCA, CWU, NO CARD"
+      everyone: "Everyone"
+      off: "Off"
+  notification:
+    forcefield:
+      mode_changed: "Changed force field mode to: {mode}"

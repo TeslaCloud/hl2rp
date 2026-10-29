@@ -1,0 +1,12 @@
+es:
+  forcefield:
+    modes:
+      cca_only: "Solo PC"
+      cca_cwu: "PC + UTC"
+      cca_cwu_card: "PC, UTC + tarjeta"
+      cca_cwu_no_card: "PC, UTC, SIN TARJETA"
+      everyone: "Todos"
+      off: "Apagado"
+  notification:
+    forcefield:
+      mode_changed: "Modo del campo de fuerza cambiado a: {mode}"

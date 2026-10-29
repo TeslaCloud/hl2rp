@@ -1,0 +1,12 @@
+ru:
+  forcefield:
+    modes:
+      cca_only: "Только ГО"
+      cca_cwu: "ГО + ГСР"
+      cca_cwu_card: "ГО, ГСР + карта"
+      cca_cwu_no_card: "ГО, ГСР, БЕЗ КАРТЫ"
+      everyone: "Все"
+      off: "Выключено"
+  notification:
+    forcefield:
+      mode_changed: "Режим силового поля изменён на: {mode}"

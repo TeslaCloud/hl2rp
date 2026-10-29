@@ -238,7 +238,7 @@ function ENT:Use(act, _call, _type, _val)
 
   self:CollisionRulesChanged()
   self:EmitSound('buttons/combine_button5.wav', 140, 100 + (self.mode - 1) * 15)
-  act:notify('Changed force field mode to: '..Forcefields.modes[self.mode])
+  act:notify('notification.forcefield.mode_changed', { mode = Forcefields.modes[self.mode] })
 end
 
 --- Stops the shield hum when the forcefield is removed.
