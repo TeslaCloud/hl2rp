@@ -189,18 +189,14 @@ ru:
       turret_ceiling: Подвесная Турель Альянса
       cscanner: Городской Сканер
       combine_dropship: Транспортёр Альянса
-      combine_elite: Элитный Солдат Альянса
       combine_gunship: Штурмовик Альянса
       combine_soldier: Солдат Альянса
       hunter: Охотник
       helicopter: Вертолёт-охотник
       manhack: Мэнхэк
       metropolice: Юнит ГО
-      prison_guard: Солдат Нова Проспект
-      prison_shotgunner: Солдат Нова Проспект с дробовиком
       rollermine: Шаровая мина
       clawscanner: Боевой сканер
-      shotgun_soldier: Солдат Альянса с дробовиком
       stalker: Сталкер
       strider: Страйдер
       turret_floor: Турель
@@ -213,18 +209,12 @@ ru:
       mossman: Доктор Джудит Моссман
       eli: Элай Вэнс
       gman: G-Man
-      medic: Медик Сопротивления
       odessa: Одесса Кэббедж
-      rebel: Боец Сопротивления
-      refugee: Беженец
-      vortigaunturiah: Урия
       vortigaunt: Вортигонт
-      vortigauntslave: Вортигонт-раб
       breen: Уоллес Брин
       antlion: Муравьиный лев
       antlion_grub: Личинка муравьиного льва
       antlionguard: Муравьиный лев-страж
-      antlionguardian: Муравьиный лев-страж гнезда
       antlion_worker: Муравьиный лев-рабочий
       barnacle: Барнакл
       headcrab_fast: Быстрый хедкраб

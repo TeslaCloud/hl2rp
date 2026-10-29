@@ -191,18 +191,14 @@ en:
       turret_ceiling: Ceiling Turret
       cscanner: City Scanner
       combine_dropship: Combine Dropship
-      combine_elite: Combine Elite
       combine_gunship: Combine Gunship
       combine_soldier: Combine Soldier
       hunter: Hunter
       helicopter: Hunter-Chopper
       manhack: Manhack
       metropolice: Metro Police
-      prison_guard: Prison Guard
-      prison_shotgunner: Prison Shotgun Guard
       rollermine: Rollermine
       clawscanner: Shield Scanner
-      shotgun_soldier: Shotgun Soldier
       stalker: Stalker
       strider: Strider
       turret_floor: Turret
@@ -215,18 +211,12 @@ en:
       mossman: Dr. Judith Mossman
       eli: Eli Vance
       gman: G-Man
-      medic: Medic
       odessa: Odessa Cubbage
-      rebel: Rebel
-      refugee: Refugee
-      vortigaunturiah: Uriah
       vortigaunt: Vortigaunt
-      vortigauntslave: Vortigaunt Slave
       breen: Wallace Breen
       antlion: Antlion
       antlion_grub: Antlion Grub
       antlionguard: Antlion Guard
-      antlionguardian: Antlion Guardian
       antlion_worker: Antlion Worker
       barnacle: Barnacle
       headcrab_fast: Fast Headcrab

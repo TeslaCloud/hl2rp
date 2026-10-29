@@ -179,18 +179,14 @@ es:
       turret_ceiling: Torreta de techo
       cscanner: Escáner de la ciudad
       combine_dropship: Nave de transporte Combine
-      combine_elite: Élite Combine
       combine_gunship: Cañonera Combine
       combine_soldier: Soldado Combine
       hunter: Cazador
       helicopter: Helicóptero cazador
       manhack: Manhack
       metropolice: Policía metropolitana
-      prison_guard: Guardia de prisión
-      prison_shotgunner: Guardia de prisión con escopeta
       rollermine: Rodamina
       clawscanner: Escáner de escudo
-      shotgun_soldier: Soldado con escopeta
       stalker: Stalker
       strider: Strider
       turret_floor: Torreta
@@ -203,18 +199,12 @@ es:
       mossman: Dra. Judith Mossman
       eli: Eli Vance
       gman: G-Man
-      medic: Médico
       odessa: Odessa Cubbage
-      rebel: Rebelde
-      refugee: Refugiado
-      vortigaunturiah: Uriah
       vortigaunt: Vortigaunt
-      vortigauntslave: Vortigaunt esclavo
       breen: Wallace Breen
       antlion: Hormiga león
       antlion_grub: Larva de hormiga león
       antlionguard: Guardián hormiga león
-      antlionguardian: Guardián hormiga león del nido
       antlion_worker: Obrera hormiga león
       barnacle: Barnacle
       headcrab_fast: Headcrab rápido
