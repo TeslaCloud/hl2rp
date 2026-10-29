@@ -152,9 +152,10 @@ end
 --
 -- The plugins of the schema load after those of the framework, so this handler runs after theirs. The damage of a
 -- hit on a player is rolled by `D20:ResolvePlayerDamage`, which the Damage plugin's `EntityTakeDamage` handler
--- calls; the damage of a hit on an NPC is rolled by `D20:EntityTakeDamage`, as the Damage plugin only handles
--- players. While the D20 plugin is enabled both have rolled by the time this handler runs, and the extra damage
--- events of an attack they have rolled already (shotgun pellets) are blocked before they get here.
+-- calls; the damage of a hit on an NPC is rolled by `D20:EntityTakeDamage`, as the Damage plugin rolls only the
+-- damage of players, through `ResolvePlayerDamage`. While the D20 plugin is enabled both have rolled by the time
+-- this handler runs, and the extra damage events of an attack they have rolled already (shotgun pellets) are
+-- blocked before they get here.
 -- @param entity [Entity entity being damaged]
 -- @param damage_info [CTakeDamageInfo damage being dealt]
 -- @return [Boolean true to block the damage when the attack missed, nil when it hit or combat does not apply]
