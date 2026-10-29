@@ -20,10 +20,6 @@ en:
       desc: A headcrab, or the body that one has taken over.
   currency:
     tokens: Tokens
-  error:
-    item:
-      nothing_to_treat: You have no wounds that this could treat.
-      already_healing: You are already healing.
   faction:
     admin:
       title: City Administrator
@@ -54,10 +50,8 @@ en:
     action:
       eat: Eat
       drink: Drink
-      apply: Apply
     category:
       cards: Access cards
-      medical: Medical
     card_cp:
       print_name: Civil Protection Access Card
       description:

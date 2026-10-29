@@ -20,10 +20,6 @@ fr:
       desc: "Un headcrab, ou le corps dont il a pris le contrôle."
   currency:
     tokens: "Jetons"
-  error:
-    item:
-      nothing_to_treat: "Vous n'avez aucune blessure que ceci pourrait soigner."
-      already_healing: "Vous êtes déjà en train de vous soigner."
   faction:
     admin:
       title: "Administrateur de la Cité"
@@ -54,10 +50,8 @@ fr:
     action:
       eat: "Manger"
       drink: "Boire"
-      apply: "Appliquer"
     category:
       cards: "Cartes d'accès"
-      medical: "Médical"
     card_cp:
       print_name: "Carte d'accès de la Protection civile"
       description: "Une carte d'accès du Cartel de haute technologie, utilisée par les unités ordinaires de la Protection civile. Elle fonctionne grâce au propre champ électrique du corps. Elle transmet les données en se servant du sel du corps comme support de transmission."

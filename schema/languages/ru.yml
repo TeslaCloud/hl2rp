@@ -20,10 +20,6 @@ ru:
       desc: Хедкраб или тело, которое он захватил.
   currency:
     tokens: Токены
-  error:
-    item:
-      nothing_to_treat: У вас нет ран, которые можно этим вылечить.
-      already_healing: Вы уже лечитесь.
   faction:
     admin:
       title: Городской Администратор
@@ -54,10 +50,8 @@ ru:
     action:
       eat: Съесть
       drink: Выпить
-      apply: Применить
     category:
       cards: Карты доступа
-      medical: Медицина
     card_cp:
       print_name: Карта доступа Гражданской Обороны
       description:
