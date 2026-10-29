@@ -9,10 +9,10 @@ function SCHEMA:ShouldOpenWeaponSelect(client, bind, pressed)
   end
 end
 
---- Adds the voice lines of the schema from its `voicelines.yml` file.
+--- Adds the voice lines of the schema from its `voice_lines.yml` file.
 -- @param voice_lines [Map the VoiceLines library]
 function SCHEMA:RegisterVoiceLines(voice_lines)
-  voice_lines:load_file(self:get_path()..'/voicelines.yml')
+  voice_lines:load_file(self:get_path()..'/voice_lines.yml')
 end
 
 do

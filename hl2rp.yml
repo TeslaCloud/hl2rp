@@ -15,5 +15,5 @@ depends:
   - radios
   - combat
 depends_development:
-  - devhud
+  - dev_hud
   - profiler
