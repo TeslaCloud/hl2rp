@@ -34,7 +34,6 @@ depends:
   - shared_flashlight
   - pickup_objects
   - displaytyping
-  - settings
   - cinematics
   - spawnpoints
   - spawnsaver
