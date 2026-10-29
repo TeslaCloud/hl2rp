@@ -5,6 +5,7 @@ FACTION.color = Color(210, 220, 100)
 FACTION.whitelisted = true
 FACTION.material = 'flux/hl2rp/factions/admin.jpg'
 FACTION.name_template = '{name}'
+FACTION.random_names = SCHEMA.human_names
 FACTION.has_gender = true
 FACTION.stats = {
   ['intelligence'] = 1,

@@ -1,3 +1,7 @@
+--- The lists of random character names: first names by gender and last names for humans, and
+-- the names of vortigaunts, gathered in `SCHEMA.human_names` and `SCHEMA.vortigaunt_names`,
+-- the random_names of the factions.
+
 SCHEMA.male_names = w[[
 Aamir Aaron Abbey Abbie Abbot Abbott Abby Abdel Abdul Abdulkarim Abdullah Abe Abel Abelard Abner Abraham Abram Ace
 Adair Adam Adams Addie Adger Aditya Adlai Adnan Adolf Adolfo Adolph Adolphe Adolpho Adolphus Adrian Adrick Adrien
@@ -1427,3 +1431,12 @@ Djor Agol Ja Ta Ga Ba Wa Ra Na Ma O]]
 SCHEMA.vort_last_names = w[[
 Dor Zix Lass Baah Kairs Court Dev Bul Magro Wakas Gardom Tas Burnakus Garzuer Langa Ah Yok Dar Ung Da Ungda Lant Glaa
 Tosh Nah Pah Gah Wah Rah Tah Mi Do Lar Hal Har Hag Ar La Hare]]
+
+SCHEMA.human_names = {
+  male = { first = SCHEMA.male_names, last = SCHEMA.last_names },
+  female = { first = SCHEMA.female_names, last = SCHEMA.last_names }
+}
+
+SCHEMA.vortigaunt_names = {
+  universal = { first = SCHEMA.vort_names, last = SCHEMA.vort_last_names }
+}

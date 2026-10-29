@@ -5,6 +5,7 @@ FACTION.color = Color(7, 135, 32)
 FACTION.material = 'flux/hl2rp/factions/citizen.jpg'
 FACTION.whitelisted = true
 FACTION.name_template = '{name}'
+FACTION.random_names = SCHEMA.vortigaunt_names
 FACTION.has_gender = false
 FACTION.ooc_hidden = false
 

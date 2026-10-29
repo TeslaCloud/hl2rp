@@ -45,11 +45,3 @@ end
 function FACTION:get_unit_id(target)
   return target:name():match('%d+$') or self:generate_id()
 end
-
---- Gives the player a random civilian name when they leave the faction.
--- @param target [Player player leaving the faction]
-function FACTION:on_player_leave(target)
-  if target:is_human() then
-    Characters.set_name(target, SCHEMA:get_random_name(target:get_gender()))
-  end
-end

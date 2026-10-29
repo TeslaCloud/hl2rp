@@ -73,23 +73,6 @@ function SCHEMA:is_human(target)
   return false
 end
 
---- Returns a random full name for a gender, or a random vortigaunt name for vortigaunt characters.
--- @param gender [String gender, 'no_gender' uses male names]
--- @param char_data=nil [Table character data, used to check the faction]
--- @return [String random first and last name]
-function SCHEMA:get_random_name(gender, char_data)
-  if char_data and char_data.faction == 'vortigaunt' then
-    return table.Random(self.vort_names)..' '..table.Random(self.vort_last_names)
-  end
-
-  gender = (gender == 'no_gender' and 'male') or gender
-
-  local last_name = table.Random(self.last_names)
-  local first_name = table.Random(self[gender..'_names'])
-
-  return first_name..' '..last_name
-end
-
 local player_meta = FindMetaTable('Player')
 
 --- Checks whether the player is in a combine faction.

@@ -4,6 +4,7 @@ FACTION.phys_desc = 'faction.citizen.phys_desc'
 FACTION.color = Color(225, 185, 135)
 FACTION.material = 'flux/hl2rp/factions/citizen.jpg'
 FACTION.name_template = '{name}'
+FACTION.random_names = SCHEMA.human_names
 FACTION.has_gender = true
 FACTION.menu_sound = {
   'vo/npc/male01/answer16.wav',
