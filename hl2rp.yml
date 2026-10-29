@@ -1,6 +1,7 @@
 damage_scale_head: 2
 damage_scale_arms: 2
 damage_scale_legs: 2
+log_damage: true
 depends:
   - 3dtexts
   - admin
@@ -51,7 +52,6 @@ depends:
   - recognize
   - radios
   - playersearch
-  - logging
   - doorkeys
   - animations
 depends_development:
