@@ -14,7 +14,8 @@ end
 
 if SERVER then
   --- Puts the player in control of a scanner, viewing through it while it follows a marker the player steers.
-  -- The player's weapons are stored and stripped until they exit the scanner.
+  -- The aim of the scanner starts level, in the direction the scanner faces. The player's
+  -- weapons are stored and stripped until they exit the scanner.
   -- @param entity [NPC scanner to control]
   function player_meta:control_scanner(entity)
     if self:controls_scanner() then
@@ -30,6 +31,7 @@ if SERVER then
 
     entity.target_name = target_name
     entity.marker = marker
+    entity.aim_angle = Angle(0, entity:GetAngles().y, 0)
     entity.pilot = self
     entity.flashlight = false
     entity:SetKeyValue('SpotlightDisabled', 'true')

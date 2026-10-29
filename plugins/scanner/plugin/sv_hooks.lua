@@ -93,15 +93,21 @@ function Scanners:PlayerOneSecond(actor)
   end
 end
 
---- Moves the scanner's marker according to the player's movement and mouse input and blocks their own movement.
+const mouse_sensitivity = 0.022
+
+--- Moves the scanner's marker according to the player's movement and mouse input and blocks
+-- their own movement. The mouse deltas of every command turn the aim angle kept on the
+-- scanner, by 0.022 degrees per unit as the view of a player turns, and the marker is placed
+-- ahead of the scanner in the direction of that angle.
 -- @param actor [Player player controlling the scanner]
 -- @param cmd [CUserCmd command being processed]
 function Scanners:StartCommand(actor, cmd)
   if actor:controls_scanner() then
     local scanner = actor:get_scanner()
     local marker = scanner.marker
+    local aim_angle = scanner.aim_angle
 
-    if IsValid(scanner) and IsValid(marker) then
+    if IsValid(scanner) and IsValid(marker) and aim_angle then
       if cmd:KeyDown(IN_JUMP) then
         cmd:SetUpMove(10_000)
       elseif cmd:KeyDown(IN_DUCK) then
@@ -115,10 +121,12 @@ function Scanners:StartCommand(actor, cmd)
       local forward = scanner_forward * cmd:GetForwardMove() * speed
       local right = scanner:GetRight() * cmd:GetSideMove() * speed
       local up = scanner_up * cmd:GetUpMove() * speed
-      local aim =
-        util.AimVector(scanner:GetAimVector():Angle(), actor:GetFOV(), cmd:GetMouseX(), cmd:GetMouseY(), 0, 0) * 32
 
-      aim = aim + forward + right + up
+      aim_angle.y -= cmd:GetMouseX() * mouse_sensitivity
+      aim_angle.p = math.Clamp(aim_angle.p + cmd:GetMouseY() * mouse_sensitivity, -89, 89)
+      aim_angle:Normalize()
+
+      local aim = aim_angle:Forward() * 32 + forward + right + up
 
       marker:SetPos(pos + aim)
     end
