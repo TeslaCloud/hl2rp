@@ -227,3 +227,10 @@ en:
       alpha:
         flux_alpha: FLUX ALPHA
         subtext: Everything is subject to change!
+    voice_lines:
+      category:
+        citizens: Citizens
+        civil_protection: Civil Protection
+        vortigaunt: Vortigaunts
+        overwatch_radio: Overwatch Radio
+        dispatch: Dispatch

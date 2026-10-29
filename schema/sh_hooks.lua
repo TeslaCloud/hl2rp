@@ -9,6 +9,12 @@ function SCHEMA:ShouldOpenWeaponSelect(client, bind, pressed)
   end
 end
 
+--- Adds the voice lines of the schema from its `voicelines.yml` file.
+-- @param voice_lines [Map the VoiceLines library]
+function SCHEMA:RegisterVoiceLines(voice_lines)
+  voice_lines:load_file(self:get_path()..'/voicelines.yml')
+end
+
 do
   local default_npcs = {
     ['npc_crow'] = 'npc.hl2.crow',

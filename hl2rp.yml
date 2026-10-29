@@ -46,6 +46,7 @@ depends:
   - rpcommands
   - recognize
   - radios
+  - voicelines
   - playersearch
   - doorkeys
   - animations

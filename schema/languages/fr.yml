@@ -215,3 +215,10 @@ fr:
       alpha:
         flux_alpha: "FLUX ALPHA"
         subtext: "Tout est susceptible de changer !"
+    voice_lines:
+      category:
+        citizens: Citoyens
+        civil_protection: Protection civile
+        vortigaunt: Vortigaunts
+        overwatch_radio: Radio de l'Overwatch
+        dispatch: Répartiteur

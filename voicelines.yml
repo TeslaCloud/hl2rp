@@ -1,4 +1,5 @@
-# Voice lines of the HL2RP schema, loaded by the Voice Lines plugin.
+# Voice lines of the HL2RP schema, loaded into the Voice Lines plugin by the
+# RegisterVoiceLines handler of the schema.
 #
 # Every category has:
 #   name     the language phrase shown as the title of the category.

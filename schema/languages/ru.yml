@@ -225,3 +225,10 @@ ru:
       alpha:
         flux_alpha: АЛЬФА ТЕСТ
         subtext: В будущем может измениться что угодно!
+    voice_lines:
+      category:
+        citizens: Граждане
+        civil_protection: Гражданская оборона
+        vortigaunt: Вортигонты
+        overwatch_radio: Радио Надзора
+        dispatch: Диспетчер
