@@ -5,53 +5,14 @@ damage_scale_npcs: true
 log_damage: true
 combat_auto_start: true
 shared_flashlight_item: flashlight
+profile: roleplay_full
 depends:
-  - 3dtexts
-  - admin
-  - areadisplay
-  - characters
-  - chatbox
-  - containers
-  - currencies
-  - doors
-  - factions
-  - items
-  - mapscenes
-  - observer
   - gamemastery
-  - ragdoll
-  - stamina
-  - staticents
-  - thirdperson
-  - crosshair
-  - hints
-  - visiblelegs
-  - autowalk
-  - raisegun
-  - weaponselect
-  - shared_flashlight
-  - pickup_objects
-  - displaytyping
   - cinematics
-  - spawnpoints
-  - spawnsaver
-  - stats
-  - damage
   - d20
   - levels
   - limbs
-  - vendors
-  - propprotection
-  - mapcleaner
-  - gametime
-  - screeneffects
-  - rpcommands
-  - recognize
   - radios
-  - voicelines
-  - playersearch
-  - doorkeys
-  - animations
   - combat
 depends_development:
   - devhud
