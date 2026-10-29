@@ -6,14 +6,12 @@ function Scanners:ShouldHUDPaintCrosshair()
   end
 end
 
---- Stops mouse input from turning the player's view while they control a scanner.
--- @param cmd [CUserCmd command being processed]
+--- Stops mouse input from turning the player's view while they control a scanner. The mouse
+-- deltas stay in the command, where the server reads them to steer the scanner's marker.
+-- @param _cmd [CUserCmd command being processed]
 -- @return [Boolean true to override the view angles, nil otherwise]
-function Scanners:InputMouseApply(cmd)
+function Scanners:InputMouseApply(_cmd)
   if PLAYER:controls_scanner() then
-    cmd:SetMouseX(0)
-    cmd:SetMouseY(0)
-
     return true
   end
 end
