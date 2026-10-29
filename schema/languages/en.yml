@@ -233,13 +233,3 @@ en:
       alpha:
         flux_alpha: FLUX ALPHA
         subtext: Everything is subject to change!
-    limb:
-      body: Body
-      head: Head
-      chest: Chest
-      stomach: Stomach
-      right_arm: Right Arm
-      left_arm: Left Arm
-      right_leg: Right Leg
-      left_leg: Left Leg
-      groin: Groin

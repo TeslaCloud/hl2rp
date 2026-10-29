@@ -221,13 +221,3 @@ fr:
       alpha:
         flux_alpha: "FLUX ALPHA"
         subtext: "Tout est susceptible de changer !"
-    limb:
-      body: "Corps"
-      head: "Tête"
-      chest: "Torse"
-      stomach: "Ventre"
-      right_arm: "Bras droit"
-      left_arm: "Bras gauche"
-      right_leg: "Jambe droite"
-      left_leg: "Jambe gauche"
-      groin: "Entrejambe"

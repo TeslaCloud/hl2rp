@@ -221,13 +221,3 @@ es:
       alpha:
         flux_alpha: FLUX ALFA
         subtext: ¡Todo está sujeto a cambios!
-    limb:
-      body: Cuerpo
-      head: Cabeza
-      chest: Pecho
-      stomach: Estómago
-      right_arm: Brazo derecho
-      left_arm: Brazo izquierdo
-      right_leg: Pierna derecha
-      left_leg: Pierna izquierda
-      groin: Ingle

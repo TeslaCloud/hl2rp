@@ -231,13 +231,3 @@ ru:
       alpha:
         flux_alpha: АЛЬФА ТЕСТ
         subtext: В будущем может измениться что угодно!
-    limb:
-      body: Тело
-      head: Голова
-      chest: Грудь
-      stomach: Живот
-      right_arm: Правая рука
-      left_arm: Левая рука
-      right_leg: Правая нога
-      left_leg: Левая нога
-      groin: Пах

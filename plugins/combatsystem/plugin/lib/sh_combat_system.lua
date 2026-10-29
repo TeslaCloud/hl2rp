@@ -97,7 +97,9 @@ local hitgroup_adjust = {
 --   AdjustAttackDistance hook can change both distances first;
 -- * recoil: -2 for every shot the attacker has already fired this turn, while the strength
 --   modifier of the attacker is negative;
--- * body part: -2 for the head, +2 for an arm or a leg, nothing for the rest.
+-- * body part: -2 for the head, +2 for an arm or a leg, nothing for the rest; the hit
+--   location of a player comes from `Damage:get_hitgroup`, that of an NPC from
+--   `CTakeDamageInfo:get_hitgroup`.
 -- A natural 20 always hits and a natural 1 always misses; both are announced as critical.
 -- Every message carries the formatted roll and the armor class it was rolled against.
 -- Serverside only.
@@ -106,9 +108,15 @@ local hitgroup_adjust = {
 -- @param damage_info [CTakeDamageInfo damage of the attack]
 -- @return [Boolean true if the attack missed, false if it hit]
 function CombatSystem:calculate_hit(attacker, target, damage_info)
-  local hitgroup = damage_info:get_hitgroup()
   local combat = attacker:get_combat() or target:get_combat()
   local adjust = 0
+  local hitgroup
+
+  if target:IsPlayer() then
+    hitgroup = Damage:get_hitgroup(target)
+  else
+    hitgroup = damage_info:get_hitgroup()
+  end
 
   if attacker:IsPlayer() then
     local weapon_item = attacker:get_active_weapon_item()
@@ -175,7 +183,7 @@ function CombatSystem:calculate_hit(attacker, target, damage_info)
   local arguments = {
     attacker = attacker,
     target = target,
-    limb = SCHEMA:get_hitgroup_name(hitgroup),
+    limb = Damage:get_limb_name(hitgroup),
     roll = Dice.format(result),
     armor_class = armor_class
   }

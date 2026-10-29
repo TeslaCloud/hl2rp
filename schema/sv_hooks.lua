@@ -83,19 +83,20 @@ function SCHEMA:GetPlayerOOCName(actor)
   end
 end
 
---- Doubles damage dealt to any limb other than the torso of an NPC. Players are left alone:
--- the `damage_scale_*` configs of the Damage plugin, set in hl2rp.yml, double their head,
--- arm and leg hits, and doubling them here as well would multiply the two. The damage is
--- scaled in place and nothing is returned.
+--- Doubles damage dealt to the head, the arms and the legs of an NPC, the limbs that
+-- `Damage:get_limb` gives for the hit group. Players are left alone: the `damage_scale_*`
+-- configs of the Damage plugin, set in hl2rp.yml, double their head, arm and leg hits, and
+-- doubling them here as well would multiply the two. The damage is scaled in place and
+-- nothing is returned.
 -- @param entity [Entity entity being damaged]
 -- @param hitgroup [Number HITGROUP_ enum of the hit body part]
 -- @param damage_info [CTakeDamageInfo damage being dealt]
 function SCHEMA:ScaleEntityDamage(entity, hitgroup, damage_info)
   if entity:IsPlayer() then return end
 
-  local limbgroup = self:hitgroup_to_limb(hitgroup)
+  local limb = Damage:get_limb(hitgroup)
 
-  if limbgroup != LIMBGROUP_TORSO then
+  if limb and limb != 'chest' and limb != 'stomach' then
     damage_info:ScaleDamage(2)
   end
 end
