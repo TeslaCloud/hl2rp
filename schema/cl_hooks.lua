@@ -2,7 +2,7 @@ local alpha_text_color = Color(255, 0, 0, 75)
 local vignette_material = util.get_material('materials/flux/hl2rp/vignette.png')
 
 --- Turns on the desaturated color grading once the local player exists.
-function SCHEMA:FLInitPostEntity()
+function SCHEMA:PostInitPostEntity()
   enable_color_mod()
   Flux.set_color_mod('color', 0.85)
   Flux.set_color_mod('addb', 0.015)
