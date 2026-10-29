@@ -3,6 +3,7 @@ damage_scale_arms: 2
 damage_scale_legs: 2
 damage_scale_npcs: true
 log_damage: true
+combat_auto_start: true
 depends:
   - 3dtexts
   - admin
@@ -50,6 +51,7 @@ depends:
   - playersearch
   - doorkeys
   - animations
+  - combat
 depends_development:
   - devhud
   - profiler

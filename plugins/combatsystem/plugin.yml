@@ -1,7 +1,0 @@
-name: Turn Based Combat System
-description: Fully automated roleplay turn based combat system.
-author: TeslaCloud Studios
-depends:
-  - stats
-  - damage
-  - d20
