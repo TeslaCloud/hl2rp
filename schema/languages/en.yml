@@ -242,7 +242,7 @@ en:
     hud:
       alpha:
         flux_alpha: FLUX ALPHA
-        subtext: Everything is a subject to a change!
+        subtext: Everything is subject to change!
     limb:
       body: Body
       head: Head
