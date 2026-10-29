@@ -26,7 +26,6 @@ depends:
   - hints
   - visiblelegs
   - autowalk
-  - prefixes
   - raisegun
   - weaponselect
   - shared_flashlight
