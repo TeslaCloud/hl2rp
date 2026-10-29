@@ -1,14 +1,17 @@
 local alpha_text_color = Color(255, 0, 0, 75)
 local vignette_material = util.get_material('materials/flux/hl2rp/vignette.png')
 
---- Applies the desaturated color grading and vignette and draws the alpha version notice.
-function SCHEMA:HUDPaint()
-  local w, h = ScrW(), ScrH()
-  local text_offset = math.scale(90)
-
+--- Turns on the desaturated color grading once the local player exists.
+function SCHEMA:FLInitPostEntity()
   enable_color_mod()
   Flux.set_color_mod('color', 0.85)
   Flux.set_color_mod('addb', 0.015)
+end
+
+--- Draws the vignette and the alpha version notice.
+function SCHEMA:HUDPaint()
+  local w, h = ScrW(), ScrH()
+  local text_offset = math.scale(90)
 
   surface.SetDrawColor(255, 255, 255, 255)
   surface.SetMaterial(vignette_material)
