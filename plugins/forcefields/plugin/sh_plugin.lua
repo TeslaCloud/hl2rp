@@ -42,7 +42,7 @@ const card_check_interval = 1
 
 --- Checks whether a player carries a CP card or a CP officer card. The answer is looked up in
 -- the inventory at most once a second per player and kept on the player in between, since
--- forcefields ask for it on every collision check. Always false without the Inventory plugin.
+-- forcefields ask for it on every collision check. Always false without the Items plugin.
 -- @param activator [Player]
 -- @return [Boolean]
 function Forcefields:carries_cp_card(activator)

@@ -3,4 +3,4 @@ description: Adds a flashlight item that players need to have equipped to turn o
 author: TeslaCloud Studios
 depends:
   - shared_flashlight
-  - inventory
+  - items

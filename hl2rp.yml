@@ -14,7 +14,6 @@ depends:
   - doors
   - factions
   - items
-  - inventory
   - mapscenes
   - observer
   - gamemastery
