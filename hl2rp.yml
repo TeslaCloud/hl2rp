@@ -1,6 +1,7 @@
 damage_scale_head: 2
 damage_scale_arms: 2
 damage_scale_legs: 2
+damage_scale_npcs: true
 log_damage: true
 depends:
   - 3dtexts

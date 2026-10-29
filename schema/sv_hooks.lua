@@ -1,20 +1,12 @@
---- Server hooks of the schema: pain, death and moaning sounds, the damage multipliers of hit
--- locations, the Combine doors, and the name Overwatch soldiers are shown under in the local
--- OOC chat.
+--- Server hooks of the schema: pain, death and moaning sounds, the Combine doors, and the
+-- name Overwatch soldiers are shown under in the local OOC chat.
 --
--- The damage of a hit is rolled by the D20 plugin from the dice of the weapon or of the
--- attacker, so the schema does not scale damage by weapon. The damage handlers
--- (`ScalePlayerDamage`, `ScaleNPCDamage` and `ScaleEntityDamage`) change the damage in place
--- and return nothing. Flux stops calling the handlers of a hook at the first one that returns
--- a value, and the schema is called after every plugin and before the gamemode, so a value
--- returned from here would keep the gamemode from seeing the damage. The Damage, D20 and
--- Limbs plugins hook the same events and return nothing either, except that they block
--- damage that a handler of the PrePlayerTakeDamage hook has canceled and the extra hits of
--- one attack in the same tick. The hit location multipliers of players are the
--- `damage_scale_*` configs of the Damage plugin, which hl2rp.yml sets to double the damage of
--- the head, the arms and the legs; the schema only doubles those hits on NPCs, which the
--- plugin does not cover. The D20 plugin applies both multipliers to the rolled damage again.
--- Limb damage is worked out from the health a player has lost after every multiplier.
+-- The schema does not scale damage itself. The damage of a hit is rolled by the D20 plugin
+-- from the dice of the weapon or of the attacker, and the hit location multipliers of players
+-- and NPCs are the `damage_scale_*` configs of the Damage plugin, which hl2rp.yml sets to
+-- double the damage of the head, the arms and the legs, for NPCs too (`damage_scale_npcs`).
+-- The D20 plugin applies the multipliers to the rolled damage again. Limb damage is worked
+-- out from the health a player has lost after every multiplier.
 
 local random = math.random
 
@@ -81,51 +73,6 @@ function SCHEMA:GetPlayerOOCName(actor)
   if actor:get_faction_id() == 'overwatch' then
     return 'Overwatch Soldier'
   end
-end
-
---- Doubles damage dealt to the head, the arms and the legs of an NPC, the limbs that
--- `Damage:get_limb` gives for the hit group. Players are left alone: the `damage_scale_*`
--- configs of the Damage plugin, set in hl2rp.yml, double their head, arm and leg hits, and
--- doubling them here as well would multiply the two. The damage is scaled in place and
--- nothing is returned.
--- @param entity [Entity entity being damaged]
--- @param hitgroup [Number HITGROUP_ enum of the hit body part]
--- @param damage_info [CTakeDamageInfo damage being dealt]
-function SCHEMA:ScaleEntityDamage(entity, hitgroup, damage_info)
-  if entity:IsPlayer() then return end
-
-  local limb = Damage:get_limb(hitgroup)
-
-  if limb and limb != 'chest' and limb != 'stomach' then
-    damage_info:ScaleDamage(2)
-  end
-end
-
---- Scales damage dealt to players through the ScaleEntityDamage hook. Returns nothing, so
--- that the gamemode still applies its own multipliers afterward. The multipliers of the
--- Damage plugin and the hit location that the Damage and Limbs plugins remember have been
--- handled by then, as plugins are called before the schema.
--- @param victim [Player player being damaged]
--- @param hitgroup [Number HITGROUP_ enum of the hit body part]
--- @param damage_info [CTakeDamageInfo damage being dealt]
-function SCHEMA:ScalePlayerDamage(victim, hitgroup, damage_info)
-  --- Called on the server when a bullet or melee hit on a player or an NPC is scaled by hit
-  -- location, from the schema's `ScalePlayerDamage` and `ScaleNPCDamage` handlers. Scale the
-  -- damage in place; the return value is ignored, and a handler that returns one keeps the
-  -- handlers after it from being called.
-  -- @param entity [Entity The player or NPC that was hit]
-  -- @param hitgroup [Number HITGROUP_ enum of the hit body part]
-  -- @param damage_info [CTakeDamageInfo The damage being dealt]
-  hook.Run('ScaleEntityDamage', victim, hitgroup, damage_info)
-end
-
---- Scales damage dealt to NPCs through the ScaleEntityDamage hook. Returns nothing, so that
--- the gamemode still handles the hit afterward.
--- @param entity [NPC NPC being damaged]
--- @param hitgroup [Number HITGROUP_ enum of the hit body part]
--- @param damage_info [CTakeDamageInfo damage being dealt]
-function SCHEMA:ScaleNPCDamage(entity, hitgroup, damage_info)
-  hook.Run('ScaleEntityDamage', entity, hitgroup, damage_info)
 end
 
 --- Makes badly hurt human players moan, more often the lower their health is.
