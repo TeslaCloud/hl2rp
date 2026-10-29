@@ -35,7 +35,7 @@ Currencies:register_currency('tokens', {
   }
 })
 
-Config.set('default_currency', 'tokens')
+Config.set('currencies_default', 'tokens')
 
 --- Checks whether a faction belongs to the combine.
 -- @param faction [String faction ID]
