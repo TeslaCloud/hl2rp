@@ -1,4 +1,4 @@
-local IsValid = IsValid
+--- The weapon types of the schema: whether a weapon class is ranged, melee or throwable.
 
 local weapon_types = {
   ['weapon_357']        = WEAPON_RANGED,
@@ -21,22 +21,4 @@ local weapon_types = {
 -- @return [Number WEAPON_ enum, WEAPON_DEFAULT for unknown weapons]
 function SCHEMA:get_weapon_type(weapon_class)
   return weapon_types[weapon_class] or WEAPON_DEFAULT
-end
-
-local player_meta = FindMetaTable('Player')
-
---- Returns the type of the weapon the player is holding.
--- @return [Number WEAPON_ enum, WEAPON_DEFAULT if no weapon is held]
-function player_meta:get_active_weapon_type()
-  local weapon = self:GetActiveWeapon()
-
-  if IsValid(weapon) then
-    local weapon_class = weapon:GetClass()
-
-    if weapon_class then
-      return SCHEMA:get_weapon_type(weapon_class)
-    end
-  end
-
-  return WEAPON_DEFAULT
 end

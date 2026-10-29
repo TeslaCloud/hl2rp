@@ -1,13 +1,13 @@
 --- Main file of the Half-Life 2 roleplay schema, run on both realms. Includes the root files of
 -- the schema, sets the default theme, the human and combine faction groups and the tokens
--- currency, and adds the combine and human checks to `SCHEMA`, `Player` and `Entity`.
+-- currency, and adds the combine and human checks to `SCHEMA`; those of `Player` and `Entity`
+-- are in `lib/meta`.
 
 require_relative 'cl_schema'
 require_relative 'sv_schema'
 require_relative 'cl_hooks'
 require_relative 'sh_hooks'
 require_relative 'sv_hooks'
-require_relative 'sv_nethooks'
 
 local IsValid = IsValid
 
@@ -68,33 +68,6 @@ end
 function SCHEMA:is_human(target)
   if IsValid(target) and target:IsPlayer() then
     return self:human_faction(target:get_faction_id())
-  end
-
-  return false
-end
-
-local player_meta = FindMetaTable('Player')
-
---- Checks whether the player is in a combine faction.
--- @return [Boolean whether the player is combine]
-function player_meta:is_combine()
-  return SCHEMA:is_combine(self)
-end
-
---- Checks whether the player is in a human faction.
--- @return [Boolean whether the player is human]
-function player_meta:is_human()
-  return SCHEMA:is_human(self)
-end
-
-local entity_meta = FindMetaTable('Entity')
-
---- Checks whether the entity is a door without the 256, 8192 or 32768 spawn flags, which combine cards can open.
--- @return [Boolean whether the entity is a combine door]
-function entity_meta:is_combine_door()
-  if IsValid(self) and self:is_door() and !self:HasSpawnFlags(256) and !self:HasSpawnFlags(8192) and
-     !self:HasSpawnFlags(32_768) then
-    return true
   end
 
   return false
