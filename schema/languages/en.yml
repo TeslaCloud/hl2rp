@@ -20,6 +20,9 @@ en:
       desc: A headcrab, or the body that one has taken over.
   currency:
     tokens: Tokens
+  error:
+    punch:
+      wrong_faction: You are not allowed to punch.
   faction:
     admin:
       title: City Administrator

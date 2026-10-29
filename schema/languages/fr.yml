@@ -20,6 +20,9 @@ fr:
       desc: "Un headcrab, ou le corps dont il a pris le contrôle."
   currency:
     tokens: "Jetons"
+  error:
+    punch:
+      wrong_faction: "Vous n'avez pas le droit de donner des coups de poing."
   faction:
     admin:
       title: "Administrateur de la Cité"

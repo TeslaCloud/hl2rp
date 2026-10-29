@@ -1,6 +1,9 @@
+require_relative 'cl_schema'
+require_relative 'sv_schema'
 require_relative 'cl_hooks'
 require_relative 'sh_hooks'
 require_relative 'sv_hooks'
+require_relative 'sv_nethooks'
 
 local IsValid = IsValid
 

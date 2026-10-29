@@ -20,6 +20,9 @@ ru:
       desc: Хедкраб или тело, которое он захватил.
   currency:
     tokens: Токены
+  error:
+    punch:
+      wrong_faction: Вам не разрешено бить кулаками.
   faction:
     admin:
       title: Городской Администратор
