@@ -7,8 +7,8 @@ function Scanners:ShouldHUDPaintCrosshair()
 end
 
 const math_modf = math.modf
-const yaw_scale = GetConVar('m_yaw')
-const pitch_scale = GetConVar('m_pitch')
+const yaw_convar = GetConVar('m_yaw')
+const pitch_convar = GetConVar('m_pitch')
 const inverse_default_scale = 1 / 0.022
 
 local mouse_rest_x = 0
@@ -28,8 +28,8 @@ function Scanners:InputMouseApply(cmd, x, y)
 
   local whole_x, whole_y
 
-  whole_x, mouse_rest_x = math_modf(mouse_rest_x + x * yaw_scale:GetFloat() * inverse_default_scale)
-  whole_y, mouse_rest_y = math_modf(mouse_rest_y + y * pitch_scale:GetFloat() * inverse_default_scale)
+  whole_x, mouse_rest_x = math_modf(mouse_rest_x + x * yaw_convar:GetFloat() * inverse_default_scale)
+  whole_y, mouse_rest_y = math_modf(mouse_rest_y + y * pitch_convar:GetFloat() * inverse_default_scale)
 
   cmd:SetMouseX(whole_x)
   cmd:SetMouseY(whole_y)
