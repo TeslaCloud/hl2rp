@@ -1,3 +1,6 @@
 name: Enhanced Administration
 description: Adds the Message and Report commands for players and the SetHealth and SetArmor commands for staff.
 author: Gary
+depends:
+  - admin
+  - chatbox
