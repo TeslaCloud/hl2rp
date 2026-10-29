@@ -108,6 +108,9 @@ en:
     canned_food:
       print_name: Combine Branded Canned Food
       description: A plastic container filled with, ugh... food.
+    flashlight:
+      print_name: Flashlight
+      description: Lets you illuminate the dark areas on the map.
     medical_bandage:
       print_name: Sterilized Bandage
       description: A thin waiver of sterile bandages.

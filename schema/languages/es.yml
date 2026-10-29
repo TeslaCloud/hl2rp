@@ -100,6 +100,9 @@ es:
     canned_food:
       print_name: Comida enlatada marca Combine
       description: Envase de plástico repleto de, huh... comida sintética.
+    flashlight:
+      print_name: Linterna
+      description: Te permite iluminar las zonas oscuras del mapa.
     medical_bandage:
       print_name: Venda esterilizada
       description: Un rollo fino de vendas estériles.

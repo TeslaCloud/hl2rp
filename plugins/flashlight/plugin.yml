@@ -1,6 +1,0 @@
-name: Flashlight
-description: Adds a flashlight item that players need to have equipped to turn on their flashlight.
-author: TeslaCloud Studios
-depends:
-  - shared_flashlight
-  - items

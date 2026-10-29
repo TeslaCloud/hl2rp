@@ -100,6 +100,9 @@ fr:
     canned_food:
       print_name: "Conserve de la marque du Cartel"
       description: "Un récipient en plastique rempli de, beurk... nourriture."
+    flashlight:
+      print_name: "Lampe torche"
+      description: "Permet d'éclairer les zones sombres de la carte."
     medical_bandage:
       print_name: "Bandage stérilisé"
       description: "Une fine bande de pansements stériles."

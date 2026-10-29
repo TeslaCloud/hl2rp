@@ -108,6 +108,9 @@ ru:
     canned_food:
       print_name: Питательная паста
       description: Пластиковая банка с безвкусной серой пастой.
+    flashlight:
+      print_name: Фонарик
+      description: Будучи включенным, позволяет лучше ориентироваться в темных местах.
     medical_bandage:
       print_name: Стерильный бинт
       description: Тонкий рулон стерильного бинта.

@@ -4,6 +4,7 @@ damage_scale_legs: 2
 damage_scale_npcs: true
 log_damage: true
 combat_auto_start: true
+shared_flashlight_item: flashlight
 depends:
   - 3dtexts
   - admin
