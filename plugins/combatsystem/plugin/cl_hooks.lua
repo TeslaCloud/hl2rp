@@ -38,7 +38,7 @@ end
 
 --- Prevents the local player from attacking while their weapon is frozen.
 -- @return [Boolean false if the weapon is frozen, nil otherwise]
-function CombatSystem:CanPlayerAttack()
+function CombatSystem:PlayerCanAttack()
   local weapon = PLAYER:GetActiveWeapon()
 
   if IsValid(weapon) and weapon:is_frozen() then

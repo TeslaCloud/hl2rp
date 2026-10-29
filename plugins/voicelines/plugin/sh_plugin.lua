@@ -34,7 +34,7 @@
 --   })
 -- end
 -- ```
--- The `CanUseVoiceLine` hook overrides who may use a line, and `VoiceLinePlayed` is run on
+-- The `PlayerCanUseVoiceLine` hook overrides who may use a line, and `VoiceLinePlayed` is run on
 -- the server every time the sound of a line plays. Players find the lines they may use on the
 -- Voice Lines page of the Help tab, where they can listen to a line or say it, and with the
 -- `voicelines` command. A player can play a voice line once per 'voice_line_interval' config;
@@ -443,7 +443,7 @@ function VoiceLines:can_use(target, category, line)
   --   category is being checked]
   -- @return [Boolean return false to forbid the line, true to allow it whatever the factions
   --   and ranks of the category; nothing leaves the decision to them]
-  local allowed = hook.Run('CanUseVoiceLine', target, category, line)
+  local allowed = hook.Run('PlayerCanUseVoiceLine', target, category, line)
 
   if allowed != nil then
     return allowed == true

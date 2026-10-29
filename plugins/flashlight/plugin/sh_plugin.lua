@@ -10,7 +10,7 @@ if SERVER then
       return false
     end
 
-    local hooked = hook.Run('PlayerSwitchedFlashlight', actor, on)
+    local hooked = hook.Run('PlayerCanSwitchFlashlight', actor, on)
 
     if hooked != nil then
       return hooked

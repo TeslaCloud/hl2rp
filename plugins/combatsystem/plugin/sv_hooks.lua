@@ -67,7 +67,7 @@ end
 --- Prevents players from raising their weapon in combat without an attack turn.
 -- @param actor [Player player raising the weapon]
 -- @return [Boolean false to prevent raising, nil otherwise]
-function CombatSystem:CanPlayerRaiseWeapon(actor)
+function CombatSystem:PlayerCanRaiseWeapon(actor)
   if actor:in_combat() and (actor:is_frozen() or !actor:has_turn(TURN_ATTACK)) then
     return false
   end
@@ -190,7 +190,7 @@ end
 --- Prevents frozen players from auto walking.
 -- @param actor [Player player trying to auto walk]
 -- @return [Boolean false to prevent it, nil otherwise]
-function CombatSystem:CanPlayerAutoWalk(actor)
+function CombatSystem:PlayerCanAutoWalk(actor)
   if actor:is_frozen() then
     return false
   end
