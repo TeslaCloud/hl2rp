@@ -1,5 +1,3 @@
 name: HL2 Scanners
 description: Adds ability to spawn and control HL2 scanners.
 author: TeslaCloud Studios
-depends:
-  - areas
