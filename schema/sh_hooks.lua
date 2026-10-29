@@ -3,7 +3,7 @@
 -- @param bind [String bind that was pressed]
 -- @param pressed [Boolean whether the key was pressed or released]
 -- @return [Boolean false to keep the weapon selection closed, nil otherwise]
-function SCHEMA:ShouldOpenWepselect(client, bind, pressed)
+function SCHEMA:ShouldOpenWeaponSelect(client, bind, pressed)
   if bind and bind:find('slot') and pressed and !client:KeyDown(IN_WALK) then
     return false
   end

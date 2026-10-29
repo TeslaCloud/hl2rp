@@ -1,5 +1,5 @@
 --- Server hooks of the Voice Lines plugin. In character speech is put together by the
--- `ChatboxAdjustPlayerSay` handler of the RolePlay Commands plugin, which this plugin depends
+-- `AdjustPlayerSay` handler of the RolePlay Commands plugin, which this plugin depends
 -- on and therefore runs after: when the phrase says a line, the message is put together again
 -- from the text of the line at the volume of the phrase, and the sound plays once the
 -- chatbox has sent the message, to exactly the players who have received it. Radio messages
@@ -27,7 +27,7 @@ end
 -- @param actor [Player the speaker]
 -- @param text [String the phrase as it was typed, with its markup]
 -- @param message [List arguments for Chatbox.add_text, replaced in place]
-function VoiceLines:ChatboxAdjustPlayerSay(actor, text, message)
+function VoiceLines:AdjustPlayerSay(actor, text, message)
   local options = get_options(message)
 
   if !options or options.refused or !options.ic then return end
@@ -77,8 +77,8 @@ end
 --- Replaces a radio message that says a voice line with the text of the line. Lines whose text
 -- is an action are not said over the radio.
 -- @param speaker [Player the player talking on the radio]
--- @param info [Map the transmission, see the PlayerAdjustRadioInfo hook of the Radios plugin]
-function VoiceLines:PlayerAdjustRadioInfo(speaker, info)
+-- @param info [Map the transmission, see the AdjustRadioInfo hook of the Radios plugin]
+function VoiceLines:AdjustRadioInfo(speaker, info)
   if !isstring(info.text) then return end
 
   local line, category = self:match(speaker, info.text, true)
@@ -96,7 +96,7 @@ end
 -- @param info [Map the transmission as it was sent]
 -- @param listeners [List<Player> the players who have received the message over the radio]
 -- @param eavesdroppers [List<Player> the players who have overheard it]
-function VoiceLines:PlayerRadioUsed(speaker, info, listeners, eavesdroppers)
+function VoiceLines:PlayerUsedRadio(speaker, info, listeners, eavesdroppers)
   local voice_line = info.voice_line
 
   if !istable(voice_line) then return end
