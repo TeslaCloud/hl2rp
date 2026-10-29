@@ -207,11 +207,8 @@ function THEME:DrawBarHindrance(bar_info)
 end
 
 --- Draws the fill of a bar, showing the gap between its current and target fill in the bar color.
--- Also hinders the health bar at 30.
 -- @param bar_info [Table bar position, size and values]
 function THEME:DrawBarFill(bar_info)
-  Flux.Bars:hinder_value('health', 30)
-
   local bar_height = self:get_option('bar_height')
   local bar_x = bar_info.x + 2
   local bar_y = bar_info.y + bar_info.height - (bar_height - 2)
