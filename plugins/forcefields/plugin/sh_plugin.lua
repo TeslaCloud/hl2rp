@@ -36,7 +36,7 @@ local allowed_ents = {
   npc_tripmine        = true
 }
 
-local CurTime = CurTime
+const CurTime = CurTime
 
 const card_check_interval = 1
 
