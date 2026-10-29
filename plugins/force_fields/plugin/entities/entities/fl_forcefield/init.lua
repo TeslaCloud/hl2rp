@@ -191,7 +191,7 @@ function ENT:Think()
 end
 
 --- Restores the saved mode and on state of the forcefield.
--- @param mode [Number index into Forcefields.modes]
+-- @param mode [Number index into ForceFields.modes]
 -- @param is_on [Boolean whether the forcefield is on]
 function ENT:RestoreMode(mode, is_on)
   self.on = is_on
@@ -216,7 +216,7 @@ function ENT:Use(act, _call, _type, _val)
 
   self.mode = (self.mode or 1) + 1
 
-  if self.mode > #Forcefields.modes then
+  if self.mode > #ForceFields.modes then
     self.mode = 1
   end
 
@@ -238,7 +238,7 @@ function ENT:Use(act, _call, _type, _val)
 
   self:CollisionRulesChanged()
   self:EmitSound('buttons/combine_button5.wav', 140, 100 + (self.mode - 1) * 15)
-  act:notify('notification.forcefield.mode_changed', { mode = Forcefields.modes[self.mode] })
+  act:notify('notification.forcefield.mode_changed', { mode = ForceFields.modes[self.mode] })
 end
 
 --- Stops the shield hum when the forcefield is removed.

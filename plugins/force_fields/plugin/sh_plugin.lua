@@ -1,6 +1,6 @@
-PLUGIN:set_global('Forcefields')
+PLUGIN:set_global('ForceFields')
 
-Forcefields.modes = {
+ForceFields.modes = {
   'forcefield.modes.cca_only',
   'forcefield.modes.cca_cwu',
   'forcefield.modes.cca_cwu_card',
@@ -42,10 +42,10 @@ const card_check_interval = 1
 
 --- Checks whether a player carries a CP card or a CP officer card. The answer is looked up in
 -- the inventory at most once a second per player and kept on the player in between, since
--- forcefields ask for it on every collision check. Always false without the Items plugin.
+-- force fields ask for it on every collision check. Always false without the Items plugin.
 -- @param activator [Player]
 -- @return [Boolean]
-function Forcefields:carries_cp_card(activator)
+function ForceFields:carries_cp_card(activator)
   if !Inventories then return false end
 
   local cur_time = CurTime()
@@ -58,11 +58,11 @@ function Forcefields:carries_cp_card(activator)
   return activator.forcefield_has_card
 end
 
---- Lets whitelisted projectiles and NPCs pass through forcefields and asks ShouldForcefieldCollide for players.
+--- Lets whitelisted projectiles and NPCs pass through force fields and asks ShouldForcefieldCollide for players.
 -- @param a [Entity first entity]
 -- @param b [Entity second entity]
 -- @return [Boolean whether the entities collide, nil to use the default]
-function Forcefields:ShouldCollide(a, b)
+function ForceFields:ShouldCollide(a, b)
   local a_class, b_class = a:GetClass(), b:GetClass()
 
   if a_class != 'fl_forcefield' and b_class != 'fl_forcefield' then return end
@@ -102,12 +102,12 @@ end
 
 --- Decides whether a player collides with a forcefield based on its mode. CWU members pass in
 -- modes 2 to 4, and in mode 3 so does anyone who carries a CP card or a CP officer card (see
--- `Forcefields:carries_cp_card`).
+-- `ForceFields:carries_cp_card`).
 -- @param activator [Player player touching the forcefield]
 -- @param _field [Entity forcefield]
--- @param mode [Number index into Forcefields.modes]
+-- @param mode [Number index into ForceFields.modes]
 -- @return [Boolean false to let the player through, true to block them, nil to use the default]
-function Forcefields:ShouldForcefieldCollide(activator, _field, mode)
+function ForceFields:ShouldForcefieldCollide(activator, _field, mode)
   if mode >= 2 and mode <= 4 and IsValid(activator) then
     if activator:get_faction_id() == 'citizen' and activator:is_rank('cwu') then
       return false

@@ -1,13 +1,13 @@
-if !Forcefields then
-  PLUGIN:set_global('Forcefields')
+if !ForceFields then
+  PLUGIN:set_global('ForceFields')
 end
 
 --- Rebuilds the clientside collision mesh of every forcefield between its two posts.
-function Forcefields:update_forcefields()
-  local forcefields = ents.FindByClass('fl_forcefield')
+function ForceFields:update_force_fields()
+  local force_fields = ents.FindByClass('fl_forcefield')
 
-  for i = 1, #forcefields do
-    local forcefield = forcefields[i]
+  for i = 1, #force_fields do
+    local forcefield = force_fields[i]
     local post = forcefield:GetDTEntity(0)
 
     if IsValid(post) then

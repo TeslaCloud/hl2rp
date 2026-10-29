@@ -1,8 +1,8 @@
 --- Builds the forcefield collision meshes once the local player has loaded in.
-function Forcefields:PlayerInitialized()
-  Forcefields:update_forcefields()
+function ForceFields:PlayerInitialized()
+  ForceFields:update_force_fields()
 end
 
 timer.Create('forcefield_updater', 250, 0, function()
-  Forcefields:update_forcefields()
+  ForceFields:update_force_fields()
 end)
