@@ -36,6 +36,28 @@ local allowed_ents = {
   npc_tripmine        = true
 }
 
+local CurTime = CurTime
+
+const card_check_interval = 1
+
+--- Checks whether a player carries a CP card or a CP officer card. The answer is looked up in
+-- the inventory at most once a second per player and kept on the player in between, since
+-- forcefields ask for it on every collision check. Always false without the Inventory plugin.
+-- @param activator [Player]
+-- @return [Boolean]
+function Forcefields:carries_cp_card(activator)
+  if !Inventories then return false end
+
+  local cur_time = CurTime()
+
+  if (activator.forcefield_card_check_at or 0) <= cur_time then
+    activator.forcefield_card_check_at = cur_time + card_check_interval
+    activator.forcefield_has_card = activator:has_item('card_cp') or activator:has_item('card_cp_officer')
+  end
+
+  return activator.forcefield_has_card
+end
+
 --- Lets whitelisted projectiles and NPCs pass through forcefields and asks ShouldForcefieldCollide for players.
 -- @param a [Entity first entity]
 -- @param b [Entity second entity]
@@ -79,7 +101,8 @@ function Forcefields:ShouldCollide(a, b)
 end
 
 --- Decides whether a player collides with a forcefield based on its mode. CWU members pass in
--- modes 2 to 4, and in mode 3 so does anyone who carries a CP card or a CP officer card.
+-- modes 2 to 4, and in mode 3 so does anyone who carries a CP card or a CP officer card (see
+-- `Forcefields:carries_cp_card`).
 -- @param activator [Player player touching the forcefield]
 -- @param _field [Entity forcefield]
 -- @param mode [Number index into Forcefields.modes]
@@ -90,7 +113,7 @@ function Forcefields:ShouldForcefieldCollide(activator, _field, mode)
       return false
     end
 
-    if mode == 3 and (activator:has_item('card_cp') or activator:has_item('card_cp_officer')) then
+    if mode == 3 and self:carries_cp_card(activator) then
       return false
     end
   end
