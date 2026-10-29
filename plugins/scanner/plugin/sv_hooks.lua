@@ -1,7 +1,10 @@
+--- Server-side hooks of the Scanner plugin: taking control of a spawned scanner, leaving it on
+-- death or disconnect, its controls, and steering it.
+
 --- Puts the player in control of a scanner they spawn.
 -- @param actor [Player player that spawned the NPC]
 -- @param entity [NPC spawned NPC]
-function Scanners:PlayerSpawnedNPC(actor, entity)
+function Scanner:PlayerSpawnedNPC(actor, entity)
   if entity:GetClass() == 'npc_cscanner' then
     actor:control_scanner(entity)
   end
@@ -12,7 +15,7 @@ end
 -- @param victim [Player player that died]
 -- @param _inflictor [Entity]
 -- @param _attacker [Entity]
-function Scanners:PlayerDeath(victim, _inflictor, _attacker)
+function Scanner:PlayerDeath(victim, _inflictor, _attacker)
   if victim:controls_scanner() then
     victim.weapons = nil
     victim:exit_scanner()
@@ -21,7 +24,7 @@ end
 
 --- Releases the scanner of a player who disconnects while piloting it.
 -- @param actor [Player player that is disconnecting]
-function Scanners:PlayerDisconnected(actor)
+function Scanner:PlayerDisconnected(actor)
   if actor:controls_scanner() then
     actor.weapons = nil
     actor:exit_scanner()
@@ -33,7 +36,7 @@ local light_mat = Material('effects/flashlight001')
 --- Handles scanner controls: mouse 1 takes a photo, F toggles the spotlight and E exits the scanner.
 -- @param actor [Player player that pressed the button]
 -- @param button [Number BUTTON_CODE of the pressed button]
-function Scanners:PlayerButtonDown(actor, button)
+function Scanner:PlayerButtonDown(actor, button)
   if actor:controls_scanner() then
     local cur_time = CurTime()
     local scanner = actor:get_scanner()
@@ -85,7 +88,7 @@ end
 
 --- Keeps a controlled scanner following its marker.
 -- @param actor [Player player being checked]
-function Scanners:PlayerOneSecond(actor)
+function Scanner:PlayerOneSecond(actor)
   if actor:controls_scanner() then
     local scanner = actor:get_scanner()
 
@@ -101,7 +104,7 @@ const mouse_sensitivity = 0.022
 -- ahead of the scanner in the direction of that angle.
 -- @param actor [Player player controlling the scanner]
 -- @param cmd [CUserCmd command being processed]
-function Scanners:StartCommand(actor, cmd)
+function Scanner:StartCommand(actor, cmd)
   if actor:controls_scanner() then
     local scanner = actor:get_scanner()
     local marker = scanner.marker

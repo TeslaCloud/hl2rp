@@ -1,3 +1,6 @@
+--- Client-side receivers of the Scanner plugin: the scanner that the local player controls
+-- and the light of the flash of a scanner.
+
 Cable.receive('fl_scanner_update', function(entity)
   PLAYER.scanner = entity
 end)

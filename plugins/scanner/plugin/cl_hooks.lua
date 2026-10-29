@@ -1,6 +1,9 @@
+--- Client-side hooks of the Scanner plugin: the crosshair, the aim and the overlay of a player
+-- who controls a scanner.
+
 --- Hides the crosshair while the local player controls a scanner.
 -- @return [Boolean false while controlling a scanner, nil otherwise]
-function Scanners:ShouldHUDPaintCrosshair()
+function Scanner:ShouldHUDPaintCrosshair()
   if PLAYER:controls_scanner() then
     return false
   end
@@ -23,7 +26,7 @@ local mouse_rest_y = 0
 -- @param x [Number horizontal mouse delta]
 -- @param y [Number vertical mouse delta]
 -- @return [Boolean true to override the view angles, nil otherwise]
-function Scanners:InputMouseApply(cmd, x, y)
+function Scanner:InputMouseApply(cmd, x, y)
   if !PLAYER:controls_scanner() then return end
 
   local whole_x, whole_y
@@ -40,7 +43,7 @@ end
 local scanner_material = Material('effects/combine_binocoverlay')
 
 --- Draws the scanner overlay over the screen while the local player controls a scanner.
-function Scanners:HUDPaintBackground()
+function Scanner:HUDPaintBackground()
   if PLAYER:controls_scanner() then
     surface.SetDrawColor(255, 255, 255, 255)
     surface.SetMaterial(scanner_material)
