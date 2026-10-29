@@ -1,3 +1,5 @@
 name: Overwatch Systems
 description: Lets members of the Overwatch faction knock players over with the fl_punch console command.
 author: Gary Tate
+depends:
+  - ragdoll
