@@ -54,6 +54,9 @@ function Scanners:PlayerButtonDown(actor, button)
         scanner.next_switch = cur_time + 1
       else
         local att = scanner:GetAttachment(1)
+
+        if !att then return end
+
         local pos, ang = WorldToLocal(att.Pos, att.Ang, scanner:GetPos(), scanner:GetAngles())
 
         scanner.flashlight = ents.Create('env_projectedtexture')
