@@ -1,3 +1,3 @@
-PLUGIN:set_global 'Datafile'
+PLUGIN:set_global 'DataFile'
 
 require_relative 'cl_hooks'

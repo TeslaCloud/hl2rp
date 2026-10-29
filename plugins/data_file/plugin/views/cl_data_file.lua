@@ -1,11 +1,11 @@
 local PANEL = {}
 
---- Sets up the centered datafile window and its sidebar.
+--- Sets up the centered Datafile window and its sidebar.
 function PANEL:Init()
   local scrw, scrh = ScrW(), ScrH()
   local width, height = self:get_menu_size()
 
-  self:SetTitle(t'ui.datafile.title')
+  self:SetTitle(t'ui.data_file.title')
   self:SetSize(width, height)
   self:SetPos(scrw * 0.5 - width * 0.5, scrh * 0.5 - height * 0.5)
 
@@ -30,10 +30,10 @@ function PANEL:Paint(w, h)
   draw.RoundedBox(0, 0, 0, w, h, background:alpha(150))
 end
 
---- Returns the scaled size of the datafile window.
+--- Returns the scaled size of the Datafile window.
 -- @return [Number width, Number height]
 function PANEL:get_menu_size()
   return math.scale(1280), math.scale(900)
 end
 
-vgui.Register('fl_datafile_panel', PANEL, 'fl_base_panel')
+vgui.Register('fl_data_file_panel', PANEL, 'fl_base_panel')
