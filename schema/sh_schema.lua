@@ -1,3 +1,7 @@
+--- Main file of the Half-Life 2 roleplay schema, run on both realms. Includes the root files of
+-- the schema, sets the default theme, the human and combine faction groups and the tokens
+-- currency, and adds the combine and human checks to `SCHEMA`, `Player` and `Entity`.
+
 require_relative 'cl_schema'
 require_relative 'sv_schema'
 require_relative 'cl_hooks'
