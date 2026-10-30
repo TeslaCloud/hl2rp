@@ -19,6 +19,11 @@
 #
 # A message says a line when, ignoring letter case and the punctuation at its end, it is the
 # command of the line, its text or one of its aliases.
+#
+# A message made of the commands and aliases of several lines, separated by spaces, says them
+# one after the other, each once the sound of the one before it has ended. A comma after a
+# command adds a pause of one second before the next line, a period two seconds:
+#   figures dwell, later. same
 categories:
   citizens:
     name: ui.voice_lines.category.citizens
