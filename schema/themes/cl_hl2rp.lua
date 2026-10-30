@@ -39,7 +39,7 @@ end
 -- @param panel [Panel chatbox panel]
 -- @param width [Number width of the panel]
 -- @param height [Number height of the panel]
-function THEME:ChatboxPaintBackground(panel, width, height)
+function THEME:PaintChatboxBackground(panel, width, height)
   DisableClipping(true)
     draw.box(0, -8, width, height - panel.text_entry:GetTall(), self:get_color('menu_background'))
   DisableClipping(false)
@@ -117,7 +117,7 @@ end
 -- @param panel [Panel character panel]
 -- @param w [Number width of the panel]
 -- @param h [Number height of the panel]
-function THEME:PaintCharPanel(panel, w, h)
+function THEME:PaintCharacterPanel(panel, w, h)
   if panel.char_data then
     local char_data = panel.char_data
     local font = self:get_font('main_menu_titles')
@@ -142,7 +142,7 @@ end
 -- @param _panel [Panel character creation panel]
 -- @param w [Number width of the panel]
 -- @param h [Number height of the panel]
-function THEME:PaintCharCreationMainPanel(_panel, w, h)
+function THEME:PaintCharacterCreationMainPanel(_panel, w, h)
   local title = t'ui.char_create.text'
   local font = get_font('main_menu_title')
   local title_w, _title_h = text_size(title, font)
@@ -153,7 +153,7 @@ end
 -- @param _panel [Panel character loading panel]
 -- @param w [Number width of the panel]
 -- @param h [Number height of the panel]
-function THEME:PaintCharCreationLoadPanel(_panel, w, h)
+function THEME:PaintCharacterCreationLoadPanel(_panel, w, h)
   local title = t'ui.char_create.load'
   local font = get_font('main_menu_title')
   local title_w, _title_h = text_size(title, font)
@@ -164,7 +164,7 @@ end
 -- @param panel [Panel character creation stage panel]
 -- @param w [Number width of the panel]
 -- @param _h [Number height of the panel]
-function THEME:PaintCharCreationBasePanel(panel, w, _h)
+function THEME:PaintCharacterCreationBasePanel(panel, w, _h)
   if isstring(panel.text) then
     local text = t(panel.text)
     local font = get_font('main_menu_large')
@@ -181,7 +181,7 @@ end
 
 --- Draws the thin accent colored outline of a bar.
 -- @param bar_info [Table bar position, size and values]
-function THEME:DrawBarBackground(bar_info)
+function THEME:PaintBarBackground(bar_info)
   local height = self:get_option('bar_height')
 
   draw.box_outlined(
@@ -198,7 +198,7 @@ end
 
 --- Draws the hindered part of a bar from its right end.
 -- @param bar_info [Table bar position, size and values]
-function THEME:DrawBarHindrance(bar_info)
+function THEME:PaintBarHindrance(bar_info)
   local length = bar_info.width * (bar_info.hinder_value / bar_info.max_value)
   local bar_height = self:get_option('bar_height')
   local bar_y = bar_info.y + bar_info.height - (bar_height - 2)
@@ -208,7 +208,7 @@ end
 
 --- Draws the fill of a bar, showing the gap between its current and target fill in the bar color.
 -- @param bar_info [Table bar position, size and values]
-function THEME:DrawBarFill(bar_info)
+function THEME:PaintBarFill(bar_info)
   local bar_height = self:get_option('bar_height')
   local bar_x = bar_info.x + 2
   local bar_y = bar_info.y + bar_info.height - (bar_height - 2)
@@ -231,7 +231,7 @@ end
 
 --- Draws the bar's label and, when shown, its hindrance text at the right end.
 -- @param bar_info [Table bar position, size and values]
-function THEME:DrawBarTexts(bar_info)
+function THEME:PaintBarTexts(bar_info)
   local font = get_font(bar_info.font)
   local accent_color = self:get_color('accent')
 
