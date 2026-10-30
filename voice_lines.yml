@@ -24,6 +24,10 @@
 # one after the other, each once the sound of the one before it has ended. A comma after a
 # command adds a pause of one second before the next line, a period two seconds:
 #   figures dwell, later. same
+# A chain says at most as many lines as the voice_lines_max_chain config allows (6 by
+# default), and every word of it has to belong to a command or an alias of a line the
+# character may use: a message that is longer, or that holds anything else, is ordinary
+# speech.
 categories:
   citizens:
     name: ui.voice_lines.category.citizens
