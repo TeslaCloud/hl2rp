@@ -1,2 +1,6 @@
 db/
 db/schema.lua
+/packages/*
+*.local.yml
+*.local.lua
+/content/resource/fonts/fa-*.ttf
