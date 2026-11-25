@@ -33,57 +33,75 @@ end
 
 local light_mat = Material('effects/flashlight001')
 
---- Handles scanner controls: mouse 1 takes a photo, F toggles the spotlight and E exits the scanner.
--- @param actor [Player player that pressed the button]
--- @param button [Number BUTTON_CODE of the pressed button]
-function Scanner:PlayerButtonDown(actor, button)
-  if actor:controls_scanner() then
-    local cur_time = CurTime()
-    local scanner = actor:get_scanner()
+--- Takes a photo with the scanner, at most once a second: the shutter sound, and the flash for
+-- everyone.
+-- @param scanner [NPC]
+local function take_photo(scanner)
+  local cur_time = CurTime()
 
-    if button == MOUSE_FIRST and (!scanner.next_flash or scanner.next_flash < cur_time) then
-      scanner:EmitSound('npc/scanner/scanner_photo1.wav')
-      Cable.send(nil, 'fl_scanner_flash', scanner)
-      scanner.next_flash = cur_time + 1
-    end
+  if (scanner.next_flash or 0) >= cur_time then return end
 
-    if button == KEY_F and (!scanner.next_switch or scanner.next_switch < cur_time) then
-      if scanner.flashlight then
-        scanner.flashlight:Remove()
-        scanner.flashlight = nil
+  scanner:EmitSound('npc/scanner/scanner_photo1.wav')
+  Cable.send(nil, 'fl_scanner_flash', scanner)
+  scanner.next_flash = cur_time + 1
+end
 
-        scanner:EmitSound('buttons/combine_button2.wav')
+--- Turns the spotlight of the scanner on or off, at most once a second.
+-- @param scanner [NPC]
+local function toggle_spotlight(scanner)
+  local cur_time = CurTime()
 
-        scanner.next_switch = cur_time + 1
-      else
-        local att = scanner:GetAttachment(1)
+  if (scanner.next_switch or 0) >= cur_time then return end
 
-        if !att then return end
+  if scanner.flashlight then
+    scanner.flashlight:Remove()
+    scanner.flashlight = nil
 
-        local pos, ang = WorldToLocal(att.Pos, att.Ang, scanner:GetPos(), scanner:GetAngles())
+    scanner:EmitSound('buttons/combine_button2.wav')
 
-        scanner.flashlight = ents.Create('env_projectedtexture')
-        scanner.flashlight:SetParent(scanner)
-        scanner.flashlight:SetLocalPos(pos)
-        scanner.flashlight:SetLocalAngles(ang)
-        scanner.flashlight:SetKeyValue('enableshadows', 1)
-        scanner.flashlight:SetKeyValue('nearz', 1)
-        scanner.flashlight:SetKeyValue('lightfov', 75)
-        scanner.flashlight:SetKeyValue('farz', 512)
-        scanner.flashlight:SetKeyValue('lightcolor', '255 240 210 255')
-        scanner.flashlight:Spawn()
-        scanner.flashlight:Input('SpotlightTexture', NULL, NULL, light_mat:GetString('$basetexture'))
+    scanner.next_switch = cur_time + 1
 
-        scanner:EmitSound('buttons/button1.wav')
-
-        scanner.next_switch = cur_time + 1
-      end
-    end
-
-    if button == KEY_E then
-      actor:exit_scanner()
-    end
+    return
   end
+
+  local att = scanner:GetAttachment(1)
+
+  if !att then return end
+
+  local pos, ang = WorldToLocal(att.Pos, att.Ang, scanner:GetPos(), scanner:GetAngles())
+
+  scanner.flashlight = ents.Create('env_projectedtexture')
+  scanner.flashlight:SetParent(scanner)
+  scanner.flashlight:SetLocalPos(pos)
+  scanner.flashlight:SetLocalAngles(ang)
+  scanner.flashlight:SetKeyValue('enableshadows', 1)
+  scanner.flashlight:SetKeyValue('nearz', 1)
+  scanner.flashlight:SetKeyValue('lightfov', 75)
+  scanner.flashlight:SetKeyValue('farz', 512)
+  scanner.flashlight:SetKeyValue('lightcolor', '255 240 210 255')
+  scanner.flashlight:Spawn()
+  scanner.flashlight:Input('SpotlightTexture', NULL, NULL, light_mat:GetString('$basetexture'))
+
+  scanner:EmitSound('buttons/button1.wav')
+
+  scanner.next_switch = cur_time + 1
+end
+
+--- Makes the flashlight key toggle the spotlight of the scanner a player controls, in place of
+-- their own flashlight.
+-- @param actor [Player]
+-- @param _on [Boolean whether the flashlight is being turned on]
+-- @return [Boolean false while the player controls a scanner, nil otherwise]
+function Scanner:PlayerSwitchFlashlight(actor, _on)
+  if !actor:controls_scanner() then return end
+
+  local scanner = actor:get_scanner()
+
+  if IsValid(scanner) then
+    toggle_spotlight(scanner)
+  end
+
+  return false
 end
 
 --- Keeps a controlled scanner following its marker.
@@ -99,9 +117,10 @@ end
 const mouse_sensitivity = 0.022
 
 --- Moves the scanner's marker according to the player's movement and mouse input and blocks
--- their own movement. The mouse deltas of every command turn the aim angle kept on the
--- scanner, by 0.022 degrees per unit as the view of a player turns, and the marker is placed
--- ahead of the scanner in the direction of that angle.
+-- their own movement and buttons. The mouse deltas of every command turn the aim angle kept
+-- on the scanner, by 0.022 degrees per unit as the view of a player turns, and the marker is
+-- placed ahead of the scanner in the direction of that angle. Pressing the attack key takes a
+-- photo, the use key leaves the scanner.
 -- @param actor [Player player controlling the scanner]
 -- @param cmd [CUserCmd command being processed]
 function Scanner:StartCommand(actor, cmd)
@@ -111,6 +130,14 @@ function Scanner:StartCommand(actor, cmd)
     local aim_angle = scanner.aim_angle
 
     if IsValid(scanner) and IsValid(marker) and aim_angle then
+      local attack_down = cmd:KeyDown(IN_ATTACK)
+
+      if attack_down and !scanner.attack_down then
+        take_photo(scanner)
+      end
+
+      scanner.attack_down = attack_down
+
       if cmd:KeyDown(IN_JUMP) then
         cmd:SetUpMove(10_000)
       elseif cmd:KeyDown(IN_DUCK) then
@@ -134,7 +161,13 @@ function Scanner:StartCommand(actor, cmd)
       marker:SetPos(pos + aim)
     end
 
+    local should_exit = cmd:KeyDown(IN_USE)
+
     cmd:ClearMovement()
     cmd:ClearButtons()
+
+    if should_exit then
+      actor:exit_scanner()
+    end
   end
 end

@@ -1,3 +1,5 @@
+--- Server side of the scanner control panel: its model and physics.
+
 include('shared.lua')
 
 AddCSLuaFile('shared.lua')

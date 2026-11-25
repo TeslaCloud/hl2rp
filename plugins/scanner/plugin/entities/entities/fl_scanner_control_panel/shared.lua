@@ -1,3 +1,5 @@
+--- The scanner control panel: a Combine monitor that staff can place and make static.
+
 ENT.Type            = 'anim'
 ENT.Base            = 'base_anim'
 ENT.PrintName       = 'Scanners Control Panel'

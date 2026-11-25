@@ -1,6 +1,6 @@
 --- Scanner lets players fly the city scanners of Half-Life 2 that they spawn, seeing through
--- them and steering them with the movement keys and the mouse; mouse 1 takes a photo, F
--- toggles the spotlight and E leaves the scanner. The control panel entity can be made
+-- them and steering them with the movement keys and the mouse; the attack key takes a photo,
+-- the flashlight key toggles the spotlight and the use key leaves the scanner. The control panel entity can be made
 -- static when the Static Entities plugin is loaded.
 
 PLUGIN:set_global('Scanner')

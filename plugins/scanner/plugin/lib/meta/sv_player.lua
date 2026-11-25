@@ -48,14 +48,20 @@ function player_meta:control_scanner(entity)
   end)
 end
 
---- Releases the player's scanner and restores their view and the weapons that were stored
--- when they took control, if any are still stored.
+--- Releases the player's scanner, turns its spotlight off and restores the player's view and
+-- the weapons that were stored when they took control, if any are still stored.
 function player_meta:exit_scanner()
   local scanner = self.scanner
 
   if IsValid(scanner) then
     scanner.pilot = nil
     scanner:Fire('SetFollowTarget', scanner.target_name)
+
+    if IsValid(scanner.flashlight) then
+      scanner.flashlight:Remove()
+    end
+
+    scanner.flashlight = false
   end
 
   if self.weapons then
@@ -65,7 +71,6 @@ function player_meta:exit_scanner()
   self.weapons = nil
   self.scanner = nil
   self:SetViewEntity(self)
-  self:Freeze(false)
 
   Cable.send(self, 'fl_scanner_update', nil)
 end
