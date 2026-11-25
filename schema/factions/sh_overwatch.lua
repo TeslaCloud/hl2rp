@@ -1,3 +1,6 @@
+--- The Combine Overwatch, the soldiers of the Combine: a whitelisted faction named by squad,
+-- rank and unit ID, with the OWS, GUARD and EOW ranks.
+
 FACTION.name = 'faction.combine.overwatch.title'
 FACTION.description = 'faction.combine.overwatch.desc'
 FACTION.phys_desc = 'faction.combine.overwatch.phys_desc'
@@ -39,9 +42,4 @@ function FACTION:generate_id()
   return math.random(100, 999)
 end
 
---- Returns the unit ID at the end of the player's current name, or a new random one.
--- @param target [Player player to get the unit ID of]
--- @return [String or Number unit ID]
-function FACTION:get_unit_id(target)
-  return target:name():match('%d+$') or self:generate_id()
-end
+FACTION.get_unit_id = SCHEMA.get_unit_id

@@ -1,3 +1,7 @@
+--- The Combine Civil Authority, the Civil Protection units: a whitelisted faction named by
+-- unit, from the city, the index, the rank, the tagline and a unit ID, with a regular and a
+-- rank leader rank.
+
 FACTION.name = 'faction.combine.cca.title'
 FACTION.description = 'faction.combine.cca.desc'
 FACTION.phys_desc = 'faction.combine.cca.phys_desc'
@@ -55,15 +59,10 @@ FACTION.models = {
 FACTION:add_rank ''
 FACTION:add_rank '.RL'
 
---- Generates a random unit ID from 1 to 9.
+--- Generates a random unit ID from 1000 to 9999.
 -- @return [Number unit ID]
 function FACTION:generate_id()
-  return math.random(1, 9)
+  return math.random(1000, 9999)
 end
 
---- Returns the unit ID at the end of the player's current name, or a new random one.
--- @param target [Player player to get the unit ID of]
--- @return [String or Number unit ID]
-function FACTION:get_unit_id(target)
-  return target:name():match('%d+$') or self:generate_id()
-end
+FACTION.get_unit_id = SCHEMA.get_unit_id

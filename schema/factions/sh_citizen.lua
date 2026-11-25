@@ -1,3 +1,6 @@
+--- Citizens: the default faction, the people who live in the city under the Combine, with
+-- random human names and the CWU rank of the Civil Workers' Union.
+
 FACTION.name = 'faction.citizen.title'
 FACTION.description = 'faction.citizen.desc'
 FACTION.phys_desc = 'faction.citizen.phys_desc'

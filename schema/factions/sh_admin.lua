@@ -1,3 +1,5 @@
+--- The City Administrator: a whitelisted human faction that runs the city for the Combine.
+
 FACTION.name = 'faction.admin.title'
 FACTION.description = 'faction.admin.desc'
 FACTION.phys_desc = 'faction.admin.phys_desc'

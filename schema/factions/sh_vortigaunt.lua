@@ -1,3 +1,6 @@
+--- Vortigaunts: a whitelisted faction of the aliens from Xen, whose random names come from the
+-- vortigaunt name lists.
+
 FACTION.name = 'faction.vortigaunt.title'
 FACTION.description = 'faction.vortigaunt.description'
 FACTION.phys_desc = 'faction.vortigaunt.phys_desc'

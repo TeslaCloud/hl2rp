@@ -1,7 +1,8 @@
 --- Main file of the Half-Life 2 roleplay schema, run on both realms. Includes the root files of
--- the schema, sets the default theme, the human and combine faction groups and the tokens
--- currency, and adds the combine and human checks to `SCHEMA`; those of `Player` and `Entity`
--- are in `lib/meta`.
+-- the schema, sets the default theme and the human and combine faction groups, registers the
+-- tokens currency, which hl2rp.yml makes the default one, and adds the combine and human
+-- checks and the unit IDs of the combine factions to `SCHEMA`; the checks of `Player` and
+-- `Entity` are in `lib/meta`.
 
 require_relative 'cl_schema'
 require_relative 'sv_schema'
@@ -35,7 +36,16 @@ Currencies:register_currency('tokens', {
   }
 })
 
-Config.set('currencies_default', 'tokens')
+--- Returns the unit ID of a combine character: the number at the end of the player's current
+-- name, which keeps the unit ID when the name is generated again, or else one that the
+-- generate_id method of the faction picks. The combine factions use it as their get_unit_id
+-- method, for the {callback:get_unit_id} placeholder of their name templates.
+-- @param faction [Faction]
+-- @param target [Player]
+-- @return [String/Number unit ID]
+function SCHEMA.get_unit_id(faction, target)
+  return target:name():match('%d+$') or faction:generate_id()
+end
 
 --- Checks whether a faction belongs to the combine.
 -- @param faction [String faction ID]
