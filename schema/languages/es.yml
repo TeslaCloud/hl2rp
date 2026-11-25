@@ -20,9 +20,6 @@ es:
       desc: Un headcrab o el cuerpo del que se ha apoderado.
   currency:
     tokens: Fichas
-  error:
-    punch:
-      wrong_faction: No tienes permitido dar puñetazos.
   faction:
     admin:
       title: Administrador de la Ciudad

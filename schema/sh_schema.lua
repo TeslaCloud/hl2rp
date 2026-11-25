@@ -4,8 +4,6 @@
 -- checks and the unit IDs of the combine factions to `SCHEMA`; the checks of `Player` and
 -- `Entity` are in `lib/meta`.
 
-require_relative 'cl_schema'
-require_relative 'sv_schema'
 require_relative 'cl_hooks'
 require_relative 'sh_hooks'
 require_relative 'sv_hooks'
