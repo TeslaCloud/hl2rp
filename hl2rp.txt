@@ -1,9 +1,9 @@
 "hl2rp"
 {
-  "base"          "sandbox"
   "title"         "HL2 RP"
+  "base"          "sandbox"
   "author"        "TeslaCloud Studios"
   "description"   "A roleplay gamemode based on Half-Life 2."
-  "version"       "1.0"
+  "version"       "1.0.0"
   "menusystem"    "1"
 }
