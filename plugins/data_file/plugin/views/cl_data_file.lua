@@ -1,3 +1,5 @@
+--- The Datafile window of the tab menu, `fl_data_file_panel`: a centered frame with a sidebar.
+
 local PANEL = {}
 
 --- Sets up the centered Datafile window and its sidebar.

@@ -1,3 +1,6 @@
+--- Shared hooks of the schema: the weapon selection, the voice lines and the names of the
+-- Half-Life 2 NPCs.
+
 --- Only opens the weapon selection with the slot keys while the walk key is held.
 -- @param client [Player local player]
 -- @param bind [String bind that was pressed]

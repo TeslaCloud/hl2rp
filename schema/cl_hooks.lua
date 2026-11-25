@@ -1,3 +1,6 @@
+--- Client hooks of the schema: the color grading, the vignette and the alpha notice of the
+-- HUD, and the train horn for a player's first character.
+
 local alpha_text_color = Color(255, 0, 0, 75)
 local vignette_material = util.get_material('materials/flux/hl2rp/vignette.png')
 
