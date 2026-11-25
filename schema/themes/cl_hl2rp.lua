@@ -1,7 +1,12 @@
+--- The theme of the schema: the factory theme of Flux with blue accents, the main menu with a
+-- bottom centered sidebar, the schema logo banner and the menu music, the translucent chatbox,
+-- the character menus and thin bars.
+
 local math_scale = math.scale
 local text_size = util.text_size
 local get_font = Theme.get_font
 local logo_color = Color(255, 255, 255)
+local menu_texts = {}
 
 THEME.author = 'TeslaCloud Studios'
 THEME.id = 'hl2rp'
@@ -16,6 +21,7 @@ function THEME:on_loaded()
   self:set_color('accent_dark', accent_color:darken(20))
   self:set_color('accent_light', accent_color:lighten(20))
   self:set_color('menu_background', Color(0, 0, 0, 100))
+  self:set_color('menu_banner', self:get_color('menu_background'):lighten(40))
 
   self:set_option('menu_sidebar_width', scrw * 0.25)
   self:set_option('menu_sidebar_x', scrw * 0.5)
@@ -45,16 +51,21 @@ function THEME:PaintChatboxBackground(panel, width, height)
   DisableClipping(false)
 end
 
---- Draws the blurred main menu with the schema logo banner, description, author, schema title and Flux version.
+--- Draws the blurred main menu with the schema logo banner, description, author, schema title
+-- and Flux version. The texts are built again only when the language changes.
 -- @param panel [Panel main menu panel]
 -- @param width [Number width of the panel]
 -- @param height [Number height of the panel]
 function THEME:PaintMainMenu(panel, width, height)
-  local title, desc, author = SCHEMA:get_name()..' '..(SCHEMA.version or 'UNKNOWN'), SCHEMA:get_description(), t(
-    'ui.main_menu.developed_by',
-    { author = SCHEMA:get_author() }
-  )
-  local version = 'Flux '..(GAMEMODE.version or 'UNKNOWN')
+  if !menu_texts.title or menu_texts.lang != Flux.Lang.current then
+    menu_texts.lang = Flux.Lang.current
+    menu_texts.title = SCHEMA:get_name()..' '..(SCHEMA.version or 'UNKNOWN')
+    menu_texts.desc = SCHEMA:get_description()
+    menu_texts.author = t('ui.main_menu.developed_by', { author = SCHEMA:get_author() })
+    menu_texts.version = 'Flux '..(GAMEMODE.version or 'UNKNOWN')
+  end
+
+  local title, desc, author, version = menu_texts.title, menu_texts.desc, menu_texts.author, menu_texts.version
   local logo = self:get_material('schema_logo')
   local font = self:get_font('main_menu_titles')
   local text_color = self:get_color('schema_text')
@@ -69,7 +80,7 @@ function THEME:PaintMainMenu(panel, width, height)
 
   draw.blur_box(0, 0, width, height)
 
-  surface.SetDrawColor(self:get_color('menu_background'):lighten(40))
+  surface.SetDrawColor(self:get_color('menu_banner'))
   surface.DrawRect(0, logo_offset, width, bar_height)
 
   if logo then
