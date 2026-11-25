@@ -1,3 +1,6 @@
+--- Server side of the force field: spawning it with its post, the shield hum and touch
+-- sounds, cycling its mode with the use key, and restoring the mode it was saved in.
+
 include('shared.lua')
 
 AddCSLuaFile('cl_init.lua')
@@ -20,26 +23,14 @@ function ENT:SpawnFunction(owner, trace)
   return entity
 end
 
---- Sets up the networked mode and post entity variables.
-function ENT:SetupDataTables()
-  self:DTVar('Int', 0, 'Mode')
-  self:DTVar('Entity', 0, 'Dummy')
-end
-
---- Snaps the forcefield to the floor, spawns its post at the wall to the right and builds the collision mesh.
+--- Snaps the forcefield to the floor, spawns its post at the wall to the right, builds the
+-- collision mesh and puts the forcefield into its first mode.
 function ENT:Initialize()
   self:SetModel('models/props_combine/combine_fence01b.mdl')
   self:SetSolid(SOLID_VPHYSICS)
   self:SetUseType(SIMPLE_USE)
   self:PhysicsInit(SOLID_VPHYSICS)
   self:DrawShadow(false)
-
-  if !isbool(self.on) then
-    self.on = true
-  end
-
-  self.mode = self.mode or 1
-  self:SetDTInt(0, self.mode)
 
   local data
 
@@ -74,29 +65,19 @@ function ENT:Initialize()
     data.filter = self
   local trace = util.TraceLine(data)
 
-  self.post = ents.Create('prop_physics')
-  self.post:SetModel('models/props_combine/combine_fence01a.mdl')
-  self.post:SetPos(self.force_pos or trace.HitPos - Vector(0, 0, 50))
-  self.post:SetAngles(Angle(0, self:GetAngles().y, 0))
-  self.post:Spawn()
-  self.post.PhysgunDisabled = true
-  self.post:SetCollisionGroup(COLLISION_GROUP_WORLD)
-  self.post:DrawShadow(false)
-  self.post:DeleteOnRemove(self)
-  self.post:MakePhysicsObjectAShadow(false, false)
-  self:DeleteOnRemove(self.post)
+  local post = ents.Create('prop_physics')
+  post:SetModel('models/props_combine/combine_fence01a.mdl')
+  post:SetPos(self.force_pos or trace.HitPos - Vector(0, 0, 50))
+  post:SetAngles(Angle(0, self:GetAngles().y, 0))
+  post:Spawn()
+  post.PhysgunDisabled = true
+  post:SetCollisionGroup(COLLISION_GROUP_WORLD)
+  post:DrawShadow(false)
+  post:DeleteOnRemove(self)
+  post:MakePhysicsObjectAShadow(false, false)
+  self:DeleteOnRemove(post)
 
-  local post_pos = self:WorldToLocal(self.post:GetPos())
-  local verts = {
-    { pos = Vector(0, 0, -35) },
-    { pos = Vector(0, 0, 150) },
-    { pos = post_pos + Vector(0, 0, 150) },
-    { pos = post_pos + Vector(0, 0, 150) },
-    { pos = post_pos - Vector(0, 0, 35) },
-    { pos = Vector(0, 0, -35) }
-  }
-
-  self:PhysicsFromMesh(verts)
+  self:build_mesh(post)
 
   local phys_obj = self:GetPhysicsObject()
 
@@ -106,26 +87,18 @@ function ENT:Initialize()
   end
 
   self:SetCustomCollisionCheck(true)
-  self:EnableCustomCollisions(true)
 
-  phys_obj = self.post:GetPhysicsObject()
+  phys_obj = post:GetPhysicsObject()
 
   if IsValid(phys_obj) then
     phys_obj:EnableMotion(false)
   end
 
-  self:SetDTEntity(0, self.post)
+  self:SetPost(post)
 
   self.shield_loop = CreateSound(self, 'ambient/machines/combine_shield_loop3.wav')
 
-  if self.mode == 6 then
-    self.on = false
-    self:SetSkin(1)
-    self.post:SetSkin(1)
-    self:EmitSound('shield/deactivate.wav')
-    self:SetCollisionGroup(COLLISION_GROUP_WORLD)
-  end
-
+  self:apply_mode(self.mode or 1)
   self:SetPersistent(true)
 end
 
@@ -198,6 +171,27 @@ function ENT:RestoreMode(mode, is_on)
   self.mode = mode
 end
 
+--- Puts the forcefield into a mode and networks it. The last mode turns the shield off: no
+-- hum, the off skin on both posts and no collisions; every other mode turns it on.
+-- @param mode [Number index into ForceFields.modes]
+function ENT:apply_mode(mode)
+  local is_on = !self:is_off_mode(mode)
+  local skin = is_on ? 0 : 1
+  local post = self:GetPost()
+
+  self.mode = mode
+  self.on = is_on
+  self:SetMode(mode)
+  self:SetSkin(skin)
+
+  if IsValid(post) then
+    post:SetSkin(skin)
+  end
+
+  self:SetCollisionGroup(is_on ? COLLISION_GROUP_NONE : COLLISION_GROUP_WORLD)
+  self:CollisionRulesChanged()
+end
+
 --- Cycles a combine player through the forcefield modes, turning the shield off in the 'Off' mode.
 -- @param act [Player player using the forcefield]
 -- @param _call [Entity caller of the use]
@@ -214,31 +208,32 @@ function ENT:Use(act, _call, _type, _val)
     return
   end
 
-  self.mode = (self.mode or 1) + 1
+  local mode = self:GetMode() + 1
 
-  if self.mode > #ForceFields.modes then
-    self.mode = 1
+  if mode > #ForceFields.modes then
+    mode = 1
   end
 
-  self:SetDTInt(0, self.mode)
+  self:apply_mode(mode)
+  self:EmitSound(self.on ? 'shield/activate.wav' : 'shield/deactivate.wav')
+  self:EmitSound('buttons/combine_button5.wav', 140, 100 + (mode - 1) * 15)
+  act:notify('notification.forcefield.mode_changed', { mode = ForceFields.modes[mode] })
+end
 
-  if self.mode == 6 then
-    self.on = false
-    self:SetSkin(1)
-    self.post:SetSkin(1)
-    self:EmitSound('shield/deactivate.wav')
-    self:SetCollisionGroup(COLLISION_GROUP_WORLD)
-  else
-    self.on = true
-    self:SetSkin(0)
-    self.post:SetSkin(0)
-    self:EmitSound('shield/activate.wav')
-    self:SetCollisionGroup(COLLISION_GROUP_NONE)
-  end
+--- Puts a forcefield that the duplicator has restored, such as a static one at map load, back
+-- into the mode it was saved in. It has spawned in the first mode before the saved fields
+-- were merged into it.
+-- @param data [Map saved copy of the forcefield]
+function ENT:OnDuplicated(data)
+  self:apply_mode(data.mode or 1)
+end
 
-  self:CollisionRulesChanged()
-  self:EmitSound('buttons/combine_button5.wav', 140, 100 + (self.mode - 1) * 15)
-  act:notify('notification.forcefield.mode_changed', { mode = ForceFields.modes[self.mode] })
+--- Leaves the hum and the use cooldown out of the saved copy of the forcefield; the hum is
+-- created again when it spawns.
+-- @param data [Map saved copy of the forcefield]
+function ENT:OnEntityCopyTableFinish(data)
+  data.shield_loop = nil
+  data.next_use = nil
 end
 
 --- Stops the shield hum when the forcefield is removed.

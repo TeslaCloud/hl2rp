@@ -1,3 +1,6 @@
+--- Client side library of the Force Fields plugin: rebuilding the collision meshes of the force
+-- fields from their posts.
+
 if !ForceFields then
   PLUGIN:set_global('ForceFields')
 end
@@ -8,27 +11,10 @@ function ForceFields:update_force_fields()
 
   for i = 1, #force_fields do
     local forcefield = force_fields[i]
-    local post = forcefield:GetDTEntity(0)
+    local post = forcefield:GetPost()
 
     if IsValid(post) then
-      local post_pos = forcefield:WorldToLocal(post:GetPos() - Vector(0, 0, 50))
-      local verts = {
-        { pos = Vector(0, 0, -35) },
-        { pos = Vector(0, 0, 150) },
-        { pos = post_pos + Vector(0, 0, 150) },
-        { pos = post_pos + Vector(0, 0, 150) },
-        { pos = post_pos - Vector(0, 0, 35) },
-        { pos = Vector(0, 0, -35) }
-      }
-
-      forcefield:PhysicsFromMesh(verts)
-      forcefield:EnableCustomCollisions(true)
-
-      local phys_obj = forcefield:GetPhysicsObject()
-
-      if IsValid(phys_obj) then
-        phys_obj:EnableCollisions(false)
-      end
+      forcefield:update_mesh(post)
     end
   end
 end

@@ -1,5 +1,5 @@
---- Player extensions of the schema: whether a player is combine or human, and the type of the
--- weapon they hold.
+--- Player extensions of the schema: whether a player is combine or human, whether they carry a
+-- CP card, and the type of the weapon they hold.
 
 local IsValid = IsValid
 local player_meta = FindMetaTable('Player')
@@ -14,6 +14,12 @@ end
 -- @return [Boolean whether the player is human]
 function player_meta:is_human()
   return SCHEMA:is_human(self)
+end
+
+--- Checks whether the player carries a CP card or a CP officer card. Needs the Items plugin.
+-- @return [Boolean]
+function player_meta:has_cp_card()
+  return self:has_item('card_cp') or self:has_item('card_cp_officer')
 end
 
 --- Returns the type of the weapon the player is holding.

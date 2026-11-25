@@ -1,3 +1,10 @@
+--- Force Fields adds the Combine force field, which combine players cycle through the modes of
+-- `ForceFields.modes` with the use key. The mode decides who passes: CWU members in modes 2
+-- to 4, and in mode 3 holders of a CP card too, everyone in the last two. Combine players
+-- always pass, a player who holds the use key collides with it to use it, and the
+-- `ShouldForcefieldCollide` hook decides for everyone else. Force fields are saved with the
+-- map when the Static Entities plugin is loaded.
+
 PLUGIN:set_global('ForceFields')
 
 ForceFields.modes = {
@@ -36,26 +43,31 @@ local allowed_ents = {
   npc_tripmine        = true
 }
 
-const CurTime = CurTime
-
-const card_check_interval = 1
-
---- Checks whether a player carries a CP card or a CP officer card. The answer is looked up in
--- the inventory at most once a second per player and kept on the player in between, since
--- force fields ask for it on every collision check. Always false without the Items plugin.
+--- Checks whether a player carries a CP card or a CP officer card, as
+-- `ForceFields:update_collision_state` has last found. Always false without the Items plugin.
 -- @param activator [Player]
 -- @return [Boolean]
 function ForceFields:carries_cp_card(activator)
-  if !Inventories then return false end
+  return activator.forcefield_has_card == true
+end
 
-  local cur_time = CurTime()
+--- Looks again at what force fields decide by for a player: whether they are combine, a CWU
+-- citizen or carry a CP card (see `Player:has_cp_card`). Force fields read the answers kept
+-- on the player on every collision check. The physics engine keeps the result of a check for
+-- a pair of entities, so it is told whenever one of the answers changes.
+-- @param target [Player]
+function ForceFields:update_collision_state(target)
+  local is_combine = target:is_combine()
+  local is_cwu = target:get_faction_id() == 'citizen' and target:is_rank('cwu')
+  local has_card = Inventories != nil and target:has_cp_card()
 
-  if (activator.forcefield_card_check_at or 0) <= cur_time then
-    activator.forcefield_card_check_at = cur_time + card_check_interval
-    activator.forcefield_has_card = activator:has_item('card_cp') or activator:has_item('card_cp_officer')
-  end
+  if is_combine == target.forcefield_is_combine and is_cwu == target.forcefield_is_cwu
+  and has_card == target.forcefield_has_card then return end
 
-  return activator.forcefield_has_card
+  target.forcefield_is_combine = is_combine
+  target.forcefield_is_cwu = is_cwu
+  target.forcefield_has_card = has_card
+  target:CollisionRulesChanged()
 end
 
 --- Lets whitelisted projectiles and NPCs pass through force fields and asks ShouldForcefieldCollide for players.
@@ -89,11 +101,20 @@ function ForceFields:ShouldCollide(a, b)
     if IsValid(activator) then
       if activator:KeyDown(IN_USE) then return true end
 
-      if activator:is_combine() or activator:get_nv('forcefield_collide') == false then
+      if activator.forcefield_is_combine or activator:get_nv('forcefield_collide') == false then
         return false
       end
 
-      return Plugin.call('ShouldForcefieldCollide', activator, entity, entity:GetDTInt(0) or 1)
+      --- Decides whether a player who is not combine collides with a forcefield, on both
+      -- realms, on every collision check between the two. The answer has to stay the same
+      -- for the pair until `Entity:CollisionRulesChanged` is called on one of them. The
+      -- plugin's own handler goes by the mode of the forcefield.
+      -- @param activator [Player The player touching the forcefield]
+      -- @param field [Entity The forcefield]
+      -- @param mode [Number The mode of the forcefield, an index into ForceFields.modes]
+      -- @return [Boolean Return false to let the player through, true to block them; nil
+      --   leaves it to the other ShouldCollide handlers, and the two collide by default]
+      return Plugin.call('ShouldForcefieldCollide', activator, entity, entity:GetMode())
     else
       return true
     end
@@ -109,7 +130,7 @@ end
 -- @return [Boolean false to let the player through, true to block them, nil to use the default]
 function ForceFields:ShouldForcefieldCollide(activator, _field, mode)
   if mode >= 2 and mode <= 4 and IsValid(activator) then
-    if activator:get_faction_id() == 'citizen' and activator:is_rank('cwu') then
+    if activator.forcefield_is_cwu then
       return false
     end
 
@@ -125,8 +146,10 @@ function ForceFields:ShouldForcefieldCollide(activator, _field, mode)
   end
 end
 
-if SERVER then
+if SERVER and StaticEnts then
   StaticEnts:whitelist_ent 'fl_forcefield'
 end
 
 require_relative 'cl_hooks'
+require_relative 'sh_hooks'
+require_relative 'sv_hooks'
