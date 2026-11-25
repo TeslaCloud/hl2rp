@@ -5,3 +5,4 @@
 *.local.yml
 *.local.lua
 /content/resource/fonts/fa-*.ttf
+/.fpkg/garrysmod/
