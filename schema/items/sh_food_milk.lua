@@ -1,3 +1,5 @@
+--- A bottle of milk that players drink.
+
 ITEM:base_off 'consumable'
 ITEM.name = 'item.food_milk.print_name'
 ITEM.print_name = 'item.food_milk.print_name'

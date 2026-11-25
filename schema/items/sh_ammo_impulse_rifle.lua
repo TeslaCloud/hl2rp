@@ -1,4 +1,7 @@
-ITEM:base_off 'ItemAmmo'
+--- Pulse rifle energy: an ammunition cartridge that gives 20 rounds of pulse rifle ammo, stacking
+-- up to four.
+
+ITEM:base_off 'ammo'
 ITEM.name = 'item.ar2.ammo.print_name'
 ITEM.print_name = 'item.ar2.ammo.print_name'
 ITEM.description = 'item.ar2.ammo.description'

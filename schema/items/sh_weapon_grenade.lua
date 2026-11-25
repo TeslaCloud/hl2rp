@@ -1,9 +1,12 @@
+--- The grenade: a throwable weapon item that gives one grenade when equipped and is used up once
+-- it is thrown.
+
 ITEM:base_off 'throwable'
 ITEM.name = 'item.grenade.print_name'
 ITEM.print_name = 'item.grenade.print_name'
 ITEM.description = 'item.grenade.description'
 ITEM.weight = 0.5
-ITEM.equip_slot = 'weapon_frag'
+ITEM.equip_slot = 'weapon.category.throwable'
 ITEM.model = 'models/items/grenadeammo.mdl'
 ITEM.weapon_type = WEAPON_THROWABLE
 ITEM.effective_distance = 0

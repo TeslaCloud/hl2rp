@@ -1,3 +1,6 @@
+--- The .357 Magnum revolver: a secondary ranged weapon item that gives the weapon_357 weapon when
+-- equipped.
+
 ITEM:base_off 'weapon'
 ITEM.name = 'item.revolver.print_name'
 ITEM.print_name = 'item.revolver.print_name'

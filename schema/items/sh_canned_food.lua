@@ -1,3 +1,5 @@
+--- Combine branded canned food that players eat, stacking up to eight.
+
 ITEM:base_off 'consumable'
 ITEM.name = 'item.canned_food.print_name'
 ITEM.print_name = 'item.canned_food.print_name'

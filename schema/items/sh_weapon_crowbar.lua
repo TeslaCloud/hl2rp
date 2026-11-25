@@ -1,3 +1,5 @@
+--- The crowbar: a melee weapon item that gives the weapon_crowbar weapon when equipped.
+
 ITEM:base_off 'weapon'
 ITEM.name = 'item.crowbar.print_name'
 ITEM.print_name = 'item.crowbar.print_name'

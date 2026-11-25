@@ -1,3 +1,5 @@
+--- The RPG: a heavy ranged weapon item that gives the weapon_rpg weapon when equipped.
+
 ITEM:base_off 'weapon'
 ITEM.name = 'item.rpg.print_name'
 ITEM.print_name = 'item.rpg.print_name'

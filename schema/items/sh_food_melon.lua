@@ -1,3 +1,5 @@
+--- A melon that players eat.
+
 ITEM:base_off 'consumable'
 ITEM.name = 'item.food_melon.print_name'
 ITEM.print_name = 'item.food_melon.print_name'

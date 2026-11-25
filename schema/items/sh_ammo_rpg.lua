@@ -1,4 +1,6 @@
-ITEM:base_off 'ItemAmmo'
+--- The RPG missile: ammunition that gives one missile for the rocket launcher.
+
+ITEM:base_off 'ammo'
 ITEM.name = 'item.rpg.ammo.print_name'
 ITEM.print_name = 'item.rpg.ammo.print_name'
 ITEM.description = 'item.rpg.ammo.description'

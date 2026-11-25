@@ -1,3 +1,6 @@
+--- The 9mm pistol: a secondary ranged weapon item that gives the weapon_pistol weapon when
+-- equipped.
+
 ITEM:base_off 'weapon'
 ITEM.name = 'item.pistol.print_name'
 ITEM.print_name = 'item.pistol.print_name'

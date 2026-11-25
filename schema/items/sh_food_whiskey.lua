@@ -1,3 +1,5 @@
+--- A bottle of whiskey that players drink, stacking up to two.
+
 ITEM:base_off 'consumable'
 ITEM.name = 'item.food_whiskey.print_name'
 ITEM.print_name = 'item.food_whiskey.print_name'

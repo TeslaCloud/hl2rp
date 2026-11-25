@@ -1,4 +1,6 @@
-ITEM:base_off 'ItemAmmo'
+--- Crossbow bolts: ammunition that gives one crossbow bolt per use, six times.
+
+ITEM:base_off 'ammo'
 ITEM.name = 'item.crossbow.ammo.print_name'
 ITEM.print_name = 'item.crossbow.ammo.print_name'
 ITEM.description = 'item.crossbow.ammo.description'

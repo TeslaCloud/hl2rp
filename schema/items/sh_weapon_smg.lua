@@ -1,3 +1,5 @@
+--- The SMG: a primary ranged weapon item that gives the weapon_smg1 weapon when equipped.
+
 ITEM:base_off 'weapon'
 ITEM.name = 'item.smg.print_name'
 ITEM.print_name = 'item.smg.print_name'

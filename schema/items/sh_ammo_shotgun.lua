@@ -1,4 +1,6 @@
-ITEM:base_off 'ItemAmmo'
+--- 12 gauge shells: a box of ammunition that gives 5 shotgun shells per use, four times.
+
+ITEM:base_off 'ammo'
 ITEM.name = 'item.shotgun.ammo.print_name'
 ITEM.print_name = 'item.shotgun.ammo.print_name'
 ITEM.description = 'item.shotgun.ammo.description'

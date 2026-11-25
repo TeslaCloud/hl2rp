@@ -1,4 +1,6 @@
-ITEM:base_off 'ItemAmmo'
+--- 9mm ammo: a box of ammunition that gives 20 rounds of pistol ammo per use, five times.
+
+ITEM:base_off 'ammo'
 ITEM.name = 'item.pistol.ammo.print_name'
 ITEM.print_name = 'item.pistol.ammo.print_name'
 ITEM.description = 'item.pistol.ammo.description'

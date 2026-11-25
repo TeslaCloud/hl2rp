@@ -1,3 +1,6 @@
+--- The SPAS-12 shotgun: a primary ranged weapon item that gives the weapon_shotgun weapon when
+-- equipped.
+
 ITEM:base_off 'weapon'
 ITEM.name = 'item.shotgun.print_name'
 ITEM.print_name = 'item.shotgun.print_name'

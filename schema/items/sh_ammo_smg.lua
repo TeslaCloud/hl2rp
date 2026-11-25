@@ -1,4 +1,6 @@
-ITEM:base_off 'ItemAmmo'
+--- 4.6x30mm ammo: a box of ammunition that gives 45 rounds of SMG ammo per use, eight times.
+
+ITEM:base_off 'ammo'
 ITEM.name = 'item.smg.ammo.print_name'
 ITEM.print_name = 'item.smg.ammo.print_name'
 ITEM.description = 'item.smg.ammo.description'

@@ -1,3 +1,6 @@
+--- Flavored Breen's Water: a yellow can of the limited-tier flavored water that players drink,
+-- stacking up to eight.
+
 ITEM:base_off 'consumable'
 ITEM.name = 'item.breens_water_limited.print_name'
 ITEM.print_name = 'item.breens_water_limited.print_name'

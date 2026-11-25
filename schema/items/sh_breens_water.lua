@@ -1,3 +1,5 @@
+--- Breen's Water: a can of water that players drink, stacking up to eight.
+
 ITEM:base_off 'consumable'
 ITEM.name = 'item.breens_water.print_name'
 ITEM.print_name = 'item.breens_water.print_name'

@@ -1,3 +1,5 @@
+--- Treated poison headcrab meat that players eat, stacking up to three.
+
 ITEM:base_off 'consumable'
 ITEM.name = 'item.food_pheadcrab.print_name'
 ITEM.print_name = 'item.food_pheadcrab.print_name'

@@ -1,4 +1,7 @@
-ITEM:base_off 'ItemAmmo'
+--- .357 Magnum bullets: a box of ammunition that gives 6 rounds of revolver ammo per use, three
+-- times.
+
+ITEM:base_off 'ammo'
 ITEM.name = 'item.revolver.ammo.print_name'
 ITEM.print_name = 'item.revolver.ammo.print_name'
 ITEM.description = 'item.revolver.ammo.description'

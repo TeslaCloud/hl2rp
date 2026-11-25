@@ -1,3 +1,6 @@
+--- Sparkling Breen's Water: a red can of sparkling water that players drink, stacking up to
+-- eight.
+
 ITEM:base_off 'consumable'
 ITEM.name = 'item.breens_water_gas.print_name'
 ITEM.print_name = 'item.breens_water_gas.print_name'

@@ -1,4 +1,7 @@
-ITEM:base_off 'ItemAmmo'
+--- The pulse rifle energy core: ammunition that gives one energy ball for the secondary fire of
+-- the pulse rifle.
+
+ITEM:base_off 'ammo'
 ITEM.name = 'item.ar2.core.print_name'
 ITEM.print_name = 'item.ar2.core.print_name'
 ITEM.description = 'item.ar2.core.description'

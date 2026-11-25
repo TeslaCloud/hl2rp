@@ -1,4 +1,7 @@
-ITEM:base_off 'ItemAmmo'
+--- The SMG grenade: ammunition that gives one grenade for the secondary fire of the SMG, stacking
+-- up to four.
+
+ITEM:base_off 'ammo'
 ITEM.name = 'item.smg.ammo.grenade.print_name'
 ITEM.print_name = 'item.smg.ammo.grenade.print_name'
 ITEM.description = 'item.smg.ammo.grenade.description'

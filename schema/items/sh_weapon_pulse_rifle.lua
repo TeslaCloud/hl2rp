@@ -1,3 +1,5 @@
+--- The pulse rifle: a primary ranged weapon item that gives the weapon_ar2 weapon when equipped.
+
 ITEM:base_off 'weapon'
 ITEM.name = 'item.ar2.print_name'
 ITEM.print_name = 'item.ar2.print_name'

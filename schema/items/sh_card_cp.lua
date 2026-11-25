@@ -1,3 +1,6 @@
+--- The Civil Protection access card: it opens the combine doors and, in the card mode of a force
+-- field, lets its carrier through.
+
 ITEM.name = 'item.card_cp.print_name'
 ITEM.description = 'item.card_cp.description'
 ITEM.category = 'item.category.cards'

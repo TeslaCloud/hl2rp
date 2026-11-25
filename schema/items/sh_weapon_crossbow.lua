@@ -1,3 +1,5 @@
+--- The crossbow: a heavy ranged weapon item that gives the weapon_crossbow weapon when equipped.
+
 ITEM:base_off 'weapon'
 ITEM.name = 'item.crossbow.print_name'
 ITEM.print_name = 'item.crossbow.print_name'

@@ -1,3 +1,5 @@
+--- The stun baton: a melee weapon item that gives the weapon_stunstick weapon when equipped.
+
 ITEM:base_off 'weapon'
 ITEM.name = 'item.stunstick.print_name'
 ITEM.print_name = 'item.stunstick.print_name'
