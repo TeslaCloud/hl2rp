@@ -45,6 +45,7 @@ en:
         title: Combine Overwatch
         desc: Combine military soldiers.
         phys_desc: Wearing heavy overwatch armor.
+        ooc_name: Overwatch Soldier
       cca:
         title: Combine Civil Authority
         desc: Combine police forces.

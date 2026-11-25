@@ -65,13 +65,14 @@ function SCHEMA:PlayerDeath(victim, _inflictor, _attacker)
   end
 end
 
---- Shows the members of the Overwatch faction as 'Overwatch Soldier' in the local OOC chat,
+--- Shows the members of the Overwatch faction as an Overwatch soldier in the local OOC chat,
 -- so that the line does not give away which soldier wrote it.
 -- @param actor [Player player who writes]
--- @return [String 'Overwatch Soldier' for the Overwatch faction, nil for everyone else]
+-- @return [String the `faction.combine.overwatch.ooc_name` phrase for the Overwatch faction,
+--   nil for everyone else]
 function SCHEMA:GetPlayerOOCName(actor)
   if actor:get_faction_id() == 'overwatch' then
-    return 'Overwatch Soldier'
+    return t'faction.combine.overwatch.ooc_name'
   end
 end
 
@@ -100,7 +101,7 @@ end
 function SCHEMA:PlayerUseDoor(activator, entity)
   if !entity:is_combine_door() then return end
 
-  if activator:has_item('card_cp') or activator:has_item('card_cp_officer') then
+  if activator:has_cp_card() then
     entity:Fire('Open')
   end
 end

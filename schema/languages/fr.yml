@@ -45,6 +45,7 @@ fr:
         title: "Overwatch du Cartel"
         desc: "Les soldats de l'armée du Cartel."
         phys_desc: "Porte une lourde armure de l'Overwatch."
+        ooc_name: "Soldat de l'Overwatch"
       cca:
         title: "Protection civile du Cartel"
         desc: "Les forces de police du Cartel."

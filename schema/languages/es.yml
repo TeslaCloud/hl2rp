@@ -45,6 +45,7 @@ es:
         title: Overwatch del Combine
         desc: Soldados militares del Combine.
         phys_desc: Lleva una pesada armadura de Overwatch.
+        ooc_name: Soldado de Overwatch
       cca:
         title: Protección Civil
         desc: Fuerzas policiales del Combine.
