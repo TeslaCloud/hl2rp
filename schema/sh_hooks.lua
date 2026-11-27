@@ -1,16 +1,4 @@
---- Shared hooks of the schema: the weapon selection, the voice lines and the names of the
--- Half-Life 2 NPCs.
-
---- Only opens the weapon selection with the slot keys while the walk key is held.
--- @param client [Player local player]
--- @param bind [String bind that was pressed]
--- @param pressed [Boolean whether the key was pressed or released]
--- @return [Boolean false to keep the weapon selection closed, nil otherwise]
-function SCHEMA:ShouldOpenWeaponSelect(client, bind, pressed)
-  if bind and bind:find('slot') and pressed and !client:KeyDown(IN_WALK) then
-    return false
-  end
-end
+--- Shared hooks of the schema: the voice lines and the names of the Half-Life 2 NPCs.
 
 --- Adds the voice lines of the schema from its `voice_lines.yml` file.
 -- @param voice_lines [Map the VoiceLines library]
