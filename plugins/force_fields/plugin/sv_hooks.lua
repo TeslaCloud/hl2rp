@@ -1,7 +1,7 @@
---- Server hooks of the Force Fields plugin: a player who changes faction or rank is looked at
+--- Server hooks of the Force Fields plugin: a player whose faction or rank changes is looked at
 -- again right away.
 
---- Looks again at a player who has been moved into another faction.
+--- Looks again at a player whose faction has changed, as what they carry or wear decides it.
 -- @param target [Player]
 -- @param _faction_table [Faction]
 -- @param _old_faction [Faction]

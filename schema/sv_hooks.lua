@@ -10,7 +10,9 @@
 
 local random = math.random
 
---- Plays a pain sound for the hurt player at most once a second, picked by faction, gender and hit limb.
+--- Plays a pain sound for the hurt player at most once a second: the Combine pain sounds for the
+-- members of the Civil Protection and the Overwatch, whatever their species, and for other
+-- humans one picked by gender and hit limb.
 -- @param victim [Player player that was hurt]
 -- @param _attacker [Entity entity that dealt the damage]
 function SCHEMA:PlayerHurt(victim, _attacker)
@@ -20,7 +22,11 @@ function SCHEMA:PlayerHurt(victim, _attacker)
     if !victim.next_sound or victim.next_sound <= cur_time then
       local faction = victim:get_faction_id()
 
-      if victim:is_human() then
+      if faction == 'cca' then
+        victim:EmitSound('npc/metropolice/pain'..random(1, 4)..'.wav')
+      elseif faction == 'overwatch' then
+        victim:EmitSound('npc/combine_soldier/pain'..random(1, 3)..'.wav')
+      elseif victim:is_human() then
         local limb = victim:LastHitGroup()
         local gender = victim:get_gender()
         local sound_path
@@ -40,10 +46,6 @@ function SCHEMA:PlayerHurt(victim, _attacker)
         end
 
         victim:EmitSound(sound_path)
-      elseif faction == 'cca' then
-        victim:EmitSound('npc/metropolice/pain'..random(1, 4)..'.wav')
-      elseif faction == 'overwatch' then
-        victim:EmitSound('npc/combine_soldier/pain'..random(1, 3)..'.wav')
       end
 
       victim.next_sound = cur_time + 1
@@ -76,10 +78,11 @@ function SCHEMA:GetPlayerOOCName(actor)
   end
 end
 
---- Makes badly hurt human players moan, more often the lower their health is.
+--- Makes badly hurt human players moan, more often the lower their health is, unless they are
+-- members of the Civil Protection, who wear a mask.
 -- @param actor [Player player being checked]
 function SCHEMA:PlayerOneSecond(actor)
-  if !actor:Alive() or !actor:is_human() then return end
+  if !actor:Alive() or !actor:is_human() or actor:get_faction_id() == 'cca' then return end
 
   local health = actor:Health()
 

@@ -1,52 +1,24 @@
 es:
-  class:
-    citizen:
-      title: Ciudadano
-      desc: Un residente corriente de la ciudad, sin tareas asignadas por el Combine.
-    recruit:
-      title: Recluta
-      desc: Una unidad de Protección Civil recién alistada que patrulla las calles.
-    slave:
-      title: Vortigaunt esclavizado
-      desc: Un vortigaunt encadenado al que el Combine obliga a hacer trabajos serviles.
-    soldier:
-      title: Soldado
-      desc: Un soldado transhumano del Overwatch del Combine.
-    vortigaunt:
-      title: Vortigaunt
-      desc: Un vortigaunt libre que se oculta del Combine.
-    zombie:
-      title: Zombi
-      desc: Un headcrab o el cuerpo del que se ha apoderado.
   currency:
     tokens: Fichas
   faction:
     admin:
       title: Administrador de la Ciudad
       desc: La persona que controla la ciudad.
-      phys_desc: Viste un traje elegante y sobrio.
     citizen:
       title: Ciudadano
       desc: Un ciudadano corriente que vive bajo la autoridad del Combine.
-      phys_desc: Viste ropa de ciudadano sucia.
     vortigaunt:
       title: Vortigaunt
       description: Un alienígena de Xen, perseguido y esclavizado por el Combine.
-      phys_desc: Una criatura encorvada de piel verde con un gran ojo rojo.
-    zombie:
-      title: Zombi
-      description: Un headcrab o un cuerpo del que se ha apoderado.
-      phys_desc: Un cuerpo destrozado con un headcrab aferrado a la cabeza.
     combine:
       overwatch:
         title: Overwatch del Combine
         desc: Soldados militares del Combine.
-        phys_desc: Lleva una pesada armadura de Overwatch.
         ooc_name: Soldado de Overwatch
       cca:
         title: Protección Civil
         desc: Fuerzas policiales del Combine.
-        phys_desc: Lleva un reluciente uniforme de Protección Civil con una porra eléctrica nueva en el cinturón.
   item:
     action:
       eat: Comer
@@ -62,6 +34,9 @@ es:
     cca_uniform:
       print_name: Uniforme de Protección Civil
       description: Uniforme de unidad de Protección Civil con un par de botas negras y una máscara de gas.
+    admin_suit:
+      print_name: Traje del Administrador de la Ciudad
+      description: Un traje elegante y sobrio que viste el Administrador de la Ciudad.
     breens_water:
       print_name: Agua de Breen
       description: Una lata de color azul llena de agua. Lleva impreso 'Reserva privada de Breen'.
@@ -167,6 +142,13 @@ es:
     grenade:
       print_name: Granada
       description: Un pequeño tubo redondo lleno de sustancias explosivas.
+  species:
+    synth:
+      name: Sintético
+      description: Un soldado transhumano del Combine, hecho a partir de un cuerpo humano.
+    vortigaunt:
+      name: Vortigaunt
+      description: Un alienígena de Xen, perseguido y esclavizado por el Combine.
   npc:
     hl2:
       crow: Cuervo

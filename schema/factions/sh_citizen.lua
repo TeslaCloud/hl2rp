@@ -1,14 +1,11 @@
---- Citizens: the default faction, the people who live in the city under the Combine, with
--- random human names and the CWU rank of the Civil Workers' Union.
+--- Citizens: the people who live in the city under the Combine, and every human who wears
+-- nothing that makes them a member of another faction. Members of the Civil Workers' Union
+-- hold the CWU rank, which is kept in the record of the character.
 
 FACTION.name = 'faction.citizen.title'
 FACTION.description = 'faction.citizen.desc'
-FACTION.phys_desc = 'faction.citizen.phys_desc'
 FACTION.color = Color(225, 185, 135)
 FACTION.material = 'flux/hl2rp/factions/citizen.jpg'
-FACTION.name_template = '{name}'
-FACTION.random_names = SCHEMA.human_names
-FACTION.has_gender = true
 FACTION.menu_sound = {
   'vo/npc/male01/answer16.wav',
   'vo/npc/male01/answer25.wav',
@@ -19,29 +16,6 @@ FACTION.menu_sound = {
   'vo/npc/male01/question23.wav',
   'vo/npc/male01/question20.wav',
   'vo/npc/male01/question19.wav'
-}
-FACTION.models = {
-  male = {
-    'models/teslacloud/citizens/male01.mdl',
-    'models/teslacloud/citizens/male02.mdl',
-    'models/teslacloud/citizens/male03.mdl',
-    'models/teslacloud/citizens/male04.mdl',
-    'models/teslacloud/citizens/male05.mdl',
-    'models/teslacloud/citizens/male06.mdl',
-    'models/teslacloud/citizens/male07.mdl',
-    'models/teslacloud/citizens/male08.mdl',
-    'models/teslacloud/citizens/male09.mdl',
-    'models/teslacloud/citizens/male10.mdl'
-  },
-  female = {
-    'models/teslacloud/citizens/female01.mdl',
-    'models/teslacloud/citizens/female02.mdl',
-    'models/teslacloud/citizens/female03.mdl',
-    'models/teslacloud/citizens/female04.mdl',
-    'models/teslacloud/citizens/female05.mdl',
-    'models/teslacloud/citizens/female06.mdl',
-    'models/teslacloud/citizens/female07.mdl'
-  }
 }
 
 FACTION:add_rank ''

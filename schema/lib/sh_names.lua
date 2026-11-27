@@ -1,6 +1,6 @@
 --- The lists of random character names: first names by gender and last names for humans, and
 -- the names of vortigaunts, gathered in `SCHEMA.human_names` and `SCHEMA.vortigaunt_names`,
--- the random_names of the factions.
+-- the random_names of the human and vortigaunt species.
 
 SCHEMA.male_names = w[[
 Aamir Aaron Abbey Abbie Abbot Abbott Abby Abdel Abdul Abdulkarim Abdullah Abe Abel Abelard Abner Abraham Abram Ace

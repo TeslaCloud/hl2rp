@@ -1,5 +1,5 @@
---- Player extensions of the schema: whether a player is combine or human, whether they carry a
--- CP card, and the type of the weapon they hold.
+--- Player extensions of the schema: whether a player is in a combine faction or of the human
+-- species, whether they carry a CP card, and the type of the weapon they hold.
 
 local IsValid = IsValid
 local player_meta = FindMetaTable('Player')
@@ -10,7 +10,7 @@ function player_meta:is_combine()
   return SCHEMA:is_combine(self)
 end
 
---- Checks whether the player is in a human faction.
+--- Checks whether the player is of the human species.
 -- @return [Boolean whether the player is human]
 function player_meta:is_human()
   return SCHEMA:is_human(self)

@@ -1,52 +1,24 @@
 fr:
-  class:
-    citizen:
-      title: "Citoyen"
-      desc: "Un habitant ordinaire de la Cité, à qui le Cartel n'a assigné aucune tâche."
-    recruit:
-      title: "Recrue"
-      desc: "Une unité de la Protection civile fraîchement enrôlée qui patrouille dans les rues."
-    slave:
-      title: "Vortigaunt asservi"
-      desc: "Un vortigaunt enchaîné que le Cartel astreint à des travaux serviles."
-    soldier:
-      title: "Soldat"
-      desc: "Un soldat transhumain de l'Overwatch du Cartel."
-    vortigaunt:
-      title: "Vortigaunt"
-      desc: "Un vortigaunt libre qui se cache du Cartel."
-    zombie:
-      title: "Zombie"
-      desc: "Un headcrab, ou le corps dont il a pris le contrôle."
   currency:
     tokens: "Jetons"
   faction:
     admin:
       title: "Administrateur de la Cité"
       desc: "La personne qui contrôle la Cité."
-      phys_desc: "Porte un costume strict et élégant."
     citizen:
       title: "Citoyen"
       desc: "Un citoyen ordinaire qui vit sous l'autorité du Cartel."
-      phys_desc: "Porte des vêtements de citoyen sales."
     vortigaunt:
       title: "Vortigaunt"
       description: "Un extraterrestre venu de Xen, traqué et réduit en esclavage par le Cartel."
-      phys_desc: "Une créature voûtée à la peau verte, dotée d'un grand œil rouge."
-    zombie:
-      title: "Zombie"
-      description: "Un headcrab, ou un corps dont il a pris le contrôle."
-      phys_desc: "Un corps mutilé avec un headcrab agrippé à la tête."
     combine:
       overwatch:
         title: "Overwatch du Cartel"
         desc: "Les soldats de l'armée du Cartel."
-        phys_desc: "Porte une lourde armure de l'Overwatch."
         ooc_name: "Soldat de l'Overwatch"
       cca:
         title: "Protection civile du Cartel"
         desc: "Les forces de police du Cartel."
-        phys_desc: "Porte un uniforme rutilant de la police métropolitaine, avec une matraque électrique flambant neuve à la ceinture."
   item:
     action:
       eat: "Manger"
@@ -62,6 +34,9 @@ fr:
     cca_uniform:
       print_name: "Uniforme de la Protection civile"
       description: "Uniforme d'unité de la Protection civile, avec une paire de bottes noires et un masque à gaz."
+    admin_suit:
+      print_name: "Costume de l'Administrateur de la Cité"
+      description: "Un costume strict et élégant, que porte l'Administrateur de la Cité."
     breens_water:
       print_name: "Eau de Breen"
       description: "Une canette bleue remplie d'eau. « Réserve privée de Breen » est imprimé dessus."
@@ -167,6 +142,13 @@ fr:
     grenade:
       print_name: "Grenade"
       description: "Un petit tube rond rempli de substances explosives."
+  species:
+    synth:
+      name: "Synthétique"
+      description: "Un soldat transhumain du Cartel, fait à partir d'un corps humain."
+    vortigaunt:
+      name: "Vortigaunt"
+      description: "Un extraterrestre de Xen, traqué et réduit en esclavage par le Cartel."
   npc:
     hl2:
       crow: "Corbeau"

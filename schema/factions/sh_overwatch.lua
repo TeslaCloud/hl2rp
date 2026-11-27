@@ -1,16 +1,13 @@
---- The Combine Overwatch, the soldiers of the Combine: a whitelisted faction named by squad,
--- rank and unit ID, with the OWS, GUARD and EOW ranks.
+--- The Combine Overwatch, the soldiers of the Combine: the whitelisted faction of every synth,
+-- shown under its squad, its rank and its unit number, with the OWS, GUARD and EOW ranks.
 
 FACTION.name = 'faction.combine.overwatch.title'
 FACTION.description = 'faction.combine.overwatch.desc'
-FACTION.phys_desc = 'faction.combine.overwatch.phys_desc'
 FACTION.color = Color(225, 115, 100)
 FACTION.material = 'flux/hl2rp/factions/overwatch.jpg'
-FACTION.has_name = false
-FACTION.has_gender = false
+FACTION.species = 'synth'
 FACTION.whitelisted = true
-FACTION.name_template = 'OW.{data:squad}-{rank}.{callback:get_unit_id}'
-FACTION:set_data('squad', 'ECHO')
+FACTION.name_template = 'OW.ECHO-{rank}.{name}'
 FACTION.stats = {
   ['strength'] = 1,
   ['reflexes'] = 1,
@@ -24,22 +21,6 @@ FACTION.menu_sound = {
   'npc/combine_soldier/vo/prison_soldier_prosecuted7.wav'
 }
 
-FACTION.model_classes = {
-  universal = 'combine_soldier'
-}
-
-FACTION.models.universal = {
-  'models/teslacloud/overwatch/overwatch.mdl'
-}
-
 FACTION:add_rank('OWS')
 FACTION:add_rank('GUARD')
 FACTION:add_rank('EOW')
-
---- Generates a random unit ID from 100 to 999.
--- @return [Number unit ID]
-function FACTION:generate_id()
-  return math.random(100, 999)
-end
-
-FACTION.get_unit_id = SCHEMA.get_unit_id
