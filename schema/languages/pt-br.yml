@@ -1,0 +1,210 @@
+pt-br:
+  currency:
+    tokens: Fichas
+  faction:
+    admin:
+      title: Administrador da Cidade
+      desc: A pessoa que controla a cidade.
+    citizen:
+      title: Cidadão
+      desc: Um cidadão comum que vive sob a autoridade da Combine.
+    vortigaunt:
+      title: Vortigaunt
+      description: Um alienígena de Xen, caçado e escravizado pela Combine.
+    combine:
+      overwatch:
+        title: Overwatch da Combine
+        desc: Soldados das forças militares da Combine.
+        ooc_name: Soldado da Overwatch
+      cca:
+        title: Proteção Civil
+        desc: Forças policiais da Combine.
+  item:
+    action:
+      eat: Comer
+      drink: Beber
+    category:
+      cards: Cartões de acesso
+    card_cp:
+      print_name: Cartão de acesso da Proteção Civil
+      description: Um cartão de acesso Combine de alta tecnologia usado pelas unidades comuns da Proteção Civil. Funciona usando o próprio campo elétrico do corpo. Transmite dados usando o sal do corpo como meio de transmissão.
+    card_cp_officer:
+      print_name: Cartão de acesso de oficial da Proteção Civil
+      description: Um cartão de acesso Combine de alta tecnologia usado pelos oficiais da Proteção Civil. Funciona usando o próprio campo elétrico do corpo. Transmite dados usando o sal do corpo como meio de transmissão.
+    cca_uniform:
+      print_name: Uniforme da Proteção Civil
+      description: Uniforme de unidade da Proteção Civil, com um par de botas pretas e uma máscara de gás.
+    admin_suit:
+      print_name: Terno do Administrador da Cidade
+      description: Um terno sóbrio e elegante, usado pelo Administrador da Cidade.
+    breens_water:
+      print_name: Água do Breen
+      description: 'Uma lata azul cheia de água. Traz “Reserva Particular do Breen” impresso nela.'
+    breens_water_gas:
+      print_name: Água do Breen com gás
+      description: Uma lata vermelha cheia de água com gás.
+    breens_water_limited:
+      print_name: Água do Breen saborizada
+      description: Uma lata amarela cheia de água saborizada de edição limitada.
+    food_waterbottle:
+      print_name: Garrafa de água
+      description: Uma garrafa plástica de água. Refrescante.
+    food_whiskey:
+      print_name: Garrafa de uísque
+      description: Uma garrafa de vidro de 375 ml com bebida alcoólica forte. Tem cheiro de trigo fermentado.
+    food_vodka:
+      print_name: Garrafa de vodca
+      description: Uma garrafa de vidro de 375 ml com bebida alcoólica forte. Tem cheiro de etanol.
+    food_rum:
+      print_name: Uma garrafa de rum
+      description: Uma garrafa de vidro de 375 ml com bebida alcoólica forte. Tem cheiro de açúcar fermentado.
+    food_gin:
+      print_name: Uma garrafa de gim
+      description: Uma garrafa de vidro de 375 ml com bebida alcoólica forte. Tem cheiro de frutas silvestres fermentadas.
+    food_headcrab:
+      print_name: Carne de headcrab
+      description: Um pedaço de headcrab cozido. Tem gosto de frango, só que mais sem graça e mais duro.
+    food_pheadcrab:
+      print_name: Carne tratada de headcrab venenoso
+      description: Um pedaço de headcrab venenoso cozido e tratado. Seus lábios ficam um pouco dormentes quando você come...
+    food_melon:
+      print_name: Melancia
+      description: Uma esfera verde e meio torta. Por dentro é rosada.
+    food_milk:
+      print_name: Garrafa de leite
+      description: Um galão de leite em uma embalagem de plástico.
+    canned_food:
+      print_name: Comida enlatada da marca Combine
+      description: Um pote de plástico cheio de, argh... comida.
+    flashlight:
+      print_name: Lanterna
+      description: Permite iluminar as áreas escuras do mapa.
+    medical_bandage:
+      print_name: Atadura esterilizada
+      description: Um rolo fino de ataduras estéreis.
+    medical_fak:
+      print_name: Kit de primeiros socorros
+      description: Um conjunto profissional de equipamentos de primeiros socorros.
+    pistol:
+      print_name: Pistola 9 mm
+      description: Uma arma compacta que dispara balas 9x19 mm.
+      ammo:
+        print_name: Munição 9 mm
+        description: Uma caixa de metal cheia de balas 9x19 mm.
+    smg:
+      print_name: Submetralhadora
+      description: Uma arma de defesa pessoal compacta que dispara balas 4,6x30 mm.
+      ammo:
+        print_name: Munição 4,6x30 mm
+        description: Uma caixa de metal cheia de balas 4,6x30 mm.
+        grenade:
+          print_name: Granada de submetralhadora
+          description: Um explosivo que serve de munição para o lança-granadas da submetralhadora.
+    shotgun:
+      print_name: SPAS-12
+      description: Uma escopeta usada principalmente pelas equipes de guardas prisionais da Overwatch. Dispara munição calibre 12.
+      ammo:
+        print_name: Calibre 12
+        description: Uma caixa de papelão cheia de munição calibre 12.
+    revolver:
+      print_name: ".357 Magnum"
+      description: Um revólver reluzente de antes da guerra que dispara balas .357 Magnum.
+      ammo:
+        print_name: Balas .357 Magnum
+        description: Uma caixa de papelão cheia de balas .357 Magnum.
+    ar2:
+      print_name: Rifle de pulso (AR2)
+      description: Rifle de pulso padrão da Overwatch (OSIPR). Dispara feixes de energia.
+      ammo:
+        print_name: Energia de rifle de pulso
+        description: Um pequeno cartucho de metal com munição de energia para rifle de pulso.
+      core:
+        print_name: Núcleo de energia de rifle de pulso
+        description: Uma esfera de energia contida em uma câmara de metal.
+    crossbow:
+      print_name: Besta
+      description: Uma arma de construção tosca que dispara virotes incandescentes.
+      ammo:
+        print_name: Virotes de besta
+        description: Pequenas peças de metal que servem de munição para a besta.
+    crowbar:
+      print_name: Pé de cabra
+      description: Um pedaço de metal com as pontas curvadas, mais conhecido como pé de cabra.
+    rpg:
+      print_name: RPG
+      description: Uma arma que parece um tubo verde. De vez em quando pode disparar pelo lado errado.
+      ammo:
+        print_name: Míssil de RPG
+        description: Um míssil laranja, usado normalmente com um RPG.
+    stunstick:
+      print_name: Bastão de choque
+      description: Um bastão com função de choque elétrico.
+    grenade:
+      print_name: Granada
+      description: Um pequeno tubo arredondado cheio de substâncias explosivas.
+  species:
+    synth:
+      name: Sintético
+      description: Um soldado transumano da Combine, feito a partir de um corpo humano.
+    vortigaunt:
+      name: Vortigaunt
+      description: Um alienígena de Xen, caçado e escravizado pela Combine.
+  npc:
+    hl2:
+      crow: Corvo
+      monk: Padre Grigori
+      pigeon: Pombo
+      seagull: Gaivota
+      combine_camera: Câmera Combine
+      turret_ceiling: Torreta de teto
+      cscanner: Scanner da cidade
+      combine_dropship: Nave de transporte Combine
+      combine_gunship: Nave de combate Combine
+      combine_soldier: Soldado Combine
+      hunter: Caçador
+      helicopter: Helicóptero de caça
+      manhack: Manhack
+      metropolice: Polícia Metropolitana
+      rollermine: Rollermine
+      clawscanner: Scanner de escudo
+      stalker: Stalker
+      strider: Strider
+      turret_floor: Torreta
+      alyx: Alyx Vance
+      barney: Barney Calhoun
+      citizen: Cidadão
+      dog: Dog
+      magnusson: Dr. Arne Magnusson
+      kleiner: Dr. Isaac Kleiner
+      mossman: Dra. Judith Mossman
+      eli: Eli Vance
+      gman: G-Man
+      odessa: Odessa Cubbage
+      vortigaunt: Vortigaunt
+      breen: Wallace Breen
+      antlion: Formiga-leão
+      antlion_grub: Larva de formiga-leão
+      antlionguard: Guarda formiga-leão
+      antlion_worker: Formiga-leão operária
+      barnacle: Barnacle
+      headcrab_fast: Headcrab rápido
+      fastzombie: Zumbi rápido
+      fastzombie_torso: Torso de zumbi rápido
+      headcrab: Headcrab
+      headcrab_black: Headcrab venenoso
+      poisonzombie: Zumbi venenoso
+      zombie: Zumbi
+      zombie_torso: Torso de zumbi
+      zombine: Zumbine
+  ui:
+    hud:
+      alpha:
+        flux_alpha: FLUX ALFA
+        subtext: Tudo está sujeito a mudanças!
+    voice_lines:
+      category:
+        citizens: Cidadãos
+        civil_protection: Proteção Civil
+        vortigaunt: Vortigaunts
+        overwatch_radio: Rádio da Overwatch
+        dispatch: Central
